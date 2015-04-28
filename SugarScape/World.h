@@ -10,9 +10,10 @@
 #define __SugarScape__World__
 
 #include <iostream>
-#include "Action"
+#include "Action.h"
 
 class World{
+    int step;
     int size;
     int cultureCount;
     int maxVision;
@@ -37,6 +38,7 @@ public:
     World(void);
     
     //Getters
+    int getStep(void);
     int getSize(void);
     int getCultureCount(void);
     int getMaxVision(void);

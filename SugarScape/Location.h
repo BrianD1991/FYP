@@ -11,12 +11,28 @@
 
 #include <iostream>
 class Location{
+    int x,y;
+    int sugar;
+    int maxSugar;
+    int pollution;
 public:
+    //constructors
     Location();
-    Location(int);
-private:
+    Location(int,int);
     
+    //getters
+    int getX(void);
+    int getY(void);
+    int getSugar(void);
+    int getMaxSugar(void);
+    int getPollution(void);
     
+    //setters
+    int setX(int);
+    int setY(int);
+    int setSugar(int);
+    int setMaxSugar(int);
+    int setPollution(int);
 };
 
 #endif /* defined(__SugarScape__Location__) */

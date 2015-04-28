@@ -10,5 +10,8 @@
 #define __SugarScape__Agent__
 
 #include <iostream>
-
+class Agent{
+public:
+    Agent();
+};
 #endif /* defined(__SugarScape__Agent__) */
