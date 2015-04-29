@@ -11,10 +11,13 @@
 
 #include <iostream>
 class Location{
-    int x,y;
-    int sugar;
-    int maxSugar;
-    int pollution;
+        //once initialised these stay constant
+        std::pair<int,int> position;
+        int maxSugar;
+    
+        //mutable
+        int currentSugar,newSugar;
+        int currentPollution,newPollution;
 public:
     //constructors
     Location();
@@ -33,6 +36,9 @@ public:
     int setSugar(int);
     int setMaxSugar(int);
     int setPollution(int);
+    
+    //helpers
+    bool sync(void);
 };
 
 #endif /* defined(__SugarScape__Location__) */
