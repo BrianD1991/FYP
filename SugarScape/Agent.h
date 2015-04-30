@@ -14,7 +14,8 @@
 
 enum Sex {
     male = 0,
-    female = 1
+    female = 1,
+    unknown = 2
     };
 
 enum affiliation {
@@ -66,12 +67,14 @@ public:
     std::vector<bool*> getDiseases(void);
     
     //setters
-    std::pair<int, int> setPosition(void);
+    std::pair<int, int> setPosition(std::pair<int, int>);
     Sex setSex(Sex);
     int setVision(int);
+    int incAge(void);
     int setAge(int);
     int setMaxAge(int);
     int setMetabolism(int);
+    int incSugar(int);
     int setSugar(int);
     int setCultureLength(int);
     int setImmunityLength(int);

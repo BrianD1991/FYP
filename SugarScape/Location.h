@@ -10,8 +10,11 @@
 #define __SugarScape__Location__
 
 #include <iostream>
+
+const std::pair<int, int> nullPosition(-1,-1);
+
 class Location{
-        //once initialised these stay constant
+        //immutable -- once initialised these stay constant
         std::pair<int,int> position;
         int maxSugar;
     
@@ -24,6 +27,7 @@ public:
     Location(int,int);
     
     //getters
+    std::pair<int,int> getPosition(void);
     int getX(void);
     int getY(void);
     int getSugar(void);
@@ -31,6 +35,7 @@ public:
     int getPollution(void);
     
     //setters
+    std::pair<int,int> setPosition(std::pair<int,int>);
     int setX(int);
     int setY(int);
     int setSugar(int);
