@@ -7,3 +7,11 @@
 //
 
 #include "Action.h"
+
+
+Action::Action(){
+    
+}
+bool Action::execute(Agent* theAgent){
+    return false;
+}

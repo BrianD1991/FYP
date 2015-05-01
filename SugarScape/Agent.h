@@ -12,6 +12,9 @@
 #include <iostream>
 #include <vector>
 
+
+class World;
+
 enum Sex {
     male = 0,
     female = 1,
@@ -21,11 +24,13 @@ enum Sex {
 enum affiliation {
     red = 0,
     blue = 1
-};
+    };
 
 
 class Agent{
+    
     //immutable
+    World* theWorld;
     Sex sex;
     int vision;
     int maxAge;
@@ -33,7 +38,7 @@ class Agent{
     int immunityLength;
     
     //mutable
-    std::pair<int, int> position;
+    std::pair<int, int> currentPosition,newPosition;
     int currentAge,newAge;
     int currentMetabolism,newMetabolism;
     int currentSugar,newSugar;
@@ -87,16 +92,16 @@ public:
 
     //helpers
     affiliation getTribe(void);
-    bool isImmune(bool*);
+    bool isImmune(bool*,int);
     bool isChild(Agent*);
-    int addChild(Agent*);
-    int removeChild(Agent*);
+    unsigned long  addChild(Agent*);
+    unsigned long  removeChild(Agent*);
     int totalOwed(void);
     int totalOwing(void);
     int OwedToday(void);
     int OwingToday(void);
     bool hasDisease(bool*);
-    int addDisease(bool*);
+    unsigned long addDisease(bool*);
     bool sync(void);
 };
 #endif /* defined(__SugarScape__Agent__) */

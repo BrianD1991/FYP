@@ -5,6 +5,7 @@
 //  Created by Joseph P Kehoe on 28/04/2015.
 //  Copyright (c) 2015 Joseph P Kehoe. All rights reserved.
 //
+#include "World.h"
 
 #include "Agent.h"
 
@@ -16,7 +17,7 @@ Agent::Agent()
 
 //getters
 std::pair<int, int> Agent::getPosition(void){
-    return position;
+    return currentPosition;
 }
 Sex Agent::getSex(void){
     return sex;
@@ -62,8 +63,8 @@ std::vector<bool*> Agent::getDiseases(void){
 }
 
 //setters
-std::pair<int, int> Agent::setPosition(std::pair<int, int> newPosition){
-    position=newPosition;
+std::pair<int, int> Agent::setPosition(std::pair<int, int> destination){
+    newPosition=destination;
     return newPosition;
 }
 Sex Agent::setSex(Sex newSex){
@@ -119,23 +120,127 @@ bool *Agent::setImmunity(bool* replacementImmunity){
     newImmunity=replacementImmunity;
     return newImmunity;
 }
-std::vector<Agent*> Agent::setChildren(std::vector<Agent*>){
-
+std::vector<Agent*> Agent::setChildren(std::vector<Agent*>replacementChildren){
+    newChildren=replacementChildren;
+    return newChildren;
 }
-std::vector<std::pair<Agent*,std::pair<int, int>>> Agent::setLoansOwed(std::vector<std::pair<Agent*,std::pair<int, int>>>);
-std::vector<std::pair<Agent*,std::pair<int, int>>> Agent::setLoansOwing(std::vector<std::pair<Agent*,std::pair<int, int>>>);
-std::vector<bool*> Agent::setDiseases(std::vector<bool*>);
+
+std::vector<std::pair<Agent*,std::pair<int, int>>> Agent::setLoansOwed(std::vector<std::pair<Agent*,std::pair<int, int>>> replacementLoansOwed){
+    newLoansOwed=replacementLoansOwed;
+    return newLoansOwed;
+}
+std::vector<std::pair<Agent*,std::pair<int, int>>> Agent::setLoansOwing(std::vector<std::pair<Agent*,std::pair<int, int>>> replacementLoansOwing){
+    newLoansOwing=replacementLoansOwing;
+    return newLoansOwing;
+}
+std::vector<bool*> Agent::setDiseases(std::vector<bool*> replacementDiseases){
+    newDiseases=replacementDiseases;
+    return newDiseases;
+}
 
 //helpers
-affiliation Agent::getTribe(void);
-bool Agent::isImmune(bool*);
-bool Agent::isChild(Agent*);
-int Agent::addChild(Agent*);
-int Agent::removeChild(Agent*);
-int Agent::totalOwed(void);
-int Agent::totalOwing(void);
-int Agent::OwedToday(void);
-int Agent::OwingToday(void);
-bool Agent::hasDisease(bool*);
-int Agent::addDisease(bool*);
-bool Agent::sync(void);
+affiliation Agent::getTribe(void){
+    int reds=0;
+    for (int i=0; i<cultureLength; ++i) {
+        if (currentCulture[i]==true) {
+            reds++;
+        }
+    }
+    if (reds>cultureLength/2) {
+        return affiliation::red;
+    }
+    else{
+        return affiliation::blue;
+    }
+}
+bool Agent::isImmune(bool* disease, int length){
+    int j=0;
+    for (int i=0; i<immunityLength-length; ++i) {
+        for (j=0; j<length && disease[j]==currentImmunity[i+j]; ++j) {
+            if (i+j==immunityLength-1) {
+                return false;
+            }
+        }
+        if (j==length) {
+            return true;
+        }
+    }
+    return false;
+}
+bool Agent::isChild(Agent* agent){
+    for (const Agent* child: currentChildren){
+        if (agent==child) return true;
+    }
+    return false;
+}
+unsigned long Agent::addChild(Agent* newChild){
+    newChildren.push_back(newChild);
+    return newChildren.size();
+}
+unsigned long Agent::removeChild(Agent* goneChild){
+    auto it = std::find(newChildren.begin(), newChildren.end(), goneChild);
+    if(it != newChildren.end())
+        newChildren.erase(it);
+    return newChildren.size();
+}
+int Agent::totalOwed(void){
+    int total=0;
+    for(const std::pair<Agent*,std::pair<int, int>> account:currentLoansOwed){
+        total+=account.second.first+account.second.first*theWorld->getRate()*theWorld->getDuration();
+    }//for
+    return total;
+}
+int Agent::totalOwing(void){
+    int total=0;
+    for(const std::pair<Agent*,std::pair<int, int>> account:currentLoansOwing){
+        total+=account.second.first+account.second.first*theWorld->getRate()*theWorld->getDuration();
+    }//for
+    return total;
+}
+int Agent::OwedToday(void){
+    int total=0;
+    for(const std::pair<Agent*,std::pair<int, int>> account:currentLoansOwed){
+        if (account.second.second==theWorld->getStep()) {
+            total+=account.second.first+account.second.first*theWorld->getRate()*theWorld->getDuration();
+        }//if
+    }//for
+    return total;
+}
+int Agent::OwingToday(void){
+    int total=0;
+    for(const std::pair<Agent*,std::pair<int, int>> account:currentLoansOwing){
+        if (account.second.second==theWorld->getStep()) {
+            total+=account.second.first+account.second.first*theWorld->getRate()*theWorld->getDuration();
+        }//if
+    }//for
+    return total;
+}
+bool Agent::hasDisease(bool* infection){
+    for(const bool* myDisease:currentDiseases){
+        if (myDisease==infection) {
+            return true;
+        }
+    }
+    return false;
+}
+unsigned long Agent::addDisease(bool* infection){
+    newDiseases.push_back(infection);
+    return newDiseases.size();
+}
+bool Agent::sync(void){
+    currentPosition=newPosition;
+    currentAge=newAge;
+    currentSugar=newSugar;
+    for (int i=0; i<cultureLength; ++i) {
+        currentCulture[i]=newCulture[i];
+    }
+    for (int i=0; i<immunityLength; ++i) {
+        currentImmunity[i]=newImmunity[i];
+    }
+    currentChildren=newChildren;
+    currentLoansOwed=newLoansOwed;
+    currentLoansOwing=newLoansOwing;
+    currentDiseases=newDiseases;
+    return true;
+}
+
