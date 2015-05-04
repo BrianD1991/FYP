@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include "Action.h"
+#include "Location.h"
 
 class World{
     int step;
@@ -32,6 +33,8 @@ class World{
     int initialPopulationSize;
     int pollutionRate;
     int childAmount;
+    
+    Location ** Lattice;
     
 public:
     //Constructors
@@ -60,6 +63,8 @@ public:
     int getInitialPopulationSize(void);
     int getPollutionRate(void);
     int getChildAmount(void);
+    Agent* getAgent(int,int);
+    std::vector<Agent*> getNeighbours(int,int,int);
     
     //Setters
     int setSize(int);
@@ -83,11 +88,15 @@ public:
     int setInitialPopulationSize(int);
     int setPollutionRate(int);
     int setChildAmount(int);
+    Agent* setAgent(int,int,Agent*);
+    
+    
 
     //Rule Application
     int doIndependentRule(Action* upDate);
     int doReadDependentRule(Action* upDate);
     int doWriteDependentRule(Action* upDate, Action* getGroup);
+
 };
 
 

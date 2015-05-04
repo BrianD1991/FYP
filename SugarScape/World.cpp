@@ -10,7 +10,20 @@
 
 
 //Constructors
-World::World(void){
+World::World(void)
+    :size(20),step(0),cultureCount(20),
+    maxAge(20),maxVision(6),maxMetabolism(5),
+    minAge(10),minMetabolism(1),sugarGrowth(10),
+    duration(10),rate(3),initialPopulationSize(50),
+    initialSugarMax(10),initialSugarMin(5),winterRate(3),
+    seasonLength(5),production(2),consumption(2),
+    combatLimit(6),immunityLength(30),pollutionRate(2),
+    childAmount(4)
+{
+    Lattice=new Location*[size];
+    for (int i=0; i<size; ++i) {
+        Lattice[i]=new Location[size];
+    }//for
     
 }
 
@@ -80,6 +93,26 @@ int World::getPollutionRate(void){
 }
 int World::getChildAmount(void){
     return childAmount;
+}
+Agent* World::getAgent(int xPosition,int yPosition){
+    return Lattice[xPosition%size][yPosition%size].getAgent();
+}
+std::vector<Agent*> World::getNeighbours(int xPosition,int yPosition,int range){
+    std::vector<Agent*> neighbourList;
+    Agent* neighbour=nullptr;
+    for (int i=xPosition-range; i<xPosition+range; ++i) {
+        neighbour=Lattice[i%size][yPosition].getAgent();
+        if (neighbour!=nullptr) {
+            neighbourList.push_back(neighbour);
+        }//if
+    }//for
+    for (int i=yPosition-range; i<yPosition+range; ++i) {
+        neighbour=Lattice[xPosition][i%size].getAgent();
+        if (neighbour!=nullptr) {
+            neighbourList.push_back(neighbour);
+        }//if
+    }//for
+//TODO: DO NOT ADD CALLING AGENT TO SET OF NEIGHBOURS!
 }
 
 //Setters
@@ -167,7 +200,9 @@ int World::setChildAmount(int newChildAmount){
     childAmount=newChildAmount;
     return childAmount;
 }
-
+Agent* World::setAgent(int xPosition,int yPosition, Agent *newAgent){
+    return Lattice[xPosition%size][yPosition%size].setAgent(newAgent);
+}
 //Rule Application
 int World::doIndependentRule(Action* upDate){
     return -1;

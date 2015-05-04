@@ -44,7 +44,9 @@ int Location::getMaxSugar(void){
 int Location::getPollution(void){
     return currentPollution;
 }
-
+Agent* Location::getAgent(void){
+    return currentResident;
+}
 //setters
 std::pair<int,int> Location::setPosition(std::pair<int,int> newPosition){
     if (position==nullPosition) {
@@ -78,8 +80,14 @@ int Location::setPollution(int newAmount){
     newPollution=newAmount;
     return newPollution;
 }
-
+Agent* Location::setAgent(Agent* newAgent){
+    newResident=newAgent;
+    return newResident;
+}
 //helpers
+bool Location::hasAgent(void){
+    return currentResident!=nullptr;
+}
 bool Location::sync(void){
     currentPollution=newPollution;
     currentSugar=newSugar;

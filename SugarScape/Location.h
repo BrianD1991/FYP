@@ -10,7 +10,7 @@
 #define __SugarScape__Location__
 
 #include <iostream>
-
+#include "Agent.h"
 const std::pair<int, int> nullPosition(-1,-1);
 
 class Location{
@@ -21,6 +21,7 @@ class Location{
         //mutable
         int currentSugar,newSugar;
         int currentPollution,newPollution;
+        Agent *currentResident,*newResident;
 public:
     //constructors
     Location();
@@ -33,6 +34,7 @@ public:
     int getSugar(void);
     int getMaxSugar(void);
     int getPollution(void);
+    Agent* getAgent(void);
     
     //setters
     std::pair<int,int> setPosition(std::pair<int,int>);
@@ -41,8 +43,10 @@ public:
     int setSugar(int);
     int setMaxSugar(int);
     int setPollution(int);
+    Agent *setAgent(Agent*);
     
     //helpers
+    bool hasAgent(void);
     bool sync(void);
 };
 
