@@ -19,6 +19,7 @@ class Location{
         int maxSugar;
     
         //mutable
+        bool done;
         int currentSugar,newSugar;
         int currentPollution,newPollution;
         Agent *currentResident,*newResident;
@@ -28,6 +29,7 @@ public:
     Location(int,int);
     
     //getters
+    bool isDone(void);
     std::pair<int,int> getPosition(void);
     int getX(void);
     int getY(void);
@@ -46,6 +48,7 @@ public:
     Agent *setAgent(Agent*);
     
     //helpers
+    bool markDone(void);
     bool hasAgent(void);
     bool sync(void);
 };

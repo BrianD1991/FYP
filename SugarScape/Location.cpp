@@ -26,6 +26,9 @@ newSugar(0),position(std::make_pair(x, y))
 }
 
 //getters
+bool Location::isDone(void){
+    return done;
+}
 std::pair<int,int> Location::getPosition(void){
     return position;
 }
@@ -85,11 +88,16 @@ Agent* Location::setAgent(Agent* newAgent){
     return newResident;
 }
 //helpers
+bool Location::markDone(void){
+    return done=true;
+}
 bool Location::hasAgent(void){
     return currentResident!=nullptr;
 }
 bool Location::sync(void){
+    done=false;
     currentPollution=newPollution;
     currentSugar=newSugar;
+    currentResident=newResident;
     return true;
 }

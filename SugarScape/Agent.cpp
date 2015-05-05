@@ -16,6 +16,9 @@ Agent::Agent()
 }
 
 //getters
+bool Agent::isDone(void){
+    return done;
+}
 std::pair<int, int> Agent::getPosition(void){
     return currentPosition;
 }
@@ -139,6 +142,9 @@ std::vector<bool*> Agent::setDiseases(std::vector<bool*> replacementDiseases){
 }
 
 //helpers
+bool Agent::markDone(void){
+    return done=true;
+}
 affiliation Agent::getTribe(void){
     int reds=0;
     for (int i=0; i<cultureLength; ++i) {
@@ -241,6 +247,7 @@ bool Agent::sync(void){
     currentLoansOwed=newLoansOwed;
     currentLoansOwing=newLoansOwing;
     currentDiseases=newDiseases;
+    done=false;
     return true;
 }
 

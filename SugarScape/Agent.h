@@ -39,6 +39,7 @@ class Agent{
     int immunityLength;
     
     //mutable
+    bool done;
     std::pair<int, int> currentPosition,newPosition;
     int currentAge,newAge;
     int currentMetabolism,newMetabolism;
@@ -56,6 +57,7 @@ public:
     Agent();
     
     //getters
+    bool isDone(void);
     std::pair<int, int> getPosition(void);
     Sex getSex(void);
     int getVision(void);
@@ -92,6 +94,7 @@ public:
     std::vector<bool*> setDiseases(std::vector<bool*>);
 
     //helpers
+    bool markDone(void);
     affiliation getTribe(void);
     bool isImmune(bool*,int);
     bool isChild(Agent*);
