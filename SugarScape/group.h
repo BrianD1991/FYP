@@ -14,16 +14,24 @@
 
 class group{
     std::vector<Location*> members;
-    int score;
+    int rank;
     int size;
 public:
-    int getScore(void);
+    //constructor
+    group(void);
+    //getters
+    int getRank(void);
     std::vector<Location*> getMembers(void);
     int getSize(void);
     
-    bool push_back(Location*);
+    //setters
+    int push_back(Location*);
+    int setRank(int);
     
+    
+    //Helpers
     static bool compare(group *,group *);
+
     
 };
 #endif /* defined(__SugarScape__group__) */

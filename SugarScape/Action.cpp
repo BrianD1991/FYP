@@ -9,8 +9,14 @@
 #include "Action.h"
 
 
-Action::Action(){
+Action::Action(World* theWorld):sim(theWorld){
     
+}
+Action::~Action(void){
+    
+}
+int Action::run(void){
+    return -1;
 }
 bool Action::executeAction(Location *theLocation){
     return false;

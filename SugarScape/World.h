@@ -10,8 +10,10 @@
 #define __SugarScape__World__
 
 #include <iostream>
-#include "Action.h"
 #include "Location.h"
+
+class Action;
+
 
 class World{
     int step;
@@ -36,6 +38,7 @@ class World{
     
     Location ** Lattice;
     std::vector<Agent*> population;
+    std::vector<Action*> activeRules;
     
 public:
     //Constructors
@@ -68,6 +71,7 @@ public:
     int getChildAmount(void);
     Agent* getAgent(int,int);
     std::vector<Agent*> getNeighbours(int,int,int);
+    Location** getLattice(void);
     
     //Setters
     int setSize(int);

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D82B992E1AFA59B3009AB362 /* IndependentAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D82B992C1AFA59B2009AB362 /* IndependentAction.cpp */; };
 		D89398281AFA2F20008B6490 /* group.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D89398261AFA2F20008B6490 /* group.cpp */; };
 		D89726AA1AEBD28B005664BF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D89726A91AEBD28B005664BF /* main.cpp */; };
 		D89726AC1AEBD28B005664BF /* SugarScape.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = D89726AB1AEBD28B005664BF /* SugarScape.1 */; };
@@ -30,6 +31,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D82B992C1AFA59B2009AB362 /* IndependentAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IndependentAction.cpp; path = ../IndependentAction.cpp; sourceTree = "<group>"; };
+		D82B992D1AFA59B3009AB362 /* IndependentAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IndependentAction.h; path = ../IndependentAction.h; sourceTree = "<group>"; };
 		D89398261AFA2F20008B6490 /* group.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = group.cpp; sourceTree = "<group>"; };
 		D89398271AFA2F20008B6490 /* group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = group.h; sourceTree = "<group>"; };
 		D89726A61AEBD28B005664BF /* SugarScape */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SugarScape; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,6 +80,8 @@
 			children = (
 				D89726A91AEBD28B005664BF /* main.cpp */,
 				D89726AB1AEBD28B005664BF /* SugarScape.1 */,
+				D82B992C1AFA59B2009AB362 /* IndependentAction.cpp */,
+				D82B992D1AFA59B3009AB362 /* IndependentAction.h */,
 				D89726B21AEBD591005664BF /* Location.cpp */,
 				D89726B31AEBD591005664BF /* Location.h */,
 				D8D9943C1AEF873100F248C7 /* Agent.cpp */,
@@ -148,6 +153,7 @@
 				D89398281AFA2F20008B6490 /* group.cpp in Sources */,
 				D89726AA1AEBD28B005664BF /* main.cpp in Sources */,
 				D8D994441AEF8BE300F248C7 /* Action.cpp in Sources */,
+				D82B992E1AFA59B3009AB362 /* IndependentAction.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +242,7 @@
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_UNUSED_PARAMETER = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -256,6 +263,7 @@
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_UNUSED_PARAMETER = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				VERSIONING_SYSTEM = "apple-generic";

@@ -8,6 +8,7 @@
 
 #include "World.h"
 #include "group.h"
+#include "Action.h"
 
 
 
@@ -200,6 +201,11 @@ std::vector<Agent*> World::getNeighbours(int xPosition,int yPosition,int range){
     }//for
     return neighbourList;
 }
+Location** World::getLattice(void){
+    return Lattice;
+}
+
+
 
 //Setters
 int World::setSize(int newSize){
