@@ -100,9 +100,7 @@ public:
     
 
     //Rule Application
-    int doIndependentRule(Action* upDate);
-    int doReadDependentRule(Action* upDate);
-    int doWriteDependentRule(Action* upDate);
+    int applyRules(void);
 
 };
 
