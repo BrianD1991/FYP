@@ -10,11 +10,11 @@
 #define __SugarScape__Action__
 
 #include <iostream>
-#include "Agent.h"
+#include "Location.h"
 
 class Action{
 public:
     Action();
-    bool execute(Agent* );
+    bool execute(Location );
 };
 #endif /* defined(__SugarScape__Action__) */

@@ -27,52 +27,136 @@ World::World(void)
     
 }
 
-//Getters
+
+
+
+//*************************Getters*************************
+
+/**
+ Returns the step number
+ @returns step
+ @exception void
+ */
 int World::getStep(void){
     return step;
 }
+/**
+ Returns the dimensions of the lattice
+ @returns size
+ @exception void
+ */
 int World::getSize(void){
     return size;
 }
+/**
+ Returns the size of the culture string
+ @returns cultureCount
+ @exception void
+ */
 int World::getCultureCount(void){
     return cultureCount;
 }
+/**
+ Returns the maximum possible vision length of any agent
+ @returns maxVision
+ @exception void
+ */
 int World::getMaxVision(void){
     return maxVision;
 }
+/**
+ Returns the minimum possible metabolism rate for any agent
+ @returns minMetabolism
+ @exception void
+ */
 int World::getMinMetabolism(void){
     return minMetabolism;
 }
+/**
+ Returns the maximum possible metbolism rate for any agent
+ @returns maxMetabolism
+ @exception void
+ */
 int World::getMaxMetabolism(void){
     return maxMetabolism;
 }
+/**
+ Returns the growth rate for each location
+ @returns sugarWrowth
+ @exception void
+ */
 int World::getSugarGrowth(void){
     return sugarGrowth;
 }
+/**
+ Returns the minimum possible natural lifespan of an agent
+ @returns minAge
+ @exception void
+ */
 int World::getMinAge(void){
     return minAge;
 }
+/**
+ Returns the maximum possible natural lifespan of an agent
+ @returns maxAge
+ @exception void
+ */
 int World::getMaxAge(void){
     return maxAge;
 }
+/**
+ Returns the duraion of a loan
+ @returns duration
+ @exception void
+ */
 int World::getDuration(void){
     return duration;
 }
+/**
+ Returns the rate of interest for a load
+ @returns rate
+ @exception void
+ */
 int World::getRate(void){
     return rate;
 }
+/**
+ Returns the minimum possible initial sugar allocation assigned to an agent
+ @returns initialSugarMin
+ @exception void
+ */
 int World::getInitialSugarMin(void){
     return initialSugarMin;
 }
+/**
+ Returns the maximum possible initial sugar allocation assigned to an agent
+ @returns initialSugarMax
+ @exception void
+ */
 int World::getInitialSugarMax(void){
     return initialSugarMax;
 }
+/**
+ Returns the winter growth rate for each location
+ @returns winterRate
+ @exception void
+ */
 int World::getWinterRate(void){
     return winterRate;
 }
+/**
+ Returns the length of each season
+ @returns seasonLength
+ @exception void
+ */
 int World::getSeasonLength(void){
     return seasonLength;
 }
+/**
+ Returns the ...
+ @returns <#retval#>
+ @exception <#throws#>
+ */
 int World::getProduction(void){
     return production;
 }
@@ -102,17 +186,17 @@ std::vector<Agent*> World::getNeighbours(int xPosition,int yPosition,int range){
     Agent* neighbour=nullptr;
     for (int i=xPosition-range; i<xPosition+range; ++i) {
         neighbour=Lattice[i%size][yPosition].getAgent();
-        if (neighbour!=nullptr) {
+        if (neighbour!=nullptr && i!=xPosition) {
             neighbourList.push_back(neighbour);
         }//if
     }//for
     for (int i=yPosition-range; i<yPosition+range; ++i) {
         neighbour=Lattice[xPosition][i%size].getAgent();
-        if (neighbour!=nullptr) {
+        if (neighbour!=nullptr && i!=yPosition) {
             neighbourList.push_back(neighbour);
         }//if
     }//for
-//TODO: DO NOT ADD CALLING AGENT TO SET OF NEIGHBOURS!
+    return neighbourList;
 }
 
 //Setters
@@ -205,10 +289,40 @@ Agent* World::setAgent(int xPosition,int yPosition, Agent *newAgent){
 }
 //Rule Application
 int World::doIndependentRule(Action* upDate){
-    return -1;
+    //Perform action
+    for (int i=0; i<size; ++i) {
+        for (int k=0; k<size; ++k) {
+            upDate->execute(Lattice[i][k]);
+        }
+    }
+    //Update everyone
+    for (int i=0; i<size; ++i) {
+        for (int k=0; k<size; ++k) {
+            Lattice[i][k].sync();
+            if (Lattice[i][k].hasAgent()) {
+                Lattice[i][k].getAgent()->sync();
+            }
+        }
+    }
+    return 1;
 }
 int World::doReadDependentRule(Action* upDate){
-    return -1;
+    //Perform action
+    for (int i=0; i<size; ++i) {
+        for (int k=0; k<size; ++k) {
+            upDate->execute(Lattice[i][k]);
+        }
+    }
+    //Update everyone
+    for (int i=0; i<size; ++i) {
+        for (int k=0; k<size; ++k) {
+            Lattice[i][k].sync();
+            if (Lattice[i][k].hasAgent()) {
+                Lattice[i][k].getAgent()->sync();
+            }
+        }
+    }
+    return 1;
 }
 int World::doWriteDependentRule(Action* upDate, Action* getGroup){
     return -1;

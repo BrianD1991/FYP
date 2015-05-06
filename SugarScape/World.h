@@ -35,10 +35,13 @@ class World{
     int childAmount;
     
     Location ** Lattice;
+    std::vector<Agent*> population;
     
 public:
     //Constructors
     World(void);
+
+    
     
     //Getters
     int getStep(void);

@@ -12,6 +12,6 @@
 Action::Action(){
     
 }
-bool Action::execute(Agent* theAgent){
+bool Action::execute(Location theLocation){
     return false;
 }
