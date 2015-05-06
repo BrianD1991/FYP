@@ -11,10 +11,12 @@
 
 #include <iostream>
 #include "Location.h"
+#include "group.h"
 
 class Action{
 public:
     Action();
-    bool execute(Location );
+    bool executeAction(Location *);
+    group* formGroup(Location *);
 };
 #endif /* defined(__SugarScape__Action__) */
