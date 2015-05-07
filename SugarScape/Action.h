@@ -21,7 +21,7 @@ public:
     Action(World*);
     virtual ~Action();
     virtual int run(void);
-    virtual bool executeAction(Location *);
-    virtual group* formGroup(Location *);
+    virtual bool executeAction(Location *)=0;
+    virtual group* formGroup(Location *)=0;
 };
 #endif /* defined(__SugarScape__Action__) */

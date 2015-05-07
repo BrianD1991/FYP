@@ -18,11 +18,5 @@ Action::~Action(void){
 int Action::run(void){
     return -1;
 }
-bool Action::executeAction(Location *theLocation){
-    return false;
-}
-group* Action::formGroup(Location *theLocation){
-    group* theGroup= new group;
-    theGroup->push_back(theLocation);
-    return theGroup;
-}
+
+
