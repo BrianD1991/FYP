@@ -16,29 +16,29 @@ class Action;
 
 
 class World{
-    int step;
-    int size;
-    int cultureCount;
-    int maxVision;
-    int minMetabolism, maxMetabolism;
-    int sugarGrowth;
-    int minAge,maxAge;
-    int duration;
-    int rate;
-    int initialSugarMin,initialSugarMax;
-    int winterRate;
-    int seasonLength;
+    int step; /*!< Number of steps the simulation has run for */
+    int size; /*!< Dimensions of lattice  a size*size matrix of locations*/
+    int cultureCount;/*!< Length of bitstring containing culture information */
+    int maxVision; /*!< Maximum extent allowable for any agents vision */
+    int minMetabolism, maxMetabolism; /*!< minimum and maximum metabolism rates that any agent may be born with */
+    int sugarGrowth; /*!< Rate at which sugar is replenished by each location during a step */
+    int minAge,maxAge; /*!< Minimum and maximum allowable lifespan that can be assigned to any agents*/
+    int duration; /*!< Duration of all loan lengths in steps */
+    int rate; /*!< Rate of interest applied to loans */
+    int initialSugarMin,initialSugarMax; /*!< Range of initial sugar allocation given to agents at beginning of simulation */
+    int winterRate; /*!< Rate that sugar grows back during winter season */
+    int seasonLength; /*!< Length of each season (winter and summer) */
     int production;
     int consumption;
-    int combatLimit;
+    int combatLimit; /*!< Maximum reward attainable through killing an agent */
     int immunityLength;
-    int initialPopulationSize;
+    int initialPopulationSize; /*!< Starting population size */
     int pollutionRate;
     int childAmount;
     
-    Location ** Lattice;
-    std::vector<Agent*> population;
-    std::vector<Action*> activeRules;
+    Location ** Lattice; /*!< 2D (size by size) Matrix of locations in world  */
+    std::vector<Agent*> population; /*!< Agents in simulation */
+    std::vector<Action*> activeRules; /*!< Rules we run each time step */
     
 public:
     //Constructors

@@ -16,13 +16,13 @@ const std::pair<int, int> nullPosition(-1,-1);
 class Location{
         //immutable -- once initialised these stay constant
         std::pair<int,int> position;
-        int maxSugar;
+        int maxSugar; /*!< Maximum amount of sugar this location may hold at any one time */
     
         //mutable
-        bool done;
-        int currentSugar,newSugar;
-        int currentPollution,newPollution;
-        Agent *currentResident,*newResident;
+        bool done; /*!< True if location has applied current rule successfully */
+        int currentSugar,newSugar; /*!< Amount of sugar currently at location */
+        int currentPollution,newPollution; /*!< Amount of pollution currently at site */
+        Agent *currentResident,*newResident; /*!< Agent currently at this location (if any) */
 public:
     //constructors
     Location();

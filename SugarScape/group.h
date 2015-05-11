@@ -13,9 +13,9 @@
 #include "Location.h"
 
 class group{
-    std::vector<Location*> members;
-    int rank;
-    int size;
+    std::vector<Location*> members; /*!< Agents in this group */
+    int rank; /*!< Determines the ranking of a group - used for collision resolution*/
+    int size; /*!< Number of agents in this group */
 public:
     //constructor
     group(void);

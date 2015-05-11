@@ -14,9 +14,15 @@
 #include "group.h"
 #include "World.h"
 
+/*!  \class  Action
+ \brief Abstract base class for Actions
+ 
+ Actions  need to define formGroup and executeAction functions
+ */
+
 class Action{
 protected:
-    World *sim;
+    World *sim; /*!< The object containing the entire simulation */
 public:
     Action(World*);
     virtual ~Action();
@@ -25,3 +31,25 @@ public:
     virtual group* formGroup(Location *)=0;
 };
 #endif /* defined(__SugarScape__Action__) */
+
+
+//!
+/*!
+ <#detail#>
+ */
+
+
+
+/*!< <#description#> */
+
+
+/**
+ * <#description#>
+ * @param <#param1#>
+ * @param <#param2#>
+ * @see <#ref#>
+ * @return <#returnValue#>
+ * @exception <#exceptionValue#>
+ */
+
+

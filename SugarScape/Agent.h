@@ -31,26 +31,26 @@ enum affiliation {
 class Agent{
     
     //immutable
-    World* theWorld;
-    Sex sex;
-    int vision;
-    int maxAge;
-    int cultureLength;
-    int immunityLength;
+    World* theWorld;/*!< The Class containing everything in the simulation*/
+    Sex sex; /*!< Agents are either male or female */
+    int vision; /*!< The number of locations that an agent can see out to */
+    int maxAge; /*!< Maximum lifespan of an agent */
+    int cultureLength; /*!< Length of culture bitstring */
+    int immunityLength; /*!< Length of immunity bitstring */
     
     //mutable
-    bool done;
-    std::pair<int, int> currentPosition,newPosition;
-    int currentAge,newAge;
-    int currentMetabolism,newMetabolism;
-    int currentSugar,newSugar;
+    bool done; /*!< True if agent has completed current action */
+    std::pair<int, int> currentPosition,newPosition; /*!< Position or agent on lattice */
+    int currentAge,newAge; /*!< Number of steps agent has existed for */
+    int currentMetabolism,newMetabolism; /*!< Amount of suygar agent consumes each turn/step  */
+    int currentSugar,newSugar; /*!< Sugar reserves held by agent */
 
-    bool *currentCulture,*newCulture;
-    bool *currentImmunity,*newImmunity;
-    std::vector<Agent*> currentChildren,newChildren;
-    std::vector<std::pair<Agent*,std::pair<int, int>>> currentLoansOwed,newLoansOwed;
-    std::vector<std::pair<Agent*,std::pair<int, int>>> currentLoansOwing,newLoansOwing;
-    std::vector<bool*> currentDiseases,newDiseases;
+    bool *currentCulture,*newCulture; /*!< bitstring represetnting Culture of agent */
+    bool *currentImmunity,*newImmunity; /*!< bitstring holding disease bit sequences that agent has immunity from  */
+    std::vector<Agent*> currentChildren,newChildren; /*!< Offspring of agent */
+    std::vector<std::pair<Agent*,std::pair<int, int>>> currentLoansOwed,newLoansOwed; /*!< Loans that the agent owes */
+    std::vector<std::pair<Agent*,std::pair<int, int>>> currentLoansOwing,newLoansOwing; /*!< Loans the agent has given to other agents - amounts owed to him */
+    std::vector<bool*> currentDiseases,newDiseases; /*!< Set of diseases (bitstrings) that agent suffers from */
     
 public:
     //Constructors
