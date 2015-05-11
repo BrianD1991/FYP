@@ -12,9 +12,11 @@
 #include <iostream>
 #include "Action.h"
 
-class IndependentAction:Action{
+class IndependentAction:public Action{
+public:
     IndependentAction(World*);
     virtual ~IndependentAction();
     virtual int run(void);
+    virtual group* formGroup(Location*);
 };
 #endif /* defined(__SugarScape__IndependentAction__) */

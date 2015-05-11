@@ -12,7 +12,8 @@
 #include <iostream>
 #include "Action.h"
 
-class ReadAction:Action{
+class ReadAction:public Action{
+public:
     ReadAction(World*);
     virtual ~ReadAction();
     virtual int run(void);

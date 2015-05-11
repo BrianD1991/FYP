@@ -40,6 +40,7 @@ class World{
     std::vector<Agent*> population; /*!< Agents in simulation */
     std::vector<Action*> activeRules; /*!< Rules we run each time step */
     
+    
 public:
     //Constructors
     World(void);

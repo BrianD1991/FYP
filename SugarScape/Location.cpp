@@ -71,6 +71,9 @@ int Location::setY(int y){
 }
 int Location::setSugar(int newAmount){
     newSugar=newAmount;
+    if (newSugar>maxSugar){
+        newSugar=maxSugar;
+    }
     return newSugar;
 }
 int Location::setMaxSugar(int newMax){

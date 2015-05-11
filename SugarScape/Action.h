@@ -17,7 +17,7 @@
 /*!  \class  Action
  \brief Abstract base class for Actions
  
- Actions  need to define formGroup and executeAction functions
+ Derived actions need to define formGroup and executeAction functions as they are pure virtual
  */
 
 class Action{

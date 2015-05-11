@@ -12,7 +12,8 @@
 #include <iostream>
 #include "Action.h"
 
-class WriteAction:Action{
+class WriteAction:public Action{
+public:
     WriteAction(World*);
     virtual ~WriteAction();
     virtual int run(void);

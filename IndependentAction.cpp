@@ -14,6 +14,17 @@ IndependentAction::IndependentAction(World* theWorld):Action(theWorld){
 IndependentAction::~IndependentAction(void){
     
 }
+
+/**
+ * Forms exclusive Group for Growback- No group involved so returns null pointer
+ * @param Location to apply rule to
+ * @return Pointer to group
+ * @exception none
+ */
+group* IndependentAction::formGroup(Location*){
+    return nullptr;
+}
+
 int IndependentAction::run(void){
     int size=sim->getSize();
     Location** Lattice=sim->getLattice();
