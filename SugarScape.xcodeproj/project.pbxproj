@@ -37,8 +37,8 @@
 /* Begin PBXFileReference section */
 		7CBEA3891B00F23000B37ABF /* Growback.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Growback.cpp; sourceTree = "<group>"; };
 		7CBEA38A1B00F23000B37ABF /* Growback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Growback.h; sourceTree = "<group>"; };
-		7CBEA38C1B00F89F00B37ABF /* SeasonalGrowback.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SeasonalGrowback.cpp; path = SugarScape/SeasonalGrowback.cpp; sourceTree = "<group>"; };
-		7CBEA38D1B00F89F00B37ABF /* SeasonalGrowback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SeasonalGrowback.h; path = SugarScape/SeasonalGrowback.h; sourceTree = "<group>"; };
+		7CBEA38C1B00F89F00B37ABF /* SeasonalGrowback.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SeasonalGrowback.cpp; sourceTree = "<group>"; };
+		7CBEA38D1B00F89F00B37ABF /* SeasonalGrowback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeasonalGrowback.h; sourceTree = "<group>"; };
 		D82B992C1AFA59B2009AB362 /* IndependentAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IndependentAction.cpp; path = ../IndependentAction.cpp; sourceTree = "<group>"; };
 		D82B992D1AFA59B3009AB362 /* IndependentAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IndependentAction.h; path = ../IndependentAction.h; sourceTree = "<group>"; };
 		D82B992F1AFA5EEE009AB362 /* ReadAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ReadAction.cpp; path = ../ReadAction.cpp; sourceTree = "<group>"; };
@@ -74,8 +74,6 @@
 		D897269D1AEBD28B005664BF = {
 			isa = PBXGroup;
 			children = (
-				7CBEA38C1B00F89F00B37ABF /* SeasonalGrowback.cpp */,
-				7CBEA38D1B00F89F00B37ABF /* SeasonalGrowback.h */,
 				D89726A81AEBD28B005664BF /* SugarScape */,
 				D89726A71AEBD28B005664BF /* Products */,
 			);
@@ -92,6 +90,8 @@
 		D89726A81AEBD28B005664BF /* SugarScape */ = {
 			isa = PBXGroup;
 			children = (
+				7CBEA38C1B00F89F00B37ABF /* SeasonalGrowback.cpp */,
+				7CBEA38D1B00F89F00B37ABF /* SeasonalGrowback.h */,
 				D89726A91AEBD28B005664BF /* main.cpp */,
 				7CBEA3891B00F23000B37ABF /* Growback.cpp */,
 				7CBEA38A1B00F23000B37ABF /* Growback.h */,
