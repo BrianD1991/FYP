@@ -33,7 +33,7 @@ class World{
     int combatLimit; /*!< Maximum reward attainable through killing an agent */
     int immunityLength;
     int initialPopulationSize; /*!< Starting population size */
-    int pollutionRate;
+    int pollutionRate; /*!< Number of timeperiods that pass between each diffusion of pollution */
     int childAmount;
     
     Location ** Lattice; /*!< 2D (size by size) Matrix of locations in world  */

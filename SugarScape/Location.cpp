@@ -10,10 +10,10 @@
 
 
 //constructors
-Location::Location():
+Location::Location(World *theWorld):
     maxSugar(0),currentSugar(0),
     currentPollution(0),newPollution(0),
-    newSugar(0),position(0,0)
+    newSugar(0),position(0,0),sim(theWorld)
 {
     //empty
 }
@@ -90,6 +90,11 @@ Agent* Location::setAgent(Agent* newAgent){
     newResident=newAgent;
     return newResident;
 }
+World* Location::setWorld(World* theWorld){
+    World* old=sim;
+    sim=theWorld;
+    return old;
+}
 //helpers
 bool Location::markDone(void){
     return done=true;
@@ -97,6 +102,9 @@ bool Location::markDone(void){
 bool Location::hasAgent(void){
     return currentResident!=nullptr;
 }
+
+
+
 bool Location::sync(void){
     done=false;
     currentPollution=newPollution;

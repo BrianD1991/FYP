@@ -11,12 +11,15 @@
 
 #include <iostream>
 #include "Agent.h"
+class World;
+
 const std::pair<int, int> nullPosition(-1,-1);
 
 class Location{
         //immutable -- once initialised these stay constant
         std::pair<int,int> position;
         int maxSugar; /*!< Maximum amount of sugar this location may hold at any one time */
+        World *sim;/*!< Pointer to the simulation */
     
         //mutable
         bool done; /*!< True if location has applied current rule successfully */
@@ -25,7 +28,7 @@ class Location{
         Agent *currentResident,*newResident; /*!< Agent currently at this location (if any) */
 public:
     //constructors
-    Location();
+    Location(World* sim=nullptr);
     Location(int,int);
     
     //getters
@@ -46,6 +49,7 @@ public:
     int setMaxSugar(int);
     int setPollution(int);
     Agent *setAgent(Agent*);
+    World* setWorld(World*);
     
     //helpers
     bool markDone(void);

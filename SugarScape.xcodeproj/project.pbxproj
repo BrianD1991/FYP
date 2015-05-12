@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C79878A1B022C96003A4AE5 /* Diffusion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C7987881B022C96003A4AE5 /* Diffusion.cpp */; };
 		7CBEA38B1B00F23000B37ABF /* Growback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CBEA3891B00F23000B37ABF /* Growback.cpp */; };
 		7CBEA38E1B00F89F00B37ABF /* SeasonalGrowback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CBEA38C1B00F89F00B37ABF /* SeasonalGrowback.cpp */; };
 		D82B992E1AFA59B3009AB362 /* IndependentAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D82B992C1AFA59B2009AB362 /* IndependentAction.cpp */; };
@@ -35,6 +36,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7C7987881B022C96003A4AE5 /* Diffusion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Diffusion.cpp; sourceTree = "<group>"; };
+		7C7987891B022C96003A4AE5 /* Diffusion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Diffusion.h; sourceTree = "<group>"; };
 		7CBEA3891B00F23000B37ABF /* Growback.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Growback.cpp; sourceTree = "<group>"; };
 		7CBEA38A1B00F23000B37ABF /* Growback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Growback.h; sourceTree = "<group>"; };
 		7CBEA38C1B00F89F00B37ABF /* SeasonalGrowback.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SeasonalGrowback.cpp; sourceTree = "<group>"; };
@@ -91,8 +94,10 @@
 			isa = PBXGroup;
 			children = (
 				7CBEA38C1B00F89F00B37ABF /* SeasonalGrowback.cpp */,
+				7C7987891B022C96003A4AE5 /* Diffusion.h */,
 				7CBEA38D1B00F89F00B37ABF /* SeasonalGrowback.h */,
 				D89726A91AEBD28B005664BF /* main.cpp */,
+				7C7987881B022C96003A4AE5 /* Diffusion.cpp */,
 				7CBEA3891B00F23000B37ABF /* Growback.cpp */,
 				7CBEA38A1B00F23000B37ABF /* Growback.h */,
 				D82B99301AFA5EEE009AB362 /* ReadAction.h */,
@@ -168,6 +173,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8D9943E1AEF873200F248C7 /* Agent.cpp in Sources */,
+				7C79878A1B022C96003A4AE5 /* Diffusion.cpp in Sources */,
 				7CBEA38B1B00F23000B37ABF /* Growback.cpp in Sources */,
 				D82B99341AFA5F7F009AB362 /* WriteAction.cpp in Sources */,
 				D82B99311AFA5EEE009AB362 /* ReadAction.cpp in Sources */,

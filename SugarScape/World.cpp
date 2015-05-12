@@ -27,6 +27,11 @@ World::World(void)
     for (int i=0; i<size; ++i) {
         Lattice[i]=new Location[size];
     }//for
+    for (int i=0; i<size; ++i) {
+        for (int k=0; k<size; ++k) {
+            Lattice[i][k].setWorld(this);
+        }
+    }
     
 }
 
@@ -204,6 +209,7 @@ std::vector<Agent*> World::getNeighbours(int xPosition,int yPosition,int range){
 Location** World::getLattice(void){
     return Lattice;
 }
+
 
 
 
