@@ -10,12 +10,18 @@
 #include "Agent.h"
 
 //Constructors
-Agent::Agent()
+Agent::Agent(World *s):amountEaten(0), done(false),
+    theWorld(s),currentAge(0),newAge(0),
+    cultureLength(s->getCultureCount()),immunityLength(s->getImmunityLength())
 {
-    
+    //TO DO!!
 }
 
 //getters
+int Agent::getAmountEaten(void){
+    return amountEaten;
+}
+
 bool Agent::isDone(void){
     return done;
 }

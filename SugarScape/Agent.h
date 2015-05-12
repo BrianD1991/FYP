@@ -39,6 +39,7 @@ class Agent{
     int immunityLength; /*!< Length of immunity bitstring */
     
     //mutable
+    int amountEaten;/*!< Store amount last eaten - required for Pollution Formation rule */
     bool done; /*!< True if agent has completed current action */
     std::pair<int, int> currentPosition,newPosition; /*!< Position or agent on lattice */
     int currentAge,newAge; /*!< Number of steps agent has existed for */
@@ -54,9 +55,10 @@ class Agent{
     
 public:
     //Constructors
-    Agent();
+    Agent(World*sim);
     
     //getters
+    int getAmountEaten(void);
     bool isDone(void);
     std::pair<int, int> getPosition(void);
     Sex getSex(void);
