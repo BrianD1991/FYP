@@ -108,6 +108,7 @@ public:
     int OwingToday(void);
     bool hasDisease(bool*);
     unsigned long addDisease(bool*);
+    bool setTag(int,bool);
     bool sync(void);
 };
 #endif /* defined(__SugarScape__Agent__) */

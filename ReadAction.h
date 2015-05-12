@@ -17,5 +17,6 @@ public:
     ReadAction(World*);
     virtual ~ReadAction();
     virtual int run(void);
+    virtual group* formGroup(Location*);
 };
 #endif /* defined(__SugarScape__ReadAction__) */

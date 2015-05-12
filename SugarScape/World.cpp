@@ -32,6 +32,7 @@ World::World(void)
             Lattice[i][k].setWorld(this);
         }
     }
+     rng.seed(seed_val);
     
 }
 
@@ -39,6 +40,12 @@ World::World(void)
 
 
 //*************************Getters*************************
+
+
+int World::getRnd(int start,int end){
+    std::uniform_int_distribution<uint32_t> uint_dist(start,end);
+    return uint_dist(rng);
+}
 
 /**
  Returns the step number

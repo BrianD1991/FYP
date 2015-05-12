@@ -10,7 +10,7 @@
 #define __SugarScape__Diffusion__
 
 #include <iostream>
-#include "IndependentAction.h"
+#include "ReadAction.h"
 
 /*!  \class  Diffusion
  \brief Implements Pollution Diffusion rule
@@ -19,7 +19,7 @@
  * Each site's flux becomes its new pollution level.
  */
 
-class Diffusion:public IndependentAction{
+class Diffusion:public ReadAction{
 public:
     Diffusion(World *s);
     virtual bool executeAction(Location *);

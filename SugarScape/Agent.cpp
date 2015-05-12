@@ -239,6 +239,11 @@ unsigned long Agent::addDisease(bool* infection){
     newDiseases.push_back(infection);
     return newDiseases.size();
 }
+
+bool Agent::setTag(int index,bool value){
+    return newCulture[index]=value;
+}
+
 bool Agent::sync(void){
     currentPosition=newPosition;
     currentAge=newAge;

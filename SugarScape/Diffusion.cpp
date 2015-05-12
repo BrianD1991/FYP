@@ -9,7 +9,7 @@
 #include "Diffusion.h"
 
 
-Diffusion::Diffusion(World *s):IndependentAction(s){
+Diffusion::Diffusion(World *s):ReadAction(s){
     //EMPTY
 }
 

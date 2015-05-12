@@ -11,6 +11,11 @@
 
 #include <iostream>
 #include "Location.h"
+#include <random>
+
+typedef std::mt19937 MyRNG;  // the Mersenne Twister with a popular choice of parameters
+uint32_t seed_val;           // populate somehow
+
 
 class Action;
 
@@ -40,6 +45,9 @@ class World{
     std::vector<Agent*> population; /*!< Agents in simulation */
     std::vector<Action*> activeRules; /*!< Rules we run each time step */
     
+    //random Numbers
+    MyRNG rng;// keep one instance
+
     
 public:
     //Constructors
@@ -48,6 +56,7 @@ public:
     
     
     //Getters
+    int getRnd(int,int);
     int getStep(void);
     int getSize(void);
     int getCultureCount(void);
@@ -102,6 +111,7 @@ public:
 
     //Rule Application
     int applyRules(void);
+    
 
 };
 

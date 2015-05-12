@@ -14,6 +14,17 @@ ReadAction::ReadAction(World* theWorld):Action(theWorld){
 ReadAction::~ReadAction(void){
     
 }
+/**
+ * Forms exclusive Group
+ * @param loc :Location to apply rule to
+ * @return Pointer to group
+ * @exception none
+ */
+group* ReadAction::formGroup(Location* loc){
+    return nullptr;
+}
+
+
 int ReadAction::run(void){
     int size=sim->getSize();
     Location** Lattice=sim->getLattice();
