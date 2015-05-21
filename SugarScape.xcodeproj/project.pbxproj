@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0871784C1B0E2C9F00ED6854 /* AgentDisease.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0871784A1B0E2C9F00ED6854 /* AgentDisease.cpp */; };
 		7C79878A1B022C96003A4AE5 /* Diffusion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C7987881B022C96003A4AE5 /* Diffusion.cpp */; };
 		7C79878D1B023775003A4AE5 /* PollutionFormation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C79878B1B023775003A4AE5 /* PollutionFormation.cpp */; };
 		7C7987901B0242D1003A4AE5 /* AgentCulture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C79878E1B0242D1003A4AE5 /* AgentCulture.cpp */; };
@@ -38,6 +39,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0871784A1B0E2C9F00ED6854 /* AgentDisease.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AgentDisease.cpp; sourceTree = "<group>"; };
+		0871784B1B0E2C9F00ED6854 /* AgentDisease.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentDisease.h; sourceTree = "<group>"; };
 		7C7987881B022C96003A4AE5 /* Diffusion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Diffusion.cpp; sourceTree = "<group>"; };
 		7C7987891B022C96003A4AE5 /* Diffusion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Diffusion.h; sourceTree = "<group>"; };
 		7C79878B1B023775003A4AE5 /* PollutionFormation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PollutionFormation.cpp; sourceTree = "<group>"; };
@@ -100,6 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				7C79878E1B0242D1003A4AE5 /* AgentCulture.cpp */,
+				0871784A1B0E2C9F00ED6854 /* AgentDisease.cpp */,
+				0871784B1B0E2C9F00ED6854 /* AgentDisease.h */,
 				7C79878F1B0242D1003A4AE5 /* AgentCulture.h */,
 				7CBEA38C1B00F89F00B37ABF /* SeasonalGrowback.cpp */,
 				7C7987891B022C96003A4AE5 /* Diffusion.h */,
@@ -193,6 +198,7 @@
 				7C7987901B0242D1003A4AE5 /* AgentCulture.cpp in Sources */,
 				D8D994411AEF874500F248C7 /* World.cpp in Sources */,
 				D89398281AFA2F20008B6490 /* group.cpp in Sources */,
+				0871784C1B0E2C9F00ED6854 /* AgentDisease.cpp in Sources */,
 				D89726AA1AEBD28B005664BF /* main.cpp in Sources */,
 				D8D994441AEF8BE300F248C7 /* Action.cpp in Sources */,
 				D82B992E1AFA59B3009AB362 /* IndependentAction.cpp in Sources */,

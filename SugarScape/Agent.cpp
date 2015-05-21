@@ -55,7 +55,7 @@ int Agent::getImmunityLength(void){
 bool *Agent::getCulture(void){
     return currentCulture;
 }
-bool *Agent::getImmunity(void){
+std::vector<bool> Agent::getImmunity(void){
     return currentImmunity;
 }
 std::vector<Agent*> Agent::getChildren(void){
@@ -67,7 +67,7 @@ std::vector<std::pair<Agent*,std::pair<int, int>>> Agent::getLoansOwed(void){
 std::vector<std::pair<Agent*,std::pair<int, int>>> Agent::getLoansOwing(void){
     return currentLoansOwing;
 }
-std::vector<bool*> Agent::getDiseases(void){
+std::vector<std::vector<bool>> Agent::getDiseases(void){
     return currentDiseases;
 }
 
@@ -119,13 +119,16 @@ int Agent::setImmunityLength(int newAmount){
     immunityLength=newAmount;
     return immunityLength;
 }
+int Agent::setImmunityTag(bool newValue,int index){
+    newImmunity[index]=newValue;
+    return newImmunity[index];
+}
 bool *Agent::setCulture(bool* replacementCulture){
     delete newCulture;
     newCulture=replacementCulture;
     return newCulture;
 }
-bool *Agent::setImmunity(bool* replacementImmunity){
-    delete newImmunity;
+std::vector<bool> Agent::setImmunity(std::vector<bool> replacementImmunity){
     newImmunity=replacementImmunity;
     return newImmunity;
 }
@@ -142,7 +145,7 @@ std::vector<std::pair<Agent*,std::pair<int, int>>> Agent::setLoansOwing(std::vec
     newLoansOwing=replacementLoansOwing;
     return newLoansOwing;
 }
-std::vector<bool*> Agent::setDiseases(std::vector<bool*> replacementDiseases){
+std::vector<std::vector<bool>> Agent::setDiseases(std::vector<std::vector<bool>> replacementDiseases){
     newDiseases=replacementDiseases;
     return newDiseases;
 }
@@ -165,8 +168,9 @@ affiliation Agent::getTribe(void){
         return affiliation::blue;
     }
 }
-bool Agent::isImmune(bool* disease, int length){
+bool Agent::isImmune(std::vector<bool> disease){
     int j=0;
+    int length= disease.size();
     for (int i=0; i<immunityLength-length; ++i) {
         for (j=0; j<length && disease[j]==currentImmunity[i+j]; ++j) {
             if (i+j==immunityLength-1) {
@@ -218,6 +222,8 @@ int Agent::OwedToday(void){
     }//for
     return total;
 }
+
+
 int Agent::OwingToday(void){
     int total=0;
     for(const std::pair<Agent*,std::pair<int, int>> account:currentLoansOwing){
@@ -227,23 +233,55 @@ int Agent::OwingToday(void){
     }//for
     return total;
 }
-bool Agent::hasDisease(bool* infection){
-    for(const bool* myDisease:currentDiseases){
+/**
+ * Checks to see if an agent has a particular disease
+ * @param infection :disease we are checking for
+ * @return true if we have it otherwise false
+ * @exception none
+ */
+bool Agent::hasDisease(std::vector<bool> infection){
+    for(const std::vector<bool> myDisease:currentDiseases){
         if (myDisease==infection) {
             return true;
         }
     }
     return false;
 }
-unsigned long Agent::addDisease(bool* infection){
+
+/**
+ * Infects an agent with a disease by adding it to the list of diseases agent has. Be careful not to add the same disease multiple times
+ * @param infection :Bool array representing a disease
+ * @return the number of diseases held by the agent
+ * @exception none
+ */
+unsigned long Agent::addDisease(std::vector<bool> infection){
     newDiseases.push_back(infection);
     return newDiseases.size();
 }
 
+
+
+unsigned long Agent::diseaseCount(void){
+    return currentDiseases.size();
+}
+
+/**
+ * Sets the value of one of the bools in the culture array
+ * @param index :index of tag being updated
+ * @param value :new value of tag
+ * @return new tag value
+ * @exception none
+ */
 bool Agent::setTag(int index,bool value){
     return newCulture[index]=value;
 }
 
+
+/**
+ * Finalises updates - Applies updates to agent state
+ * @return true if update sucessfull, otherwise false
+ * @exception none
+ */
 bool Agent::sync(void){
     currentPosition=newPosition;
     currentAge=newAge;
