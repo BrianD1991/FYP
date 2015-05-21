@@ -49,7 +49,7 @@ bool AgentDisease::executeAction(Location *loc){
                 }
                 //find first tag not agreeing
                 int i=0;
-                for (i=0; immunity[i]==infection[i]; ++i) {
+                for (i=0; immunity[bestIndex+i]==infection[i]; ++i) {
                     //EMPTY
                 }
                 //set tag at index value to new value

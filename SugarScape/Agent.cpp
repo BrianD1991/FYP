@@ -170,7 +170,7 @@ affiliation Agent::getTribe(void){
 }
 bool Agent::isImmune(std::vector<bool> disease){
     int j=0;
-    int length= disease.size();
+    int length= (int)disease.size();
     for (int i=0; i<immunityLength-length; ++i) {
         for (j=0; j<length && disease[j]==currentImmunity[i+j]; ++j) {
             if (i+j==immunityLength-1) {
