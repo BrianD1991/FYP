@@ -24,17 +24,51 @@ group* ReadAction::formGroup(Location* loc){
     return nullptr;
 }
 
+/**
+ * Performs a read only action across entire lattice sequentially
+ * @see Action.h
+ * @return number of actions performed
+ * @exception none
+ */
+bool ReadAction::run(int startX, int startY, int size){
+    Location** Lattice=sim->getLattice();
+    //Perform action
+    for (int i=startX; i<startX+size; ++i) {
+        for (int k=startY; k<startY+size; ++k) {
+            executeAction(&Lattice[i][k]);
+        }
+    }
+    //Update everyone
+    for (int i=startX; i<startX+size; ++i) {
+        for (int k=startY; k<startY+size; ++k) {
+            Lattice[i][k].sync();
+            if (Lattice[i][k].hasAgent()) {
+                Lattice[i][k].getAgent()->sync();
+            }
+        }
+    }
+    return true;
+    
+}
 
-int ReadAction::run(void){
+/**
+ * Performs a read only action across entire lattice concurrently
+ * @see Action.h
+ * @return number of actions performed
+ * @exception none
+ */
+bool ReadAction::concurrentRun(void){
     int size=sim->getSize();
     Location** Lattice=sim->getLattice();
     //Perform action
+#pragma omp for
     for (int i=0; i<size; ++i) {
         for (int k=0; k<size; ++k) {
             executeAction(&Lattice[i][k]);
         }
     }
     //Update everyone
+#pragma omp for
     for (int i=0; i<size; ++i) {
         for (int k=0; k<size; ++k) {
             Lattice[i][k].sync();
@@ -43,7 +77,7 @@ int ReadAction::run(void){
             }
         }
     }
-    return 1;
+    return true;
     
 }
 

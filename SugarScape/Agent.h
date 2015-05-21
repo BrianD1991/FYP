@@ -28,6 +28,11 @@ enum affiliation {
     };
 
 
+/*!  \class  Agent
+ \brief entities that move and interact on the lattice.
+ 
+ Agents move across the lattice and interact with each other and the location they reside in.
+ */
 class Agent{
     
     //immutable

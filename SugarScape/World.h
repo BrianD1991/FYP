@@ -10,11 +10,12 @@
 #define __SugarScape__World__
 
 #include <iostream>
-#include "Location.h"
 #include <random>
+#include "Location.h"
+
 
 typedef std::mt19937 MyRNG;  // the Mersenne Twister with a popular choice of parameters
-uint32_t seed_val;           // populate somehow
+  
 
 
 class Action;

@@ -16,6 +16,7 @@ class WriteAction:public Action{
 public:
     WriteAction(World*);
     virtual ~WriteAction();
-    virtual int run(void);
+    virtual bool run(int,int,int);
+    virtual bool concurrentRun(void);
 };
 #endif /* defined(__SugarScape__WriteAction__) */

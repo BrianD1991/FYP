@@ -12,11 +12,17 @@
 #include <iostream>
 #include "Action.h"
 
+/*!  \class  IndependentAction
+ \brief Actions that require no interaction between agents
+ 
+ The simplest possible agent actions.  No interaction between agents. Every agent acts independently.
+ */
 class IndependentAction:public Action{
 public:
     IndependentAction(World*);
     virtual ~IndependentAction();
-    virtual int run(void);
+    virtual bool run(int,int,int);
+    virtual bool concurrentRun(void);
     virtual group* formGroup(Location*);
 };
 #endif /* defined(__SugarScape__IndependentAction__) */

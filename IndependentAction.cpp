@@ -17,24 +17,57 @@ IndependentAction::~IndependentAction(void){
 
 /**
  * Forms exclusive Group for Growback- No group involved so returns null pointer
- * @param Location to apply rule to
+ * @param currLocation :Location to apply rule to
  * @return Pointer to group
  * @exception none
  */
-group* IndependentAction::formGroup(Location*){
+group* IndependentAction::formGroup(Location *currLocation){
     return nullptr;
 }
+/**
+ * Performs action on entire lattice
+ * @see Action
+ * @return number of actions performed
+ * @exception none
+ */
+bool IndependentAction::run(int startX, int startY, int size){
+    Location** Lattice=sim->getLattice();
+    //Perform action
+    for (int i=startX; i<startX+size; ++i) {
+        for (int k=startY; k<startY+size; ++k) {
+            executeAction(&Lattice[i][k]);
+        }
+    }
+    //Update everyone
+    for (int i=startX; i<startX+size; ++i) {
+        for (int k=startY; k<startY+size; ++k) {
+            Lattice[i][k].sync();
+            if (Lattice[i][k].hasAgent()) {
+                Lattice[i][k].getAgent()->sync();
+            }
+        }
+    }
+    return true;
 
-int IndependentAction::run(void){
+}
+/**
+ * Performs action on entire lattice concurrently
+ * @see Action
+ * @return number of actions performed
+ * @exception none
+ */
+bool IndependentAction::concurrentRun(void){
     int size=sim->getSize();
     Location** Lattice=sim->getLattice();
     //Perform action
+#pragma omp for
     for (int i=0; i<size; ++i) {
         for (int k=0; k<size; ++k) {
             executeAction(&Lattice[i][k]);
         }
     }
     //Update everyone
+#pragma omp for
     for (int i=0; i<size; ++i) {
         for (int k=0; k<size; ++k) {
             Lattice[i][k].sync();
@@ -43,8 +76,8 @@ int IndependentAction::run(void){
             }
         }
     }
-    return 1;
-
+    return true;
+    
 }
 
 

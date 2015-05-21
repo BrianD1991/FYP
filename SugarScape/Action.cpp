@@ -15,8 +15,24 @@ Action::Action(World* theWorld):sim(theWorld){
 Action::~Action(void){
     
 }
-int Action::run(void){
-    return -1;
+/**
+ * Sequentially performs action on square section of Lattice
+ * @param startX :start row on lattice
+ * @param startY :start column on lattice
+ * @param size :dimenstion of lattice (assume square lattice)
+ * @return true if ok, false to indicate error
+ * @exception none
+ */
+bool Action::run(int startX,int startY, int size){
+    return false;
+}
+/**
+ * Concurrently performs action on entire Lattice
+ * @return true if ok, false to indicate error
+ * @exception none
+ */
+bool Action::concurrentRun(void){
+    return false;
 }
 
 

@@ -32,7 +32,7 @@ World::World(void)
             Lattice[i][k].setWorld(this);
         }
     }
-     rng.seed(seed_val);
+     rng.seed();
     
 }
 
@@ -312,7 +312,7 @@ Agent* World::setAgent(int xPosition,int yPosition, Agent *newAgent){
 int World::applyRules(){
     int ruleCount=0;
     for(auto rule:activeRules){
-        ruleCount+=rule->run();
+        ruleCount+=rule->run(0,0,size);
     }
     return ruleCount;
 }
