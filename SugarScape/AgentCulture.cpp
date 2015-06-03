@@ -13,6 +13,13 @@ AgentCulture::AgentCulture(World *s):ReadAction(s){
     //EMPTY
 }
 
+/**
+ * If location contains an agent then apply culture rule to that agent
+ * @param loc :location to be checked
+ * @see Culture Rule
+ * @return true if location contained agent else false
+ * @exception none
+ */
 bool AgentCulture::executeAction(Location *loc){
     if (loc->hasAgent()) {
         std::vector<Agent*> neighbours=sim->getNeighbours(loc->getX(), loc->getY(), 1);
