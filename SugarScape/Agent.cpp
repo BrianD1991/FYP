@@ -10,7 +10,8 @@
 #include "Agent.h"
 
 //Constructors
-Agent::Agent(World *s):amountEaten(0), done(false),
+Agent::Agent(World *s,Agent *dad, Agent *mum):amountEaten(0), done(false),
+    father(dad),mother(mum),
     theWorld(s),currentAge(0),newAge(0),
     cultureLength(s->getCultureCount()),immunityLength(s->getImmunityLength())
 {
@@ -52,6 +53,20 @@ int Agent::getCultureLength(void){
 int Agent::getImmunityLength(void){
     return immunityLength;
 }
+unsigned long Agent::getChildrenCount()
+{
+    return currentChildren.size();
+}
+Agent* Agent::getFather()
+{
+    return father;
+}
+Agent* Agent::getMother()
+{
+    return mother;
+}
+
+
 bool *Agent::getCulture(void){
     return currentCulture;
 }

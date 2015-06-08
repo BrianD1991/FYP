@@ -60,13 +60,14 @@ class Agent{
     bool *currentCulture,*newCulture; /*!< bitstring representing Culture of agent */
     std::vector<bool> currentImmunity,newImmunity; /*!< bitstring holding disease bit sequences that agent has immunity from  */
     std::vector<Agent*> currentChildren,newChildren; /*!< Offspring of agent */
+    Agent *father, *mother;
     std::vector<std::pair<Agent*,std::pair<int, int>>> currentLoansOwed,newLoansOwed; /*!< Loans that the agent owes */
     std::vector<std::pair<Agent*,std::pair<int, int>>> currentLoansOwing,newLoansOwing; /*!< Loans the agent has given to other agents - amounts owed to him */
     std::vector<std::vector<bool>> currentDiseases,newDiseases; /*!< Set of diseases (bitstrings) that agent suffers from */
     
 public:
     //Constructors
-    Agent(World*sim);
+    Agent(World *sim=nullptr,Agent *dad=nullptr, Agent *mum=nullptr);
     
     //getters
     int getAmountEaten(void);
@@ -80,6 +81,9 @@ public:
     int getSugar(void);
     int getCultureLength(void);
     int getImmunityLength(void);
+    unsigned long getChildrenCount();
+    Agent* getFather();
+    Agent* getMother();
     bool *getCulture(void);
     std::vector<bool> getImmunity(void);
     std::vector<Agent*> getChildren(void);
