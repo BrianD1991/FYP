@@ -38,4 +38,3 @@ bool Inheritance::executeAction(Location * loc)
 }
 
 
-
