@@ -10,7 +10,7 @@
 #define __SugarScape__Inheritance__
 
 #include <iostream>
-#include "AgentCulture.h"
+#include "ReadAction.h"
 
 
 /*!  \class  Inheritance

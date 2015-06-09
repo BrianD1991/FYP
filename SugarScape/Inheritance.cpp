@@ -8,7 +8,8 @@
 
 #include "Inheritance.h"
 
-Inheritance::Inheritance(World *s):ReadAction(s)
+Inheritance::Inheritance(World* s)
+    :ReadAction(s)
 {
     //Our work is done!
 }
