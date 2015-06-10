@@ -19,7 +19,7 @@ AgentDisease::AgentDisease(World *s):ReadAction(s){
  * @return True if agent was here
  * @exception none
  */
-bool AgentDisease::executeAction(Location *loc){
+bool AgentDisease::executeAction(Location *loc, group*){
 
     if (loc->hasAgent()) {
         Agent * subject=loc->getAgent();

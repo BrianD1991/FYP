@@ -22,7 +22,7 @@
 class Diffusion:public ReadAction{
 public:
     Diffusion(World *s);
-    virtual bool executeAction(Location *);
+    virtual bool executeAction(Location *, group *);
 };
 
 

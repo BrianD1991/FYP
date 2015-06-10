@@ -51,7 +51,7 @@ bool WriteAction::run(int startX, int startY, int size){
     for(auto grp:ExclusiveGroups){
         std::vector<Location*> members=grp->getMembers();
         for(auto loc:members){
-            executeAction(loc);
+            executeAction(loc,grp);
         }
     }
 //update states

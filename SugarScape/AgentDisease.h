@@ -33,7 +33,7 @@ Disease transmission
 class AgentDisease:public ReadAction{
 public:
     AgentDisease(World *s);
-    virtual bool executeAction(Location *);
+    virtual bool executeAction(Location *, group *);
 };
 
 

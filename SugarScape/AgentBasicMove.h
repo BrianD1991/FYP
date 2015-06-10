@@ -15,7 +15,7 @@
 class AgentBasicMove :public WriteAction{
 public:
     AgentBasicMove(World *s);
-    virtual bool executeAction(Location *);
+    virtual bool executeAction(Location *, group *);
     virtual group* formGroup(Location *);
     
 };

@@ -20,7 +20,7 @@ When sugar quantity s is gathered from the Sugarscape, an amount of production p
 class PollutionFormation:public IndependentAction{
 public:
     PollutionFormation(World *s);
-    virtual bool executeAction(Location *);
+    virtual bool executeAction(Location *, group *);
 };
 
 

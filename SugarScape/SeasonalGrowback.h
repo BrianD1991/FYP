@@ -21,7 +21,7 @@ Initially it is summer in the top half of the Sugarscape and winter in the botto
 class SeasonalGrowback:public IndependentAction{
 public:
     SeasonalGrowback(World *s);
-    virtual bool executeAction(Location *);
+    virtual bool executeAction(Location *, group *);
 };
 
 #endif /* defined(__SugarScape__SeasonalGrowback__) */

@@ -14,22 +14,14 @@ AgentBasicMove::AgentBasicMove(World *s)
     //our work is done
 }
 
-bool AgentBasicMove::executeAction(Location *loc)
+bool AgentBasicMove::executeAction(Location *loc, group * grp)
 {
     if (loc->hasAgent()) {
-        Agent* theAgent=loc->getAgent();
-        if (theAgent->getAge()==theAgent->getMaxAge()) {//I am dying
-            theAgent->setSugar(0);
-        }
-        else {//I am alive check to see if parents are dying
-            if (theAgent->getFather()->getAge()==theAgent->getFather()->getMaxAge()) {
-                theAgent->incSugar(theAgent->getFather()->getSugar()/theAgent->getFather()->getChildrenCount());
-            }
-            if (theAgent->getMother()->getAge()==theAgent->getMother()->getMaxAge()) {
-                theAgent->incSugar(theAgent->getMother()->getSugar()/theAgent->getMother()->getChildrenCount());
-            }
-        }
-        
+        //Agent* theAgent=loc->getAgent();
+        std::pair<int,int> currPosition=loc->getAgent()->getPosition();
+        sim->setAgent(currPosition.first, currPosition.second, nullptr);//remove old location ptr to agent
+        loc->getAgent()->setPosition(grp->getMembers()[0]->getPosition());//set new position to new location
+        sim->setAgent(grp->getMembers()[0]->getPosition().first,grp->getMembers()[0]->getPosition().second,loc->getAgent());//add ptr to agent at new location
         return true;
     }else{
         return false;/*!< no agent present so did nothing */

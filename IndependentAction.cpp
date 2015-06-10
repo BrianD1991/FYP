@@ -35,7 +35,7 @@ bool IndependentAction::run(int startX, int startY, int size){
     //Perform action
     for (int i=startX; i<startX+size; ++i) {
         for (int k=startY; k<startY+size; ++k) {
-            executeAction(&Lattice[i][k]);
+            executeAction(&Lattice[i][k],nullptr);
         }
     }
     //Update everyone
@@ -63,7 +63,7 @@ bool IndependentAction::concurrentRun(void){
 #pragma omp for
     for (int i=0; i<size; ++i) {
         for (int k=0; k<size; ++k) {
-            executeAction(&Lattice[i][k]);
+            executeAction(&Lattice[i][k],nullptr);
         }
     }
     //Update everyone

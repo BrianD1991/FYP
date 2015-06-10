@@ -31,7 +31,7 @@ Agent Culture K
 class AgentCulture:public ReadAction{
 public:
     AgentCulture(World *s);
-    virtual bool executeAction(Location *);
+    virtual bool executeAction(Location *, group *);
 };
 
 

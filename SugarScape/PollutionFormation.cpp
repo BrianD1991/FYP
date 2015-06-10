@@ -11,7 +11,7 @@
 PollutionFormation::PollutionFormation(World *s):IndependentAction(s){
     //EMPTY
 }
-bool PollutionFormation::executeAction(Location *loc){
+bool PollutionFormation::executeAction(Location *loc, group *){
     if (loc->hasAgent()) {//agent present implies pollution created
         int currPollution=loc->getPollution();
         currPollution+=loc->getAgent()->getMetabolism()*sim->getConsumption();//amount metabolised

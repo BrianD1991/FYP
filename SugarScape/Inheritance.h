@@ -23,7 +23,7 @@
 class Inheritance:public ReadAction{
 public:
     Inheritance(World *s);
-    virtual bool executeAction(Location *);
+    virtual bool executeAction(Location *, group *);
 
 };
 

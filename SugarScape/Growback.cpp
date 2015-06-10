@@ -13,7 +13,7 @@ Growback::Growback(World *sim):IndependentAction(sim){
     
 }
 
-bool Growback::executeAction(Location * place){
+bool Growback::executeAction(Location * place,group*){
     
     place->setSugar(sim->getSugarGrowth());
     return true;

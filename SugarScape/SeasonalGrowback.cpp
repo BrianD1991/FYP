@@ -13,7 +13,7 @@ SeasonalGrowback::SeasonalGrowback(World *sim):IndependentAction(sim){
     
 }
 
-bool SeasonalGrowback::executeAction(Location * place){
+bool SeasonalGrowback::executeAction(Location * place, group *){
     if ((sim->getStep()/sim->getSeasonLength())%2==0) {//summer top half
         if (place->getX()*2<sim->getSize()) {
             place->setSugar(sim->getSugarGrowth());

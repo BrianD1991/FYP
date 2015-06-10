@@ -21,6 +21,6 @@
 class Growback:public IndependentAction{
 public:
     Growback(World *s);
-    virtual bool executeAction(Location *);
+    virtual bool executeAction(Location *, group *);
 };
 #endif /* defined(__SugarScape__Growback__) */

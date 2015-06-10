@@ -24,7 +24,7 @@ Inheritance::Inheritance(World* s)
  * @return true if agent was presnt otherwise false
  * @exception none
  */
-bool Inheritance::executeAction(Location * loc)
+bool Inheritance::executeAction(Location * loc, group *)
 {
     if (loc->hasAgent()) {
         Agent* theAgent=loc->getAgent();

@@ -13,7 +13,7 @@ Diffusion::Diffusion(World *s):ReadAction(s){
     //EMPTY
 }
 
-bool Diffusion::executeAction(Location *loc){
+bool Diffusion::executeAction(Location *loc, group *){
     if (sim->getStep()%sim->getPollutionRate()==0) {
         Location** lattice=sim->getLattice();
         int diffusedPollution= lattice[loc->getX()+1][loc->getY()].getPollution()

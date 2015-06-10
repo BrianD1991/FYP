@@ -28,7 +28,7 @@ public:
     virtual ~Action();
     virtual bool run(int,int,int);
     virtual bool concurrentRun(void);
-    virtual bool executeAction(Location *)=0;
+    virtual bool executeAction(Location *, group*)=0;
     virtual group* formGroup(Location *)=0;
 };
 #endif /* defined(__SugarScape__Action__) */
