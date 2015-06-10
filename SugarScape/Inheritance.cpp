@@ -14,7 +14,16 @@ Inheritance::Inheritance(World* s)
     //Our work is done!
 }
 
-
+/**
+ * Check location for agent. If present check to see if due to die.  If so then remove all sugar.
+ * If agent is not dying then check each parent to see if they are dying.
+ * If they are take the correct share of their sugar (total sugar divided by number of children.
+ * Note: We do not bother to check if any of their other children may be dying - just to simplify code
+ * @param loc :location to check for agent
+ * @see Inheritance Rule
+ * @return true if agent was presnt otherwise false
+ * @exception none
+ */
 bool Inheritance::executeAction(Location * loc)
 {
     if (loc->hasAgent()) {
@@ -33,7 +42,7 @@ bool Inheritance::executeAction(Location * loc)
         
         return true;
     }else{
-        return false;
+        return false;/*!< no agent present so did nothing */
     }
 
 }

@@ -196,16 +196,49 @@ int World::getChildAmount(void){
 Agent* World::getAgent(int xPosition,int yPosition){
     return Lattice[xPosition%size][yPosition%size].getAgent();
 }
-std::vector<Agent*> World::getNeighbours(int xPosition,int yPosition,int range){
+std::vector<Location*> World::getNeighbourhood(int xPosition,int yPosition,int range)
+{
+    std::vector<Location*> neighbourhood;
+    for (int i=xPosition-range; i<=xPosition+range; ++i) {/*!< loop up to and including (<=) or else we lose last location */
+        if (i!=xPosition) {
+            neighbourhood.push_back(&Lattice[i%size][yPosition]);
+        }//if
+    }//for
+    for (int i=yPosition-range; i<=yPosition+range; ++i) {/*!< loop up to and including (<=) or else we lose last location */
+        if (i!=yPosition) {
+            neighbourhood.push_back(&Lattice[xPosition][i%size]);
+        }//if
+    }//for
+    return neighbourhood;
+}
+
+std::vector<Location*> World::getEmptyNeighbourhood(int xPosition,int yPosition,int range)
+{
+    std::vector<Location*> neighbourhood;
+    for (int i=xPosition-range; i<=xPosition+range; ++i) {/*!< loop up to and including (<=) or else we lose last location */
+        if (i!=xPosition && !Lattice[i%size][yPosition].hasAgent()) {
+            neighbourhood.push_back(&Lattice[i%size][yPosition]);
+        }//if
+    }//for
+    for (int i=yPosition-range; i<=yPosition+range; ++i) {/*!< loop up to and including (<=) or else we lose last location */
+        if (i!=yPosition && !Lattice[xPosition][i%size].hasAgent()) {
+            neighbourhood.push_back(&Lattice[xPosition][i%size]);
+        }//if
+    }//for
+    return neighbourhood;
+}
+
+std::vector<Agent*> World::getNeighbours(int xPosition,int yPosition,int range)
+{
     std::vector<Agent*> neighbourList;
     Agent* neighbour=nullptr;
-    for (int i=xPosition-range; i<xPosition+range; ++i) {
+    for (int i=xPosition-range; i<=xPosition+range; ++i) {/*!< loop up to and including (<=) or else we lose last location */
         neighbour=Lattice[i%size][yPosition].getAgent();
         if (neighbour!=nullptr && i!=xPosition) {
             neighbourList.push_back(neighbour);
         }//if
     }//for
-    for (int i=yPosition-range; i<yPosition+range; ++i) {
+    for (int i=yPosition-range; i<=yPosition+range; ++i) {/*!< loop up to and including (<=) or else we lose last location */
         neighbour=Lattice[xPosition][i%size].getAgent();
         if (neighbour!=nullptr && i!=yPosition) {
             neighbourList.push_back(neighbour);
@@ -213,7 +246,8 @@ std::vector<Agent*> World::getNeighbours(int xPosition,int yPosition,int range){
     }//for
     return neighbourList;
 }
-Location** World::getLattice(void){
+Location** World::getLattice(void)
+{
     return Lattice;
 }
 

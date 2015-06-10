@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0871784C1B0E2C9F00ED6854 /* AgentDisease.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0871784A1B0E2C9F00ED6854 /* AgentDisease.cpp */; };
+		08CED8A91B28C8DA00510CA6 /* AgentBasicMove.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08CED8A71B28C8DA00510CA6 /* AgentBasicMove.cpp */; };
 		7C6A7F0C1B25D9DB000AE96D /* ViewPort.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C6A7F0A1B25D9DB000AE96D /* ViewPort.cpp */; };
 		7C6A7F0F1B25E62C000AE96D /* Inheritance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C6A7F0D1B25E62C000AE96D /* Inheritance.cpp */; };
 		7C79878A1B022C96003A4AE5 /* Diffusion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C7987881B022C96003A4AE5 /* Diffusion.cpp */; };
@@ -43,6 +44,8 @@
 /* Begin PBXFileReference section */
 		0871784A1B0E2C9F00ED6854 /* AgentDisease.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AgentDisease.cpp; sourceTree = "<group>"; };
 		0871784B1B0E2C9F00ED6854 /* AgentDisease.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentDisease.h; sourceTree = "<group>"; };
+		08CED8A71B28C8DA00510CA6 /* AgentBasicMove.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AgentBasicMove.cpp; sourceTree = "<group>"; };
+		08CED8A81B28C8DA00510CA6 /* AgentBasicMove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentBasicMove.h; sourceTree = "<group>"; };
 		7C6A7F0A1B25D9DB000AE96D /* ViewPort.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ViewPort.cpp; sourceTree = "<group>"; };
 		7C6A7F0B1B25D9DB000AE96D /* ViewPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewPort.h; sourceTree = "<group>"; };
 		7C6A7F0D1B25E62C000AE96D /* Inheritance.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Inheritance.cpp; sourceTree = "<group>"; };
@@ -141,6 +144,8 @@
 				7C6A7F0A1B25D9DB000AE96D /* ViewPort.cpp */,
 				7C6A7F0B1B25D9DB000AE96D /* ViewPort.h */,
 				7C6A7F0D1B25E62C000AE96D /* Inheritance.cpp */,
+				08CED8A71B28C8DA00510CA6 /* AgentBasicMove.cpp */,
+				08CED8A81B28C8DA00510CA6 /* AgentBasicMove.h */,
 				7C6A7F0E1B25E62C000AE96D /* Inheritance.h */,
 			);
 			path = SugarScape;
@@ -198,6 +203,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8D9943E1AEF873200F248C7 /* Agent.cpp in Sources */,
+				08CED8A91B28C8DA00510CA6 /* AgentBasicMove.cpp in Sources */,
 				7C79878A1B022C96003A4AE5 /* Diffusion.cpp in Sources */,
 				7CBEA38B1B00F23000B37ABF /* Growback.cpp in Sources */,
 				7C79878D1B023775003A4AE5 /* PollutionFormation.cpp in Sources */,

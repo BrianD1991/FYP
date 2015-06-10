@@ -12,7 +12,7 @@
 //Constructors
 Agent::Agent(World *s,Agent *dad, Agent *mum):amountEaten(0), done(false),
     father(dad),mother(mum),
-    theWorld(s),currentAge(0),newAge(0),
+    theWorld(s),currentAge(0),
     cultureLength(s->getCultureCount()),immunityLength(s->getImmunityLength())
 {
     //TO DO!!
@@ -102,11 +102,11 @@ int Agent::setVision(int newVision){
     return newVision;
 }
 int Agent::incAge(void){
-    return ++newAge;
+    return ++currentAge;
 }
 int Agent::setAge(int newAmount){
-    newAge=newAmount;
-    return newAge;
+    currentAge=newAmount;
+    return currentAge;
 }
 int Agent::setMaxAge(int newMax){
     if (maxAge==-1) {
@@ -299,7 +299,6 @@ bool Agent::setTag(int index,bool value){
  */
 bool Agent::sync(void){
     currentPosition=newPosition;
-    currentAge=newAge;
     currentSugar=newSugar;
     for (int i=0; i<cultureLength; ++i) {
         currentCulture[i]=newCulture[i];

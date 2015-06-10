@@ -24,6 +24,7 @@ class Inheritance:public ReadAction{
 public:
     Inheritance(World *s);
     virtual bool executeAction(Location *);
+
 };
 
 #endif /* defined(__SugarScape__Inheritance__) */

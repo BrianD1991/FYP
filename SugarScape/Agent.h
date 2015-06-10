@@ -53,7 +53,7 @@ class Agent{
     int amountEaten;/*!< Store amount last eaten - required for Pollution Formation rule */
     bool done; /*!< True if agent has completed current action */
     std::pair<int, int> currentPosition,newPosition; /*!< Position or agent on lattice */
-    int currentAge,newAge; /*!< Number of steps agent has existed for */
+    int currentAge; /*!< Number of steps agent has existed for, newAge is simply currentAge+1 */
     int currentMetabolism,newMetabolism; /*!< Amount of suygar agent consumes each turn/step  */
     int currentSugar,newSugar; /*!< Sugar reserves held by agent */
 
