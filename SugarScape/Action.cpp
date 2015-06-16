@@ -19,7 +19,7 @@ Action::~Action(void){
  * Sequentially performs action on square section of Lattice
  * @param startX :start row on lattice
  * @param startY :start column on lattice
- * @param size :dimenstion of lattice (assume square lattice)
+ * @param size :dimension of lattice (assume square lattice)
  * @return true if ok, false to indicate error
  * @exception none
  */

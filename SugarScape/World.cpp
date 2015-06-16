@@ -342,6 +342,16 @@ int World::setChildAmount(int newChildAmount){
 Agent* World::setAgent(int xPosition,int yPosition, Agent *newAgent){
     return Lattice[xPosition%size][yPosition%size].setAgent(newAgent);
 }
+Agent* World::killAgent(int xPosition,int yPosition)
+{
+    if (Lattice[xPosition%size][yPosition%size].hasAgent()) {
+        return Lattice[xPosition%size][yPosition%size].killAgent();
+    }
+    else
+    {
+        return nullptr;
+    }
+}
 //Rule Application
 int World::applyRules(){
     int ruleCount=0;

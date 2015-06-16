@@ -109,6 +109,7 @@ public:
     int setPollutionRate(int);
     int setChildAmount(int);
     Agent* setAgent(int,int,Agent*);
+    Agent* killAgent(int,int);
     
     
 

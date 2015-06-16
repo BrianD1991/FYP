@@ -291,7 +291,83 @@ bool Agent::setTag(int index,bool value){
     return newCulture[index]=value;
 }
 
+/**
+ * Tells us if an agent is dead -- if it has reached maxAge or has no sugar left
+ * @return true if will die now wlse false
+ * @exception none
+ */
+bool Agent::isDead(void)
+{
+    if (currentAge==maxAge || currentSugar==0) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
+/**
+ * REmoves all loans with dead agents
+ * @return number of loan agreements nullified
+ * @exception none
+ */
+int Agent::removeDeadLoans(void)
+{
+    int repititions=0;
+    auto it=newLoansOwed.begin();
+    while(it!=newLoansOwed.end())
+    {
+        if (it->first->isDead()) {
+            it=newLoansOwed.erase(it);
+            ++repititions;
+        }
+        else{
+            ++it;
+        }
+    }
+    it=newLoansOwing.begin();
+    while(it!=newLoansOwing.end())
+    {
+        if (it->first->isDead()) {
+            it=newLoansOwing.erase(it);
+            ++repititions;
+        }
+        else{
+            ++it;
+        }
+    }
+    return repititions;
+}
+
+/**
+ * Removed link to mother if father is dead
+ * @return true if mother was dead else false
+ * @exception none
+ */
+bool Agent::removeDeadMother(void)
+{
+    if (mother->isDead()) {
+        mother=nullptr;
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+/**
+ * Removed link to father if father is dead
+ * @return true if father was dead else false
+ * @exception none
+ */
+bool Agent::removeDeadFather(void)
+{
+    if (father->isDead()) {
+        father=nullptr;
+        return true;
+    }
+    else{
+        return false;
+    }
+}
 /**
  * Finalises updates - Applies updates to agent state
  * @return true if update sucessfull, otherwise false

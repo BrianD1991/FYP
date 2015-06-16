@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0871784C1B0E2C9F00ED6854 /* AgentDisease.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0871784A1B0E2C9F00ED6854 /* AgentDisease.cpp */; };
+		089A0C551B30447500C17F80 /* AgentDeath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 089A0C531B30447500C17F80 /* AgentDeath.cpp */; };
+		089A0C581B30ABF000C17F80 /* GarbageCollection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 089A0C561B30ABF000C17F80 /* GarbageCollection.cpp */; };
 		08CED8A91B28C8DA00510CA6 /* AgentBasicMove.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08CED8A71B28C8DA00510CA6 /* AgentBasicMove.cpp */; };
 		7C6A7F0C1B25D9DB000AE96D /* ViewPort.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C6A7F0A1B25D9DB000AE96D /* ViewPort.cpp */; };
 		7C6A7F0F1B25E62C000AE96D /* Inheritance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C6A7F0D1B25E62C000AE96D /* Inheritance.cpp */; };
@@ -44,6 +46,10 @@
 /* Begin PBXFileReference section */
 		0871784A1B0E2C9F00ED6854 /* AgentDisease.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AgentDisease.cpp; sourceTree = "<group>"; };
 		0871784B1B0E2C9F00ED6854 /* AgentDisease.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentDisease.h; sourceTree = "<group>"; };
+		089A0C531B30447500C17F80 /* AgentDeath.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AgentDeath.cpp; sourceTree = "<group>"; };
+		089A0C541B30447500C17F80 /* AgentDeath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentDeath.h; sourceTree = "<group>"; };
+		089A0C561B30ABF000C17F80 /* GarbageCollection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GarbageCollection.cpp; sourceTree = "<group>"; };
+		089A0C571B30ABF000C17F80 /* GarbageCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GarbageCollection.h; sourceTree = "<group>"; };
 		08CED8A71B28C8DA00510CA6 /* AgentBasicMove.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AgentBasicMove.cpp; sourceTree = "<group>"; };
 		08CED8A81B28C8DA00510CA6 /* AgentBasicMove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentBasicMove.h; sourceTree = "<group>"; };
 		7C6A7F0A1B25D9DB000AE96D /* ViewPort.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ViewPort.cpp; sourceTree = "<group>"; };
@@ -115,6 +121,10 @@
 				0871784A1B0E2C9F00ED6854 /* AgentDisease.cpp */,
 				0871784B1B0E2C9F00ED6854 /* AgentDisease.h */,
 				7C79878F1B0242D1003A4AE5 /* AgentCulture.h */,
+				089A0C531B30447500C17F80 /* AgentDeath.cpp */,
+				089A0C561B30ABF000C17F80 /* GarbageCollection.cpp */,
+				089A0C571B30ABF000C17F80 /* GarbageCollection.h */,
+				089A0C541B30447500C17F80 /* AgentDeath.h */,
 				7CBEA38C1B00F89F00B37ABF /* SeasonalGrowback.cpp */,
 				7C7987891B022C96003A4AE5 /* Diffusion.h */,
 				7CBEA38D1B00F89F00B37ABF /* SeasonalGrowback.h */,
@@ -217,6 +227,8 @@
 				D89398281AFA2F20008B6490 /* group.cpp in Sources */,
 				0871784C1B0E2C9F00ED6854 /* AgentDisease.cpp in Sources */,
 				D89726AA1AEBD28B005664BF /* main.cpp in Sources */,
+				089A0C581B30ABF000C17F80 /* GarbageCollection.cpp in Sources */,
+				089A0C551B30447500C17F80 /* AgentDeath.cpp in Sources */,
 				7C6A7F0C1B25D9DB000AE96D /* ViewPort.cpp in Sources */,
 				D8D994441AEF8BE300F248C7 /* Action.cpp in Sources */,
 				D82B992E1AFA59B3009AB362 /* IndependentAction.cpp in Sources */,

@@ -11,7 +11,7 @@
 
 //constructors
 Location::Location(World *theWorld):
-    maxSugar(0),currentSugar(0),
+    maxSugar(0),currentSugar(0),deadAgent(nullptr),
     currentPollution(0),newPollution(0),
     newSugar(0),position(0,0),sim(theWorld)
 {
@@ -102,8 +102,27 @@ bool Location::markDone(void){
 bool Location::hasAgent(void){
     return currentResident!=nullptr;
 }
-
-
+Agent* Location::killAgent(void)
+{
+    newResident=nullptr;
+    return deadAgent=currentResident;
+}
+bool Location::hasDeadAgent()
+{
+    return deadAgent!=nullptr;
+}
+bool Location::putOutGarbage(void)
+{
+    if (deadAgent!=nullptr) {
+        delete deadAgent;
+        deadAgent=nullptr;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 
 bool Location::sync(void){
     done=false;

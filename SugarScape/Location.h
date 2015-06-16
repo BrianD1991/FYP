@@ -26,6 +26,7 @@ class Location{
         int currentSugar,newSugar; /*!< Amount of sugar currently at location */
         int currentPollution,newPollution; /*!< Amount of pollution currently at site */
         Agent *currentResident,*newResident; /*!< Agent currently at this location (if any) */
+        Agent *deadAgent;
 public:
     //constructors
     Location(World* sim=nullptr);
@@ -54,6 +55,9 @@ public:
     //helpers
     bool markDone(void);
     bool hasAgent(void);
+    bool hasDeadAgent(void);
+    Agent* killAgent(void);
+    bool putOutGarbage(void);
     bool sync(void);
 };
 

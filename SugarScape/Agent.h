@@ -126,6 +126,10 @@ public:
     unsigned long addDisease(std::vector<bool>);
     unsigned long  diseaseCount(void);
     bool setTag(int,bool);
+    bool isDead(void);
+    int removeDeadLoans(void);
+    bool removeDeadMother(void);
+    bool removeDeadFather(void);
     bool sync(void);
 };
 #endif /* defined(__SugarScape__Agent__) */
