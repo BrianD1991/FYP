@@ -15,7 +15,7 @@ GarbageCollection::GarbageCollection(World *s)
 }
 /**
  * Deletes dead agent kept by location
- * @param Location we are checking
+ * @param loc :Location we are checking
  * @param Group we need - not required by this rule
  * @see Death, Replacement, Combat
  * @return true if there was a dead agent to remove else false
