@@ -212,35 +212,51 @@ std::vector<Location*> World::getNeighbourhood(int xPosition,int yPosition,int r
     return neighbourhood;
 }
 
+/**
+ * get all empty locations around us that are not marked done
+ * @param xPosition :x-xoordinate of index
+ * @param yPosition :y-coordinate of index
+ * @param range :vision - how far we can see in four directions
+ * @return vector of Location pointers (all empty locations in our neighbourhood
+ */
 std::vector<Location*> World::getEmptyNeighbourhood(int xPosition,int yPosition,int range)
 {
     std::vector<Location*> neighbourhood;
     for (int i=xPosition-range; i<=xPosition+range; ++i) {/*!< loop up to and including (<=) or else we lose last location */
-        if (i!=xPosition && !Lattice[i%size][yPosition].hasAgent()) {
+        //pick location only if it !=identity (us) and is empty and is not marked done
+        if (i!=xPosition && Lattice[i%size][yPosition].hasAgent()==false && Lattice[i%size][yPosition].isDone()==false) {
             neighbourhood.push_back(&Lattice[i%size][yPosition]);
         }//if
     }//for
     for (int i=yPosition-range; i<=yPosition+range; ++i) {/*!< loop up to and including (<=) or else we lose last location */
-        if (i!=yPosition && !Lattice[xPosition][i%size].hasAgent()) {
+        //pick location only if it !=identity (us) and is empty and is not marked done
+        if (i!=yPosition && false==Lattice[xPosition][i%size].hasAgent() && false==Lattice[xPosition][i%size].isDone()) {
             neighbourhood.push_back(&Lattice[xPosition][i%size]);
         }//if
     }//for
     return neighbourhood;
 }
 
+/**
+ * Returns all agents in our neighbourhood who are not marked as done!
+ * @param xPosition :x-xoordinate of index
+ * @param yPosition :y-coordinate of index
+ * @param range :vision - how far we can see in four directions
+ * @return vector of pointers to agents who are neighbours and not marked done
+ */
 std::vector<Agent*> World::getNeighbours(int xPosition,int yPosition,int range)
 {
     std::vector<Agent*> neighbourList;
     Agent* neighbour=nullptr;
     for (int i=xPosition-range; i<=xPosition+range; ++i) {/*!< loop up to and including (<=) or else we lose last location */
         neighbour=Lattice[i%size][yPosition].getAgent();
-        if (neighbour!=nullptr && i!=xPosition) {
+        if (neighbour!=nullptr && i!=xPosition && Lattice[i%size][yPosition].isDone()==false) {
             neighbourList.push_back(neighbour);
         }//if
     }//for
     for (int i=yPosition-range; i<=yPosition+range; ++i) {/*!< loop up to and including (<=) or else we lose last location */
         neighbour=Lattice[xPosition][i%size].getAgent();
-        if (neighbour!=nullptr && i!=yPosition) {
+        if (neighbour!=nullptr && i!=yPosition && Lattice[xPosition][i%size].isDone()==false) {
             neighbourList.push_back(neighbour);
         }//if
     }//for

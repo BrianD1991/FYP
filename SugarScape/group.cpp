@@ -41,6 +41,14 @@ int group::getSize(void){
     return size;
 }
 
+/**
+ * gets locationof the agent in charge of group
+ * @return pointer to location of agent in charge
+ */
+Location *group::getPrimeMover(void)
+{
+    return primeMover;
+}
 
 //*****************************SETTERS*****************************
 
@@ -64,6 +72,16 @@ int group::setRank(int newRank){
     return rank=newRank;
 }
 
+/**
+ * Sets the location of aGent who has formed the group
+ * @param loc :pointer to location
+ * @return true
+ */
+bool group::setPrimeMover(Location* loc)
+{
+    primeMover=loc;
+    return true;
+}
 //*****************************HELPERS*****************************
 
 /**

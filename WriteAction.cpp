@@ -37,8 +37,14 @@ bool WriteAction::run(int startX, int startY, int size){
                     exclusive=false;
                 }
             }
+            if (grp->getPrimeMover()->isDone()) {
+                exclusive=false;
+            }
+            //all agents in group are free then
+            // add group to exclusiveGroups and mark each location as done
             if (exclusive) {//all agents in group are free!
                 ExclusiveGroups.push_back(grp);
+                grp->getPrimeMover()->markDone();
                 for(auto loc:members){
                     loc->markDone();
                     --remaining;
@@ -49,19 +55,27 @@ bool WriteAction::run(int startX, int startY, int size){
     }//While
 //Exclusive Groups all formed here. Apply actions
     for(auto grp:ExclusiveGroups){
-        std::vector<Location*> members=grp->getMembers();
-        for(auto loc:members){
-            executeAction(loc,grp);
-        }
+        executeAction(grp->getPrimeMover(),grp);
+//        std::vector<Location*> members=grp->getMembers();
+//        for(auto loc:members){
+//            executeAction(loc,grp);
+//        }
     }
 //update states
     for(auto grp:ExclusiveGroups){
         std::vector<Location*> members=grp->getMembers();
+        Location *primeMoverLocation=grp->getPrimeMover();
+        //update all group members --locations and resident agents (if any)
         for(auto loc:members){
             loc->sync();
             if (loc->hasAgent()) {
                 loc->getAgent()->sync();
             }
+        }
+        //update location of group "leader" and prime agent 
+        primeMoverLocation->sync();
+        if (primeMoverLocation->hasAgent()) {
+            primeMoverLocation->getAgent()->sync();
         }
     }
     

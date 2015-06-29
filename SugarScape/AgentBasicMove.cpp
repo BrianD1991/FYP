@@ -14,6 +14,9 @@ AgentBasicMove::AgentBasicMove(World *s)
     //our work is done
 }
 
+
+
+
 bool AgentBasicMove::executeAction(Location *loc, group * grp)
 {
     if (loc->hasAgent()) {
@@ -52,6 +55,7 @@ group* AgentBasicMove::formGroup(Location *loc)
             if (rank<0) rank+=theAgent->getVision();
             else rank -=theAgent->getVision();
             ourChoice->setRank(rank);
+            ourChoice->setPrimeMover(loc);
         }
         
     }

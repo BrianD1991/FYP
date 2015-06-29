@@ -13,7 +13,8 @@
 #include "Location.h"
 
 class group{
-    std::vector<Location*> members; /*!< Agents in this group */
+    std::vector<Location*> members; /*!< Locations of Agents in this group */
+    Location *primeMover;/*!< Location of Agent who formed the group */
     int rank; /*!< Determines the ranking of a group - used for collision resolution*/
     int size; /*!< Number of agents in this group */
 public:
@@ -23,10 +24,12 @@ public:
     int getRank(void);
     std::vector<Location*> getMembers(void);
     int getSize(void);
+    Location *getPrimeMover(void);
     
     //setters
     int push_back(Location*);
     int setRank(int);
+    bool setPrimeMover(Location*);
     
     
     //Helpers
