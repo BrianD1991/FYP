@@ -31,12 +31,11 @@ bool AgentBasicMove::executeAction(Location *loc, group * grp)
     }
 }
 
-
 /**
  * Pick a random empty location within our neighbourhood as defined by our vision
  * @param loc :Our location
  * @see Move Rule
- * @return Our chosen location held in a group object (or nullPtr if we have no move
+ * @return Our chosen location held in a group object (or our existing location if we have no move
  * @exception none
  */
 group* AgentBasicMove::formGroup(Location *loc)
@@ -46,16 +45,22 @@ group* AgentBasicMove::formGroup(Location *loc)
         Agent* theAgent=loc->getAgent();
         //find all empty locations
         std::vector<Location*> possibleDestinations=sim->getEmptyNeighbourhood(theAgent->getPosition().first, theAgent->getPosition().second, theAgent->getVision());
+        ourChoice = new group();
         if (possibleDestinations.size()!=0) {/*!< check to see if we can move anywhere */
-            ourChoice = new group();
             int index=sim->getRnd(0,(int)possibleDestinations.size());//pick random location
             ourChoice->push_back(possibleDestinations[index]);
             int rank=possibleDestinations[index]->getPosition().first-theAgent->getPosition().first
-                    +possibleDestinations[index]->getPosition().second-theAgent->getPosition().second;
-            if (rank<0) rank+=theAgent->getVision();
-            else rank -=theAgent->getVision();
+            +possibleDestinations[index]->getPosition().second-theAgent->getPosition().second;
+            if (rank<0) rank =-rank;
             ourChoice->setRank(rank);
             ourChoice->setPrimeMover(loc);
+            ourChoice->setActiveParticipants(1);//one active participant per group - the agent moving
+        }
+        else{
+            ourChoice->push_back(loc);
+            ourChoice->setRank(0);
+            ourChoice->setPrimeMover(loc);
+            ourChoice->setActiveParticipants(1);
         }
         
     }

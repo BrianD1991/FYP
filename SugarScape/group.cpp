@@ -12,7 +12,7 @@
 
 //*****************************CONSTRUCTORS*****************************
 group::group(void):
-    rank(0),size(0){
+rank(0),size(0){
     
 }
 //*****************************GETTERS*****************************
@@ -42,7 +42,17 @@ int group::getSize(void){
 }
 
 /**
- * gets locationof the agent in charge of group
+ Returns the number of active participants in the group
+ @returns activePArticipants
+ @exception void
+ */
+int group::getActivePArticipants(void)
+{
+    return activeParticipants;
+}
+
+/**
+ * gets location of the agent in charge of group
  * @return pointer to location of agent in charge
  */
 Location *group::getPrimeMover(void)
@@ -70,6 +80,17 @@ int group::push_back(Location* location){
  */
 int group::setRank(int newRank){
     return rank=newRank;
+}
+
+/**
+ sets the number of active participants in a group
+ @param number :number of active participants in group
+ @returns new ranking score
+ @exception void
+ */
+int group::setActiveParticipants(int number)
+{
+    return activeParticipants=number;
 }
 
 /**

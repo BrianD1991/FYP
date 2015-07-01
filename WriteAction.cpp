@@ -18,17 +18,18 @@ bool WriteAction::run(int startX, int startY, int size){
     Location** Lattice=sim->getLattice();
     
     std::vector<group*> proposedGroups, ExclusiveGroups;
-    int remaining=size*size;
-    while (remaining>0) {
-//Part One: Form group proposals
+    //calculate number of entities that need to take part in this actions
+    int remaining=participantCount(startX, startY, size);
+    while (remaining>0) {//loop until all active participants are in groups
+        //Part One: Form group proposals
         for (int i=startX; i<startX+size; ++i ) {
             for (int k=startY; k<startY+size; ++k) {
-                proposedGroups.push_back(formGroup(&Lattice[i][k]));
+                if (Lattice[i][k].isDone()==false) proposedGroups.push_back(formGroup(&Lattice[i][k]));
             }
         }
-//Part Two: Sort proposed groups
+        //Part Two: Sort proposed groups
         std::sort(proposedGroups.begin(), proposedGroups.end(), group::compare);
-//Part Three: Find Exclusive Groups
+        //Part Three: Find Exclusive Groups
         for(auto grp:proposedGroups){
             bool exclusive=true;
             std::vector<Location*> members=grp->getMembers();
@@ -47,21 +48,16 @@ bool WriteAction::run(int startX, int startY, int size){
                 grp->getPrimeMover()->markDone();
                 for(auto loc:members){
                     loc->markDone();
-                    --remaining;
                 }
+                remaining=remaining-grp->getActivePArticipants();//reduce number of entities left to place
             }
         }
-        
     }//While
-//Exclusive Groups all formed here. Apply actions
+    //Exclusive Groups all formed here. Apply actions
     for(auto grp:ExclusiveGroups){
         executeAction(grp->getPrimeMover(),grp);
-//        std::vector<Location*> members=grp->getMembers();
-//        for(auto loc:members){
-//            executeAction(loc,grp);
-//        }
     }
-//update states
+    //update states
     for(auto grp:ExclusiveGroups){
         std::vector<Location*> members=grp->getMembers();
         Location *primeMoverLocation=grp->getPrimeMover();
@@ -72,7 +68,7 @@ bool WriteAction::run(int startX, int startY, int size){
                 loc->getAgent()->sync();
             }
         }
-        //update location of group "leader" and prime agent 
+        //update location of group "leader" and prime agent
         primeMoverLocation->sync();
         if (primeMoverLocation->hasAgent()) {
             primeMoverLocation->getAgent()->sync();
@@ -102,5 +98,26 @@ bool WriteAction::concurrentRun(void){
     }
     
     return true;
+}
+/**
+ Calculate the number of active participants in this action on the grid
+ Default is number of agents - assume they are all active
+ @param startX :start Index for row
+ @param startY :start index for column
+ @param dimSize :Dimensions of grid size
+ @returns number of agents in this grid
+ @exception none
+ */
+int WriteAction::participantCount(int startX, int startY, int dimSize)
+{
+    int pcount=0;
+    for (int i=startX; i<startX+dimSize; ++startX) {
+        for (int k=startY; k<startY+dimSize; ++k) {
+            if (sim->getAgent(i, k)!=nullptr) {
+                ++pcount;
+            }
+        }
+    }
+    return pcount;
 }
 

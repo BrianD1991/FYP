@@ -17,6 +17,8 @@ class group{
     Location *primeMover;/*!< Location of Agent who formed the group */
     int rank; /*!< Determines the ranking of a group - used for collision resolution*/
     int size; /*!< Number of agents in this group */
+    int activeParticipants;/*!< Number of active participants in this group used to calculate no. of*/
+    /*!< remaining entities left to be assigned to groups*/
 public:
     //constructor
     group(void);
@@ -24,17 +26,19 @@ public:
     int getRank(void);
     std::vector<Location*> getMembers(void);
     int getSize(void);
+    int getActivePArticipants(void);
     Location *getPrimeMover(void);
     
     //setters
     int push_back(Location*);
     int setRank(int);
+    int setActiveParticipants(int);
     bool setPrimeMover(Location*);
     
     
     //Helpers
     static bool compare(group *,group *);
-
+    
     
 };
 #endif /* defined(__SugarScape__group__) */
