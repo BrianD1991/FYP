@@ -165,7 +165,24 @@ std::vector<std::vector<bool>> Agent::setDiseases(std::vector<std::vector<bool>>
     return newDiseases;
 }
 
-//helpers
+//*********************** HELPERS ***********************************************
+
+
+Agent* Agent::initialise(World *sim,Agent *dad, Agent *mum)
+{
+    theWorld=sim;
+    father=dad;
+    mother=mum;
+    done=false;
+    cultureLength=theWorld->getCultureCount();
+    immunityLength=theWorld->getImmunityLength();
+    diseaseLength=theWorld->getDiseaseLength();
+    currentAge=newAge=0;
+    return this;
+}
+
+
+
 bool Agent::markDone(void){
     return done=true;
 }
@@ -386,6 +403,7 @@ bool Agent::sync(void){
     currentLoansOwed=newLoansOwed;
     currentLoansOwing=newLoansOwing;
     currentDiseases=newDiseases;
+    currentAge = newAge++;
     done=false;
     return true;
 }

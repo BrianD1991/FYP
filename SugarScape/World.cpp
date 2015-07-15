@@ -72,6 +72,14 @@ int World::getCultureCount(void){
     return cultureCount;
 }
 /**
+ Returns the size of a disease string
+ @returns cultureCount
+ @exception void
+ */
+int World::getDiseaseLength(void){
+    return diseaseLength;
+}
+/**
  Returns the maximum possible vision length of any agent
  @returns maxVision
  @exception void
@@ -278,6 +286,10 @@ int World::setSize(int newSize){
 int World::setCultureCount(int newCultureCount){
     cultureCount=newCultureCount;
     return cultureCount;
+}
+int World::setDiseaseLength(int newDiseaseLength){
+    diseaseLength=newDiseaseLength;
+    return diseaseLength;
 }
 int World::setMaxVision(int newMaxVision){
     maxVision=newMaxVision;

@@ -25,6 +25,7 @@ class World{
     int step; /*!< Number of steps the simulation has run for */
     int size; /*!< Dimensions of lattice  a size*size matrix of locations*/
     int cultureCount;/*!< Length of bitstring containing culture information */
+    int diseaseLength;/*!< Length of disease bitstring assuming all diseases are same length */
     int maxVision; /*!< Maximum extent allowable for any agents vision */
     int minMetabolism, maxMetabolism; /*!< minimum and maximum metabolism rates that any agent may be born with */
     int sugarGrowth; /*!< Rate at which sugar is replenished by each location during a step */
@@ -61,6 +62,7 @@ public:
     int getStep(void);
     int getSize(void);
     int getCultureCount(void);
+    int getDiseaseLength(void);
     int getMaxVision(void);
     int getMinMetabolism(void);
     int getMaxMetabolism(void);
@@ -89,6 +91,7 @@ public:
     //Setters
     int setSize(int);
     int setCultureCount(int);
+    int setDiseaseLength(int);
     int setMaxVision(int);
     int setMinMetabolism(int);
     int setMaxMetabolism(int);

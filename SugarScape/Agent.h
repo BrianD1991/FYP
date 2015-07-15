@@ -53,8 +53,8 @@ class Agent{
     int amountEaten;/*!< Store amount last eaten - required for Pollution Formation rule */
     bool done; /*!< True if agent has completed current action */
     std::pair<int, int> currentPosition,newPosition; /*!< Position or agent on lattice */
-    int currentAge; /*!< Number of steps agent has existed for, newAge is simply currentAge+1 */
-    int currentMetabolism,newMetabolism; /*!< Amount of suygar agent consumes each turn/step  */
+    int currentAge,newAge; /*!< Number of steps agent has existed for */
+    int currentMetabolism,newMetabolism; /*!< Amount of sugar agent consumes each turn/step  */
     int currentSugar,newSugar; /*!< Sugar reserves held by agent */
 
     bool *currentCulture,*newCulture; /*!< bitstring representing Culture of agent */
@@ -112,6 +112,7 @@ public:
     std::vector<std::vector<bool>> setDiseases(std::vector<std::vector<bool>>);
 
     //helpers
+    Agent* initialise(World *sim=nullptr,Agent *dad=nullptr, Agent *mum=nullptr);
     bool markDone(void);
     affiliation getTribe(void);
     bool isImmune(std::vector<bool>);
