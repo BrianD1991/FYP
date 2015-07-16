@@ -30,6 +30,7 @@
 		D8D994411AEF874500F248C7 /* World.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D8D9943F1AEF874500F248C7 /* World.cpp */; };
 		D8D994441AEF8BE300F248C7 /* Action.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D8D994421AEF8BE300F248C7 /* Action.cpp */; };
 		D8F15FF41B57CF7F007E4E7D /* AgentMove.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D8F15FF21B57CF7F007E4E7D /* AgentMove.cpp */; };
+		D8F15FF71B57D43A007E4E7D /* AgentCombat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D8F15FF51B57D43A007E4E7D /* AgentCombat.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -91,6 +92,8 @@
 		D8D994431AEF8BE300F248C7 /* Action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Action.h; sourceTree = "<group>"; };
 		D8F15FF21B57CF7F007E4E7D /* AgentMove.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AgentMove.cpp; sourceTree = "<group>"; };
 		D8F15FF31B57CF7F007E4E7D /* AgentMove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentMove.h; sourceTree = "<group>"; };
+		D8F15FF51B57D43A007E4E7D /* AgentCombat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AgentCombat.cpp; sourceTree = "<group>"; };
+		D8F15FF61B57D43A007E4E7D /* AgentCombat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentCombat.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +164,8 @@
 				7C6A7F0B1B25D9DB000AE96D /* ViewPort.h */,
 				7C6A7F0D1B25E62C000AE96D /* Inheritance.cpp */,
 				08CED8A71B28C8DA00510CA6 /* AgentBasicMove.cpp */,
+				D8F15FF51B57D43A007E4E7D /* AgentCombat.cpp */,
+				D8F15FF61B57D43A007E4E7D /* AgentCombat.h */,
 				08CED8A81B28C8DA00510CA6 /* AgentBasicMove.h */,
 				D8F15FF21B57CF7F007E4E7D /* AgentMove.cpp */,
 				D8F15FF31B57CF7F007E4E7D /* AgentMove.h */,
@@ -231,6 +236,7 @@
 				7C6A7F0F1B25E62C000AE96D /* Inheritance.cpp in Sources */,
 				D82B99311AFA5EEE009AB362 /* ReadAction.cpp in Sources */,
 				7CBEA38E1B00F89F00B37ABF /* SeasonalGrowback.cpp in Sources */,
+				D8F15FF71B57D43A007E4E7D /* AgentCombat.cpp in Sources */,
 				D89726B41AEBD591005664BF /* Location.cpp in Sources */,
 				D8F15FF41B57CF7F007E4E7D /* AgentMove.cpp in Sources */,
 				7C7987901B0242D1003A4AE5 /* AgentCulture.cpp in Sources */,

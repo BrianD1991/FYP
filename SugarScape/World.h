@@ -87,6 +87,7 @@ public:
     std::vector<Location*> getEmptyNeighbourhood(int,int,int);
     std::vector<Agent*> getNeighbours(int,int,int);
     Location** getLattice(void);
+    Location* getLocation(std::pair<int, int>);
     
     //Setters
     int setSize(int);

@@ -274,7 +274,10 @@ Location** World::getLattice(void)
 {
     return Lattice;
 }
-
+Location* World::getLocation(std::pair<int, int> pos)
+{
+    return &Lattice[pos.first][pos.second];
+}
 
 
 
