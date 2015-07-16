@@ -47,10 +47,10 @@ group* AgentBasicMove::formGroup(Location *loc)
         std::vector<Location*> possibleDestinations=sim->getEmptyNeighbourhood(theAgent->getPosition().first, theAgent->getPosition().second, theAgent->getVision());
         ourChoice = new group();
         if (possibleDestinations.size()!=0) {/*!< check to see if we can move anywhere */
-            int index=sim->getRnd(0,(int)possibleDestinations.size());//pick random location
+            int index=pickIndex(possibleDestinations);
             ourChoice->push_back(possibleDestinations[index]);
             int rank=possibleDestinations[index]->getPosition().first-theAgent->getPosition().first
-            +possibleDestinations[index]->getPosition().second-theAgent->getPosition().second;
+                    +possibleDestinations[index]->getPosition().second-theAgent->getPosition().second;
             if (rank<0) rank =-rank;
             ourChoice->setRank(rank);
             ourChoice->setPrimeMover(loc);
@@ -66,3 +66,12 @@ group* AgentBasicMove::formGroup(Location *loc)
     }
     return ourChoice;/*!< is NOT nullPtr only if we assigned it a value earlier */
 }
+
+int AgentBasicMove::pickIndex(std::vector<Location*> possibleDestinations)
+{
+    return sim->getRnd(0,(int)possibleDestinations.size());//pick random location
+}
+
+
+
+
