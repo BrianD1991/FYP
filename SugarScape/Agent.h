@@ -136,6 +136,9 @@ public:
     int removeDeadLoans(void);
     bool removeDeadMother(void);
     bool removeDeadFather(void);
+    int removeKilledLoans(void);
+    bool removeKilledMother(void);
+    bool removeKilledFather(void);
     bool sync(void);
 };
 #endif /* defined(__SugarScape__Agent__) */

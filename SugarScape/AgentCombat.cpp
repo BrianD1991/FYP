@@ -45,6 +45,17 @@ bool AgentCombat::executeAction(Location *loc, group *grp)
             winner->setPosition(loser->getPosition());//set new position to new location
             sim->setAgent(loser->getPosition().first,loser->getPosition().second,winner);//add ptr to agent at new location
             //4. Remove any links to killed agents
+            for(auto ag:winner->getChildren())
+            {
+                if (ag->isKilled()) {
+                    winner->removeChild(ag);
+                }
+            }
+            //remove loans with dead agents
+            winner->removeKilledLoans();
+            //remove dead parents
+            winner->removeKilledFather();
+            winner->removeKilledMother();
         }
         else{
             std::cerr << " nullptr in executeAction combat"<<std::endl;

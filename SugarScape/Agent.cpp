@@ -344,7 +344,7 @@ bool Agent::isKilled(void)
 }
 
 /**
- * REmoves all loans with dead agents
+ * Removes all loans with dead agents
  * @return number of loan agreements nullified
  * @exception none
  */
@@ -406,6 +406,70 @@ bool Agent::removeDeadFather(void)
         return false;
     }
 }
+/**
+ * Removes all loans with dead agents
+ * @return number of loan agreements nullified
+ * @exception none
+ */
+int Agent::removeKilledLoans(void)
+{
+    int repititions=0;
+    auto it=newLoansOwed.begin();
+    while(it!=newLoansOwed.end())
+    {
+        if (it->first->isKilled()) {
+            it=newLoansOwed.erase(it);
+            ++repititions;
+        }
+        else{
+            ++it;
+        }
+    }
+    it=newLoansOwing.begin();
+    while(it!=newLoansOwing.end())
+    {
+        if (it->first->isKilled()) {
+            it=newLoansOwing.erase(it);
+            ++repititions;
+        }
+        else{
+            ++it;
+        }
+    }
+    return repititions;
+}
+
+/**
+ * Removed link to mother if father is dead
+ * @return true if mother was dead else false
+ * @exception none
+ */
+bool Agent::removeKilledMother(void)
+{
+    if (mother->isKilled()) {
+        mother=nullptr;
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+/**
+ * Removed link to father if father is dead
+ * @return true if father was dead else false
+ * @exception none
+ */
+bool Agent::removeKilledFather(void)
+{
+    if (father->isKilled()) {
+        father=nullptr;
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
 /**
  * Finalises updates - Applies updates to agent state
  * @return true if update sucessfull, otherwise false
