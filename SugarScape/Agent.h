@@ -52,6 +52,7 @@ class Agent{
     //mutable
     int amountEaten;/*!< Store amount last eaten - required for Pollution Formation rule */
     bool done; /*!< True if agent has completed current action */
+    bool killed;/*!< True if agent has is to be removed via combat rule */
     std::pair<int, int> currentPosition,newPosition; /*!< Position or agent on lattice */
     int currentAge,newAge; /*!< Number of steps agent has existed for */
     int currentMetabolism,newMetabolism; /*!< Amount of sugar agent consumes each turn/step  */
@@ -79,6 +80,8 @@ public:
     int getMaxAge(void);
     int getMetabolism(void);
     int getSugar(void);
+    int getWealth(void);
+    int getReward(void);
     int getCultureLength(void);
     int getImmunityLength(void);
     unsigned long getChildrenCount();
@@ -114,6 +117,7 @@ public:
     //helpers
     Agent* initialise(World *sim=nullptr,Agent *dad=nullptr, Agent *mum=nullptr);
     bool markDone(void);
+    bool markKilled(void);
     affiliation getTribe(void);
     bool isImmune(std::vector<bool>);
     bool isChild(Agent*);
@@ -128,6 +132,7 @@ public:
     unsigned long  diseaseCount(void);
     bool setTag(int,bool);
     bool isDead(void);
+    bool isKilled(void);
     int removeDeadLoans(void);
     bool removeDeadMother(void);
     bool removeDeadFather(void);

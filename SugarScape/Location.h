@@ -38,6 +38,8 @@ public:
     int getX(void);
     int getY(void);
     int getSugar(void);
+    int getWealth(void);
+    int getReward(void);
     int getMaxSugar(void);
     int getPollution(void);
     Agent* getAgent(void);

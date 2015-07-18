@@ -12,13 +12,13 @@
 #include <iostream>
 #include "AgentMove.h"
 
+bool combatCompare(Location *, Location *);
 
 class AgentCombat :public AgentMove{
-protected:
-    int findVictim(std::vector<Agent*>);
 public:
     AgentCombat(World *s);
     virtual bool executeAction(Location *, group *);
     virtual group* formGroup(Location *);
+    virtual int pickIndex(std::vector<Location*>, Agent *);
 };
 #endif /* defined(__SugarScape__AgentCombat__) */

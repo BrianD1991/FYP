@@ -26,7 +26,7 @@ public:
     int getRank(void);
     std::vector<Location*> getMembers(void);
     int getSize(void);
-    int getActivePArticipants(void);
+    int getActiveParticipants(void);
     Location *getPrimeMover(void);
     
     //setters

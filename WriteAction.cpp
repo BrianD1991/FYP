@@ -49,7 +49,7 @@ bool WriteAction::run(int startX, int startY, int size){
                 for(auto loc:members){
                     loc->markDone();
                 }
-                remaining=remaining-grp->getActivePArticipants();//reduce number of entities left to place
+                remaining=remaining-grp->getActiveParticipants();//reduce number of entities left to place
             }
         }
     }//While

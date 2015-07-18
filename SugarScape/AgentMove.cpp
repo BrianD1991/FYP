@@ -19,7 +19,7 @@ AgentMove::AgentMove(World *s)
 bool myCompare(Location *a, Location *b)
 {
     if (a->getPollution()==b->getPollution()) {
-        return a->getSugar()>b->getSugar();
+        return a->getWealth()>b->getWealth();//I am assuming we will only be checking empty locations
     } else
     {
         return a->getPollution()<b->getPollution();

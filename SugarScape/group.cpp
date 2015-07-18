@@ -46,7 +46,7 @@ int group::getSize(void){
  @returns activePArticipants
  @exception void
  */
-int group::getActivePArticipants(void)
+int group::getActiveParticipants(void)
 {
     return activeParticipants;
 }

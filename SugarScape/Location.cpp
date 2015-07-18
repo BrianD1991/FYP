@@ -12,13 +12,13 @@
 //constructors
 Location::Location(World *theWorld):
     maxSugar(0),currentSugar(0),deadAgent(nullptr),
-    currentPollution(0),newPollution(0),
+    currentPollution(0),newPollution(0),done(false),
     newSugar(0),position(0,0),sim(theWorld)
 {
     //empty
 }
 Location::Location(int x,int y):
-    maxSugar(0),currentSugar(0),
+    maxSugar(0),currentSugar(0),done(false),
     currentPollution(0),newPollution(0),
 newSugar(0),position(std::make_pair(x, y))
 {
@@ -40,6 +40,16 @@ int Location::getY(void){
 }
 int Location::getSugar(void){
     return currentSugar;
+}
+int Location::getWealth(void){
+    return currentSugar;
+}
+int Location::getReward(void){
+    if (currentResident!=nullptr) {
+        return this->getWealth()+currentResident->getWealth();
+    } else {
+        return this->getWealth();
+    }
 }
 int Location::getMaxSugar(void){
     return maxSugar;

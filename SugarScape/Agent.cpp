@@ -11,7 +11,7 @@
 
 //Constructors
 Agent::Agent(World *s,Agent *dad, Agent *mum):amountEaten(0), done(false),
-    father(dad),mother(mum),
+    father(dad),mother(mum),killed(false),
     theWorld(s),currentAge(0),
     cultureLength(s->getCultureCount()),immunityLength(s->getImmunityLength())
 {
@@ -46,6 +46,12 @@ int Agent::getMetabolism(void){
 }
 int Agent::getSugar(void){
     return currentSugar;
+}
+int Agent::getWealth(void){
+    return currentSugar;
+}
+int Agent::getReward(void){
+    return std::min(this->getWealth(),theWorld->getCombatLimit());
 }
 int Agent::getCultureLength(void){
     return cultureLength;
@@ -186,6 +192,11 @@ Agent* Agent::initialise(World *sim,Agent *dad, Agent *mum)
 bool Agent::markDone(void){
     return done=true;
 }
+
+bool Agent::markKilled(){
+    return killed=true;
+}
+
 affiliation Agent::getTribe(void){
     int reds=0;
     for (int i=0; i<cultureLength; ++i) {
@@ -310,7 +321,7 @@ bool Agent::setTag(int index,bool value){
 
 /**
  * Tells us if an agent is dead -- if it has reached maxAge or has no sugar left
- * @return true if will die now wlse false
+ * @return true if will die now else false
  * @exception none
  */
 bool Agent::isDead(void)
@@ -320,6 +331,16 @@ bool Agent::isDead(void)
     } else {
         return false;
     }
+}
+
+/**
+ * Tells us if an agent is marked for dead via combat
+ * @return true if will be killed in combat now else false
+ * @exception none
+ */
+bool Agent::isKilled(void)
+{
+    return killed;
 }
 
 /**
@@ -405,6 +426,7 @@ bool Agent::sync(void){
     currentDiseases=newDiseases;
     currentAge = newAge++;
     done=false;
+    killed = false;
     return true;
 }
 

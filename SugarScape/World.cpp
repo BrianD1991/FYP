@@ -245,6 +245,56 @@ std::vector<Location*> World::getEmptyNeighbourhood(int xPosition,int yPosition,
     return neighbourhood;
 }
 
+
+/**
+ * get all empty or attackable locations around us that are not marked done
+ * @param xPosition :x-xoordinate of index
+ * @param yPosition :y-coordinate of index
+ * @param range :vision - how far we can see in four directions
+ * @return vector of Location pointers (all empty locations in our neighbourhood
+ */
+std::vector<Location*> World::getCombatNeighbourhood(int xPosition,int yPosition,int range)
+{
+    std::vector<Location*> neighbourhood;
+    for (int i=xPosition-range; i<=xPosition+range; ++i) {/*!< loop up to and including (<=) or else we lose last location */
+        //pick location only if it !=identity (us) and is empty and is not marked done
+        if (i!=xPosition && Lattice[i%size][yPosition].isDone()==false) {
+            if (Lattice[i%size][yPosition].hasAgent()==false )
+            {
+                neighbourhood.push_back(&Lattice[i%size][yPosition]);
+            }else {
+                Agent *me=Lattice[xPosition][yPosition].getAgent();
+                Agent *other=Lattice[i%size][yPosition].getAgent();
+                if (me->getCulture()!=other->getCulture() && me->getWealth()>other->getWealth())
+                {
+                    neighbourhood.push_back(&Lattice[i%size][yPosition]);
+                }
+            }
+            
+        }//if
+    }//for
+    
+    for (int i=yPosition-range; i<=yPosition+range; ++i) {/*!< loop up to and including (<=) or else we lose last location */
+        //pick location only if it !=identity (us) and is empty and is not marked done
+        if (i!=yPosition && false==Lattice[xPosition][i%size].isDone())
+        {
+            if (false==Lattice[xPosition][i%size].hasAgent()) {
+                neighbourhood.push_back(&Lattice[xPosition][i%size]);
+            }else {
+                Agent *me=Lattice[xPosition][yPosition].getAgent();
+                Agent *other=Lattice[xPosition][i%size].getAgent();
+                if (me->getCulture()!=other->getCulture() && me->getWealth()>other->getWealth())
+                {
+                    neighbourhood.push_back(&Lattice[xPosition][i%size]);
+                }
+            }
+        }//if
+    }//for
+    return neighbourhood;
+}
+
+
+
 /**
  * Returns all agents in our neighbourhood who are not marked as done!
  * @param xPosition :x-xoordinate of index

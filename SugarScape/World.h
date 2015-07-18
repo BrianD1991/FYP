@@ -85,6 +85,7 @@ public:
     Agent* getAgent(int,int);
     std::vector<Location*> getNeighbourhood(int,int,int);
     std::vector<Location*> getEmptyNeighbourhood(int,int,int);
+    std::vector<Location*> getCombatNeighbourhood(int,int,int);
     std::vector<Agent*> getNeighbours(int,int,int);
     Location** getLattice(void);
     Location* getLocation(std::pair<int, int>);
