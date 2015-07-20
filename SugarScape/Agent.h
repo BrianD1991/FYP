@@ -14,7 +14,7 @@
 
 
 class World;
-
+class Location;
 
 enum Sex {
     male = 0,
@@ -53,6 +53,7 @@ class Agent{
     int amountEaten;/*!< Store amount last eaten - required for Pollution Formation rule */
     bool done; /*!< True if agent has completed current action */
     bool killed;/*!< True if agent has is to be removed via combat rule */
+    bool availableNeighbours[4];/*!< Used for rules where we appply rule to each neighbour e.g. AgentMating*/
     std::pair<int, int> currentPosition,newPosition; /*!< Position of agent on lattice */
     int currentAge,newAge; /*!< Number of steps agent has existed for */
     int currentMetabolism,newMetabolism; /*!< Amount of sugar agent consumes each turn/step  */
@@ -71,6 +72,7 @@ public:
     Agent(World *sim=nullptr,Agent *dad=nullptr, Agent *mum=nullptr);
     
     //getters
+    bool getAvail(int);
     int getAmountEaten(void);
     bool isDone(void);
     std::pair<int, int> getPosition(void);
@@ -93,8 +95,10 @@ public:
     std::vector<std::pair<Agent*,std::pair<int, int>>> getLoansOwed(void);
     std::vector<std::pair<Agent*,std::pair<int, int>>> getLoansOwing(void);
     std::vector<std::vector<bool>> getDiseases(void);
+    Location* getLocation(void);
     
     //setters
+    bool markNeighbour(int);
     std::pair<int, int> setPosition(std::pair<int, int>);
     Sex setSex(Sex);
     int setVision(int);

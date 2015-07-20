@@ -121,6 +121,28 @@ bool Location::hasDeadAgent()
 {
     return deadAgent!=nullptr;
 }
+
+Location* Location::getCardinal(int direction){
+    switch (direction) {
+        case 0:
+            return sim->getLocation(std::pair<int,int>(position.first-1,position.second));
+            break;
+        case 1:
+            return sim->getLocation(std::pair<int,int>(position.first+1,position.second));
+            break;
+        case 2:
+            return sim->getLocation(std::pair<int,int>(position.first,position.second+1));
+            break;
+        case 3:
+            return sim->getLocation(std::pair<int,int>(position.first,position.second-1));
+            break;
+        default:
+            std::cerr << "cardinal called with value "<< direction << std::endl;
+            break;
+    }
+    return nullptr;
+}
+
 bool Location::putOutGarbage(void)
 {
     if (deadAgent!=nullptr) {

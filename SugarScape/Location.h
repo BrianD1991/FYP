@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include "Agent.h"
-class World;
+#include "World.h"
 
 const std::pair<int, int> nullPosition(-1,-1);
 
@@ -58,6 +58,7 @@ public:
     bool markDone(void);
     bool hasAgent(void);
     bool hasDeadAgent(void);
+    Location* getCardinal(int);
     Agent* killAgent(void);
     bool putOutGarbage(void);
     bool sync(void);

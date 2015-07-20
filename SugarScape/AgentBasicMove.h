@@ -19,7 +19,7 @@ public:
     AgentBasicMove(World *s);
     virtual bool executeAction(Location *, group *);
     virtual group* formGroup(Location *);
-    virtual int pickIndex(std::vector<Location*>);
+
 };
 
 #endif /* defined(__SugarScape__AgentBasicMove__) */

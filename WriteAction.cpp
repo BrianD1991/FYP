@@ -126,3 +126,17 @@ int WriteAction::participantCount(int startX, int startY, int dimSize)
     return pcount;
 }
 
+
+/**
+ pick index from list of available locations
+ 
+ Picks randomly
+ 
+ @param possibleDestinations :vector of locations we can move to
+ @returns index of chosen location in vector
+ @exception none
+ */
+int WriteAction::pickIndex(std::vector<Location*> possibleDestinations)
+{
+    return sim->getRnd(0,(int)possibleDestinations.size());//pick random location
+}

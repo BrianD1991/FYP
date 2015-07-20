@@ -19,6 +19,10 @@ Agent::Agent(World *s,Agent *dad, Agent *mum):amountEaten(0), done(false),
 }
 
 //getters
+
+bool Agent::getAvail(int direction){
+    return availableNeighbours[direction];
+}
 int Agent::getAmountEaten(void){
     return amountEaten;
 }
@@ -91,8 +95,17 @@ std::vector<std::pair<Agent*,std::pair<int, int>>> Agent::getLoansOwing(void){
 std::vector<std::vector<bool>> Agent::getDiseases(void){
     return currentDiseases;
 }
-
+Location* Agent::getLocation(void){
+    return theWorld->getLocation(currentPosition);
+}
 //setters
+
+bool Agent::markNeighbour(int direction)
+{
+    return availableNeighbours[direction]=true;
+}
+
+
 std::pair<int, int> Agent::setPosition(std::pair<int, int> destination){
     newPosition=destination;
     return newPosition;
@@ -491,6 +504,9 @@ bool Agent::sync(void){
     currentAge = newAge++;
     done=false;
     killed = false;
+    for (int i=0; i<4; ++i) {
+        availableNeighbours[i]=true;
+    }
     return true;
 }
 

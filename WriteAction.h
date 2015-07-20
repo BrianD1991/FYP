@@ -19,5 +19,6 @@ public:
     virtual bool run(int,int,int);
     virtual bool concurrentRun(void);
     virtual int participantCount(int,int,int);
+    virtual int pickIndex(std::vector<Location*>);
 };
 #endif /* defined(__SugarScape__WriteAction__) */
