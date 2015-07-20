@@ -15,31 +15,40 @@ AgentReplacement::AgentReplacement(World *s)
     //our work is done!
 }
 
+
+/**
+ executeAction Replaces Agent with new agent.
+ 
+ Agent to be replaced is primeMover in group. New location is other member of group
+ Other location could be same as current location (if there were no free locations)
+ Also does bookkeeping, updating living agents by removing links to dead agents
+ We must ensure we call this for every agent not just dead agents so formGroup must return a valid group 
+ even if the agent is not being replaced
+ 
+ @param loc :pointer to location of agent to be replaced
+ @param grp :Group containing new location for replacement
+ @returns true if agent is replaced
+ @exception none
+ */
 bool AgentReplacement::executeAction(Location *loc, group *grp)
 {
     if (loc->hasAgent()) {
         Agent* theAgent=loc->getAgent();
         if (theAgent->isDead()) {
-            //remove from location
-            loc->setAgent(nullptr);
-            //add to new location
-            grp->getMembers()[0]->setAgent(theAgent);
-            //update agent attributes to new ones
+            loc->setAgent(nullptr);/*!< remove from current location */
+            grp->getMembers()[0]->setAgent(theAgent);/*!< add to new location */
+            //***********TO DO :update agent attributes to new ones**********
             theAgent->setAge(0);
-        } else {
-            //agent not dead so remove all links to dead agents
-            //check for links to dead children and remove them
-            for(auto ag:theAgent->getChildren())
+        } else {/*!< agent not dead so remove all links to newly dead agents */
+            for(auto ag:theAgent->getChildren())/*!< check for links to dead children and remove them */
             {
                 if (ag->isDead()) {
                     theAgent->removeChild(ag);
                 }
             }
-            //remove loans with dead agents
-            theAgent->removeDeadLoans();
-            //remove dead parents
-            theAgent->removeDeadFather();
-            theAgent->removeDeadMother();
+            theAgent->removeDeadLoans();/*!< remove loans with dead agents */
+            theAgent->removeDeadFather();/*!< remove father if dead */
+            theAgent->removeDeadMother();/*!< remove mother if dead */
         }
         return true;
     }else{
@@ -48,17 +57,28 @@ bool AgentReplacement::executeAction(Location *loc, group *grp)
   
 }
 
+/**
+ formGroup forms a group of two - the primeMover and the location of its replacement
+ 
+ If the agent is not being replaced we from a group of one. This is to ensure every agent runs execute action
+ Only try find frree slot twice. On second block just spawn in place. Would be better if we kept trying but
+ This would require updating the free slots list to remove all slots marked done.
+ 
+ @param loc :location we are examining
+ @returns pointer to group object -nullptr if location contains no agent or if agent is not due for replacement
+ @exception none
+ */
 group* AgentReplacement::formGroup(Location *loc)
 {
     if (loc->hasAgent()) {
+        group *grp= new group();/*!< create group */
+        grp->setRank(1);
+        grp->setActiveParticipants(1);
+        grp->setPrimeMover(loc);
         if (loc->getAgent()->isDead()) {
-            group *grp= new group();
-            grp->setRank(1);
-            grp->setActiveParticipants(1);
-            grp->setPrimeMover(loc);
-            if (freeSlots.size()==0) {//spawn at current location
+            if (freeSlots.size()==0) {/*!< spawn at current location */
                 grp->push_back(loc);
-            } else {
+            } else { /*!< spawn at new random empty location */
                 int index=sim->getRnd(0, (int)freeSlots.size());
                 if (freeSlots[index]->isDone()) {//slot taken spawn in place
                     grp->push_back(loc);
@@ -67,24 +87,45 @@ group* AgentReplacement::formGroup(Location *loc)
                 }
             }
             return grp;
+        }else{
+            return grp;/*!< return group with no new location  */
         }
     }
     return nullptr;//no dead agent here so do nothing
 
 }
 
+/**
+ run now gets list of all free slots before running the replacement rule
+ @param startX :top left corner X - coordinate
+ @param startY :top left corner Y - coordinate
+ @param size : width and height of grid
+ @returns true if sucessful
+ @exception none
+ */
 bool AgentReplacement::run(int startX, int startY, int size)
 {
     populateFreeSlots();
     return WriteAction::run(startX, startY, size);
 }
 
+/**
+ concurrentRun now gets list of all free slots before running the replacement rule
+ @returns true if sucessful
+ @exception none
+ */
 bool AgentReplacement::concurrentRun(void)
 {
     populateFreeSlots();
     return WriteAction::concurrentRun();
 }
 
+/**
+ populateFreeslots puts all free slots in a vector held by this class
+ 
+ @returns number of free slots
+ @exception none
+ */
 unsigned long AgentReplacement::populateFreeSlots()
 {
     freeSlots.clear();

@@ -16,6 +16,17 @@ AgentMove::AgentMove(World *s)
 }
 
 
+/**
+ myCompare compares two locations to see whcih is best
+ 
+ if they equal in pollution levels pick location with most sugar
+ else pick least polluted
+ 
+ @param a :pointer to location
+ @param b :pointer to location
+ @returns true if a better than b
+ @exception none
+ */
 bool myCompare(Location *a, Location *b)
 {
     if (a->getPollution()==b->getPollution()) {
@@ -27,7 +38,14 @@ bool myCompare(Location *a, Location *b)
 }
 
 
-
+/**
+ pickIndex returns best location to move to
+ 
+ Sorts vector of possible destinations and picks highest ranking one
+ @param possibleDestinations :vector of possible destinations
+ @returns index of first destination in sorted vector (the best)
+ @exception none
+ */
 int AgentMove::pickIndex(std::vector<Location*> possibleDestinations)
 {
     std::sort(possibleDestinations.begin(),possibleDestinations.end(),myCompare);

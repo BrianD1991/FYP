@@ -24,7 +24,12 @@ bool WriteAction::run(int startX, int startY, int size){
         //Part One: Form group proposals
         for (int i=startX; i<startX+size; ++i ) {
             for (int k=startY; k<startY+size; ++k) {
-                if (Lattice[i][k].isDone()==false) proposedGroups.push_back(formGroup(&Lattice[i][k]));
+                if (Lattice[i][k].isDone()==false){
+                    group *grp = formGroup(&Lattice[i][k]);
+                    if (grp!=nullptr) {/*!< do not add nullptrs as they will interfere with sorting */
+                        proposedGroups.push_back(grp);
+                    }
+                }
             }
         }
         //Part Two: Sort proposed groups

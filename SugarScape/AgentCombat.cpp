@@ -23,43 +23,48 @@ AgentCombat::AgentCombat(World *s)
 }
 
 
-//1. DOES NOT REMOVE LINKS TO DEAD AGENTS!
+
 bool AgentCombat::executeAction(Location *loc, group *grp)
 {
     if (loc->hasAgent()) {
-        if (grp!=nullptr)//nullptr should not be possible
+        Agent *winner = grp->getPrimeMover()->getAgent(); //must equal loc->getAgent()!
+        if (grp->getMembers().size()!=0)/*!< we are moving somewhere */
         {
-            //1. Update victorious agent resources
-            Agent *winner = grp->getPrimeMover()->getAgent(); //must equal loc->getAgent()!
-            Agent *loser = grp->getMembers()[0]->getAgent();//only one member in group - the loser
-            winner->incSugar(std::min(loser->getReward(),sim->getCombatLimit()));//WHAT IF WE ADD SPICE?
-            //2. Kill vanquished agent
-            std::pair<int,int> currPosition=loser->getPosition();
-            if (loser!=sim->killAgent(currPosition.first, currPosition.second))
-            {
-                std::cerr << "Delete of agent failed"<<std::endl;
+            if (grp->getMembers()[0]->hasAgent()==false) {/*!< moving to empty location */
+                loc->getAgent()->incSugar(grp->getMembers()[0]->getSugar());/*!< eat sugar at destination */
+                grp->getMembers()[0]->setSugar(0);/*!< sugar at location is consumed */
             }
-            //3. Move victorous agent to new position
-            currPosition=winner->getPosition();
-            sim->setAgent(currPosition.first, currPosition.second, nullptr);//remove old location ptr to agent
-            winner->setPosition(loser->getPosition());//set new position to new location
-            sim->setAgent(loser->getPosition().first,loser->getPosition().second,winner);//add ptr to agent at new location
-            //4. Remove any links to killed agents
-            for(auto ag:winner->getChildren())
-            {
-                if (ag->isKilled()) {
-                    winner->removeChild(ag);
+            else{
+                //1. Update victorious agent resources
+                Agent *loser = grp->getMembers()[0]->getAgent();//only one member in group - the loser
+                winner->incSugar(grp->getMembers()[0]->getReward());//*WHAT IF WE ADD SPICE?*
+                grp->getMembers()[0]->setSugar(0);/*!< sugar at location is consumed */
+                //2. Kill vanquished agent
+                std::pair<int,int> currPosition=loser->getPosition();
+                if (loser!=sim->killAgent(currPosition.first, currPosition.second))
+                {
+                    std::cerr << "Delete of agent failed"<<std::endl;
                 }
             }
-            //remove loans with dead agents
-            winner->removeKilledLoans();
-            //remove dead parents
-            winner->removeKilledFather();
-            winner->removeKilledMother();
+            //Move agent to new position
+            std::pair<int,int> currPosition=winner->getPosition();
+            sim->setAgent(currPosition.first, currPosition.second, nullptr);//remove old location ptr to agent
+            winner->setPosition(grp->getMembers()[0]->getPosition());//set new position to new location
+            sim->setAgent(grp->getMembers()[0]->getPosition().first,grp->getMembers()[0]->getPosition().second,winner);//add ptr to agent at new location
         }
-        else{
-            std::cerr << " nullptr in executeAction combat"<<std::endl;
+        else{/*!< we are staying put-not moving */
+            loc->getAgent()->incSugar(loc->getSugar());/*!< eat sugar at destination */
+            loc->setSugar(0);/*!< sugar at location is consumed */
         }
+        for(auto ag:winner->getChildren())/*!< Remove any links to killed children */
+        {
+            if (ag->isKilled()) {
+                winner->removeChild(ag);
+            }
+        }
+        winner->removeKilledLoans();/*!< remove loans with killed agents */
+        winner->removeKilledFather();/*!< remove father link if he is killed */
+        winner->removeKilledMother();/*!< remove mother link if she is killed */
         return true;
     }else{
         return false;/*!< no agent present so did nothing */
@@ -87,8 +92,6 @@ int AgentCombat::pickIndex(std::vector<Location*> possibles,Agent *me)
         }else{//has agent so check for combat
             if (possibles[i]->getReward()+ me->getWealth() > strongestEnemy) {
                 return i;
-            } else {
-                return -1;//all others are worst than strongest opponent (list is sorted!)
             }
         }
     }
@@ -98,17 +101,14 @@ int AgentCombat::pickIndex(std::vector<Location*> possibles,Agent *me)
 
 group* AgentCombat::formGroup(Location *loc)
 {
-    
-    group *ourChoice = nullptr;
-    if (loc->hasAgent()) {//Agent at this location
+    if (loc->hasAgent()) {/*!< Agent at this location */
+        group *ourChoice = nullptr;
         Agent* theAgent=loc->getAgent();
-        //find all empty locations
-        
-        std::vector<Location*> possibleLocations=sim->getCombatNeighbourhood(theAgent->getPosition().first, theAgent->getPosition().second, theAgent->getVision());
+        std::vector<Location*> possibleLocations=sim->getCombatNeighbourhood(theAgent->getPosition().first, theAgent->getPosition().second, theAgent->getVision());/*!< Find all possible destinations */
         ourChoice = new group();
         if (possibleLocations.size()!=0) {/*!< check to see if we can move anywhere */
             int index=pickIndex(possibleLocations, theAgent);
-            if (index>-1) {//we have a winner -- from group
+            if (index>-1) {//we have a winner -- form  a group
                 ourChoice->push_back(sim->getLocation(possibleLocations[index]->getPosition()));
                 int rank=possibleLocations[index]->getPosition().first-theAgent->getPosition().first
                 +possibleLocations[index]->getPosition().second-theAgent->getPosition().second;
@@ -117,9 +117,20 @@ group* AgentCombat::formGroup(Location *loc)
                 ourChoice->setPrimeMover(loc);
                 ourChoice->setActiveParticipants(1);//one active participant per group - the agent moving
             }
+            else{/*!< cannot find anywhere safe to move so stay here */
+
+                ourChoice->setRank(0);
+                ourChoice->setPrimeMover(loc);
+                ourChoice->setActiveParticipants(1);
+            }
+        }else{/*!< everywhere is occupied so stay here */
+            ourChoice->setRank(0);
+            ourChoice->setPrimeMover(loc);
+            ourChoice->setActiveParticipants(1);
         }
+        return ourChoice;
     }
-    return ourChoice;/*!< is NOT nullPtr only if we assigned it a value earlier */
+    return nullptr;/*!< No agent here do nothing */
 }
 
 

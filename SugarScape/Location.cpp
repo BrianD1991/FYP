@@ -46,7 +46,7 @@ int Location::getWealth(void){
 }
 int Location::getReward(void){
     if (currentResident!=nullptr) {
-        return this->getWealth()+currentResident->getWealth();
+        return this->getWealth()+currentResident->getReward();
     } else {
         return this->getWealth();
     }
