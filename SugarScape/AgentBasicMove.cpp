@@ -22,9 +22,9 @@ bool AgentBasicMove::executeAction(Location *loc, group * grp)
     if (loc->hasAgent()) {
         Agent* theAgent=loc->getAgent();
         std::pair<int,int> currPosition=theAgent->getPosition();
-        sim->setAgent(currPosition.first, currPosition.second, nullptr);/*!< remove old location ptr to agent */
+        sim->setAgent(currPosition, nullptr);/*!< remove old location ptr to agent */
         loc->getAgent()->setPosition(grp->getMembers()[0]->getPosition());/*!< set new position to new location */
-        sim->setAgent(grp->getMembers()[0]->getPosition().first,grp->getMembers()[0]->getPosition().second,theAgent);/*!< add ptr to agent at new location */
+        sim->setAgent(grp->getMembers()[0]->getPosition(),theAgent);/*!< add ptr to agent at new location */
         theAgent->incSugar(grp->getMembers()[0]->getSugar());/*!< eat sugar at new location */
         grp->getMembers()[0]->setSugar(0);/*!< sugar at new location now consumed */
         return true;
@@ -47,7 +47,7 @@ group* AgentBasicMove::formGroup(Location *loc)
     if (loc->hasAgent()) {/*!< Agent at this location */
         ourChoice = new group();
         Agent* theAgent=loc->getAgent();
-        std::vector<Location*> possibleDestinations=sim->getEmptyNeighbourhood(theAgent->getPosition().first, theAgent->getPosition().second, theAgent->getVision());/*!< find all empty locations */
+        std::vector<Location*> possibleDestinations=sim->getEmptyNeighbourhood(theAgent->getPosition(), theAgent->getVision());/*!< find all empty locations */
         if (possibleDestinations.size()!=0) {/*!< check to see if we can move anywhere */
             int index=pickIndex(possibleDestinations);
             ourChoice->push_back(possibleDestinations[index]);

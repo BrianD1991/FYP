@@ -41,16 +41,16 @@ bool AgentCombat::executeAction(Location *loc, group *grp)
                 grp->getMembers()[0]->setSugar(0);/*!< sugar at location is consumed */
                 //2. Kill vanquished agent
                 std::pair<int,int> currPosition=loser->getPosition();
-                if (loser!=sim->killAgent(currPosition.first, currPosition.second))
+                if (loser!=sim->killAgent(currPosition))
                 {
                     std::cerr << "Delete of agent failed"<<std::endl;
                 }
             }
             //Move agent to new position
             std::pair<int,int> currPosition=winner->getPosition();
-            sim->setAgent(currPosition.first, currPosition.second, nullptr);//remove old location ptr to agent
+            sim->setAgent(currPosition, nullptr);//remove old location ptr to agent
             winner->setPosition(grp->getMembers()[0]->getPosition());//set new position to new location
-            sim->setAgent(grp->getMembers()[0]->getPosition().first,grp->getMembers()[0]->getPosition().second,winner);//add ptr to agent at new location
+            sim->setAgent(grp->getMembers()[0]->getPosition(),winner);//add ptr to agent at new location
         }
         else{/*!< we are staying put-not moving */
             loc->getAgent()->incSugar(loc->getSugar());/*!< eat sugar at destination */
@@ -104,7 +104,7 @@ group* AgentCombat::formGroup(Location *loc)
     if (loc->hasAgent()) {/*!< Agent at this location */
         group *ourChoice = nullptr;
         Agent* theAgent=loc->getAgent();
-        std::vector<Location*> possibleLocations=sim->getCombatNeighbourhood(theAgent->getPosition().first, theAgent->getPosition().second, theAgent->getVision());/*!< Find all possible destinations */
+        std::vector<Location*> possibleLocations=sim->getCombatNeighbourhood(theAgent->getPosition(), theAgent->getVision());/*!< Find all possible destinations */
         ourChoice = new group();
         if (possibleLocations.size()!=0) {/*!< check to see if we can move anywhere */
             int index=pickIndex(possibleLocations, theAgent);

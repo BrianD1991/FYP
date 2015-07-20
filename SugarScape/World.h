@@ -82,11 +82,11 @@ public:
     int getInitialPopulationSize(void);
     int getPollutionRate(void);
     int getChildAmount(void);
-    Agent* getAgent(int,int);
-    std::vector<Location*> getNeighbourhood(int,int,int);
-    std::vector<Location*> getEmptyNeighbourhood(int,int,int);
-    std::vector<Location*> getCombatNeighbourhood(int,int,int);
-    std::vector<Agent*> getNeighbours(int,int,int);
+    Agent* getAgent(std::pair<int,int>);
+    std::vector<Location*> getNeighbourhood(std::pair<int,int>,int);
+    std::vector<Location*> getEmptyNeighbourhood(std::pair<int,int>,int);
+    std::vector<Location*> getCombatNeighbourhood(std::pair<int,int>,int);
+    std::vector<Agent*> getNeighbours(std::pair<int,int>,int);
     Location** getLattice(void);
     Location* getLocation(std::pair<int, int>);
     
@@ -113,8 +113,8 @@ public:
     int setInitialPopulationSize(int);
     int setPollutionRate(int);
     int setChildAmount(int);
-    Agent* setAgent(int,int,Agent*);
-    Agent* killAgent(int,int);
+    Agent* setAgent(std::pair<int,int>,Agent*);
+    Agent* killAgent(std::pair<int,int>);
     
     
 

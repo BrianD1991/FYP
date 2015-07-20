@@ -201,20 +201,20 @@ int World::getPollutionRate(void){
 int World::getChildAmount(void){
     return childAmount;
 }
-Agent* World::getAgent(int xPosition,int yPosition){
-    return Lattice[xPosition%size][yPosition%size].getAgent();
+Agent* World::getAgent(std::pair<int,int> pos){
+    return Lattice[pos.first%size][pos.second%size].getAgent();
 }
-std::vector<Location*> World::getNeighbourhood(int xPosition,int yPosition,int range)
+std::vector<Location*> World::getNeighbourhood(std::pair<int,int> pos,int range)
 {
     std::vector<Location*> neighbourhood;
-    for (int i=xPosition-range; i<=xPosition+range; ++i) {/*!< loop up to and including (<=) or else we lose last location */
-        if (i!=xPosition) {
-            neighbourhood.push_back(&Lattice[i%size][yPosition]);
+    for (int i=pos.first-range; i<=pos.first+range; ++i) {/*!< loop up to and including (<=) or else we lose last location */
+        if (i!=pos.first) {
+            neighbourhood.push_back(&Lattice[i%size][pos.second]);
         }//if
     }//for
-    for (int i=yPosition-range; i<=yPosition+range; ++i) {/*!< loop up to and including (<=) or else we lose last location */
-        if (i!=yPosition) {
-            neighbourhood.push_back(&Lattice[xPosition][i%size]);
+    for (int i=pos.second-range; i<=pos.second+range; ++i) {/*!< loop up to and including (<=) or else we lose last location */
+        if (i!=pos.second) {
+            neighbourhood.push_back(&Lattice[pos.first][i%size]);
         }//if
     }//for
     return neighbourhood;
@@ -222,24 +222,23 @@ std::vector<Location*> World::getNeighbourhood(int xPosition,int yPosition,int r
 
 /**
  * get all empty locations around us that are not marked done
- * @param xPosition :x-xoordinate of index
- * @param yPosition :y-coordinate of index
+ * @param pos :x,y-coordinates of index
  * @param range :vision - how far we can see in four directions
  * @return vector of Location pointers (all empty locations in our neighbourhood
  */
-std::vector<Location*> World::getEmptyNeighbourhood(int xPosition,int yPosition,int range)
+std::vector<Location*> World::getEmptyNeighbourhood(std::pair<int,int> pos,int range)
 {
     std::vector<Location*> neighbourhood;
-    for (int i=xPosition-range; i<=xPosition+range; ++i) {/*!< loop up to and including (<=) or else we lose last location */
+    for (int i=pos.first-range; i<=pos.first+range; ++i) {/*!< loop up to and including (<=) or else we lose last location */
         //pick location only if it !=identity (us) and is empty and is not marked done
-        if (i!=xPosition && Lattice[i%size][yPosition].hasAgent()==false && Lattice[i%size][yPosition].isDone()==false) {
-            neighbourhood.push_back(&Lattice[i%size][yPosition]);
+        if (i!=pos.first && Lattice[i%size][pos.second].hasAgent()==false && Lattice[i%size][pos.second].isDone()==false) {
+            neighbourhood.push_back(&Lattice[i%size][pos.second]);
         }//if
     }//for
-    for (int i=yPosition-range; i<=yPosition+range; ++i) {/*!< loop up to and including (<=) or else we lose last location */
+    for (int i=pos.second-range; i<=pos.second+range; ++i) {/*!< loop up to and including (<=) or else we lose last location */
         //pick location only if it !=identity (us) and is empty and is not marked done
-        if (i!=yPosition && false==Lattice[xPosition][i%size].hasAgent() && false==Lattice[xPosition][i%size].isDone()) {
-            neighbourhood.push_back(&Lattice[xPosition][i%size]);
+        if (i!=pos.second && false==Lattice[pos.first][i%size].hasAgent() && false==Lattice[pos.first][i%size].isDone()) {
+            neighbourhood.push_back(&Lattice[pos.first][i%size]);
         }//if
     }//for
     return neighbourhood;
@@ -248,44 +247,43 @@ std::vector<Location*> World::getEmptyNeighbourhood(int xPosition,int yPosition,
 
 /**
  * get all empty or attackable locations around us that are not marked done
- * @param xPosition :x-xoordinate of index
- * @param yPosition :y-coordinate of index
+ * @param pos :x,y-coordinates of index
  * @param range :vision - how far we can see in four directions
  * @return vector of Location pointers (all empty locations in our neighbourhood
  */
-std::vector<Location*> World::getCombatNeighbourhood(int xPosition,int yPosition,int range)
+std::vector<Location*> World::getCombatNeighbourhood(std::pair<int,int> pos,int range)
 {
     std::vector<Location*> neighbourhood;
-    for (int i=xPosition-range; i<=xPosition+range; ++i) {/*!< loop up to and including (<=) or else we lose last location */
+    for (int i=pos.first-range; i<=pos.first+range; ++i) {/*!< loop up to and including (<=) or else we lose last location */
         //pick location only if it !=identity (us) and is empty and is not marked done
-        if (i!=xPosition && Lattice[i%size][yPosition].isDone()==false) {
-            if (Lattice[i%size][yPosition].hasAgent()==false )
+        if (i!=pos.first && Lattice[i%size][pos.second].isDone()==false) {
+            if (Lattice[i%size][pos.second].hasAgent()==false )
             {
-                neighbourhood.push_back(&Lattice[i%size][yPosition]);
+                neighbourhood.push_back(&Lattice[i%size][pos.second]);
             }else {
-                Agent *me=Lattice[xPosition][yPosition].getAgent();
-                Agent *other=Lattice[i%size][yPosition].getAgent();
+                Agent *me=Lattice[pos.first][pos.second].getAgent();
+                Agent *other=Lattice[i%size][pos.second].getAgent();
                 if (me->getCulture()!=other->getCulture() && me->getWealth()>other->getWealth())
                 {
-                    neighbourhood.push_back(&Lattice[i%size][yPosition]);
+                    neighbourhood.push_back(&Lattice[i%size][pos.second]);
                 }
             }
             
         }//if
     }//for
     
-    for (int i=yPosition-range; i<=yPosition+range; ++i) {/*!< loop up to and including (<=) or else we lose last location */
+    for (int i=pos.second-range; i<=pos.second+range; ++i) {/*!< loop up to and including (<=) or else we lose last location */
         //pick location only if it !=identity (us) and is empty and is not marked done
-        if (i!=yPosition && false==Lattice[xPosition][i%size].isDone())
+        if (i!=pos.second && false==Lattice[pos.first][i%size].isDone())
         {
-            if (false==Lattice[xPosition][i%size].hasAgent()) {
-                neighbourhood.push_back(&Lattice[xPosition][i%size]);
+            if (false==Lattice[pos.first][i%size].hasAgent()) {
+                neighbourhood.push_back(&Lattice[pos.first][i%size]);
             }else {
-                Agent *me=Lattice[xPosition][yPosition].getAgent();
-                Agent *other=Lattice[xPosition][i%size].getAgent();
+                Agent *me=Lattice[pos.first][pos.second].getAgent();
+                Agent *other=Lattice[pos.first][i%size].getAgent();
                 if (me->getCulture()!=other->getCulture() && me->getWealth()>other->getWealth())
                 {
-                    neighbourhood.push_back(&Lattice[xPosition][i%size]);
+                    neighbourhood.push_back(&Lattice[pos.first][i%size]);
                 }
             }
         }//if
@@ -302,19 +300,19 @@ std::vector<Location*> World::getCombatNeighbourhood(int xPosition,int yPosition
  * @param range :vision - how far we can see in four directions
  * @return vector of pointers to agents who are neighbours and not marked done
  */
-std::vector<Agent*> World::getNeighbours(int xPosition,int yPosition,int range)
+std::vector<Agent*> World::getNeighbours(std::pair<int,int> pos,int range)
 {
     std::vector<Agent*> neighbourList;
     Agent* neighbour=nullptr;
-    for (int i=xPosition-range; i<=xPosition+range; ++i) {/*!< loop up to and including (<=) or else we lose last location */
-        neighbour=Lattice[i%size][yPosition].getAgent();
-        if (neighbour!=nullptr && i!=xPosition && Lattice[i%size][yPosition].isDone()==false) {
+    for (int i=pos.first-range; i<=pos.first+range; ++i) {/*!< loop up to and including (<=) or else we lose last location */
+        neighbour=Lattice[i%size][pos.second].getAgent();
+        if (neighbour!=nullptr && i!=pos.first && Lattice[i%size][pos.second].isDone()==false) {
             neighbourList.push_back(neighbour);
         }//if
     }//for
-    for (int i=yPosition-range; i<=yPosition+range; ++i) {/*!< loop up to and including (<=) or else we lose last location */
-        neighbour=Lattice[xPosition][i%size].getAgent();
-        if (neighbour!=nullptr && i!=yPosition && Lattice[xPosition][i%size].isDone()==false) {
+    for (int i=pos.second-range; i<=pos.second+range; ++i) {/*!< loop up to and including (<=) or else we lose last location */
+        neighbour=Lattice[pos.first][i%size].getAgent();
+        if (neighbour!=nullptr && i!=pos.second && Lattice[pos.first][i%size].isDone()==false) {
             neighbourList.push_back(neighbour);
         }//if
     }//for
@@ -420,13 +418,13 @@ int World::setChildAmount(int newChildAmount){
     childAmount=newChildAmount;
     return childAmount;
 }
-Agent* World::setAgent(int xPosition,int yPosition, Agent *newAgent){
-    return Lattice[xPosition%size][yPosition%size].setAgent(newAgent);
+Agent* World::setAgent(std::pair<int,int> pos, Agent *newAgent){
+    return Lattice[pos.first%size][pos.second%size].setAgent(newAgent);
 }
-Agent* World::killAgent(int xPosition,int yPosition)
+Agent* World::killAgent(std::pair<int,int> pos)
 {
-    if (Lattice[xPosition%size][yPosition%size].hasAgent()) {
-        return Lattice[xPosition%size][yPosition%size].killAgent();
+    if (Lattice[pos.first%size][pos.second%size].hasAgent()) {
+        return Lattice[pos.first%size][pos.second%size].killAgent();
     }
     else
     {

@@ -118,7 +118,7 @@ int WriteAction::participantCount(int startX, int startY, int dimSize)
     int pcount=0;
     for (int i=startX; i<startX+dimSize; ++startX) {
         for (int k=startY; k<startY+dimSize; ++k) {
-            if (sim->getAgent(i, k)!=nullptr) {
+            if (sim->getAgent(std::pair<int,int>(i, k))!=nullptr) {
                 ++pcount;
             }
         }

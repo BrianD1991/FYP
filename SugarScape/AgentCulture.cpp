@@ -22,7 +22,7 @@ AgentCulture::AgentCulture(World *s):ReadAction(s){
  */
 bool AgentCulture::executeAction(Location *loc, group* grp){
     if (loc->hasAgent()) {
-        std::vector<Agent*> neighbours=sim->getNeighbours(loc->getX(), loc->getY(), 1);
+        std::vector<Agent*> neighbours=sim->getNeighbours(loc->getPosition(), 1);
         for(auto a:neighbours){
             bool* tags=a->getCulture();
             int index=sim->getRnd(0, sim->getCultureCount()-1);

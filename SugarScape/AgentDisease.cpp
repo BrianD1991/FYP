@@ -24,7 +24,7 @@ bool AgentDisease::executeAction(Location *loc, group*){
     if (loc->hasAgent()) {
         Agent * subject=loc->getAgent();
         //Add one disease from each neighbour
-        std::vector<Agent*> neighbours=sim->getNeighbours(loc->getX(), loc->getY(), 1);
+        std::vector<Agent*> neighbours=sim->getNeighbours(loc->getPosition(), 1);
         for(auto a:neighbours){
             if (a->diseaseCount()>0) {
                 std::vector<std::vector<bool>> diseaseSet = a->getDiseases();

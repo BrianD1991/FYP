@@ -30,7 +30,7 @@ bool AgentDeath::executeAction(Location * loc, group *)
         if (theAgent->isDead()) {
             //remove from location
             std::pair<int,int> currPosition=theAgent->getPosition();
-            if (theAgent!=sim->killAgent(currPosition.first, currPosition.second))
+            if (theAgent!=sim->killAgent(currPosition))
                 {
                     std::cerr << "Delete of agent failed"<<std::endl;
                 }
