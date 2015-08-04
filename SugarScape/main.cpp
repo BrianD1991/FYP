@@ -7,11 +7,25 @@
 //
 
 #include <iostream>
+#include "World.h"
+#include "Growback.h"
+#include "AgentMove.h"
 
 int main(int argc, const char * argv[])
 {
 
     // insert code here...
+    World theWorld;
+    Action *growback= new Growback(&theWorld);
+    Action *move = new AgentMove(&theWorld);
+    theWorld.addRule(growback);
+    theWorld.addRule(move);
+    
+    
+    //tidy up
+    delete growback;
+    delete move;
+    
     if (argc>1) {
         std::cout << "Hello " << argv[1]<<std::endl;
     }

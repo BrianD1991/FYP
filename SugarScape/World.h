@@ -52,9 +52,9 @@ class World{
 
     
 public:
-    //Constructors
+    //Constructor and Destructor
     World(void);
-
+    ~World();
     
     
     //Getters
@@ -119,6 +119,7 @@ public:
     
 
     //Rule Application
+    int addRule(Action*);
     int applyRules(void);
     
 

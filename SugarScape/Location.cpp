@@ -24,6 +24,18 @@ newSugar(0),position(std::make_pair(x, y))
 {
     //empty
 }
+//Destructor
+Location::~Location(){//remove agent pointers is any exist
+    if (deadAgent!=nullptr) {
+        delete deadAgent;
+    }
+    if (currentResident!=nullptr) {
+        delete currentResident;
+    }
+    if (newResident!=nullptr) {
+        delete newResident;
+    }
+}
 
 //getters
 bool Location::isDone(void){

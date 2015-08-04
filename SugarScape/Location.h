@@ -31,6 +31,8 @@ public:
     //constructors
     Location(World* sim=nullptr);
     Location(int,int);
+    //destructor
+    ~Location();
     
     //getters
     bool isDone(void);

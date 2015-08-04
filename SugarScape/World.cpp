@@ -12,9 +12,9 @@
 
 
 
-//Constructors
+//Constructor
 World::World(void)
-    :size(20),step(0),cultureCount(20),
+    :size(40),step(0),cultureCount(20),
     maxAge(20),maxVision(6),maxMetabolism(5),
     minAge(10),minMetabolism(1),sugarGrowth(10),
     duration(10),rate(3),initialPopulationSize(50),
@@ -23,6 +23,7 @@ World::World(void)
     combatLimit(6),immunityLength(30),pollutionRate(2),
     childAmount(4)
 {
+    //Create Locations in Lattice
     Lattice=new Location*[size];
     for (int i=0; i<size; ++i) {
         Lattice[i]=new Location[size];
@@ -33,10 +34,24 @@ World::World(void)
         }
     }
      rng.seed();
-    
+    //create agents and put in lattice
+    std::pair<int,int> pos;
+    for (int i=0; i<size*size/4; ++i) {//quater fill lattice
+        Agent *anAgent= new Agent(this,nullptr,nullptr);
+        do {
+            pos.first=getRnd(0, size);
+            pos.second=getRnd(0,size);
+        } while (Lattice[pos.first][pos.second].hasAgent());
+        anAgent->setPosition(pos);
+        population.push_back(anAgent);
+    }
 }
 
-
+//Destructor
+World::~World(){
+    delete [] Lattice;
+    
+}
 
 
 //*************************Getters*************************
@@ -432,6 +447,13 @@ Agent* World::killAgent(std::pair<int,int> pos)
     }
 }
 //Rule Application
+
+
+int World::addRule(Action* rule){
+    activeRules.push_back(rule);
+    return (int)activeRules.size();
+}
+
 int World::applyRules(){
     int ruleCount=0;
     for(auto rule:activeRules){
