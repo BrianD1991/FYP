@@ -10,27 +10,34 @@
 #include "World.h"
 #include "Growback.h"
 #include "AgentMove.h"
+#include "ViewPort.h"
 
 int main(int argc, const char * argv[])
 {
 
-    // insert code here...
+    // create everything
     World theWorld;
+    ViewPort theGUI(&theWorld,std::pair<int,int>(800,600),std::pair<int,int>(0,0),40);
     Action *growback= new Growback(&theWorld);
     Action *move = new AgentMove(&theWorld);
     theWorld.addRule(growback);
     theWorld.addRule(move);
     
+    //step through sim
+    bool ok=true;
+    while (ok) {
+        theWorld.applyRules();
+        theGUI.draw();
     
-    //tidy up
+    }
+    
+    
+    
+    //tidy up at end
     delete growback;
     delete move;
     
-    if (argc>1) {
-        std::cout << "Hello " << argv[1]<<std::endl;
-    }
-    else
-        std::cout << "Hello, World!\n";
+
     return 0;
 }
 

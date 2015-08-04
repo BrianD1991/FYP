@@ -14,14 +14,14 @@
 
 //Constructor
 World::World(void)
-    :size(40),step(0),cultureCount(20),
-    maxAge(20),maxVision(6),maxMetabolism(5),
-    minAge(10),minMetabolism(1),sugarGrowth(10),
-    duration(10),rate(3),initialPopulationSize(50),
-    initialSugarMax(10),initialSugarMin(5),winterRate(3),
-    seasonLength(5),production(2),consumption(2),
-    combatLimit(6),immunityLength(30),pollutionRate(2),
-    childAmount(4)
+    :size(DIM),step(0),cultureCount(CultureCount),
+    maxAge(MaxAge),maxVision(MaxVision),maxMetabolism(MaxMetabolism),
+    minAge(MinAge),minMetabolism(MinMetabolism),sugarGrowth(SugarGrowth),
+    duration(Duration),rate(Rate),initialPopulationSize(InitialPopulationSize),
+    initialSugarMax(InitialSugarMax),initialSugarMin(InitialSugarMin),winterRate(WinterRate),
+    seasonLength(SeasonLength),production(Production),consumption(Consumption),
+    combatLimit(CombatLimit),immunityLength(ImmunityLength),pollutionRate(PollutionRate),
+    childAmount(ChildAmount)
 {
     //Create Locations in Lattice
     Lattice=new Location*[size];

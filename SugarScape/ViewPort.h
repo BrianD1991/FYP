@@ -32,6 +32,7 @@ private:
 public:
     /*!< Constructor */
     ViewPort(World *, std::pair<int,int>, std::pair<int,int>,int dim=20);
+    ~ViewPort();
     
     /*!< Draw Method */
     bool draw();

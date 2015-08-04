@@ -22,6 +22,28 @@ class Action;
 
 
 class World{
+    
+    static const int DIM=40;
+    static const int CultureCount=20;
+    static const int MaxAge=20;
+    static const int MaxVision=6;
+    static const int MaxMetabolism=5;
+    static const int MinAge=10;
+    static const int MinMetabolism=1;
+    static const int SugarGrowth=10;
+    static const int Duration=10;
+    static const int Rate=3;
+    static const int InitialPopulationSize=50;
+    static const int InitialSugarMax=10;
+    static const int InitialSugarMin=5;
+    static const int WinterRate=3;
+    static const int SeasonLength=5;
+    static const int Production=2;
+    static const int Consumption=2;
+    static const int CombatLimit=6;
+    static const int ImmunityLength=30;
+    static const int PollutionRate=2;
+    static const int ChildAmount=4;
     int step; /*!< Number of steps the simulation has run for */
     int size; /*!< Dimensions of lattice  a size*size matrix of locations*/
     int cultureCount;/*!< Length of bitstring containing culture information */
