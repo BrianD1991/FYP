@@ -10,6 +10,9 @@
 #define __SugarScape__ViewPort__
 
 #include <iostream>
+#include <SFML/Audio.hpp>
+#include <SFML/Graphics.hpp>
+
 #include "Location.h"
 #include "World.h"
 
@@ -28,10 +31,12 @@ private:
     std::pair<int,int> pixelCount;
     int portDimension;
     World *theWorld;
+    sf::RenderWindow * window;
+    sf::CircleShape * AgentRepresentations;
     
 public:
     /*!< Constructor */
-    ViewPort(World *, std::pair<int,int>, std::pair<int,int>,int dim=20);
+    ViewPort(sf::RenderWindow *, World *, std::pair<int,int>, std::pair<int,int>,int dim=20);
     ~ViewPort();
     
     /*!< Draw Method */

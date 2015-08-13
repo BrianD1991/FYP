@@ -16,6 +16,15 @@ Agent::Agent(World *s,Agent *dad, Agent *mum):amountEaten(0), done(false),
     cultureLength(s->getCultureCount()),immunityLength(s->getImmunityLength())
 {
     //TO DO!!
+    for (int i=0; i<immunityLength; ++i) {//FIX THIS XXXXXXXXX
+        currentImmunity.push_back(true);
+        newImmunity.push_back(true);
+    }
+    for (int i=0; i<cultureLength; ++i) {//FIX THIS XXXXXXXXX
+        currentCulture.push_back(true);
+        newCulture.push_back(true);
+    }
+
 }
 
 //getters
@@ -77,7 +86,7 @@ Agent* Agent::getMother()
 }
 
 
-bool *Agent::getCulture(void){
+std::vector<bool> Agent::getCulture(void){
     return currentCulture;
 }
 std::vector<bool> Agent::getImmunity(void){
@@ -157,8 +166,7 @@ int Agent::setImmunityTag(bool newValue,int index){
     newImmunity[index]=newValue;
     return newImmunity[index];
 }
-bool *Agent::setCulture(bool* replacementCulture){
-    delete newCulture;
+std::vector<bool> Agent::setCulture(std::vector<bool> replacementCulture){
     newCulture=replacementCulture;
     return newCulture;
 }

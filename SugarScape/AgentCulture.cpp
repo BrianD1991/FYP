@@ -24,7 +24,7 @@ bool AgentCulture::executeAction(Location *loc, group* grp){
     if (loc->hasAgent()) {
         std::vector<Agent*> neighbours=sim->getNeighbours(loc->getPosition(), 1);
         for(auto a:neighbours){
-            bool* tags=a->getCulture();
+            std::vector<bool> tags=a->getCulture();
             int index=sim->getRnd(0, sim->getCultureCount()-1);
             loc->getAgent()->setTag(index,tags[index]);
 

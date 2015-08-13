@@ -59,7 +59,7 @@ class Agent{
     int currentMetabolism,newMetabolism; /*!< Amount of sugar agent consumes each turn/step  */
     int currentSugar,newSugar; /*!< Sugar reserves held by agent */
 
-    bool *currentCulture,*newCulture; /*!< bitstring representing Culture of agent */
+    std::vector<bool> currentCulture,newCulture; /*!< bitstring representing Culture of agent */
     std::vector<bool> currentImmunity,newImmunity; /*!< bitstring holding disease bit sequences that agent has immunity from  */
     std::vector<Agent*> currentChildren,newChildren; /*!< Offspring of agent */
     Agent *father, *mother;
@@ -89,7 +89,7 @@ public:
     unsigned long getChildrenCount();
     Agent* getFather();
     Agent* getMother();
-    bool *getCulture(void);
+    std::vector<bool> getCulture(void);
     std::vector<bool> getImmunity(void);
     std::vector<Agent*> getChildren(void);
     std::vector<std::pair<Agent*,std::pair<int, int>>> getLoansOwed(void);
@@ -111,7 +111,7 @@ public:
     int setCultureLength(int);
     int setImmunityLength(int);
     int setImmunityTag(bool,int);
-    bool *setCulture(bool*);
+    std::vector<bool> setCulture(std::vector<bool>);
     std::vector<bool> setImmunity(std::vector<bool>);
     std::vector<Agent*> setChildren(std::vector<Agent*>);
     std::vector<std::pair<Agent*,std::pair<int, int>>> setLoansOwed(std::vector<std::pair<Agent*,std::pair<int, int>>>);

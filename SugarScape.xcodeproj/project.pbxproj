@@ -34,6 +34,16 @@
 		D8F15FFA1B5D4B92007E4E7D /* AgentMating.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D8F15FF81B5D4B92007E4E7D /* AgentMating.cpp */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		0867A2671B7B33E700A8D02F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0867A2631B7B33E600A8D02F /* SScapeGUI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0867A24B1B7B33E600A8D02F;
+			remoteInfo = SScapeGUI;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		D89726A41AEBD28B005664BF /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -50,6 +60,7 @@
 /* Begin PBXFileReference section */
 		080765E31B4BCB3800795BF6 /* AgentReplacement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AgentReplacement.cpp; sourceTree = "<group>"; };
 		080765E41B4BCB3800795BF6 /* AgentReplacement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentReplacement.h; sourceTree = "<group>"; };
+		0867A2631B7B33E600A8D02F /* SScapeGUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SScapeGUI.xcodeproj; path = SScapeGUI/SScapeGUI.xcodeproj; sourceTree = "<group>"; };
 		0871784A1B0E2C9F00ED6854 /* AgentDisease.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AgentDisease.cpp; sourceTree = "<group>"; };
 		0871784B1B0E2C9F00ED6854 /* AgentDisease.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentDisease.h; sourceTree = "<group>"; };
 		089A0C531B30447500C17F80 /* AgentDeath.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AgentDeath.cpp; sourceTree = "<group>"; };
@@ -110,6 +121,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0867A2641B7B33E600A8D02F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0867A2681B7B33E700A8D02F /* SScapeGUI.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		D897269D1AEBD28B005664BF = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +148,7 @@
 		D89726A81AEBD28B005664BF /* SugarScape */ = {
 			isa = PBXGroup;
 			children = (
+				0867A2631B7B33E600A8D02F /* SScapeGUI.xcodeproj */,
 				7C79878E1B0242D1003A4AE5 /* AgentCulture.cpp */,
 				0871784A1B0E2C9F00ED6854 /* AgentDisease.cpp */,
 				0871784B1B0E2C9F00ED6854 /* AgentDisease.h */,
@@ -220,12 +240,28 @@
 			mainGroup = D897269D1AEBD28B005664BF;
 			productRefGroup = D89726A71AEBD28B005664BF /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 0867A2641B7B33E600A8D02F /* Products */;
+					ProjectRef = 0867A2631B7B33E600A8D02F /* SScapeGUI.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				D89726A51AEBD28B005664BF /* SugarScape */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		0867A2681B7B33E700A8D02F /* SScapeGUI.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = SScapeGUI.app;
+			remoteRef = 0867A2671B7B33E700A8D02F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D89726A21AEBD28B005664BF /* Sources */ = {

@@ -1,0 +1,451 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0867A2511B7B33E600A8D02F /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0867A2501B7B33E600A8D02F /* ResourcePath.mm */; };
+		0867A2541B7B33E600A8D02F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0867A2531B7B33E600A8D02F /* main.cpp */; };
+		0867A2571B7B33E600A8D02F /* cute_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0867A2561B7B33E600A8D02F /* cute_image.jpg */; };
+		0867A2591B7B33E600A8D02F /* nice_music.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 0867A2581B7B33E600A8D02F /* nice_music.ogg */; };
+		0867A25B1B7B33E600A8D02F /* sansation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0867A25A1B7B33E600A8D02F /* sansation.ttf */; };
+		0867A25D1B7B33E600A8D02F /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0867A25C1B7B33E600A8D02F /* icon.png */; };
+		0867A28E1B7B358200A8D02F /* Action.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0867A2691B7B358200A8D02F /* Action.cpp */; };
+		0867A28F1B7B358200A8D02F /* Agent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0867A26B1B7B358200A8D02F /* Agent.cpp */; };
+		0867A2901B7B358200A8D02F /* AgentBasicMove.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0867A26D1B7B358200A8D02F /* AgentBasicMove.cpp */; };
+		0867A2911B7B358200A8D02F /* AgentCombat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0867A26F1B7B358200A8D02F /* AgentCombat.cpp */; };
+		0867A2921B7B358200A8D02F /* AgentCulture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0867A2711B7B358200A8D02F /* AgentCulture.cpp */; };
+		0867A2931B7B358200A8D02F /* AgentDeath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0867A2731B7B358200A8D02F /* AgentDeath.cpp */; };
+		0867A2941B7B358200A8D02F /* AgentDisease.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0867A2751B7B358200A8D02F /* AgentDisease.cpp */; };
+		0867A2951B7B358200A8D02F /* AgentMating.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0867A2771B7B358200A8D02F /* AgentMating.cpp */; };
+		0867A2961B7B358200A8D02F /* AgentMove.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0867A2791B7B358200A8D02F /* AgentMove.cpp */; };
+		0867A2971B7B358200A8D02F /* AgentReplacement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0867A27B1B7B358200A8D02F /* AgentReplacement.cpp */; };
+		0867A2981B7B358200A8D02F /* Diffusion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0867A27D1B7B358200A8D02F /* Diffusion.cpp */; };
+		0867A2991B7B358200A8D02F /* GarbageCollection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0867A27F1B7B358200A8D02F /* GarbageCollection.cpp */; };
+		0867A29A1B7B358200A8D02F /* group.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0867A2811B7B358200A8D02F /* group.cpp */; };
+		0867A29B1B7B358200A8D02F /* Growback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0867A2831B7B358200A8D02F /* Growback.cpp */; };
+		0867A29C1B7B358200A8D02F /* Inheritance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0867A2851B7B358200A8D02F /* Inheritance.cpp */; };
+		0867A29D1B7B358200A8D02F /* Location.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0867A2871B7B358200A8D02F /* Location.cpp */; };
+		0867A29F1B7B358200A8D02F /* PollutionFormation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0867A28A1B7B358200A8D02F /* PollutionFormation.cpp */; };
+		0867A2A01B7B358200A8D02F /* SeasonalGrowback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0867A28C1B7B358200A8D02F /* SeasonalGrowback.cpp */; };
+		0867A2A51B7B359800A8D02F /* ViewPort.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0867A2A11B7B359800A8D02F /* ViewPort.cpp */; };
+		0867A2A61B7B359800A8D02F /* World.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0867A2A31B7B359800A8D02F /* World.cpp */; };
+		0867A2A91B7B35B200A8D02F /* IndependentAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0867A2A71B7B35B200A8D02F /* IndependentAction.cpp */; };
+		0867A2AC1B7B35BE00A8D02F /* ReadAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0867A2AA1B7B35BE00A8D02F /* ReadAction.cpp */; };
+		0867A2AF1B7B35CE00A8D02F /* WriteAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0867A2AD1B7B35CE00A8D02F /* WriteAction.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0867A24B1B7B33E600A8D02F /* SScapeGUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SScapeGUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0867A24F1B7B33E600A8D02F /* SScapeGUI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SScapeGUI-Info.plist"; sourceTree = "<group>"; };
+		0867A2501B7B33E600A8D02F /* ResourcePath.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
+		0867A2521B7B33E600A8D02F /* ResourcePath.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ResourcePath.hpp; sourceTree = "<group>"; };
+		0867A2531B7B33E600A8D02F /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		0867A2561B7B33E600A8D02F /* cute_image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cute_image.jpg; sourceTree = "<group>"; };
+		0867A2581B7B33E600A8D02F /* nice_music.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = nice_music.ogg; sourceTree = "<group>"; };
+		0867A25A1B7B33E600A8D02F /* sansation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sansation.ttf; sourceTree = "<group>"; };
+		0867A25C1B7B33E600A8D02F /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		0867A2691B7B358200A8D02F /* Action.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Action.cpp; path = ../../Action.cpp; sourceTree = "<group>"; };
+		0867A26A1B7B358200A8D02F /* Action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Action.h; path = ../../Action.h; sourceTree = "<group>"; };
+		0867A26B1B7B358200A8D02F /* Agent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Agent.cpp; path = ../../Agent.cpp; sourceTree = "<group>"; };
+		0867A26C1B7B358200A8D02F /* Agent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Agent.h; path = ../../Agent.h; sourceTree = "<group>"; };
+		0867A26D1B7B358200A8D02F /* AgentBasicMove.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AgentBasicMove.cpp; path = ../../AgentBasicMove.cpp; sourceTree = "<group>"; };
+		0867A26E1B7B358200A8D02F /* AgentBasicMove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AgentBasicMove.h; path = ../../AgentBasicMove.h; sourceTree = "<group>"; };
+		0867A26F1B7B358200A8D02F /* AgentCombat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AgentCombat.cpp; path = ../../AgentCombat.cpp; sourceTree = "<group>"; };
+		0867A2701B7B358200A8D02F /* AgentCombat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AgentCombat.h; path = ../../AgentCombat.h; sourceTree = "<group>"; };
+		0867A2711B7B358200A8D02F /* AgentCulture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AgentCulture.cpp; path = ../../AgentCulture.cpp; sourceTree = "<group>"; };
+		0867A2721B7B358200A8D02F /* AgentCulture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AgentCulture.h; path = ../../AgentCulture.h; sourceTree = "<group>"; };
+		0867A2731B7B358200A8D02F /* AgentDeath.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AgentDeath.cpp; path = ../../AgentDeath.cpp; sourceTree = "<group>"; };
+		0867A2741B7B358200A8D02F /* AgentDeath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AgentDeath.h; path = ../../AgentDeath.h; sourceTree = "<group>"; };
+		0867A2751B7B358200A8D02F /* AgentDisease.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AgentDisease.cpp; path = ../../AgentDisease.cpp; sourceTree = "<group>"; };
+		0867A2761B7B358200A8D02F /* AgentDisease.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AgentDisease.h; path = ../../AgentDisease.h; sourceTree = "<group>"; };
+		0867A2771B7B358200A8D02F /* AgentMating.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AgentMating.cpp; path = ../../AgentMating.cpp; sourceTree = "<group>"; };
+		0867A2781B7B358200A8D02F /* AgentMating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AgentMating.h; path = ../../AgentMating.h; sourceTree = "<group>"; };
+		0867A2791B7B358200A8D02F /* AgentMove.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AgentMove.cpp; path = ../../AgentMove.cpp; sourceTree = "<group>"; };
+		0867A27A1B7B358200A8D02F /* AgentMove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AgentMove.h; path = ../../AgentMove.h; sourceTree = "<group>"; };
+		0867A27B1B7B358200A8D02F /* AgentReplacement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AgentReplacement.cpp; path = ../../AgentReplacement.cpp; sourceTree = "<group>"; };
+		0867A27C1B7B358200A8D02F /* AgentReplacement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AgentReplacement.h; path = ../../AgentReplacement.h; sourceTree = "<group>"; };
+		0867A27D1B7B358200A8D02F /* Diffusion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Diffusion.cpp; path = ../../Diffusion.cpp; sourceTree = "<group>"; };
+		0867A27E1B7B358200A8D02F /* Diffusion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Diffusion.h; path = ../../Diffusion.h; sourceTree = "<group>"; };
+		0867A27F1B7B358200A8D02F /* GarbageCollection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GarbageCollection.cpp; path = ../../GarbageCollection.cpp; sourceTree = "<group>"; };
+		0867A2801B7B358200A8D02F /* GarbageCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GarbageCollection.h; path = ../../GarbageCollection.h; sourceTree = "<group>"; };
+		0867A2811B7B358200A8D02F /* group.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = group.cpp; path = ../../group.cpp; sourceTree = "<group>"; };
+		0867A2821B7B358200A8D02F /* group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = group.h; path = ../../group.h; sourceTree = "<group>"; };
+		0867A2831B7B358200A8D02F /* Growback.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Growback.cpp; path = ../../Growback.cpp; sourceTree = "<group>"; };
+		0867A2841B7B358200A8D02F /* Growback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Growback.h; path = ../../Growback.h; sourceTree = "<group>"; };
+		0867A2851B7B358200A8D02F /* Inheritance.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Inheritance.cpp; path = ../../Inheritance.cpp; sourceTree = "<group>"; };
+		0867A2861B7B358200A8D02F /* Inheritance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Inheritance.h; path = ../../Inheritance.h; sourceTree = "<group>"; };
+		0867A2871B7B358200A8D02F /* Location.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Location.cpp; path = ../../Location.cpp; sourceTree = "<group>"; };
+		0867A2881B7B358200A8D02F /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Location.h; path = ../../Location.h; sourceTree = "<group>"; };
+		0867A28A1B7B358200A8D02F /* PollutionFormation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PollutionFormation.cpp; path = ../../PollutionFormation.cpp; sourceTree = "<group>"; };
+		0867A28B1B7B358200A8D02F /* PollutionFormation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PollutionFormation.h; path = ../../PollutionFormation.h; sourceTree = "<group>"; };
+		0867A28C1B7B358200A8D02F /* SeasonalGrowback.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SeasonalGrowback.cpp; path = ../../SeasonalGrowback.cpp; sourceTree = "<group>"; };
+		0867A28D1B7B358200A8D02F /* SeasonalGrowback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SeasonalGrowback.h; path = ../../SeasonalGrowback.h; sourceTree = "<group>"; };
+		0867A2A11B7B359800A8D02F /* ViewPort.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ViewPort.cpp; path = ../../ViewPort.cpp; sourceTree = "<group>"; };
+		0867A2A21B7B359800A8D02F /* ViewPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewPort.h; path = ../../ViewPort.h; sourceTree = "<group>"; };
+		0867A2A31B7B359800A8D02F /* World.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = World.cpp; path = ../../World.cpp; sourceTree = "<group>"; };
+		0867A2A41B7B359800A8D02F /* World.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = World.h; path = ../../World.h; sourceTree = "<group>"; };
+		0867A2A71B7B35B200A8D02F /* IndependentAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IndependentAction.cpp; path = ../../../IndependentAction.cpp; sourceTree = "<group>"; };
+		0867A2A81B7B35B200A8D02F /* IndependentAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IndependentAction.h; path = ../../../IndependentAction.h; sourceTree = "<group>"; };
+		0867A2AA1B7B35BE00A8D02F /* ReadAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ReadAction.cpp; path = ../../../ReadAction.cpp; sourceTree = "<group>"; };
+		0867A2AB1B7B35BE00A8D02F /* ReadAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReadAction.h; path = ../../../ReadAction.h; sourceTree = "<group>"; };
+		0867A2AD1B7B35CE00A8D02F /* WriteAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WriteAction.cpp; path = ../../../WriteAction.cpp; sourceTree = "<group>"; };
+		0867A2AE1B7B35CE00A8D02F /* WriteAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WriteAction.h; path = ../../../WriteAction.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0867A2471B7B33E600A8D02F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0867A2411B7B33E600A8D02F = {
+			isa = PBXGroup;
+			children = (
+				0867A24D1B7B33E600A8D02F /* SScapeGUI */,
+				0867A24C1B7B33E600A8D02F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0867A24C1B7B33E600A8D02F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0867A24B1B7B33E600A8D02F /* SScapeGUI.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0867A24D1B7B33E600A8D02F /* SScapeGUI */ = {
+			isa = PBXGroup;
+			children = (
+				0867A2AD1B7B35CE00A8D02F /* WriteAction.cpp */,
+				0867A2AE1B7B35CE00A8D02F /* WriteAction.h */,
+				0867A2AA1B7B35BE00A8D02F /* ReadAction.cpp */,
+				0867A2AB1B7B35BE00A8D02F /* ReadAction.h */,
+				0867A2A71B7B35B200A8D02F /* IndependentAction.cpp */,
+				0867A2A81B7B35B200A8D02F /* IndependentAction.h */,
+				0867A2A11B7B359800A8D02F /* ViewPort.cpp */,
+				0867A2A21B7B359800A8D02F /* ViewPort.h */,
+				0867A2A31B7B359800A8D02F /* World.cpp */,
+				0867A2A41B7B359800A8D02F /* World.h */,
+				0867A2691B7B358200A8D02F /* Action.cpp */,
+				0867A26A1B7B358200A8D02F /* Action.h */,
+				0867A26B1B7B358200A8D02F /* Agent.cpp */,
+				0867A26C1B7B358200A8D02F /* Agent.h */,
+				0867A26D1B7B358200A8D02F /* AgentBasicMove.cpp */,
+				0867A26E1B7B358200A8D02F /* AgentBasicMove.h */,
+				0867A26F1B7B358200A8D02F /* AgentCombat.cpp */,
+				0867A2701B7B358200A8D02F /* AgentCombat.h */,
+				0867A2711B7B358200A8D02F /* AgentCulture.cpp */,
+				0867A2721B7B358200A8D02F /* AgentCulture.h */,
+				0867A2731B7B358200A8D02F /* AgentDeath.cpp */,
+				0867A2741B7B358200A8D02F /* AgentDeath.h */,
+				0867A2751B7B358200A8D02F /* AgentDisease.cpp */,
+				0867A2761B7B358200A8D02F /* AgentDisease.h */,
+				0867A2771B7B358200A8D02F /* AgentMating.cpp */,
+				0867A2781B7B358200A8D02F /* AgentMating.h */,
+				0867A2791B7B358200A8D02F /* AgentMove.cpp */,
+				0867A27A1B7B358200A8D02F /* AgentMove.h */,
+				0867A27B1B7B358200A8D02F /* AgentReplacement.cpp */,
+				0867A27C1B7B358200A8D02F /* AgentReplacement.h */,
+				0867A27D1B7B358200A8D02F /* Diffusion.cpp */,
+				0867A27E1B7B358200A8D02F /* Diffusion.h */,
+				0867A27F1B7B358200A8D02F /* GarbageCollection.cpp */,
+				0867A2801B7B358200A8D02F /* GarbageCollection.h */,
+				0867A2811B7B358200A8D02F /* group.cpp */,
+				0867A2821B7B358200A8D02F /* group.h */,
+				0867A2831B7B358200A8D02F /* Growback.cpp */,
+				0867A2841B7B358200A8D02F /* Growback.h */,
+				0867A2851B7B358200A8D02F /* Inheritance.cpp */,
+				0867A2861B7B358200A8D02F /* Inheritance.h */,
+				0867A2871B7B358200A8D02F /* Location.cpp */,
+				0867A2881B7B358200A8D02F /* Location.h */,
+				0867A28A1B7B358200A8D02F /* PollutionFormation.cpp */,
+				0867A28B1B7B358200A8D02F /* PollutionFormation.h */,
+				0867A28C1B7B358200A8D02F /* SeasonalGrowback.cpp */,
+				0867A28D1B7B358200A8D02F /* SeasonalGrowback.h */,
+				0867A2501B7B33E600A8D02F /* ResourcePath.mm */,
+				0867A2521B7B33E600A8D02F /* ResourcePath.hpp */,
+				0867A2531B7B33E600A8D02F /* main.cpp */,
+				0867A2551B7B33E600A8D02F /* Resources */,
+				0867A24E1B7B33E600A8D02F /* Supporting Files */,
+			);
+			path = SScapeGUI;
+			sourceTree = "<group>";
+		};
+		0867A24E1B7B33E600A8D02F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0867A24F1B7B33E600A8D02F /* SScapeGUI-Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0867A2551B7B33E600A8D02F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0867A2561B7B33E600A8D02F /* cute_image.jpg */,
+				0867A2581B7B33E600A8D02F /* nice_music.ogg */,
+				0867A25A1B7B33E600A8D02F /* sansation.ttf */,
+				0867A25C1B7B33E600A8D02F /* icon.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0867A24A1B7B33E600A8D02F /* SScapeGUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0867A2601B7B33E600A8D02F /* Build configuration list for PBXNativeTarget "SScapeGUI" */;
+			buildPhases = (
+				0867A2461B7B33E600A8D02F /* Sources */,
+				0867A2471B7B33E600A8D02F /* Frameworks */,
+				0867A2481B7B33E600A8D02F /* Resources */,
+				0867A2491B7B33E600A8D02F /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SScapeGUI;
+			productName = SScapeGUI;
+			productReference = 0867A24B1B7B33E600A8D02F /* SScapeGUI.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0867A2421B7B33E600A8D02F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Joseph Kehoe";
+			};
+			buildConfigurationList = 0867A2451B7B33E600A8D02F /* Build configuration list for PBXProject "SScapeGUI" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0867A2411B7B33E600A8D02F;
+			productRefGroup = 0867A24C1B7B33E600A8D02F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0867A24A1B7B33E600A8D02F /* SScapeGUI */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0867A2481B7B33E600A8D02F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0867A25D1B7B33E600A8D02F /* icon.png in Resources */,
+				0867A25B1B7B33E600A8D02F /* sansation.ttf in Resources */,
+				0867A2591B7B33E600A8D02F /* nice_music.ogg in Resources */,
+				0867A2571B7B33E600A8D02F /* cute_image.jpg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0867A2491B7B33E600A8D02F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This shell script simply copies required SFML dylibs/frameworks into the application bundle frameworks folder.\n# If you're using static libraries (which is not recommended) you should remove this script from your project.\n\n# SETTINGS\nCMAKE_INSTALL_FRAMEWORK_PREFIX=\"/Library/Frameworks\"\nCMAKE_INSTALL_LIB_PREFIX=\"/usr/local/lib\"\nFRAMEWORKS_FULL_PATH=\"$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH/\"\n\n# Are we building a project that uses frameworks or dylibs?\ncase \"$SFML_BINARY_TYPE\" in\n    DYLIBS)\n        frameworks=\"false\"\n        ;;\n    *)\n        frameworks=\"true\"\n        ;;\nesac\n\n# Echoes to stderr\nerror () # $* message to display\n{\n    echo $* 1>&2\n    exit 2\n}\n\nassert () # $1 is a boolean, $2...N is an error message\n{\n    if [ $# -lt 2 ]\n    then\n        error \"Internal error in assert: not enough args\"\n    fi\n\n    if [ $1 -ne 0 ]\n    then\n        shift\n        error \"$*\"\n    fi\n}\n\nforce_remove () # $@ is some paths\n{\n    test $# -ge 1\n    assert $? \"force_remove() requires at least one parameter\"\n    rm -fr $@\n    assert $? \"couldn't remove $@\"\n}\n\ncopy () # $1 is a source, $2 is a destination\n{\n    test $# -eq 2\n    assert $? \"copy() requires two parameters\"\n    ditto \"$1\" \"$2\"\n    assert $? \"couldn't copy $1 to $2\"\n}\n\nrequire () # $1 is a SFML module like 'system' or 'audio'\n{\n    dest=\"$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH/\"\n\n    if [ -z \"$1\" ]\n    then\n        error \"require() requires one parameter!\"\n    else\n        # clean potentially old stuff\n        force_remove \"$dest/libsfml-$1\"*\n        force_remove \"$dest/sfml-$1.framework\"\n\n        # copy SFML libraries\n        if [ \"$frameworks\" = \"true\" ]\n        then\n            source=\"$CMAKE_INSTALL_FRAMEWORK_PREFIX/sfml-$1.framework\"\n            target=\"sfml-$1.framework\"\n        elif [ \"$SFML_LINK_DYLIBS_SUFFIX\" = \"-d\" ]\n        then\n            source=\"$CMAKE_INSTALL_LIB_PREFIX/libsfml-$1-d.dylib\"\n            target=\"`readlink $source`\"\n        else\n            source=\"$CMAKE_INSTALL_LIB_PREFIX/libsfml-$1.dylib\"\n            target=\"`readlink $source`\"\n        fi\n\n        copy \"$source\" \"$dest/$target\"\n\n        # copy extra dependencies\n        if [ \"$1\" = \"audio\" ]\n        then\n            # copy \"FLAC\" \"ogg\" \"vorbis\" \"vorbisenc\" \"vorbisfile\" \"OpenAL\" frameworks too\n            for f in \"FLAC\" \"ogg\" \"vorbis\" \"vorbisenc\" \"vorbisfile\" \"OpenAL\"\n            do\n                copy \"$CMAKE_INSTALL_FRAMEWORK_PREFIX/$f.framework\" \"$dest/$f.framework\"\n            done\n        elif [ \"$1\" = \"graphics\" ]\n        then\n            copy \"$CMAKE_INSTALL_FRAMEWORK_PREFIX/freetype.framework\" \"$dest/freetype.framework\"\n        fi\n    fi\n}\n\nif [ -n \"$SFML_SYSTEM\" ]\nthen\n    require \"system\"\nfi\n\nif [ -n \"$SFML_AUDIO\" ]\nthen\n    require \"audio\"\nfi\n\nif [ -n \"$SFML_NETWORK\" ]\nthen\n    require \"network\"\nfi\n\nif [ -n \"$SFML_WINDOW\" ]\nthen\n    require \"window\"\nfi\n\nif [ -n \"$SFML_GRAPHICS\" ]\nthen\n    require \"graphics\"\nfi\n\n                ";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0867A2461B7B33E600A8D02F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0867A29F1B7B358200A8D02F /* PollutionFormation.cpp in Sources */,
+				0867A2541B7B33E600A8D02F /* main.cpp in Sources */,
+				0867A2A91B7B35B200A8D02F /* IndependentAction.cpp in Sources */,
+				0867A2991B7B358200A8D02F /* GarbageCollection.cpp in Sources */,
+				0867A2921B7B358200A8D02F /* AgentCulture.cpp in Sources */,
+				0867A2941B7B358200A8D02F /* AgentDisease.cpp in Sources */,
+				0867A2981B7B358200A8D02F /* Diffusion.cpp in Sources */,
+				0867A2AF1B7B35CE00A8D02F /* WriteAction.cpp in Sources */,
+				0867A29C1B7B358200A8D02F /* Inheritance.cpp in Sources */,
+				0867A2A51B7B359800A8D02F /* ViewPort.cpp in Sources */,
+				0867A2951B7B358200A8D02F /* AgentMating.cpp in Sources */,
+				0867A29A1B7B358200A8D02F /* group.cpp in Sources */,
+				0867A2911B7B358200A8D02F /* AgentCombat.cpp in Sources */,
+				0867A28F1B7B358200A8D02F /* Agent.cpp in Sources */,
+				0867A2AC1B7B35BE00A8D02F /* ReadAction.cpp in Sources */,
+				0867A2931B7B358200A8D02F /* AgentDeath.cpp in Sources */,
+				0867A2901B7B358200A8D02F /* AgentBasicMove.cpp in Sources */,
+				0867A2971B7B358200A8D02F /* AgentReplacement.cpp in Sources */,
+				0867A2A01B7B358200A8D02F /* SeasonalGrowback.cpp in Sources */,
+				0867A28E1B7B358200A8D02F /* Action.cpp in Sources */,
+				0867A29B1B7B358200A8D02F /* Growback.cpp in Sources */,
+				0867A2511B7B33E600A8D02F /* ResourcePath.mm in Sources */,
+				0867A29D1B7B358200A8D02F /* Location.cpp in Sources */,
+				0867A2A61B7B359800A8D02F /* World.cpp in Sources */,
+				0867A2961B7B358200A8D02F /* AgentMove.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		0867A25E1B7B33E600A8D02F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					i386,
+					x86_64,
+				);
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				FRAMEWORK_SEARCH_PATHS = (
+					/Library/Frameworks/,
+					"$(inherited)",
+				);
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include/,
+					"$(inherited)",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib/,
+					"$(inherited)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"$(SFML_SYSTEM)",
+					"$(SFML_WINDOW)",
+					"$(SFML_GRAPHICS)",
+					"$(SFML_AUDIO)",
+					"$(SFML_NETWORK)",
+				);
+				SFML_AUDIO = "$(SFML_LINK_PREFIX) sfml-audio$(SFML_LINK_SUFFIX)";
+				SFML_BINARY_TYPE = FRAMEWORKS;
+				SFML_GRAPHICS = "$(SFML_LINK_PREFIX) sfml-graphics$(SFML_LINK_SUFFIX)";
+				SFML_LINK_DYLIBS_PREFIX = "-l";
+				SFML_LINK_DYLIBS_SUFFIX = "";
+				SFML_LINK_FRAMEWORKS_PREFIX = "-framework";
+				SFML_LINK_FRAMEWORKS_SUFFIX = "";
+				SFML_LINK_PREFIX = "$(SFML_LINK_$(SFML_BINARY_TYPE)_PREFIX)";
+				SFML_LINK_SUFFIX = "$(SFML_LINK_$(SFML_BINARY_TYPE)_SUFFIX)";
+				SFML_NETWORK = "$(SFML_LINK_PREFIX) sfml-network$(SFML_LINK_SUFFIX)";
+				SFML_SYSTEM = "$(SFML_LINK_PREFIX) sfml-system$(SFML_LINK_SUFFIX)";
+				SFML_WINDOW = "$(SFML_LINK_PREFIX) sfml-window$(SFML_LINK_SUFFIX)";
+				SUPPORTED_PLATFORMS = macosx;
+			};
+			name = Debug;
+		};
+		0867A25F1B7B33E600A8D02F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					i386,
+					x86_64,
+				);
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				FRAMEWORK_SEARCH_PATHS = (
+					/Library/Frameworks/,
+					"$(inherited)",
+				);
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include/,
+					"$(inherited)",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib/,
+					"$(inherited)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"$(SFML_SYSTEM)",
+					"$(SFML_WINDOW)",
+					"$(SFML_GRAPHICS)",
+					"$(SFML_AUDIO)",
+					"$(SFML_NETWORK)",
+				);
+				SFML_AUDIO = "$(SFML_LINK_PREFIX) sfml-audio$(SFML_LINK_SUFFIX)";
+				SFML_BINARY_TYPE = FRAMEWORKS;
+				SFML_GRAPHICS = "$(SFML_LINK_PREFIX) sfml-graphics$(SFML_LINK_SUFFIX)";
+				SFML_LINK_DYLIBS_PREFIX = "-l";
+				SFML_LINK_DYLIBS_SUFFIX = "";
+				SFML_LINK_FRAMEWORKS_PREFIX = "-framework";
+				SFML_LINK_FRAMEWORKS_SUFFIX = "";
+				SFML_LINK_PREFIX = "$(SFML_LINK_$(SFML_BINARY_TYPE)_PREFIX)";
+				SFML_LINK_SUFFIX = "$(SFML_LINK_$(SFML_BINARY_TYPE)_SUFFIX)";
+				SFML_NETWORK = "$(SFML_LINK_PREFIX) sfml-network$(SFML_LINK_SUFFIX)";
+				SFML_SYSTEM = "$(SFML_LINK_PREFIX) sfml-system$(SFML_LINK_SUFFIX)";
+				SFML_WINDOW = "$(SFML_LINK_PREFIX) sfml-window$(SFML_LINK_SUFFIX)";
+				SUPPORTED_PLATFORMS = macosx;
+			};
+			name = Release;
+		};
+		0867A2611B7B33E600A8D02F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "SScapeGUI/SScapeGUI-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		0867A2621B7B33E600A8D02F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "SScapeGUI/SScapeGUI-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0867A2451B7B33E600A8D02F /* Build configuration list for PBXProject "SScapeGUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0867A25E1B7B33E600A8D02F /* Debug */,
+				0867A25F1B7B33E600A8D02F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0867A2601B7B33E600A8D02F /* Build configuration list for PBXNativeTarget "SScapeGUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0867A2611B7B33E600A8D02F /* Debug */,
+				0867A2621B7B33E600A8D02F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0867A2421B7B33E600A8D02F /* Project object */;
+}
