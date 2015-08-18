@@ -11,7 +11,7 @@
 
 //constructors
 Location::Location(World *theWorld):
-    maxSugar(0),currentSugar(0),deadAgent(nullptr),
+    maxSugar(0),currentSugar(5),deadAgent(nullptr),
     currentPollution(0),newPollution(0),done(false),
     newSugar(0),position(0,0),sim(theWorld)
 {

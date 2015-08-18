@@ -32,7 +32,7 @@ private:
     int portDimension;
     World *theWorld;
     sf::RenderWindow * window;
-    sf::CircleShape * AgentRepresentations;
+    sf::CircleShape *AgentRepresentations;
     
 public:
     /*!< Constructor */

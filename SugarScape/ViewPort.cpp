@@ -25,16 +25,14 @@ ViewPort::ViewPort(sf::RenderWindow * theWindow, World * aWorld, std::pair<int,i
     int cellSize=pix.first/portDimension;
     int maxRadius=cellSize/2;
     AgentRepresentations = new sf::CircleShape[portDimension*portDimension];
-    for (int i=0; i<portDimension; ++i) {
-        for (int k=0; k<portDimension; ++k) {
-            AgentRepresentations[i*portDimension+k].setRadius(maxRadius);
-            AgentRepresentations[i*portDimension+k].setFillColor(sf::Color::Red);
-            AgentRepresentations[i*portDimension+k].setPosition(i*40,k*40);
-        }
+    for (int i=0; i<portDimension*portDimension; ++i) {
+            AgentRepresentations[i].setRadius(maxRadius);
+            AgentRepresentations[i].setFillColor(sf::Color::Red);
+            AgentRepresentations[i].setPosition((i/portDimension)*cellSize,(i%portDimension)*cellSize);
     }
 }
 ViewPort::~ViewPort(){
-                delete [] AgentRepresentations;
+    delete [] AgentRepresentations;
 }
 
 
@@ -86,12 +84,19 @@ bool ViewPort::draw(){
         Agent *theAgent;
         for (int i=0; i<portDimension; ++i) {
             for (int k=0; k<portDimension; ++k) {
-                //pos.first=i;
-                //pos.second=k;
                 pos={i,k};
+                int radius=-1;
                 if (theWorld->getLocation(pos)->hasAgent()) {
                     theAgent=theWorld->getLocation(pos)->getAgent();
-                    AgentRepresentations[i*portDimension+k].setRadius(theAgent->getSugar());
+                    radius=theAgent->getSugar();
+                    AgentRepresentations[i*portDimension+k].setRadius(radius);
+                    AgentRepresentations[i*portDimension+k].setFillColor(sf::Color::Red);
+                    window->draw(AgentRepresentations[i*portDimension+k]);
+                }
+                else{
+                    radius=theWorld->getLocation(pos)->getSugar();
+                    AgentRepresentations[i*portDimension+k].setRadius(radius);
+                    AgentRepresentations[i*portDimension+k].setFillColor(sf::Color::Green);
                     window->draw(AgentRepresentations[i*portDimension+k]);
                 }
                 

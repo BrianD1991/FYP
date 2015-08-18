@@ -49,13 +49,13 @@ int main(int, char const**)
     }
     window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
-    // Load a sprite to display
-    sf::Texture texture;
-    if (!texture.loadFromFile(resourcePath() + "cute_image.jpg")) {
-        return EXIT_FAILURE;
-    }
-    sf::Sprite sprite(texture);
-
+//    // Load a sprite to display
+//    sf::Texture texture;
+//    if (!texture.loadFromFile(resourcePath() + "cute_image.jpg")) {
+//        return EXIT_FAILURE;
+//    }
+//    sf::Sprite sprite(texture);
+//
     // Create a graphical text to display
     sf::Font font;
     if (!font.loadFromFile(resourcePath() + "sansation.ttf")) {
@@ -97,7 +97,7 @@ int main(int, char const**)
         //theWorld.applyRules();
         theGUI.draw();
         // Draw the sprite
-        window.draw(sprite);
+        //window.draw(sprite);
 
         // Draw the string
         window.draw(text);
