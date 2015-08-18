@@ -86,8 +86,9 @@ bool ViewPort::draw(){
         Agent *theAgent;
         for (int i=0; i<portDimension; ++i) {
             for (int k=0; k<portDimension; ++k) {
-                pos.first=i;
-                pos.second=k;
+                //pos.first=i;
+                //pos.second=k;
+                pos={i,k};
                 if (theWorld->getLocation(pos)->hasAgent()) {
                     theAgent=theWorld->getLocation(pos)->getAgent();
                     AgentRepresentations[i*portDimension+k].setRadius(theAgent->getSugar());

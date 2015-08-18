@@ -31,19 +31,19 @@ group* ReadAction::formGroup(Location* loc){
  * @exception none
  */
 bool ReadAction::run(int startX, int startY, int size){
-    Location** Lattice=sim->getLattice();
+    Location* Lattice=sim->getLattice();
     //Perform action
     for (int i=startX; i<startX+size; ++i) {
         for (int k=startY; k<startY+size; ++k) {
-            executeAction(&Lattice[i][k],nullptr);
+            executeAction(&Lattice[i*size+k],nullptr);
         }
     }
     //Update everyone
     for (int i=startX; i<startX+size; ++i) {
         for (int k=startY; k<startY+size; ++k) {
-            Lattice[i][k].sync();
-            if (Lattice[i][k].hasAgent()) {
-                Lattice[i][k].getAgent()->sync();
+            Lattice[i*size+k].sync();
+            if (Lattice[i*size+k].hasAgent()) {
+                Lattice[i*size+k].getAgent()->sync();
             }
         }
     }
@@ -59,21 +59,21 @@ bool ReadAction::run(int startX, int startY, int size){
  */
 bool ReadAction::concurrentRun(void){
     int size=sim->getSize();
-    Location** Lattice=sim->getLattice();
+    Location* Lattice=sim->getLattice();
     //Perform action
 #pragma omp for
     for (int i=0; i<size; ++i) {
         for (int k=0; k<size; ++k) {
-            executeAction(&Lattice[i][k],nullptr);
+            executeAction(&Lattice[i*size+k],nullptr);
         }
     }
     //Update everyone
 #pragma omp for
     for (int i=0; i<size; ++i) {
         for (int k=0; k<size; ++k) {
-            Lattice[i][k].sync();
-            if (Lattice[i][k].hasAgent()) {
-                Lattice[i][k].getAgent()->sync();
+            Lattice[i*size+k].sync();
+            if (Lattice[i*size+k].hasAgent()) {
+                Lattice[i*size+k].getAgent()->sync();
             }
         }
     }

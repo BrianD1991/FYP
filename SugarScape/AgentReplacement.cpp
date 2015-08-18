@@ -129,11 +129,11 @@ bool AgentReplacement::concurrentRun(void)
 unsigned long AgentReplacement::populateFreeSlots()
 {
     freeSlots.clear();
-    Location** loc= sim->getLattice();
+    Location* loc= sim->getLattice();
     int dim=sim->getSize();
     for (int i=0; i<dim; ++i) {
         for (int k=0; k<dim; ++k) {
-            if (loc[i][k].hasAgent()==false) freeSlots.push_back(&loc[i][k]);
+            if (loc[i*dim+k].hasAgent()==false) freeSlots.push_back(&loc[i*dim+k]);
         }
     }
     return freeSlots.size();

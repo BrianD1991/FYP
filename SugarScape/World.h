@@ -65,7 +65,7 @@ class World{
     int pollutionRate; /*!< Number of timeperiods that pass between each diffusion of pollution */
     int childAmount;
     
-    Location ** Lattice; /*!< 2D (size by size) Matrix of locations in world  */
+    Location *Lattice; /*!< 2D (size by size) Matrix of locations in world  */
     std::vector<Agent*> population; /*!< Agents in simulation */
     std::vector<Action*> activeRules; /*!< Rules we run each time step */
     
@@ -109,7 +109,7 @@ public:
     std::vector<Location*> getEmptyNeighbourhood(std::pair<int,int>,int);
     std::vector<Location*> getCombatNeighbourhood(std::pair<int,int>,int);
     std::vector<Agent*> getNeighbours(std::pair<int,int>,int);
-    Location** getLattice(void);
+    Location* getLattice(void);
     Location* getLocation(std::pair<int, int>);
     
     //Setters

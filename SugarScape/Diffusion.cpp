@@ -14,12 +14,13 @@ Diffusion::Diffusion(World *s):ReadAction(s){
 }
 
 bool Diffusion::executeAction(Location *loc, group *){
+    int size=sim->getSize();
     if (sim->getStep()%sim->getPollutionRate()==0) {
-        Location** lattice=sim->getLattice();
-        int diffusedPollution= lattice[loc->getX()+1][loc->getY()].getPollution()
-                            +lattice[loc->getX()-1][loc->getY()].getPollution()
-                            +lattice[loc->getX()][loc->getY()+1].getPollution()
-                            +lattice[loc->getX()][loc->getY()-1].getPollution();
+        Location* lattice=sim->getLattice();
+        int diffusedPollution= lattice[((loc->getX()+1)%size)*size+loc->getY()].getPollution()
+                            +lattice[((loc->getX()-1)%size)*size+loc->getY()].getPollution()
+                            +lattice[loc->getX()*size+(loc->getY()+1)%size].getPollution()
+                            +lattice[loc->getX()*size+(loc->getY()-1)%size].getPollution();
         loc->setPollution(diffusedPollution/4);
         return true;
     }else{

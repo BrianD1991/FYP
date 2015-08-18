@@ -15,7 +15,7 @@ WriteAction::~WriteAction(void){
     
 }
 bool WriteAction::run(int startX, int startY, int size){
-    Location** Lattice=sim->getLattice();
+    Location* Lattice=sim->getLattice();
     
     std::vector<group*> proposedGroups, ExclusiveGroups;
     //calculate number of entities that need to take part in this actions
@@ -24,8 +24,8 @@ bool WriteAction::run(int startX, int startY, int size){
         //Part One: Form group proposals
         for (int i=startX; i<startX+size; ++i ) {
             for (int k=startY; k<startY+size; ++k) {
-                if (Lattice[i][k].isDone()==false){
-                    group *grp = formGroup(&Lattice[i][k]);
+                if (Lattice[i*size+k].isDone()==false){
+                    group *grp = formGroup(&Lattice[i*size+k]);
                     if (grp!=nullptr) {/*!< do not add nullptrs as they will interfere with sorting */
                         proposedGroups.push_back(grp);
                     }

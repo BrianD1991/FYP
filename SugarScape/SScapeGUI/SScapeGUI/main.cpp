@@ -95,7 +95,7 @@ int main(int, char const**)
         window.clear();
         
         //theWorld.applyRules();
-        //theGUI.draw();
+        theGUI.draw();
         // Draw the sprite
         window.draw(sprite);
 
