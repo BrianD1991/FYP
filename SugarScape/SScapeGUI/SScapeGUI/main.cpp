@@ -23,6 +23,7 @@
 
 #include "World.h"
 #include "Growback.h"
+#include "SeasonalGrowback.h"
 #include "AgentMove.h"
 #include "ViewPort.h"
 
@@ -34,13 +35,16 @@ int main(int, char const**)
     
     // create everything
     World theWorld;
+    theWorld.init();
     ViewPort theGUI(&window,&theWorld,std::pair<int,int>(800,600),std::pair<int,int>(0,0),40);
     Action *growback= new Growback(&theWorld);
+    Action *seasonalGrowback = new SeasonalGrowback(&theWorld);
     Action *move = new AgentMove(&theWorld);
-    theWorld.addRule(growback);
-    theWorld.addRule(move);
+    theWorld.addRule(seasonalGrowback);
+    //theWorld.addRule(move);
 
-
+    int stepCount=0;
+    std::string counter;
 
     // Set the Icon
     sf::Image icon;
@@ -61,8 +65,9 @@ int main(int, char const**)
     if (!font.loadFromFile(resourcePath() + "sansation.ttf")) {
         return EXIT_FAILURE;
     }
-    sf::Text text("Hello SFML", font, 50);
-    text.setColor(sf::Color::Black);
+    counter = std::to_string(stepCount);
+    sf::Text text(counter, font, 50);
+    text.setColor(sf::Color::White);
 
     // Load a music to play
     sf::Music music;
@@ -94,7 +99,7 @@ int main(int, char const**)
         // Clear screen
         window.clear();
         
-        //theWorld.applyRules();
+        theWorld.applyRules();
         theGUI.draw();
         // Draw the sprite
         //window.draw(sprite);
@@ -104,10 +109,12 @@ int main(int, char const**)
 
         // Update the window
         window.display();
-
+        counter = std::to_string(++stepCount);
+        text.setString(counter);
     }
 
     //tidy up at end
+    delete seasonalGrowback;
     delete growback;
     delete move;
 

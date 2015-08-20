@@ -138,7 +138,8 @@ public:
     Agent* setAgent(std::pair<int,int>,Agent*);
     Agent* killAgent(std::pair<int,int>);
     
-    
+    //helpers
+    bool init(void);
 
     //Rule Application
     int addRule(Action*);

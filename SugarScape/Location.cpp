@@ -11,29 +11,50 @@
 
 //constructors
 Location::Location(World *theWorld):
-    maxSugar(0),currentSugar(5),deadAgent(nullptr),
+    deadAgent(nullptr),newResident(nullptr),
     currentPollution(0),newPollution(0),done(false),
     newSugar(0),position(0,0),sim(theWorld)
 {
-    //empty
+    if (sim!=nullptr) {
+        maxSugar=sim->getRnd(sim->getInitialSugarMin(), sim->getInitialSugarMax());
+        currentSugar=sim->getRnd(sim->getInitialSugarMin(), maxSugar);
+    }else{
+        maxSugar=0;
+        currentSugar=0;
+    }
 }
+
 Location::Location(int x,int y):
-    maxSugar(0),currentSugar(0),done(false),
+    done(false),deadAgent(nullptr),newResident(nullptr),
     currentPollution(0),newPollution(0),
 newSugar(0),position(std::make_pair(x, y))
 {
-    //empty
+    if (sim!=nullptr) {
+        maxSugar=sim->getRnd(sim->getInitialSugarMin(), sim->getInitialSugarMax());
+        currentSugar=sim->getRnd(sim->getInitialSugarMin(), maxSugar);
+    }else{
+        maxSugar=0;
+        currentSugar=0;
+    }
 }
+
 //Destructor
-Location::~Location(){//remove agent pointers is any exist
+Location::~Location(){//remove agent pointers if any exist
     if (deadAgent!=nullptr) {
         delete deadAgent;
     }
-    if (currentResident!=nullptr) {
-        delete currentResident;
+    if (currentResident==newResident) {
+        if (currentResident!=nullptr) {
+            delete currentResident;
+        }
     }
-    if (newResident!=nullptr) {
-        delete newResident;
+    else {
+        if (currentResident!=nullptr) {
+            delete currentResident;
+        }
+        if (newResident!=nullptr) {
+            delete newResident;
+        }
     }
 }
 

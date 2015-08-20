@@ -12,6 +12,7 @@
 //Constructors
 Agent::Agent(World *s,Agent *dad, Agent *mum):amountEaten(0), done(false),
     father(dad),mother(mum),killed(false),
+    newSugar(0),
     theWorld(s),currentAge(0),
     cultureLength(s->getCultureCount()),immunityLength(s->getImmunityLength())
 {
@@ -24,7 +25,8 @@ Agent::Agent(World *s,Agent *dad, Agent *mum):amountEaten(0), done(false),
         currentCulture.push_back(true);
         newCulture.push_back(true);
     }
-
+    currentSugar=theWorld->getRnd(0, theWorld->getInitialSugarMax());
+    newSugar=currentSugar;
 }
 
 //getters

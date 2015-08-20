@@ -23,15 +23,27 @@ World::World(void)
     combatLimit(CombatLimit),immunityLength(ImmunityLength),pollutionRate(PollutionRate),
     childAmount(ChildAmount)
 {
+    rng.seed();
+    }
+
+//Destructor
+World::~World(){
+    delete [] Lattice;
+    
+}
+
+//helpers
+bool World::init(void)
+{
     //Create Locations in Lattice
     Lattice=new Location[size*size];
-//    for (int i=0; i<size; ++i) {
-//        Lattice[i]=new Location[size];
-//    }//for
     for (int i=0; i<size*size; ++i) {
-            Lattice[i].setWorld(this);
+        Lattice[i].setWorld(this);
+        Lattice[i].setPosition(std::pair<int,int>(i/size,i%size));
+        Lattice[i].setMaxSugar(getRnd(InitialSugarMin, InitialSugarMax));
+        Lattice[i].setSugar(getRnd(InitialSugarMin, Lattice[i].getMaxSugar()));
     }
-     rng.seed();
+    
     //create agents and put in lattice
     std::pair<int,int> pos;
     for (int i=0; i<size*size/4; ++i) {//quatar fill lattice
@@ -44,12 +56,7 @@ World::World(void)
         Lattice[pos.first*size+pos.second].setAgent(anAgent);
         population.push_back(anAgent);
     }
-}
 
-//Destructor
-World::~World(){
-    delete [] Lattice;
-    
 }
 
 

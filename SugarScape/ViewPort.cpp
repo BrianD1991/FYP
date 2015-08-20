@@ -81,7 +81,7 @@ bool ViewPort::draw(){
 
     // Display grid
         std::pair<int,int> pos;
-        Agent *theAgent;
+        Agent *theAgent=nullptr;
         for (int i=0; i<portDimension; ++i) {
             for (int k=0; k<portDimension; ++k) {
                 pos={i,k};
