@@ -12,20 +12,44 @@
 //Constructors
 Agent::Agent(World *s,Agent *dad, Agent *mum, std::pair<int,int> pos):amountEaten(0), done(false),
     father(dad),mother(mum),killed(false),newPosition(pos),currentPosition(pos),
-    theWorld(s),currentAge(0),vision(2),
+    theWorld(s),currentAge(0),newAge(1),vision(2),
     cultureLength(s->getCultureCount()),immunityLength(s->getImmunityLength())
 {
-    //TO DO!!
-    for (int i=0; i<immunityLength; ++i) {//FIX THIS XXXXXXXXX
-        currentImmunity.push_back(true);
-        newImmunity.push_back(true);
+    newSugar=currentSugar=theWorld->getRnd(0, theWorld->getInitialSugarMax());
+    maxAge=theWorld->getRnd(theWorld->getMinAge(), theWorld->getMaxAge());
+    currentMetabolism=newMetabolism=theWorld->getRnd(theWorld->getMinMetabolism(),theWorld->getMaxMetabolism());
+    cultureLength=theWorld->getCultureCount();
+    immunityLength=theWorld->getImmunityLength();
+    diseaseLength=theWorld->getDiseaseLength();
+    /*!< Create random immunity */
+    for (int i=0; i<immunityLength; ++i) {
+        bool aBit=false;
+        if (theWorld->getRnd(0, 10)>=5) {
+            aBit=true;
+        }
+        currentImmunity.push_back(aBit);
+        newImmunity.push_back(aBit);
     }
-    for (int i=0; i<cultureLength; ++i) {//FIX THIS XXXXXXXXX
-        currentCulture.push_back(true);
-        newCulture.push_back(true);
+    /*!< Create random culture */
+    for (int i=0; i<cultureLength; ++i) {
+        bool aBit=false;
+        if (theWorld->getRnd(0, 10)>=5) {
+            aBit=true;
+        }
+        currentCulture.push_back(aBit);
+        newCulture.push_back(aBit);
     }
-    currentSugar=theWorld->getRnd(0, theWorld->getInitialSugarMax());
-    newSugar=currentSugar;
+    /*!< Create random disease */
+    std::vector<bool> newDisease;
+    for (int i=0; i<diseaseLength; ++i) {
+        bool aBit=false;
+        if (theWorld->getRnd(0, 10)>=5) {
+            aBit=true;
+        }
+        newDisease.push_back(aBit);
+    }
+    currentDiseases.push_back(newDisease);
+    newDiseases.push_back(newDisease);
 }
 
 //getters
@@ -348,7 +372,7 @@ bool Agent::setTag(int index,bool value){
  */
 bool Agent::isDead(void)
 {
-    if (currentAge==maxAge || currentSugar==0) {
+    if (currentAge>=maxAge || currentSugar<=0) {
         return true;
     } else {
         return false;
@@ -405,7 +429,10 @@ int Agent::removeDeadLoans(void)
  */
 bool Agent::removeDeadMother(void)
 {
-    if (mother->isDead()) {
+    if (mother==nullptr) {
+        return true;
+    }
+    else if (mother->isDead()) {
         mother=nullptr;
         return true;
     }
@@ -420,7 +447,10 @@ bool Agent::removeDeadMother(void)
  */
 bool Agent::removeDeadFather(void)
 {
-    if (father->isDead()) {
+    if (father==nullptr) {
+        return true;
+    }
+    else if (father->isDead()) {
         father=nullptr;
         return true;
     }
@@ -499,7 +529,7 @@ bool Agent::removeKilledFather(void)
  */
 bool Agent::sync(void){
     currentPosition=newPosition;
-    currentSugar=newSugar;
+    currentSugar=newSugar-currentMetabolism;
     for (int i=0; i<cultureLength; ++i) {
         currentCulture[i]=newCulture[i];
     }

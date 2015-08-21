@@ -22,7 +22,7 @@
 ViewPort::ViewPort(sf::RenderWindow * theWindow, World * aWorld, std::pair<int,int> pix, std::pair<int,int> start,int dim):
     window(theWindow), theWorld(aWorld),pixelCount(pix),startPosition(start),portDimension(dim)
 {
-    int cellSize=pix.first/portDimension;
+    cellSize=pix.first/portDimension;
     int maxRadius=cellSize/2;
     AgentRepresentations = new sf::CircleShape[portDimension*portDimension];
     for (int i=0; i<portDimension*portDimension; ++i) {
@@ -89,11 +89,20 @@ bool ViewPort::draw(){
                 if (theWorld->getLocation(pos)->hasAgent()) {
                     theAgent=theWorld->getLocation(pos)->getAgent();
                     radius=theAgent->getSugar();
-                    AgentRepresentations[i*portDimension+k].setFillColor(sf::Color::Red);
+                    if (theAgent->getTribe()==affiliation::blue) {
+                        AgentRepresentations[i*portDimension+k].setFillColor(sf::Color::Blue);
+                    }
+                    else{
+                        AgentRepresentations[i*portDimension+k].setFillColor(sf::Color::Red);
+                    }
+                    
                 }
                 else{
                     radius=theWorld->getLocation(pos)->getSugar();
                     AgentRepresentations[i*portDimension+k].setFillColor(sf::Color::Green);
+                }
+                if (radius>cellSize/2) {
+                    radius=cellSize;
                 }
                 AgentRepresentations[i*portDimension+k].setRadius(radius);
                 window->draw(AgentRepresentations[i*portDimension+k]);

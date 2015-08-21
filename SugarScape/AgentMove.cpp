@@ -48,8 +48,14 @@ bool myCompare(Location *a, Location *b)
  */
 int AgentMove::pickIndex(std::vector<Location*> possibleDestinations)
 {
-    std::sort(possibleDestinations.begin(),possibleDestinations.end(),myCompare);
-    return 0;
+    int best=0;
+    for (int i=0; i<possibleDestinations.size(); ++i) {
+        if (myCompare(possibleDestinations[i], possibleDestinations[best])) {
+            best=i;
+        }
+    }
+    //std::sort(possibleDestinations.begin(),possibleDestinations.end(),myCompare);
+    return best;
 }
 
 

@@ -28,6 +28,10 @@
 #include "GarbageCollection.h"
 #include "AgentMove.h"
 #include "AgentCulture.h"
+#include "AgentDeath.h"
+#include "AgentDisease.h"
+#include "Diffusion.h"
+
 
 int main(int, char const**)
 {
@@ -47,12 +51,17 @@ int main(int, char const**)
     PollutionFormation pollForm(&theWorld);
     GarbageCollection gc(&theWorld);
     AgentCulture agentCulture(&theWorld);
+    AgentDeath agentDeath(&theWorld);
+    AgentDisease agentDisease(&theWorld);
+    Diffusion diffusion(&theWorld);
     theWorld.addRule(&agentCulture);
-    theWorld.addRule(&pollForm);
-    //theWorld.addRule(seasonalGrowback);
+    //theWorld.addRule(&pollForm);
+    //theWorld.addRule(&diffusion);
+    theWorld.addRule(seasonalGrowback);
     //theWorld.addRule(&gc);
     theWorld.addRule(move);
-
+    //theWorld.addRule(&agentDeath);
+    theWorld.addRule(&agentDisease);
     int stepCount=0;
     std::string counter;
 

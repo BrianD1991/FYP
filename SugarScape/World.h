@@ -23,7 +23,8 @@ class Action;
 
 class World{
     
-    static const int DIM=20;
+    static const int DIM=40;
+    static const int AGENTCOUNT=40;
     static const int CultureCount=20;
     static const int MaxAge=20;
     static const int MaxVision=6;
@@ -37,13 +38,14 @@ class World{
     static const int InitialSugarMax=10;
     static const int InitialSugarMin=5;
     static const int WinterRate=3;
-    static const int SeasonLength=5;
+    static const int SeasonLength=15;
     static const int Production=2;
     static const int Consumption=2;
     static const int CombatLimit=6;
     static const int ImmunityLength=30;
     static const int PollutionRate=2;
     static const int ChildAmount=4;
+    
     int step; /*!< Number of steps the simulation has run for */
     int size; /*!< Dimensions of lattice  a size*size matrix of locations*/
     int cultureCount;/*!< Length of bitstring containing culture information */

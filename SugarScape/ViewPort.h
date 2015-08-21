@@ -30,6 +30,7 @@ private:
     std::pair<int,int> startPosition;
     std::pair<int,int> pixelCount;
     int portDimension;
+    int cellSize;
     World *theWorld;
     sf::RenderWindow * window;
     sf::CircleShape *AgentRepresentations;
