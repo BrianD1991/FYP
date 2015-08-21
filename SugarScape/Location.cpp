@@ -13,7 +13,7 @@
 Location::Location(World *theWorld):
     deadAgent(nullptr),newResident(nullptr),
     currentPollution(0),newPollution(0),done(false),
-    newSugar(0),position(0,0),sim(theWorld)
+    newSugar(0),position(nullPosition),sim(theWorld)
 {
     if (sim!=nullptr) {
         maxSugar=sim->getRnd(sim->getInitialSugarMin(), sim->getInitialSugarMax());

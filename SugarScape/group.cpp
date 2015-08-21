@@ -70,7 +70,7 @@ Location *group::getPrimeMover(void)
  */
 int group::push_back(Location* location){
     members.push_back(location);
-    return ++size;
+    return members.size();
 }
 /**
  Attaches a rank to a group. Used for sorting groups by importance for collision resolution

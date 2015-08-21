@@ -16,10 +16,16 @@ WriteAction::~WriteAction(void){
 }
 bool WriteAction::run(int startX, int startY, int size){
     Location* Lattice=sim->getLattice();
-    
+    int remaining=0;
+    for (int i=0; i<size*size; ++i) {
+        if (Lattice[i].hasAgent()) {
+            ++remaining;
+        }
+    }
+    std::cout << "remaining is: " << remaining<< std::endl;
     std::vector<group*> proposedGroups, ExclusiveGroups;
     //calculate number of entities that need to take part in this actions
-    int remaining=participantCount(startX, startY, size);
+    remaining=participantCount(startX, startY, size);
     while (remaining>0) {//loop until all active participants are in groups
         //Part One: Form group proposals
         for (int i=startX; i<startX+size; ++i ) {
@@ -63,22 +69,24 @@ bool WriteAction::run(int startX, int startY, int size){
         executeAction(grp->getPrimeMover(),grp);
     }
     //update states
-    for(auto grp:ExclusiveGroups){
-        std::vector<Location*> members=grp->getMembers();
-        Location *primeMoverLocation=grp->getPrimeMover();
-        //update all group members --locations and resident agents (if any)
-        for(auto loc:members){
-            loc->sync();
-            if (loc->hasAgent()) {
-                loc->getAgent()->sync();
-            }
-        }
-        //update location of group "leader" and prime agent
-        primeMoverLocation->sync();
-        if (primeMoverLocation->hasAgent()) {
-            primeMoverLocation->getAgent()->sync();
-        }
-    }
+    sim->sync();
+    
+//    for(auto grp:ExclusiveGroups){
+//        std::vector<Location*> members=grp->getMembers();
+//        Location *primeMoverLocation=grp->getPrimeMover();
+//        //update all group members --locations and resident agents (if any)
+//        for(auto loc:members){
+//            loc->sync();
+//            if (loc->hasAgent()) {
+//                loc->getAgent()->sync();
+//            }
+//        }
+//        //update location of group "leader" and prime agent
+//        primeMoverLocation->sync();
+//        if (primeMoverLocation->hasAgent()) {
+//            primeMoverLocation->getAgent()->sync();
+//        }
+//    }
     
     return true;
     
@@ -116,13 +124,14 @@ bool WriteAction::concurrentRun(void){
 int WriteAction::participantCount(int startX, int startY, int dimSize)
 {
     int pcount=0;
-    for (int i=startX; i<startX+dimSize; ++startX) {
+    for (int i=startX; i<startX+dimSize; ++i) {
         for (int k=startY; k<startY+dimSize; ++k) {
-            if (sim->getAgent(std::pair<int,int>(i, k))!=nullptr) {
+            if (sim->getAgent(std::pair<int,int>(i, k)) != nullptr) {
                 ++pcount;
             }
         }
     }
+    std::cout <<pcount<<std::endl;
     return pcount;
 }
 
@@ -138,5 +147,5 @@ int WriteAction::participantCount(int startX, int startY, int dimSize)
  */
 int WriteAction::pickIndex(std::vector<Location*> possibleDestinations)
 {
-    return sim->getRnd(0,(int)possibleDestinations.size());//pick random location
+    return sim->getRnd(0,(int)possibleDestinations.size()-1);//pick random location
 }

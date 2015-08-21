@@ -10,10 +10,9 @@
 #include "Agent.h"
 
 //Constructors
-Agent::Agent(World *s,Agent *dad, Agent *mum):amountEaten(0), done(false),
-    father(dad),mother(mum),killed(false),
-    newSugar(0),
-    theWorld(s),currentAge(0),
+Agent::Agent(World *s,Agent *dad, Agent *mum, std::pair<int,int> pos):amountEaten(0), done(false),
+    father(dad),mother(mum),killed(false),newPosition(pos),currentPosition(pos),
+    theWorld(s),currentAge(0),vision(2),
     cultureLength(s->getCultureCount()),immunityLength(s->getImmunityLength())
 {
     //TO DO!!

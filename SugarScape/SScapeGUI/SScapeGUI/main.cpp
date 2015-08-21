@@ -20,12 +20,14 @@
 // Here is a small helper for you ! Have a look.
 #include "ResourcePath.hpp"
 
-
+#include "ViewPort.h"
 #include "World.h"
 #include "Growback.h"
 #include "SeasonalGrowback.h"
+#include "PollutionFormation.h"
+#include "GarbageCollection.h"
 #include "AgentMove.h"
-#include "ViewPort.h"
+#include "AgentCulture.h"
 
 int main(int, char const**)
 {
@@ -36,12 +38,20 @@ int main(int, char const**)
     // create everything
     World theWorld;
     theWorld.init();
-    ViewPort theGUI(&window,&theWorld,std::pair<int,int>(800,600),std::pair<int,int>(0,0),40);
+    theWorld.sync();
+    theWorld.sanityCeck();
+    ViewPort theGUI(&window,&theWorld,std::pair<int,int>(800,600),std::pair<int,int>(0,0),20);
     Action *growback= new Growback(&theWorld);
     Action *seasonalGrowback = new SeasonalGrowback(&theWorld);
     Action *move = new AgentMove(&theWorld);
-    theWorld.addRule(seasonalGrowback);
-    //theWorld.addRule(move);
+    PollutionFormation pollForm(&theWorld);
+    GarbageCollection gc(&theWorld);
+    AgentCulture agentCulture(&theWorld);
+    theWorld.addRule(&agentCulture);
+    theWorld.addRule(&pollForm);
+    //theWorld.addRule(seasonalGrowback);
+    //theWorld.addRule(&gc);
+    theWorld.addRule(move);
 
     int stepCount=0;
     std::string counter;
@@ -111,6 +121,9 @@ int main(int, char const**)
         window.display();
         counter = std::to_string(++stepCount);
         text.setString(counter);
+        sf::Time t1 = sf::seconds(0.1f);
+        sf::sleep(t1);
+        theWorld.sanityCeck();
     }
 
     //tidy up at end

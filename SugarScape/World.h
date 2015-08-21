@@ -23,7 +23,7 @@ class Action;
 
 class World{
     
-    static const int DIM=40;
+    static const int DIM=20;
     static const int CultureCount=20;
     static const int MaxAge=20;
     static const int MaxVision=6;
@@ -140,6 +140,9 @@ public:
     
     //helpers
     bool init(void);
+    int sync(void);
+    void sanityCeck(void);
+    int wrap(int);
 
     //Rule Application
     int addRule(Action*);

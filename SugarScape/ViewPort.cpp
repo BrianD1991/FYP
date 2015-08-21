@@ -89,17 +89,14 @@ bool ViewPort::draw(){
                 if (theWorld->getLocation(pos)->hasAgent()) {
                     theAgent=theWorld->getLocation(pos)->getAgent();
                     radius=theAgent->getSugar();
-                    AgentRepresentations[i*portDimension+k].setRadius(radius);
                     AgentRepresentations[i*portDimension+k].setFillColor(sf::Color::Red);
-                    window->draw(AgentRepresentations[i*portDimension+k]);
                 }
                 else{
                     radius=theWorld->getLocation(pos)->getSugar();
-                    AgentRepresentations[i*portDimension+k].setRadius(radius);
                     AgentRepresentations[i*portDimension+k].setFillColor(sf::Color::Green);
-                    window->draw(AgentRepresentations[i*portDimension+k]);
                 }
-                
+                AgentRepresentations[i*portDimension+k].setRadius(radius);
+                window->draw(AgentRepresentations[i*portDimension+k]);
             }
         }
     return true;
