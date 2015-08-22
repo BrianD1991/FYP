@@ -326,6 +326,7 @@
 					/Library/Frameworks/,
 					"$(inherited)",
 				);
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include/,
@@ -373,6 +374,7 @@
 					/Library/Frameworks/,
 					"$(inherited)",
 				);
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include/,
@@ -444,6 +446,7 @@
 				0867A2621B7B33E600A8D02F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

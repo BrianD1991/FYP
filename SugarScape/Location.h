@@ -64,6 +64,7 @@ public:
     Agent* killAgent(void);
     bool putOutGarbage(void);
     bool sync(void);
+    bool initAgent(Agent *);
 };
 
 #endif /* defined(__SugarScape__Location__) */

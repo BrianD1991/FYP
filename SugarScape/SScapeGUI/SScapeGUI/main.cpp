@@ -31,20 +31,20 @@
 #include "AgentDeath.h"
 #include "AgentDisease.h"
 #include "Diffusion.h"
-
+#include "AgentCombat.h"
 
 int main(int, char const**)
 {
     
     // Create the main window
-    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML window");
+    sf::RenderWindow window(sf::VideoMode(1024, 768), "SFML window");
     
     // create everything
     World theWorld;
     theWorld.init();
     theWorld.sync();
     theWorld.sanityCeck();
-    ViewPort theGUI(&window,&theWorld,std::pair<int,int>(800,600),std::pair<int,int>(0,0),20);
+    ViewPort theGUI(&window,&theWorld,std::pair<int,int>(1024, 768),std::pair<int,int>(0,0),theWorld.getSize());
     Action *growback= new Growback(&theWorld);
     Action *seasonalGrowback = new SeasonalGrowback(&theWorld);
     Action *move = new AgentMove(&theWorld);
@@ -54,14 +54,25 @@ int main(int, char const**)
     AgentDeath agentDeath(&theWorld);
     AgentDisease agentDisease(&theWorld);
     Diffusion diffusion(&theWorld);
-    theWorld.addRule(&agentCulture);
+    AgentCombat agentCombat(&theWorld);
+    
+    //!
+    /*!
+     Add the rules we are using here.
+     */
+    theWorld.addRule(growback);
+    //theWorld.addRule(seasonalGrowback);
     //theWorld.addRule(&pollForm);
     //theWorld.addRule(&diffusion);
-    theWorld.addRule(seasonalGrowback);
-    //theWorld.addRule(&gc);
+    
     theWorld.addRule(move);
-    //theWorld.addRule(&agentDeath);
+    //theWorld.addRule(&agentCombat);
+    
+    theWorld.addRule(&agentCulture);
     theWorld.addRule(&agentDisease);
+    
+    //theWorld.addRule(&agentDeath);
+    theWorld.addRule(&gc);
     int stepCount=0;
     std::string counter;
 
@@ -130,7 +141,7 @@ int main(int, char const**)
         window.display();
         counter = std::to_string(++stepCount);
         text.setString(counter);
-        sf::Time t1 = sf::seconds(0.1f);
+        sf::Time t1 = sf::seconds(1.1f);
         sf::sleep(t1);
         theWorld.sanityCeck();
     }

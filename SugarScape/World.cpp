@@ -53,7 +53,7 @@ bool World::init(void)
             pos.second=getRnd(0,size-1);
         } while (Lattice[pos.first*size+pos.second].hasAgent());
         anAgent=new Agent(this,nullptr,nullptr,pos);
-        Lattice[pos.first*size+pos.second].setAgent(anAgent);
+        Lattice[pos.first*size+pos.second].initAgent(anAgent);
         population.push_back(anAgent);
     }
 
@@ -67,17 +67,20 @@ int World::sync(void){
 }
 
 void World::sanityCeck(void){
-    for (int i=0; i<size*size; ++i) {
-        if (Lattice[i].hasAgent()){
-            std::cout << Lattice[i].getPosition().first << "," << Lattice[i].getPosition().second <<" ";
+    for (int i=0; i<size; ++i) {
+        for (int k=0; k<size; ++k) {
+            if (Lattice[i*size+k].hasAgent()){
+                std::cout << i << "," << k <<" ";
+            }
         }
+        
     }
     std::cout <<std::endl;
     for (int i=0; i<population.size(); ++i) {
-        if (population[i]->diseaseCount()>1){
-            std::cout << i << ":" <<population[i]->diseaseCount()<<std::endl;
-        }
-        //std::cout << population[i]->getPosition().first << "," << population[i]->getPosition().second << " ";
+//        if (population[i]->diseaseCount()>1){
+//            std::cout << i << ":" <<population[i]->diseaseCount()<<std::endl;
+//        }
+        std::cout << population[i]->getPosition().first << "," << population[i]->getPosition().second << " ";
     }
     std::cout <<std::endl;
 }
@@ -258,7 +261,7 @@ int World::getChildAmount(void){
     return childAmount;
 }
 Agent* World::getAgent(std::pair<int,int> pos){
-    return Lattice[(pos.first%size)*size+(pos.second%size)].getAgent();
+    return Lattice[wrap(pos.first)*size+wrap(pos.second)].getAgent();
 }
 
 
@@ -318,16 +321,16 @@ std::vector<Location*> World::getCombatNeighbourhood(std::pair<int,int> pos,int 
     std::vector<Location*> neighbourhood;
     for (int i=pos.first-range; i<=pos.first+range; ++i) {/*!< loop up to and including (<=) or else we lose last location */
         //pick location only if it !=identity (us) and is empty and is not marked done
-        if (i!=pos.first && Lattice[(i%size)*size+pos.second].isDone()==false) {
-            if (Lattice[(i%size)*size+pos.second].hasAgent()==false )
+        if (i!=pos.first && Lattice[wrap(i)*size+pos.second].isDone()==false) {
+            if (Lattice[wrap(i)*size+pos.second].hasAgent()==false )
             {
-                neighbourhood.push_back(&Lattice[(i%size)*size+pos.second]);
+                neighbourhood.push_back(&Lattice[wrap(i)*size+pos.second]);
             }else {
                 Agent *me=Lattice[pos.first*size+pos.second].getAgent();
-                Agent *other=Lattice[(i%size)*size+pos.second].getAgent();
+                Agent *other=Lattice[wrap(i)*size+pos.second].getAgent();
                 if (me->getTribe()!=other->getTribe() && me->getWealth()>other->getWealth())
                 {
-                    neighbourhood.push_back(&Lattice[(i%size)*size+pos.second]);
+                    neighbourhood.push_back(&Lattice[wrap(i)*size+pos.second]);
                 }
             }
             
@@ -336,16 +339,16 @@ std::vector<Location*> World::getCombatNeighbourhood(std::pair<int,int> pos,int 
     
     for (int i=pos.second-range; i<=pos.second+range; ++i) {/*!< loop up to and including (<=) or else we lose last location */
         //pick location only if it !=identity (us) and is empty and is not marked done
-        if (i!=pos.second && false==Lattice[pos.first*size+i%size].isDone())
+        if (i!=pos.second && false==Lattice[pos.first*size+wrap(i)].isDone())
         {
-            if (false==Lattice[pos.first*size+i%size].hasAgent()) {
-                neighbourhood.push_back(&Lattice[pos.first*size+i%size]);
+            if (false==Lattice[pos.first*size+wrap(i)].hasAgent()) {
+                neighbourhood.push_back(&Lattice[pos.first*size+wrap(i)]);
             }else {
                 Agent *me=Lattice[pos.first*size+pos.second].getAgent();
-                Agent *other=Lattice[pos.first*size+i%size].getAgent();
+                Agent *other=Lattice[pos.first*size+wrap(i)].getAgent();
                 if (me->getTribe()!=other->getTribe() && me->getWealth()>other->getWealth())
                 {
-                    neighbourhood.push_back(&Lattice[pos.first*size+i%size]);
+                    neighbourhood.push_back(&Lattice[pos.first*size+wrap(i)]);
                 }
             }
         }//if
@@ -386,7 +389,7 @@ Location* World::getLattice(void)
 }
 Location* World::getLocation(std::pair<int, int> pos)
 {
-    return &Lattice[(pos.first%size)*size+(pos.second%size)];
+    return &Lattice[wrap(pos.first)*size+wrap(pos.second)];
 }
 
 
@@ -481,7 +484,7 @@ int World::setChildAmount(int newChildAmount){
     return childAmount;
 }
 Agent* World::setAgent(std::pair<int,int> pos, Agent *newAgent){
-    return Lattice[(pos.first%size)*size+pos.second%size].setAgent(newAgent);
+    return Lattice[wrap(pos.first)*size+wrap(pos.second)].setAgent(newAgent);
 }
 Agent* World::killAgent(std::pair<int,int> pos)
 {

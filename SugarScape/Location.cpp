@@ -11,7 +11,7 @@
 
 //constructors
 Location::Location(World *theWorld):
-    deadAgent(nullptr),newResident(nullptr),
+    deadAgent(nullptr),newResident(nullptr),currentResident(nullptr),
     currentPollution(0),newPollution(0),done(false),
     newSugar(0),position(nullPosition),sim(theWorld)
 {
@@ -25,7 +25,7 @@ Location::Location(World *theWorld):
 }
 
 Location::Location(int x,int y):
-    done(false),deadAgent(nullptr),newResident(nullptr),
+    done(false),deadAgent(nullptr),newResident(nullptr),currentResident(nullptr),
     currentPollution(0),newPollution(0),
 newSugar(0),position(std::make_pair(x, y))
 {
@@ -188,6 +188,18 @@ bool Location::putOutGarbage(void)
         return false;
     }
 }
+
+/**
+ * initAgent Used to initialise a location with an agent. Use only when initialising locationd
+ * @param InitialAgent :Pointer to new agent
+ * @return true
+ * @exception none
+ */
+bool Location::initAgent(Agent * InitialAgent){
+    currentResident=newResident=InitialAgent;
+    return true;
+}
+
 
 bool Location::sync(void){
     done=false;

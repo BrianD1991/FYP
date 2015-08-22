@@ -22,12 +22,12 @@
 ViewPort::ViewPort(sf::RenderWindow * theWindow, World * aWorld, std::pair<int,int> pix, std::pair<int,int> start,int dim):
     window(theWindow), theWorld(aWorld),pixelCount(pix),startPosition(start),portDimension(dim)
 {
-    cellSize=pix.first/portDimension;
+    cellSize=pix.second/portDimension;
     int maxRadius=cellSize/2;
     AgentRepresentations = new sf::CircleShape[portDimension*portDimension];
     for (int i=0; i<portDimension*portDimension; ++i) {
             AgentRepresentations[i].setRadius(maxRadius);
-            AgentRepresentations[i].setFillColor(sf::Color::Red);
+            AgentRepresentations[i].setFillColor(sf::Color::Yellow);
             AgentRepresentations[i].setPosition((i/portDimension)*cellSize,(i%portDimension)*cellSize);
     }
 }
@@ -79,6 +79,7 @@ int                 ViewPort::getSize()
 /*!< Draw Method */
 bool ViewPort::draw(){
 
+    int agentCount=0;
     // Display grid
         std::pair<int,int> pos;
         Agent *theAgent=nullptr;
@@ -86,7 +87,9 @@ bool ViewPort::draw(){
             for (int k=0; k<portDimension; ++k) {
                 pos={i,k};
                 int radius=-1;
-                if (theWorld->getLocation(pos)->hasAgent()) {
+                Location *currLocation=theWorld->getLocation(pos);
+                if (currLocation->hasAgent()) {
+                    agentCount++;
                     theAgent=theWorld->getLocation(pos)->getAgent();
                     radius=theAgent->getSugar();
                     if (theAgent->getTribe()==affiliation::blue) {
@@ -102,12 +105,13 @@ bool ViewPort::draw(){
                     AgentRepresentations[i*portDimension+k].setFillColor(sf::Color::Green);
                 }
                 if (radius>cellSize/2) {
-                    radius=cellSize;
+                    radius=cellSize/2;
                 }
                 AgentRepresentations[i*portDimension+k].setRadius(radius);
                 window->draw(AgentRepresentations[i*portDimension+k]);
             }
         }
+    std::cout << "Painted Count is: " << agentCount <<std::endl;
     return true;
     
 }

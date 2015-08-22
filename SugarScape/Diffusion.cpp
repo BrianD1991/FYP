@@ -17,10 +17,10 @@ bool Diffusion::executeAction(Location *loc, group *){
     int size=sim->getSize();
     if (sim->getStep() % sim->getPollutionRate()==0) {
         Location* lattice=sim->getLattice();
-        int diffusedPollution= lattice[((loc->getX()+1)%size)*size+loc->getY()].getPollution()
-                            +lattice[((loc->getX()-1)%size)*size+loc->getY()].getPollution()
-                            +lattice[loc->getX()*size+(loc->getY()+1)%size].getPollution()
-                            +lattice[loc->getX()*size+(loc->getY()-1)%size].getPollution();
+        int diffusedPollution= lattice[sim->wrap(loc->getX()+1)*size+loc->getY()].getPollution()
+                            +lattice[sim->wrap(loc->getX()-1)*size+loc->getY()].getPollution()
+                            +lattice[loc->getX()*size+sim->wrap (loc->getY()+1)].getPollution()
+                            +lattice[loc->getX()*size+sim->wrap(loc->getY()-1)].getPollution();
         loc->setPollution(diffusedPollution/4);
         return true;
     }else{
