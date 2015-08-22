@@ -35,6 +35,7 @@ bool AgentCombat::executeAction(Location *loc, group *grp)
                 grp->getMembers()[0]->setSugar(0);/*!< sugar at location is consumed */
             }
             else{
+                std::cout <<"COMBAT!"<<std::endl;
                 //1. Update victorious agent resources
                 Agent *loser = grp->getMembers()[0]->getAgent();//only one member in group - the loser
                 winner->incSugar(grp->getMembers()[0]->getReward());//*WHAT IF WE ADD SPICE?*
@@ -79,8 +80,8 @@ int AgentCombat::pickIndex(std::vector<Location*> possibles,Agent *me)
     int strongestEnemy=0;
     for(auto loc:possibles){
         if (loc->hasAgent()) {
-            if (strongestEnemy<loc->getAgent()->getReward()) {
-                strongestEnemy=loc->getAgent()->getReward();
+            if (strongestEnemy < loc->getAgent()->getReward()) {
+                strongestEnemy = loc->getAgent()->getReward();
             }
         }
     }
@@ -101,7 +102,7 @@ int AgentCombat::pickIndex(std::vector<Location*> possibles,Agent *me)
 
 group* AgentCombat::formGroup(Location *loc)
 {
-    if (loc->hasAgent()) {/*!< Agent at this location */
+    if (loc->hasAgent() && loc->isDone()==false) {/*!< Agent at this location */
         group *ourChoice = nullptr;
         Agent* theAgent=loc->getAgent();
         std::vector<Location*> possibleLocations=sim->getCombatNeighbourhood(theAgent->getPosition(), theAgent->getVision());/*!< Find all possible destinations */
@@ -109,13 +110,18 @@ group* AgentCombat::formGroup(Location *loc)
         if (possibleLocations.size()!=0) {/*!< check to see if we can move anywhere */
             int index=pickIndex(possibleLocations, theAgent);
             if (index>-1) {//we have a winner -- form  a group
-                ourChoice->push_back(sim->getLocation(possibleLocations[index]->getPosition()));
+                ourChoice->push_back(possibleLocations[index]);
+                                     //sim->getLocation(possibleLocations[index]->getPosition()));
                 int rank=possibleLocations[index]->getPosition().first-theAgent->getPosition().first
                 +possibleLocations[index]->getPosition().second-theAgent->getPosition().second;
                 if (rank<0) rank =-rank;
                 ourChoice->setRank(rank);
                 ourChoice->setPrimeMover(loc);
-                ourChoice->setActiveParticipants(1);//one active participant per group - the agent moving
+                if (possibleLocations[index]->hasAgent()) {
+                    ourChoice->setActiveParticipants(2);/*!< have killed agent therefore two participants here */
+                }else{
+                    ourChoice->setActiveParticipants(1);//one active participant in group - the agent moving
+                }
             }
             else{/*!< cannot find anywhere safe to move so stay here */
 

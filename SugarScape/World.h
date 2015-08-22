@@ -23,8 +23,8 @@ class Action;
 
 class World{
     
-    static const int DIM=40;
-    static const int AGENTCOUNT=400;
+    static const int DIM=5;
+    static const int AGENTCOUNT=10;
     static const int CultureCount=20;
     static const int MaxAge=20;
     static const int MaxVision=6;

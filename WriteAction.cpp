@@ -22,11 +22,12 @@ bool WriteAction::run(int startX, int startY, int size){
             ++remaining;
         }
     }
-    std::cout << "remaining is: " << remaining<< std::endl;
-    std::vector<group*> proposedGroups, ExclusiveGroups;
+    //std::cout << "remaining is: " << remaining<< std::endl;
+    std::vector<group*>  ExclusiveGroups;
     //calculate number of entities that need to take part in this actions
     remaining=participantCount(startX, startY, size);
     while (remaining>0) {//loop until all active participants are in groups
+        std::vector<group*> proposedGroups;
         //Part One: Form group proposals
         for (int i=startX; i<startX+size; ++i ) {
             for (int k=startY; k<startY+size; ++k) {
@@ -62,12 +63,14 @@ bool WriteAction::run(int startX, int startY, int size){
                 }
                 remaining=remaining-grp->getActiveParticipants();//reduce number of entities left to place
             }
+            std::cout << remaining <<".";
         }
     }//While
     //Exclusive Groups all formed here. Apply actions
     for(auto grp:ExclusiveGroups){
         executeAction(grp->getPrimeMover(),grp);
     }
+    std::cout<<std::endl;
     //update states
     sim->sync();
     

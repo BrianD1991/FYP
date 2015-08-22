@@ -65,8 +65,8 @@ int main(int, char const**)
     //theWorld.addRule(&pollForm);
     //theWorld.addRule(&diffusion);
     
-    theWorld.addRule(move);
-    //theWorld.addRule(&agentCombat);
+    //theWorld.addRule(move);
+    theWorld.addRule(&agentCombat);
     
     theWorld.addRule(&agentCulture);
     theWorld.addRule(&agentDisease);

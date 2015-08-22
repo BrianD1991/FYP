@@ -492,13 +492,16 @@ int Agent::removeKilledLoans(void)
 }
 
 /**
- * Removed link to mother if father is dead
+ * Removed link to mother if mother is dead
  * @return true if mother was dead else false
  * @exception none
  */
 bool Agent::removeKilledMother(void)
 {
-    if (mother->isKilled()) {
+    if (mother==nullptr) {
+        return true;
+    }
+    else if (mother->isKilled()) {
         mother=nullptr;
         return true;
     }
@@ -513,7 +516,10 @@ bool Agent::removeKilledMother(void)
  */
 bool Agent::removeKilledFather(void)
 {
-    if (father->isKilled()) {
+    if (father==nullptr) {
+        return true;
+    }
+    else if (father->isKilled()) {
         father=nullptr;
         return true;
     }
