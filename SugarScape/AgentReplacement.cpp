@@ -37,8 +37,8 @@ bool AgentReplacement::executeAction(Location *loc, group *grp)
         if (theAgent->isDead()) {
             loc->setAgent(nullptr);/*!< remove from current location */
             grp->getMembers()[0]->setAgent(theAgent);/*!< add to new location */
-            //***********TO DO :update agent attributes to new ones**********
-            theAgent->setAge(0);
+            theAgent->reincarnate(grp->getMembers()[0]->getPosition());/*!<update agent attributes to new ones */
+            std::cout << "REPLACEMENT"<< loc->getPosition().first<<"," <<loc->getPosition().second << "->" <<grp->getMembers()[0]->getPosition().first <<grp->getMembers()[0]->getPosition().second <<std::endl;
         } else {/*!< agent not dead so remove all links to newly dead agents */
             for(auto ag:theAgent->getChildren())/*!< check for links to dead children and remove them */
             {
@@ -79,7 +79,7 @@ group* AgentReplacement::formGroup(Location *loc)
             if (freeSlots.size()==0) {/*!< spawn at current location */
                 grp->push_back(loc);
             } else { /*!< spawn at new random empty location */
-                int index=sim->getRnd(0, (int)freeSlots.size());
+                int index=sim->getRnd(0, (int)freeSlots.size()-1);
                 if (freeSlots[index]->isDone()) {//slot taken spawn in place
                     grp->push_back(loc);
                 } else{

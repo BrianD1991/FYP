@@ -206,5 +206,9 @@ bool Location::sync(void){
     currentPollution=newPollution;
     currentSugar=newSugar;
     currentResident=newResident;
+    if (deadAgent!=nullptr) {
+        delete deadAgent;
+        deadAgent=nullptr;
+    }
     return true;
 }

@@ -29,6 +29,7 @@ ViewPort::ViewPort(sf::RenderWindow * theWindow, World * aWorld, std::pair<int,i
             AgentRepresentations[i].setRadius(maxRadius);
             AgentRepresentations[i].setFillColor(sf::Color::Yellow);
             AgentRepresentations[i].setPosition((i/portDimension)*cellSize,(i%portDimension)*cellSize);
+            //AgentRepresentations[i].setOrigin(maxRadius, -maxRadius);
     }
 }
 ViewPort::~ViewPort(){

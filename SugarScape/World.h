@@ -23,12 +23,12 @@ class Action;
 
 class World{
     
-    static const int DIM=5;
-    static const int AGENTCOUNT=10;
+    static const int DIM=40;
+    static const int AGENTCOUNT=400;
     static const int CultureCount=20;
-    static const int MaxAge=20;
+    static const int MaxAge=60;
     static const int MaxVision=6;
-    static const int MaxMetabolism=5;
+    static const int MaxMetabolism=10;
     static const int MinAge=10;
     static const int MinMetabolism=1;
     static const int SugarGrowth=3;

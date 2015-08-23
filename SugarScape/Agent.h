@@ -120,6 +120,7 @@ public:
 
     //helpers
     Agent* initialise(World *sim=nullptr,Agent *dad=nullptr, Agent *mum=nullptr);
+    Agent* reincarnate(std::pair<int,int> pos);
     bool markDone(void);
     bool markKilled(void);
     affiliation getTribe(void);

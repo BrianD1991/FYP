@@ -52,6 +52,8 @@ Agent::Agent(World *s,Agent *dad, Agent *mum, std::pair<int,int> pos):amountEate
     newDiseases.push_back(newDisease);
 }
 
+
+
 //getters
 
 bool Agent::getAvail(int direction){
@@ -141,7 +143,8 @@ bool Agent::markNeighbour(int direction)
 
 
 std::pair<int, int> Agent::setPosition(std::pair<int, int> destination){
-    newPosition=destination;
+    newPosition.first=theWorld->wrap(destination.first);
+    newPosition.second=theWorld->wrap(destination.second);
     return newPosition;
 }
 Sex Agent::setSex(Sex newSex){
@@ -233,6 +236,52 @@ Agent* Agent::initialise(World *sim,Agent *dad, Agent *mum)
     return this;
 }
 
+Agent* Agent::reincarnate(std::pair<int,int> pos){
+    mother=father=nullptr;
+    killed=false;
+    newPosition=currentPosition=pos;
+    currentAge=0;
+    newAge=1;
+    vision=theWorld->getRnd(0, theWorld->getMaxVision());
+    cultureLength=theWorld->getCultureCount();
+    immunityLength=theWorld->getImmunityLength();
+    newSugar=currentSugar=theWorld->getRnd(0, theWorld->getInitialSugarMax());
+    maxAge=theWorld->getRnd(theWorld->getMinAge(), theWorld->getMaxAge());
+    currentMetabolism=newMetabolism=theWorld->getRnd(theWorld->getMinMetabolism(),theWorld->getMaxMetabolism());
+    cultureLength=theWorld->getCultureCount();
+    immunityLength=theWorld->getImmunityLength();
+    diseaseLength=theWorld->getDiseaseLength();
+    /*!< Create random immunity */
+    for (int i=0; i<immunityLength; ++i) {
+        bool aBit=false;
+        if (theWorld->getRnd(0, 10)>=5) {
+            aBit=true;
+        }
+        currentImmunity.push_back(aBit);
+        newImmunity.push_back(aBit);
+    }
+    /*!< Create random culture */
+    for (int i=0; i<cultureLength; ++i) {
+        bool aBit=false;
+        if (theWorld->getRnd(0, 10)>=5) {
+            aBit=true;
+        }
+        currentCulture.push_back(aBit);
+        newCulture.push_back(aBit);
+    }
+    /*!< Create random disease */
+    std::vector<bool> newDisease;
+    for (int i=0; i<diseaseLength; ++i) {
+        bool aBit=false;
+        if (theWorld->getRnd(0, 10)>=5) {
+            aBit=true;
+        }
+        newDisease.push_back(aBit);
+    }
+    currentDiseases.push_back(newDisease);
+    newDiseases.push_back(newDisease);
+    return this;
+}
 
 
 bool Agent::markDone(void){

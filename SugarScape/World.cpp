@@ -76,13 +76,6 @@ void World::sanityCeck(void){
         
     }
     std::cout <<std::endl;
-    for (int i=0; i<population.size(); ++i) {
-//        if (population[i]->diseaseCount()>1){
-//            std::cout << i << ":" <<population[i]->diseaseCount()<<std::endl;
-//        }
-        std::cout << population[i]->getPosition().first << "," << population[i]->getPosition().second << " ";
-    }
-    std::cout <<std::endl;
 }
 
 int World::wrap(int x){
@@ -319,6 +312,8 @@ std::vector<Location*> World::getEmptyNeighbourhood(std::pair<int,int> pos,int r
 std::vector<Location*> World::getCombatNeighbourhood(std::pair<int,int> pos,int range)
 {
     std::vector<Location*> neighbourhood;
+    Agent *me=Lattice[pos.first*size+pos.second].getAgent();
+    Agent *other=nullptr;
     for (int i=pos.first-range; i<=pos.first+range; ++i) {/*!< loop up to and including (<=) or else we lose last location */
         //pick location only if it !=identity (us) and is empty and is not marked done
         if (i!=pos.first && Lattice[wrap(i)*size+pos.second].isDone()==false) {
@@ -326,8 +321,7 @@ std::vector<Location*> World::getCombatNeighbourhood(std::pair<int,int> pos,int 
             {
                 neighbourhood.push_back(&Lattice[wrap(i)*size+pos.second]);
             }else {
-                Agent *me=Lattice[pos.first*size+pos.second].getAgent();
-                Agent *other=Lattice[wrap(i)*size+pos.second].getAgent();
+                other=Lattice[wrap(i)*size+pos.second].getAgent();
                 if (me->getTribe()!=other->getTribe() && me->getWealth()>other->getWealth())
                 {
                     neighbourhood.push_back(&Lattice[wrap(i)*size+pos.second]);
@@ -344,8 +338,7 @@ std::vector<Location*> World::getCombatNeighbourhood(std::pair<int,int> pos,int 
             if (false==Lattice[pos.first*size+wrap(i)].hasAgent()) {
                 neighbourhood.push_back(&Lattice[pos.first*size+wrap(i)]);
             }else {
-                Agent *me=Lattice[pos.first*size+pos.second].getAgent();
-                Agent *other=Lattice[pos.first*size+wrap(i)].getAgent();
+                other=Lattice[pos.first*size+wrap(i)].getAgent();
                 if (me->getTribe()!=other->getTribe() && me->getWealth()>other->getWealth())
                 {
                     neighbourhood.push_back(&Lattice[pos.first*size+wrap(i)]);

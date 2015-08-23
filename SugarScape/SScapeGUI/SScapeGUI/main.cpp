@@ -32,6 +32,7 @@
 #include "AgentDisease.h"
 #include "Diffusion.h"
 #include "AgentCombat.h"
+#include "AgentReplacement.h"
 
 int main(int, char const**)
 {
@@ -55,6 +56,7 @@ int main(int, char const**)
     AgentDisease agentDisease(&theWorld);
     Diffusion diffusion(&theWorld);
     AgentCombat agentCombat(&theWorld);
+    AgentReplacement agentReplacement(&theWorld);
     
     //!
     /*!
@@ -62,17 +64,17 @@ int main(int, char const**)
      */
     theWorld.addRule(growback);
     //theWorld.addRule(seasonalGrowback);
-    //theWorld.addRule(&pollForm);
-    //theWorld.addRule(&diffusion);
+    theWorld.addRule(&pollForm);
+    theWorld.addRule(&diffusion);
     
     //theWorld.addRule(move);
-    theWorld.addRule(&agentCombat);
+    //theWorld.addRule(&agentCombat);
     
     theWorld.addRule(&agentCulture);
     theWorld.addRule(&agentDisease);
-    
-    //theWorld.addRule(&agentDeath);
-    theWorld.addRule(&gc);
+    //theWorld.addRule(&agentReplacement);
+    theWorld.addRule(&agentDeath);
+    //theWorld.addRule(&gc);
     int stepCount=0;
     std::string counter;
 
@@ -143,7 +145,7 @@ int main(int, char const**)
         text.setString(counter);
         sf::Time t1 = sf::seconds(1.1f);
         sf::sleep(t1);
-        theWorld.sanityCeck();
+        //theWorld.sanityCeck();
     }
 
     //tidy up at end
