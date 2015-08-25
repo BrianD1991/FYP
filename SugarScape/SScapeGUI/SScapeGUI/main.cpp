@@ -35,32 +35,13 @@
 #include "Diffusion.h"
 #include "AgentCombat.h"
 #include "AgentReplacement.h"
-void testClock(void){
-    std::cout << "system_clock" << std::endl;
-    std::cout << chrono::system_clock::period::num << std::endl;
-    std::cout << chrono::system_clock::period::den << std::endl;
-    std::cout << "steady = " << std::boolalpha << chrono::system_clock::is_steady << std::endl << std::endl;
-    std::cout << "high_resolution_clock" << endl;
-    std::cout << chrono::high_resolution_clock::period::num << std::endl;
-    std::cout << chrono::high_resolution_clock::period::den << std::endl;
-    std::cout << "steady = " << std::boolalpha << chrono::high_resolution_clock::is_steady << std::endl << std::endl;
-    std::cout << "steady_clock" << std::endl;
-    std::cout << chrono::steady_clock::period::num << std::endl;
-    std::cout << chrono::steady_clock::period::den << std::endl;
-    std::cout << "steady = " << std::boolalpha << chrono::steady_clock::is_steady << std::endl << std::endl;
-   auto start = chrono::steady_clock::now();
-    auto end = chrono::steady_clock::now();
-    auto diff = end - start;
-    cout << chrono::duration <double, milli> (diff).count() << " ms" << endl;
-    cout << chrono::duration <double, nano> (diff).count() << " ns" << endl;
-    return 0;
-}
 
-bool benchmark(int stepCount, int dimStart, int increment, int runs, std::string fileName){
-    ofstream outputFile(fileName);
+
+int benchmark(int stepCount, int dimStart, int increment, int runs, std::string fileName){
+    std::ofstream outputFile(fileName);
     for (int i=0; i<runs; ++i) {
         // create everything
-        World theWorld;
+        World theWorld(dimStart+i*increment);
         theWorld.init();
         theWorld.sync();
         theWorld.sanityCeck();
@@ -95,18 +76,19 @@ bool benchmark(int stepCount, int dimStart, int increment, int runs, std::string
         //theWorld.addRule(&gc);
 
         int dimSize=dimStart+i*increment;
-        auto start = chrono::steady_clock::now();
+        auto start = std::chrono::steady_clock::now();
         for (int k=0; k<stepCount; ++k) {
             //step
             theWorld.applyRules();
         }
-        auto end = chrono::steady_clock::now();
+        auto end = std::chrono::steady_clock::now();
         auto diff = end - start;
-        std::cout << chrono::duration <double, milli> (diff).count() << " ms ";
-        std::cout  << chrono::duration <double, nano> (diff).count() << " ns" << endl;
-        outputFile  << chrono::duration <double, milli> (diff).count() << " ms ";
-        outputFile  << chrono::duration <double, nano> (diff).count() << " ns" << endl;
+        std::cout << std::chrono::duration <double, std::milli> (diff).count() << " ms ";
+        std::cout  << std::chrono::duration <double, std::nano> (diff).count() << " ns" << std::endl;
+        outputFile  << std::chrono::duration <double, std::milli> (diff).count() << " ms ";
+        outputFile  << std::chrono::duration <double, std::nano> (diff).count() << " ns" << std::endl;
     }
+    return 0;
 }
 
 int main(int, char const**)
@@ -116,7 +98,7 @@ int main(int, char const**)
     sf::RenderWindow window(sf::VideoMode(1024, 768), "SFML window");
     
     // create everything
-    World theWorld;
+    World theWorld(10);
     theWorld.init();
     theWorld.sync();
     theWorld.sanityCeck();
@@ -142,13 +124,13 @@ int main(int, char const**)
     theWorld.addRule(&pollForm);
     theWorld.addRule(&diffusion);
     
-    //theWorld.addRule(move);
+    theWorld.addRule(move);
     //theWorld.addRule(&agentCombat);
     
     theWorld.addRule(&agentCulture);
     theWorld.addRule(&agentDisease);
     //theWorld.addRule(&agentReplacement);
-    theWorld.addRule(&agentDeath);
+    //theWorld.addRule(&agentDeath);
     //theWorld.addRule(&gc);
     int stepCount=0;
     std::string counter;

@@ -22,7 +22,6 @@ bool WriteAction::run(int startX, int startY, int size){
             ++remaining;
         }
     }
-    std::cout << "remaining is: " << remaining<< std::endl;
     std::vector<group*>  ExclusiveGroups;
     //calculate number of entities that need to take part in this actions
     remaining=participantCount(startX, startY, size);

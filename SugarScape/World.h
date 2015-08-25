@@ -45,6 +45,7 @@ class World{
     static const int ImmunityLength=30;
     static const int PollutionRate=2;
     static const int ChildAmount=4;
+    static const int DiseaseLength=5;
     
     int step; /*!< Number of steps the simulation has run for */
     int size; /*!< Dimensions of lattice  a size*size matrix of locations*/
@@ -66,6 +67,7 @@ class World{
     int initialPopulationSize; /*!< Starting population size */
     int pollutionRate; /*!< Number of timeperiods that pass between each diffusion of pollution */
     int childAmount;
+    int initialPopulation;
     
     Location *Lattice; /*!< 2D (size by size) Matrix of locations in world  */
     std::vector<Agent*> population; /*!< Agents in simulation */
@@ -77,7 +79,7 @@ class World{
     
 public:
     //Constructor and Destructor
-    World(void);
+    World(int dimensionSize=0);
     ~World();
     
     
@@ -145,6 +147,7 @@ public:
     int sync(void);
     void sanityCeck(void);
     int wrap(int);
+    int getAgentCount(void);
 
     //Rule Application
     int addRule(Action*);

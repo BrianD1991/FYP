@@ -12,7 +12,6 @@
 		089A0C551B30447500C17F80 /* AgentDeath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 089A0C531B30447500C17F80 /* AgentDeath.cpp */; };
 		089A0C581B30ABF000C17F80 /* GarbageCollection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 089A0C561B30ABF000C17F80 /* GarbageCollection.cpp */; };
 		08CED8A91B28C8DA00510CA6 /* AgentBasicMove.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08CED8A71B28C8DA00510CA6 /* AgentBasicMove.cpp */; };
-		7C6A7F0C1B25D9DB000AE96D /* ViewPort.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C6A7F0A1B25D9DB000AE96D /* ViewPort.cpp */; };
 		7C6A7F0F1B25E62C000AE96D /* Inheritance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C6A7F0D1B25E62C000AE96D /* Inheritance.cpp */; };
 		7C79878A1B022C96003A4AE5 /* Diffusion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C7987881B022C96003A4AE5 /* Diffusion.cpp */; };
 		7C79878D1B023775003A4AE5 /* PollutionFormation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C79878B1B023775003A4AE5 /* PollutionFormation.cpp */; };
@@ -69,8 +68,6 @@
 		089A0C571B30ABF000C17F80 /* GarbageCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GarbageCollection.h; sourceTree = "<group>"; };
 		08CED8A71B28C8DA00510CA6 /* AgentBasicMove.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AgentBasicMove.cpp; sourceTree = "<group>"; };
 		08CED8A81B28C8DA00510CA6 /* AgentBasicMove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentBasicMove.h; sourceTree = "<group>"; };
-		7C6A7F0A1B25D9DB000AE96D /* ViewPort.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ViewPort.cpp; sourceTree = "<group>"; };
-		7C6A7F0B1B25D9DB000AE96D /* ViewPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewPort.h; sourceTree = "<group>"; };
 		7C6A7F0D1B25E62C000AE96D /* Inheritance.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Inheritance.cpp; sourceTree = "<group>"; };
 		7C6A7F0E1B25E62C000AE96D /* Inheritance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Inheritance.h; sourceTree = "<group>"; };
 		7C7987881B022C96003A4AE5 /* Diffusion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Diffusion.cpp; sourceTree = "<group>"; };
@@ -185,8 +182,6 @@
 				D8D994401AEF874500F248C7 /* World.h */,
 				D8D994421AEF8BE300F248C7 /* Action.cpp */,
 				D8D994431AEF8BE300F248C7 /* Action.h */,
-				7C6A7F0A1B25D9DB000AE96D /* ViewPort.cpp */,
-				7C6A7F0B1B25D9DB000AE96D /* ViewPort.h */,
 				7C6A7F0D1B25E62C000AE96D /* Inheritance.cpp */,
 				08CED8A71B28C8DA00510CA6 /* AgentBasicMove.cpp */,
 				D8F15FF51B57D43A007E4E7D /* AgentCombat.cpp */,
@@ -289,7 +284,6 @@
 				D89726AA1AEBD28B005664BF /* main.cpp in Sources */,
 				089A0C581B30ABF000C17F80 /* GarbageCollection.cpp in Sources */,
 				089A0C551B30447500C17F80 /* AgentDeath.cpp in Sources */,
-				7C6A7F0C1B25D9DB000AE96D /* ViewPort.cpp in Sources */,
 				D8D994441AEF8BE300F248C7 /* Action.cpp in Sources */,
 				D82B992E1AFA59B3009AB362 /* IndependentAction.cpp in Sources */,
 			);

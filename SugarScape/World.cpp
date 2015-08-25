@@ -13,7 +13,7 @@
 
 
 //Constructor
-World::World(void)
+World::World(int dimensionSize)
     :size(DIM),step(0),cultureCount(CultureCount),
     maxAge(MaxAge),maxVision(MaxVision),maxMetabolism(MaxMetabolism),
     minAge(MinAge),minMetabolism(MinMetabolism),sugarGrowth(SugarGrowth),
@@ -21,8 +21,12 @@ World::World(void)
     initialSugarMax(InitialSugarMax),initialSugarMin(InitialSugarMin),winterRate(WinterRate),
     seasonLength(SeasonLength),production(Production),consumption(Consumption),
     combatLimit(CombatLimit),immunityLength(ImmunityLength),pollutionRate(PollutionRate),
-    childAmount(ChildAmount),diseaseLength(5)
+    childAmount(ChildAmount),diseaseLength(DiseaseLength),initialPopulation(AGENTCOUNT)
 {
+    if (dimensionSize>0) {
+        size=dimensionSize;
+        initialPopulation=size*size/4;
+    }
     rng.seed();
     }
 
@@ -46,7 +50,7 @@ bool World::init(void)
     
     //create agents and put in lattice
     std::pair<int,int> pos;
-    for (int i=0; i<AGENTCOUNT; ++i) {//quatar fill lattice
+    for (int i=0; i<initialPopulation; ++i) {//quatar fill lattice
         Agent *anAgent= nullptr;
         do {
             pos.first=getRnd(0, size-1);
@@ -90,7 +94,18 @@ int World::wrap(int x){
     }
 }
 
-
+int World::getAgentCount(void){
+    int count=0;
+    for (int i=0; i<size; ++i) {
+        for (int k=0; k<size; ++k) {
+            if (Lattice[i*size+k].hasAgent()){
+                ++count;
+            }
+        }
+        
+    }
+    return count;
+}
 
 //*************************Getters*************************
 
