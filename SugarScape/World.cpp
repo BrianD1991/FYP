@@ -56,7 +56,7 @@ bool World::init(void)
         Lattice[pos.first*size+pos.second].initAgent(anAgent);
         population.push_back(anAgent);
     }
-
+    return true;
 }
 
 int World::sync(void){
@@ -64,6 +64,7 @@ int World::sync(void){
         Lattice[i].sync();
         if (Lattice[i].hasAgent()) Lattice[i].getAgent()->sync();
     }
+    return 0;
 }
 
 void World::sanityCeck(void){
@@ -283,7 +284,7 @@ std::vector<Location*> World::getNeighbourhood(std::pair<int,int> pos,int range)
 std::vector<Location*> World::getEmptyNeighbourhood(std::pair<int,int> pos,int range)
 {
     std::vector<Location*> neighbourhood;
-    Location *loc=&Lattice[pos.first*size+pos.second];
+    Location *loc=nullptr; //&Lattice[pos.first*size+pos.second];
     for (int i=pos.first-range; i<=pos.first+range; ++i) {/*!< loop up to and including (<=) or else we lose last location */
         //std::cout << i <<"," << pos.second << "=" << wrap(i) << "*"<<wrap(pos.second) << "*" << wrap(i)*size+wrap(pos.second) << std::endl;
         //pick location only if it !=identity (us) and is empty and is not marked done
