@@ -18,7 +18,7 @@
 #include <SFML/Graphics.hpp>
 #include <chrono>
 #include <iostream>
-
+#include <fstream>
 // Here is a small helper for you ! Have a look.
 #include "ResourcePath.hpp"
 
@@ -57,6 +57,7 @@ void testClock(void){
 }
 
 bool benchmark(int stepCount, int dimStart, int increment, int runs, std::string fileName){
+    ofstream outputFile(fileName);
     for (int i=0; i<runs; ++i) {
         // create everything
         World theWorld;
@@ -101,8 +102,10 @@ bool benchmark(int stepCount, int dimStart, int increment, int runs, std::string
         }
         auto end = chrono::steady_clock::now();
         auto diff = end - start;
-        cout << chrono::duration <double, milli> (diff).count() << " ms ";
-        cout << chrono::duration <double, nano> (diff).count() << " ns" << endl;
+        std::cout << chrono::duration <double, milli> (diff).count() << " ms ";
+        std::cout  << chrono::duration <double, nano> (diff).count() << " ns" << endl;
+        outputFile  << chrono::duration <double, milli> (diff).count() << " ms ";
+        outputFile  << chrono::duration <double, nano> (diff).count() << " ns" << endl;
     }
 }
 
