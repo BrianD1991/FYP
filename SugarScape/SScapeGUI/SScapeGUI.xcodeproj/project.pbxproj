@@ -36,6 +36,7 @@
 		0867A2A91B7B35B200A8D02F /* IndependentAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0867A2A71B7B35B200A8D02F /* IndependentAction.cpp */; };
 		0867A2AC1B7B35BE00A8D02F /* ReadAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0867A2AA1B7B35BE00A8D02F /* ReadAction.cpp */; };
 		0867A2AF1B7B35CE00A8D02F /* WriteAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0867A2AD1B7B35CE00A8D02F /* WriteAction.cpp */; };
+		08AD16F81B8E64BE009FBF06 /* AgentMetabolism.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08AD16F61B8E64BE009FBF06 /* AgentMetabolism.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +95,8 @@
 		0867A2AB1B7B35BE00A8D02F /* ReadAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReadAction.h; path = ../../../ReadAction.h; sourceTree = "<group>"; };
 		0867A2AD1B7B35CE00A8D02F /* WriteAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WriteAction.cpp; path = ../../../WriteAction.cpp; sourceTree = "<group>"; };
 		0867A2AE1B7B35CE00A8D02F /* WriteAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WriteAction.h; path = ../../../WriteAction.h; sourceTree = "<group>"; };
+		08AD16F61B8E64BE009FBF06 /* AgentMetabolism.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AgentMetabolism.cpp; path = ../../AgentMetabolism.cpp; sourceTree = "<group>"; };
+		08AD16F71B8E64BE009FBF06 /* AgentMetabolism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AgentMetabolism.h; path = ../../AgentMetabolism.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +178,8 @@
 				0867A2501B7B33E600A8D02F /* ResourcePath.mm */,
 				0867A2521B7B33E600A8D02F /* ResourcePath.hpp */,
 				0867A2531B7B33E600A8D02F /* main.cpp */,
+				08AD16F61B8E64BE009FBF06 /* AgentMetabolism.cpp */,
+				08AD16F71B8E64BE009FBF06 /* AgentMetabolism.h */,
 				0867A2551B7B33E600A8D02F /* Resources */,
 				0867A24E1B7B33E600A8D02F /* Supporting Files */,
 			);
@@ -286,6 +291,7 @@
 				0867A2541B7B33E600A8D02F /* main.cpp in Sources */,
 				0867A2A91B7B35B200A8D02F /* IndependentAction.cpp in Sources */,
 				0867A2991B7B358200A8D02F /* GarbageCollection.cpp in Sources */,
+				08AD16F81B8E64BE009FBF06 /* AgentMetabolism.cpp in Sources */,
 				0867A2921B7B358200A8D02F /* AgentCulture.cpp in Sources */,
 				0867A2941B7B358200A8D02F /* AgentDisease.cpp in Sources */,
 				0867A2981B7B358200A8D02F /* Diffusion.cpp in Sources */,

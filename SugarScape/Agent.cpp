@@ -644,8 +644,8 @@ bool Agent::makeUnavailable(void){
  */
 bool Agent::sync(void){
     currentPosition=newPosition;
-    currentSugar=newSugar-currentMetabolism;
-    currentSpice=newSpice-currentSpiceMetabolism;
+    currentSugar=newSugar;
+    currentSpice=newSpice;
     for (int i=0; i<cultureLength; ++i) {
         currentCulture[i]=newCulture[i];
     }
@@ -656,7 +656,6 @@ bool Agent::sync(void){
     currentLoansOwed=newLoansOwed;
     currentLoansOwing=newLoansOwing;
     currentDiseases=newDiseases;
-    currentAge = newAge++;
     done=false;
     killed = false;
     return true;

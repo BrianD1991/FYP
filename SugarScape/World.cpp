@@ -76,10 +76,18 @@ void World::sanityCeck(void){
     for (int i=0; i<size; ++i) {
         for (int k=0; k<size; ++k) {
             if (Lattice[i*size+k].hasAgent()){
-                std::cout << i << "," << k <<" ";
+                std::cout << Lattice[i*size+k].getAgent()->getMetabolism()<<","<<Lattice[i*size+k].getAgent()->getSugar()<< ","
+                <<Lattice[i*size+k].getAgent()->getAge() << ","<< Lattice[i*size+k].getAgent()->getMaxAge() <<std::endl;;
             }
         }
         
+    }
+    std::cout <<std::endl;
+    for (int i=0; i<size; ++i) {
+        for (int k=0; k<size; ++k) {
+            std::cout << Lattice[i*size+k].getSugar()<<" , ";
+        }
+        std::cout << std::endl;
     }
     std::cout <<std::endl;
 }

@@ -36,7 +36,7 @@
 #include "AgentCombat.h"
 #include "AgentReplacement.h"
 #include "AgentMating.h"
-
+#include "AgentMetabolism.h"
 
 int benchmark(int stepCount, int dimStart, int increment, int runs, std::string fileName){
     std::ofstream outputFile(fileName);
@@ -57,24 +57,25 @@ int benchmark(int stepCount, int dimStart, int increment, int runs, std::string 
         Diffusion diffusion(&theWorld);
         AgentCombat agentCombat(&theWorld);
         AgentReplacement agentReplacement(&theWorld);
+        AgentMetabolism agentMetabolism(&theWorld);
         
         //!
         /*!
          Add the rules we are using here.
          */
-        theWorld.addRule(&growback);
+        //theWorld.addRule(&growback);
         //theWorld.addRule(&seasonalGrowback);
-        theWorld.addRule(&pollForm);
-        theWorld.addRule(&diffusion);
+        //theWorld.addRule(&pollForm);
+        //theWorld.addRule(&diffusion);
         
         //theWorld.addRule(&move);
         //theWorld.addRule(&agentCombat);
         
-        theWorld.addRule(&agentCulture);
-        theWorld.addRule(&agentDisease);
+        //theWorld.addRule(&agentCulture);
+        //theWorld.addRule(&agentDisease);
         //theWorld.addRule(&agentReplacement);
         theWorld.addRule(&agentDeath);
-        //theWorld.addRule(&gc);
+        theWorld.addRule(&agentMetabolism);
 
         int dimSize=dimStart+i*increment;
         auto start = std::chrono::steady_clock::now();
@@ -99,7 +100,7 @@ int main(int, char const**)
     sf::RenderWindow window(sf::VideoMode(1024, 768), "SFML window");
     
     // create everything
-    World theWorld(10);
+    World theWorld(5);
     theWorld.init();
     theWorld.sync();
     theWorld.sanityCeck();
@@ -116,6 +117,7 @@ int main(int, char const**)
     AgentCombat agentCombat(&theWorld);
     AgentReplacement agentReplacement(&theWorld);
     AgentMating agentMating(&theWorld);
+    AgentMetabolism agentMetabolism(&theWorld);
     
     //!
     /*!
@@ -129,11 +131,11 @@ int main(int, char const**)
     theWorld.addRule(move);
     theWorld.addRule(&agentMating);
     //theWorld.addRule(&agentCombat);
-    
     //theWorld.addRule(&agentCulture);
     //theWorld.addRule(&agentDisease);
     //theWorld.addRule(&agentReplacement);
-    //theWorld.addRule(&agentDeath);
+    theWorld.addRule(&agentMetabolism);
+    theWorld.addRule(&agentDeath);
     //theWorld.addRule(&gc);
     int stepCount=0;
     std::string counter;
@@ -205,7 +207,7 @@ int main(int, char const**)
         text.setString(counter);
         sf::Time t1 = sf::seconds(1.1f);
         sf::sleep(t1);
-        //theWorld.sanityCeck();
+        theWorld.sanityCeck();
     }
 
     //tidy up at end

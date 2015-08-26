@@ -38,15 +38,7 @@ bool IndependentAction::run(int startX, int startY, int size){
             executeAction(&Lattice[i*size+k],nullptr);
         }
     }
-    //Update everyone
-    for (int i=startX; i<startX+size; ++i) {
-        for (int k=startY; k<startY+size; ++k) {
-            Lattice[i*size+k].sync();
-            if (Lattice[i*size+k].hasAgent()) {
-                Lattice[i*size+k].getAgent()->sync();
-            }
-        }
-    }
+    sim->sync();
     return true;
 
 }
