@@ -15,9 +15,51 @@ AgentMating::AgentMating(World *sim)
     //our work is done
 }
 
+bool AgentMating::run(int startX, int startY, int size)
+{
+    int participants=participantCount(startX, startY, size);
+    while (participants>0) {
+        WriteAction::run(startX, startY, size);
+        participants=participantCount(startX, startY, size);
+    }
+    sim->resetNeighbours();
+    return true;
+}
+
+
 bool AgentMating::executeAction(Location *loc, group *grp)
 {
-    return false;
+    if (loc->hasAgent()) {
+        Agent* theMale=loc->getAgent();
+        if (grp->getMembers().size()==2) {
+            std::pair<int,int> newPosition=grp->getMembers()[1]->getPosition();/*!< second in group is empty location */
+            Agent *theFemale=grp->getMembers()[0]->getAgent();/*!< first in group is female agent*/
+            Agent *offSpring= new Agent(sim,theMale,theFemale,newPosition);
+            sim->setAgent(newPosition, offSpring);/*!< Put offspring in empty location */
+            offSpring->incSugar(grp->getMembers()[1]->getSugar());/*!< eat sugar at new location */
+            offSpring->makeUnavailable();
+            grp->getMembers()[1]->setSugar(0);/*!< sugar at new location now consumed */
+            
+            if (loc->getCardinal(0)->getAgent()==theFemale) {
+                theMale->markNeighbour(0);
+            } else if(loc->getCardinal(1)->getAgent()==theFemale){
+                theMale->markNeighbour(1);
+            } else if (loc->getCardinal(2)->getAgent()==theFemale){
+                theMale->markNeighbour(2);
+            }else if (loc->getCardinal(3)->getAgent()==theFemale){
+                theMale->markNeighbour(3);
+            }else{
+                std::cerr <<"MATING CANNOT FIND FEMALE"<<std::endl;
+            }
+            return true;
+        }else{
+            return false;/*!< group has no female or no location so no matting here */
+        }
+    }else{
+        std::cerr << "exectued mating on location with no agent! " << std::endl;
+        return false;/*!< no agent present so do nothing */
+    }
+
 }
 
 
@@ -53,12 +95,12 @@ group* AgentMating::formGroup(Location *loc)
             if (mate==nullptr) {/*!< no mate available return empty group */
                 return grp;
             }
-            std::vector<Location*> destinations=sim->getEmptyNeighbourhood(loc->getPosition(),1);/*!< get empty locations for offspring */
-            std::vector<Location*> moreDestinations=sim->getEmptyNeighbourhood(loc->getPosition(),1);/*!< get more empty locations for offspring */
+            std::vector<Location*> destinations=sim->getEmptyNeighbourhood(me->getPosition(),1);/*!< get empty locations around me for offspring */
+            std::vector<Location*> moreDestinations=sim->getEmptyNeighbourhood(mate->getPosition(),1);/*!< get more empty locations around mate for offspring */
             destinations.insert(destinations.end(),moreDestinations.begin(),moreDestinations.end());/*!< combine location vectors */
             for (auto it = destinations.begin(); it != destinations.end();) {/*!< remove slots that are taken (done!)*/
                 if ((*it)->isDone()) {
-                    it = destinations.erase( it ); // reseat iterator to a valid value post-erase
+                    it = destinations.erase( it ); // reset iterator to a valid value post-erase
                 }
                 else {
                         ++it;
@@ -72,7 +114,7 @@ group* AgentMating::formGroup(Location *loc)
             return grp;
         }
     }
-    return nullptr;//no dead agent here so do nothing
+    return nullptr;//no male agent here so do nothing
 
 }
 
@@ -91,11 +133,11 @@ int AgentMating::participantCount(int startX, int startY, int dimSize)
 {
     int pcount=0;
     Agent *theAgent=nullptr;
-    for (int i=startX; i<startX+dimSize; ++startX) {
+    for (int i=startX; i<startX+dimSize; ++i) {
         for (int k=startY; k<startY+dimSize; ++k) {
             theAgent=sim->getAgent(std::pair<int,int>(i, k));
             if (theAgent!=nullptr) {
-                if (theAgent->getSex()==Sex::male){
+                if (theAgent->getSex()==Sex::male && theAgent->allDone()==false){
                     ++pcount;
                 }
             }

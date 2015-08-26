@@ -53,11 +53,13 @@ class Agent{
     int amountEaten;/*!< Store amount last eaten - required for Pollution Formation rule */
     bool done; /*!< True if agent has completed current action */
     bool killed;/*!< True if agent has is to be removed via combat rule */
-    bool availableNeighbours[4];/*!< Used for rules where we appply rule to each neighbour e.g. AgentMating*/
+    bool availableNeighbours[4];/*!< Used for rules where we apply rule to each neighbour e.g. AgentMating*/
     std::pair<int, int> currentPosition,newPosition; /*!< Position of agent on lattice */
     int currentAge,newAge; /*!< Number of steps agent has existed for */
     int currentMetabolism,newMetabolism; /*!< Amount of sugar agent consumes each turn/step  */
+    int currentSpiceMetabolism, newSpiceMetabolism; /*!< Amount of spice agent consumes each turn/step  */
     int currentSugar,newSugar; /*!< Sugar reserves held by agent */
+    int currentSpice,newSpice; /*!< Sugar reserves held by agent */
 
     std::vector<bool> currentCulture,newCulture; /*!< bitstring representing Culture of agent */
     std::vector<bool> currentImmunity,newImmunity; /*!< bitstring holding disease bit sequences that agent has immunity from  */
@@ -81,7 +83,9 @@ public:
     int getAge(void);
     int getMaxAge(void);
     int getMetabolism(void);
+    int getSpiceMetabolism(void);
     int getSugar(void);
+    int getSpice(void);
     int getWealth(void);
     int getReward(void);
     int getCultureLength(void);
@@ -106,8 +110,11 @@ public:
     int setAge(int);
     int setMaxAge(int);
     int setMetabolism(int);
+    int setSpiceMetabolism(int);
     int incSugar(int);
     int setSugar(int);
+    int incSpice(int);
+    int setSpice(int);
     int setCultureLength(int);
     int setImmunityLength(int);
     int setImmunityTag(bool,int);
@@ -144,6 +151,9 @@ public:
     int removeKilledLoans(void);
     bool removeKilledMother(void);
     bool removeKilledFather(void);
+    bool allDone(void);
+    bool resetNeighbours(void);
+    bool makeUnavailable(void);
     bool sync(void);
 };
 #endif /* defined(__SugarScape__Agent__) */

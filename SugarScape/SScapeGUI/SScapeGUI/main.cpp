@@ -35,6 +35,7 @@
 #include "Diffusion.h"
 #include "AgentCombat.h"
 #include "AgentReplacement.h"
+#include "AgentMating.h"
 
 
 int benchmark(int stepCount, int dimStart, int increment, int runs, std::string fileName){
@@ -114,6 +115,7 @@ int main(int, char const**)
     Diffusion diffusion(&theWorld);
     AgentCombat agentCombat(&theWorld);
     AgentReplacement agentReplacement(&theWorld);
+    AgentMating agentMating(&theWorld);
     
     //!
     /*!
@@ -121,14 +123,15 @@ int main(int, char const**)
      */
     theWorld.addRule(growback);
     //theWorld.addRule(seasonalGrowback);
-    theWorld.addRule(&pollForm);
-    theWorld.addRule(&diffusion);
+    //theWorld.addRule(&pollForm);
+    //theWorld.addRule(&diffusion);
     
     theWorld.addRule(move);
+    theWorld.addRule(&agentMating);
     //theWorld.addRule(&agentCombat);
     
-    theWorld.addRule(&agentCulture);
-    theWorld.addRule(&agentDisease);
+    //theWorld.addRule(&agentCulture);
+    //theWorld.addRule(&agentDisease);
     //theWorld.addRule(&agentReplacement);
     //theWorld.addRule(&agentDeath);
     //theWorld.addRule(&gc);

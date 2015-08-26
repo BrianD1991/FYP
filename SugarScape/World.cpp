@@ -19,6 +19,7 @@ World::World(int dimensionSize)
     minAge(MinAge),minMetabolism(MinMetabolism),sugarGrowth(SugarGrowth),
     duration(Duration),rate(Rate),initialPopulationSize(InitialPopulationSize),
     initialSugarMax(InitialSugarMax),initialSugarMin(InitialSugarMin),winterRate(WinterRate),
+    initialSpiceMax(InitialSpiceMax),initialSpiceMin(InitialSpiceMin),spiceGrowth(SpiceGrowth),
     seasonLength(SeasonLength),production(Production),consumption(Consumption),
     combatLimit(CombatLimit),immunityLength(ImmunityLength),pollutionRate(PollutionRate),
     childAmount(ChildAmount),diseaseLength(DiseaseLength),initialPopulation(AGENTCOUNT)
@@ -107,6 +108,14 @@ int World::getAgentCount(void){
     return count;
 }
 
+bool World::resetNeighbours(void){
+    for (int i=0; i<size*size; ++i) {
+        if(Lattice[i].hasAgent()) Lattice[i].getAgent()->resetNeighbours();
+    }
+    return true;
+}
+
+
 //*************************Getters*************************
 
 
@@ -156,6 +165,14 @@ int World::getMaxVision(void){
     return maxVision;
 }
 /**
+ Returns the minimum possible spice metabolism rate for any agent
+ @returns minMetabolism
+ @exception void
+ */
+int World::getMinSpiceMetabolism(void){
+    return minSpiceMetabolism;
+}
+/**
  Returns the minimum possible metabolism rate for any agent
  @returns minMetabolism
  @exception void
@@ -172,12 +189,28 @@ int World::getMaxMetabolism(void){
     return maxMetabolism;
 }
 /**
+ Returns the maximum possible spice metbolism rate for any agent
+ @returns maxMetabolism
+ @exception void
+ */
+int World::getMaxSpiceMetabolism(void){
+    return maxSpiceMetabolism;
+}
+/**
  Returns the growth rate for each location
- @returns sugarWrowth
+ @returns sugarGrowth
  @exception void
  */
 int World::getSugarGrowth(void){
     return sugarGrowth;
+}
+/**
+ Returns the growth rate for each location
+ @returns spiceGrowth
+ @exception void
+ */
+int World::getSpiceGrowth(void){
+return sugarGrowth;
 }
 /**
  Returns the minimum possible natural lifespan of an agent
@@ -226,6 +259,22 @@ int World::getInitialSugarMin(void){
  */
 int World::getInitialSugarMax(void){
     return initialSugarMax;
+}
+/**
+ Returns the minimum possible initial sugar allocation assigned to an agent
+ @returns initialSugarMin
+ @exception void
+ */
+int World::getInitialSpiceMin(void){
+    return initialSpiceMin;
+}
+/**
+ Returns the maximum possible initial spice allocation assigned to an agent
+ @returns initialSpiceMax
+ @exception void
+ */
+int World::getInitialSpiceMax(void){
+    return initialSpiceMax;
 }
 /**
  Returns the winter growth rate for each location
@@ -432,6 +481,10 @@ int World::setSugarGrowth(int newSugarGrowth){
     sugarGrowth=newSugarGrowth;
     return sugarGrowth;
 }
+int World::setSpiceGrowth(int newSpiceGrowth){
+    spiceGrowth=newSpiceGrowth;
+    return spiceGrowth;
+}
 int World::setMinAge(int newMinAge){
     minAge=newMinAge;
     return minAge;
@@ -455,6 +508,14 @@ int World::setInitialSugarMin(int newInitialSugarMin){
 int World::setInitialSugarMax(int newInitialSugarMax){
     initialSugarMax=newInitialSugarMax;
     return initialSugarMax;
+}
+int World::setInitialSpiceMin(int newInitialSpiceMin){
+    initialSpiceMin=newInitialSpiceMin;
+    return initialSpiceMin;
+}
+int World::setInitialSpiceMax(int newInitialSpiceMax){
+    initialSpiceMax=newInitialSpiceMax;
+    return initialSpiceMax;
 }
 int World::setWinterRate(int newWinterRate){
     winterRate=newWinterRate;

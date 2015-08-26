@@ -61,8 +61,8 @@ int benchmark(int numRepeats, int stepCount, int dimStart, int increment, int ru
             //theWorld.addRule(&pollForm);
             //theWorld.addRule(&diffusion);
             
-            theWorld.addRule(&move);
-            //theWorld.addRule(&agentCombat);
+            //theWorld.addRule(&move);
+            theWorld.addRule(&agentCombat);
             
             //theWorld.addRule(&agentCulture);
             //theWorld.addRule(&agentDisease);
@@ -104,7 +104,7 @@ int benchmark(int numRepeats, int stepCount, int dimStart, int increment, int ru
 int main(int, char const**)
 {
     
-    benchmark(5,10, 10, 10, 10, "/Users/josephkehoe/movement.txt");
+    benchmark(1,200, 10, 10, 10, "/Users/josephkehoe/movement.txt");
     return 0;
 }
 

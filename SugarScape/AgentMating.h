@@ -20,5 +20,6 @@ public:
     virtual bool executeAction(Location *, group *);
     virtual group* formGroup(Location *);
     virtual int participantCount(int,int,int);
+    virtual bool run(int startX, int startY, int size);
 };
 #endif /* defined(__SugarScape__AgentMating__) */

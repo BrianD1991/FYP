@@ -17,11 +17,6 @@ WriteAction::~WriteAction(void){
 bool WriteAction::run(int startX, int startY, int size){
     Location* Lattice=sim->getLattice();
     int remaining=0;
-    for (int i=0; i<size*size; ++i) {
-        if (Lattice[i].hasAgent()) {
-            ++remaining;
-        }
-    }
     std::vector<group*>  ExclusiveGroups;
     //calculate number of entities that need to take part in this actions
     remaining=participantCount(startX, startY, size);
@@ -70,26 +65,11 @@ bool WriteAction::run(int startX, int startY, int size){
     }
     //update states
     sim->sync();
-    
-//    for(auto grp:ExclusiveGroups){
-//        std::vector<Location*> members=grp->getMembers();
-//        Location *primeMoverLocation=grp->getPrimeMover();
-//        //update all group members --locations and resident agents (if any)
-//        for(auto loc:members){
-//            loc->sync();
-//            if (loc->hasAgent()) {
-//                loc->getAgent()->sync();
-//            }
-//        }
-//        //update location of group "leader" and prime agent
-//        primeMoverLocation->sync();
-//        if (primeMoverLocation->hasAgent()) {
-//            primeMoverLocation->getAgent()->sync();
-//        }
-//    }
-    
+    //delete groups
+    for(auto grp:ExclusiveGroups){
+         delete grp;
+    }
     return true;
-    
 }
 
 bool WriteAction::concurrentRun(void){
@@ -108,8 +88,7 @@ bool WriteAction::concurrentRun(void){
                 }
             }
         }
-    }
-    
+    }    
     return true;
 }
 /**

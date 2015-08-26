@@ -15,9 +15,26 @@ Agent::Agent(World *s,Agent *dad, Agent *mum, std::pair<int,int> pos):amountEate
     theWorld(s),currentAge(0),newAge(1),vision(2),
     cultureLength(s->getCultureCount()),immunityLength(s->getImmunityLength())
 {
-    newSugar=currentSugar=theWorld->getRnd(0, theWorld->getInitialSugarMax());
-    maxAge=theWorld->getRnd(theWorld->getMinAge(), theWorld->getMaxAge());
-    currentMetabolism=newMetabolism=theWorld->getRnd(theWorld->getMinMetabolism(),theWorld->getMaxMetabolism());
+    if (dad==nullptr) {
+        newSugar=currentSugar=theWorld->getRnd(0, theWorld->getInitialSugarMax());
+        newSpice=currentSpice=theWorld->getRnd(0, theWorld->getInitialSpiceMax() );
+        maxAge=theWorld->getRnd(theWorld->getMinAge(), theWorld->getMaxAge());
+        currentMetabolism=newMetabolism=theWorld->getRnd(theWorld->getMinMetabolism(),theWorld->getMaxMetabolism());
+        //currentSpiceMetabolism=newSpiceMetabolism=theWorld->getRnd(theWorld->getMinSpiceMetabolism(),theWorld->getMaxSpiceMetabolism());
+    }
+    else{
+        newSugar=currentSugar=theWorld->getRnd(0, theWorld->getInitialSugarMax());
+        newSpice=currentSpice=theWorld->getRnd(0, theWorld->getInitialSpiceMax() );
+        maxAge=theWorld->getRnd(theWorld->getMinAge(), dad->getMaxAge());
+        currentMetabolism=newMetabolism=theWorld->getRnd(theWorld->getMinMetabolism(),mum->getMetabolism());
+        //currentSpiceMetabolism=newSpiceMetabolism=theWorld->getRnd(theWorld->getMinSpiceMetabolism(),mum->getSpiceMetabolism());
+    }
+    if (theWorld->getRnd(0,1)==0) {
+        sex=Sex::male;
+    }else{
+        sex=Sex::female;
+    }
+    
     cultureLength=theWorld->getCultureCount();
     immunityLength=theWorld->getImmunityLength();
     diseaseLength=theWorld->getDiseaseLength();
@@ -84,11 +101,17 @@ int Agent::getMaxAge(void){
 int Agent::getMetabolism(void){
     return currentMetabolism;
 }
+int Agent::getSpiceMetabolism(void){
+    return currentSpiceMetabolism;
+}
 int Agent::getSugar(void){
     return currentSugar;
 }
+int Agent::getSpice(void){
+    return currentSpice;
+}
 int Agent::getWealth(void){
-    return currentSugar;
+    return currentSugar+currentSpice;
 }
 int Agent::getReward(void){
     return std::min(this->getWealth(),theWorld->getCombatLimit());
@@ -138,7 +161,7 @@ Location* Agent::getLocation(void){
 
 bool Agent::markNeighbour(int direction)
 {
-    return availableNeighbours[direction]=true;
+    return availableNeighbours[direction]=false;
 }
 
 
@@ -174,13 +197,25 @@ int Agent::setMetabolism(int newAmount){
     newMetabolism=newAmount;
     return newMetabolism;
 }
+int Agent::setSpiceMetabolism(int newAmount){
+    newSpiceMetabolism=newAmount;
+    return newSpiceMetabolism;
+}
 int Agent::incSugar(int extraSugar){
     newSugar+=extraSugar;
     return newSugar;
 }
+int Agent::incSpice(int extraSpice){
+    newSpice+=extraSpice;
+    return newSpice;
+}
 int Agent::setSugar(int newAmount){
     newSugar=newAmount;
     return newSugar;
+}
+int Agent::setSpice(int newAmount){
+    newSpice=newAmount;
+    return newSpice;
 }
 int Agent::setCultureLength(int newAmount){
     cultureLength=newAmount;
@@ -246,8 +281,10 @@ Agent* Agent::reincarnate(std::pair<int,int> pos){
     cultureLength=theWorld->getCultureCount();
     immunityLength=theWorld->getImmunityLength();
     newSugar=currentSugar=theWorld->getRnd(0, theWorld->getInitialSugarMax());
+    newSpice=currentSpice=theWorld->getRnd(0, theWorld->getInitialSpiceMax());
     maxAge=theWorld->getRnd(theWorld->getMinAge(), theWorld->getMaxAge());
     currentMetabolism=newMetabolism=theWorld->getRnd(theWorld->getMinMetabolism(),theWorld->getMaxMetabolism());
+    currentSpiceMetabolism=newSpiceMetabolism=theWorld->getRnd(theWorld->getMinSpiceMetabolism(),theWorld->getMaxSpiceMetabolism());
     cultureLength=theWorld->getCultureCount();
     immunityLength=theWorld->getImmunityLength();
     diseaseLength=theWorld->getDiseaseLength();
@@ -577,6 +614,29 @@ bool Agent::removeKilledFather(void)
     }
 }
 
+
+bool Agent::allDone(void){
+    for (int i=0; i<4; ++i) {
+        if (availableNeighbours[i]==true) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool Agent::resetNeighbours(void){
+    for (int i=0; i<4; ++i) {
+        availableNeighbours[i]=true;
+    }
+    return true;
+}
+
+bool Agent::makeUnavailable(void){
+    for (int i=0; i<4; ++i) {
+        availableNeighbours[i]=false;
+    }
+    return true;
+}
 /**
  * Finalises updates - Applies updates to agent state
  * @return true if update sucessfull, otherwise false
@@ -585,6 +645,7 @@ bool Agent::removeKilledFather(void)
 bool Agent::sync(void){
     currentPosition=newPosition;
     currentSugar=newSugar-currentMetabolism;
+    currentSpice=newSpice-currentSpiceMetabolism;
     for (int i=0; i<cultureLength; ++i) {
         currentCulture[i]=newCulture[i];
     }
@@ -598,9 +659,6 @@ bool Agent::sync(void){
     currentAge = newAge++;
     done=false;
     killed = false;
-    for (int i=0; i<4; ++i) {
-        availableNeighbours[i]=true;
-    }
     return true;
 }
 
