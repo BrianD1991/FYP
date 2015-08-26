@@ -100,7 +100,7 @@ int main(int, char const**)
     sf::RenderWindow window(sf::VideoMode(1024, 768), "SFML window");
     
     // create everything
-    World theWorld(5);
+    World theWorld(30);
     theWorld.init();
     theWorld.sync();
     theWorld.sanityCeck();

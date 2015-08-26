@@ -31,8 +31,8 @@ class World{
     static const int MaxMetabolism=10;
     static const int MinAge=10;
     static const int MinMetabolism=4;
-    static const int SugarGrowth=2;
-    static const int SpiceGrowth=3;
+    static const int SugarGrowth=4;
+    static const int SpiceGrowth=0;
     static const int Duration=10;
     static const int Rate=3;
     static const int InitialPopulationSize=50;
