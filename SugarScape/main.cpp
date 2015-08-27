@@ -24,6 +24,10 @@
 #include "Diffusion.h"
 #include "AgentCombat.h"
 #include "AgentReplacement.h"
+#include "AgentMetabolism.h"
+#include "AgentMating.h"
+
+
 int benchmark(int,int,int,int,int,std::string);
 
 int benchmark(int numRepeats, int stepCount, int dimStart, int increment, int runs, std::string fileName){
@@ -51,6 +55,9 @@ int benchmark(int numRepeats, int stepCount, int dimStart, int increment, int ru
             Diffusion diffusion(&theWorld);
             AgentCombat agentCombat(&theWorld);
             AgentReplacement agentReplacement(&theWorld);
+            AgentMetabolism agentMetabolism(&theWorld);
+            AgentMating agentMating(&theWorld);
+            
             
             //!
             /*!
@@ -61,14 +68,18 @@ int benchmark(int numRepeats, int stepCount, int dimStart, int increment, int ru
             //theWorld.addRule(&pollForm);
             //theWorld.addRule(&diffusion);
             
-            //theWorld.addRule(&move);
-            theWorld.addRule(&agentCombat);
+            theWorld.addRule(&agentMetabolism);
+            theWorld.addRule(&move);
+            //theWorld.addRule(&agentCombat);
             
             //theWorld.addRule(&agentCulture);
             //theWorld.addRule(&agentDisease);
+            
+            theWorld.addRule(&agentMating);
             //theWorld.addRule(&agentReplacement);
-            //theWorld.addRule(&agentDeath);
-            //theWorld.addRule(&gc);
+            theWorld.addRule(&agentDeath);
+
+            
             
             auto start = std::chrono::steady_clock::now();
             for (int m=0; m<stepCount; ++m) {
@@ -104,7 +115,7 @@ int benchmark(int numRepeats, int stepCount, int dimStart, int increment, int ru
 int main(int, char const**)
 {
     
-    benchmark(1,200, 10, 10, 10, "/Users/josephkehoe/movement.txt");
+    benchmark(50,200, 10, 10, 10, "/Users/joseph/mating10-100.txt");
     return 0;
 }
 

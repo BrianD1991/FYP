@@ -68,7 +68,7 @@ int benchmark(int stepCount, int dimStart, int increment, int runs, std::string 
         //theWorld.addRule(&pollForm);
         //theWorld.addRule(&diffusion);
         
-        //theWorld.addRule(&move);
+        theWorld.addRule(&move);
         //theWorld.addRule(&agentCombat);
         
         //theWorld.addRule(&agentCulture);

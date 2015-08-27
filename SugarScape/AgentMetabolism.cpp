@@ -13,12 +13,13 @@ AgentMetabolism::AgentMetabolism(World *sim):IndependentAction(sim){
     
 }
 
-bool AgentMetabolism::executeAction(Location * loc, group * grp){
+bool AgentMetabolism::executeAction(Location * loc, group * ){
     if (loc->hasAgent()) {
         Agent *agent =loc->getAgent();
         agent->incSugar(-agent->getMetabolism());
         agent->incAge();
     }
+    return true;
 }
 
 
