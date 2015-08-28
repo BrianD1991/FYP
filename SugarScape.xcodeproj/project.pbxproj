@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		080765E51B4BCB3800795BF6 /* AgentReplacement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 080765E31B4BCB3800795BF6 /* AgentReplacement.cpp */; };
+		083D03EF1B9107740023F988 /* IterativeWriteAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 083D03ED1B9107740023F988 /* IterativeWriteAction.cpp */; };
 		0871784C1B0E2C9F00ED6854 /* AgentDisease.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0871784A1B0E2C9F00ED6854 /* AgentDisease.cpp */; };
 		089A0C551B30447500C17F80 /* AgentDeath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 089A0C531B30447500C17F80 /* AgentDeath.cpp */; };
 		089A0C581B30ABF000C17F80 /* GarbageCollection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 089A0C561B30ABF000C17F80 /* GarbageCollection.cpp */; };
@@ -60,6 +61,8 @@
 /* Begin PBXFileReference section */
 		080765E31B4BCB3800795BF6 /* AgentReplacement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AgentReplacement.cpp; sourceTree = "<group>"; };
 		080765E41B4BCB3800795BF6 /* AgentReplacement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentReplacement.h; sourceTree = "<group>"; };
+		083D03ED1B9107740023F988 /* IterativeWriteAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IterativeWriteAction.cpp; sourceTree = "<group>"; };
+		083D03EE1B9107740023F988 /* IterativeWriteAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IterativeWriteAction.h; sourceTree = "<group>"; };
 		0867A2631B7B33E600A8D02F /* SScapeGUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SScapeGUI.xcodeproj; path = SScapeGUI/SScapeGUI.xcodeproj; sourceTree = "<group>"; };
 		0871784A1B0E2C9F00ED6854 /* AgentDisease.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AgentDisease.cpp; sourceTree = "<group>"; };
 		0871784B1B0E2C9F00ED6854 /* AgentDisease.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentDisease.h; sourceTree = "<group>"; };
@@ -154,6 +157,8 @@
 				7C79878E1B0242D1003A4AE5 /* AgentCulture.cpp */,
 				0871784A1B0E2C9F00ED6854 /* AgentDisease.cpp */,
 				0871784B1B0E2C9F00ED6854 /* AgentDisease.h */,
+				083D03ED1B9107740023F988 /* IterativeWriteAction.cpp */,
+				083D03EE1B9107740023F988 /* IterativeWriteAction.h */,
 				7C79878F1B0242D1003A4AE5 /* AgentCulture.h */,
 				089A0C531B30447500C17F80 /* AgentDeath.cpp */,
 				089A0C561B30ABF000C17F80 /* GarbageCollection.cpp */,
@@ -278,6 +283,7 @@
 				7C6A7F0F1B25E62C000AE96D /* Inheritance.cpp in Sources */,
 				D82B99311AFA5EEE009AB362 /* ReadAction.cpp in Sources */,
 				7CBEA38E1B00F89F00B37ABF /* SeasonalGrowback.cpp in Sources */,
+				083D03EF1B9107740023F988 /* IterativeWriteAction.cpp in Sources */,
 				D8F15FF71B57D43A007E4E7D /* AgentCombat.cpp in Sources */,
 				D89726B41AEBD591005664BF /* Location.cpp in Sources */,
 				D8F15FF41B57CF7F007E4E7D /* AgentMove.cpp in Sources */,

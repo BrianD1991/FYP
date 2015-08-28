@@ -84,7 +84,7 @@ bool WriteAction::concurrentRun(void){
             //sequentally run through each tile
             for (int i=0; i<3; ++i) {
                 for (int k=0; k<3; ++k) {
-                    run(xTile+i*sectionSize,yTile+k*sectionSize,sectionSize);
+                    run((xTile+i)*sectionSize,(yTile+k)*sectionSize,sectionSize);
                 }
             }
         }
