@@ -33,6 +33,7 @@ group* IndependentAction::formGroup(Location *currLocation){
 bool IndependentAction::run(int startX, int startY, int size){
     Location* Lattice=sim->getLattice();
     //Perform action
+#pragma omp for
     for (int i=startX; i<startX+size; ++i) {
         for (int k=startY; k<startY+size; ++k) {
             executeAction(&Lattice[i*size+k],nullptr);
@@ -59,15 +60,7 @@ bool IndependentAction::concurrentRun(void){
         }
     }
     //Update everyone
-#pragma omp for
-    for (int i=0; i<size; ++i) {
-        for (int k=0; k<size; ++k) {
-            Lattice[i*size+k].sync();
-            if (Lattice[i*size+k].hasAgent()) {
-                Lattice[i*size+k].getAgent()->sync();
-            }
-        }
-    }
+    sim->sync();
     return true;
     
 }
