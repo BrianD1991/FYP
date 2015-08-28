@@ -10,7 +10,7 @@
 #define __SugarScape__AgentMating__
 
 #include <iostream>
-#include "WriteAction.h"
+#include "IterativeWriteAction.h"
 
 class AgentMating:public WriteAction{
 protected:
@@ -20,6 +20,6 @@ public:
     virtual bool executeAction(Location *, group *);
     virtual group* formGroup(Location *);
     virtual int participantCount(int,int,int);
-    virtual bool run(int startX, int startY, int size);
+    //virtual bool run(int startX, int startY, int size);
 };
 #endif /* defined(__SugarScape__AgentMating__) */

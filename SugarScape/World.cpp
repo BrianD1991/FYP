@@ -65,6 +65,7 @@ bool World::init(void)
 }
 
 int World::sync(void){
+#pragma omp parallel for
     for (int i=0; i<size*size; ++i) {
         Lattice[i].sync();
         if (Lattice[i].hasAgent()) Lattice[i].getAgent()->sync();
@@ -117,6 +118,7 @@ int World::getAgentCount(void){
 }
 
 bool World::resetNeighbours(void){
+#pragma omp parallel for
     for (int i=0; i<size*size; ++i) {
         if(Lattice[i].hasAgent()) Lattice[i].getAgent()->resetNeighbours();
     }

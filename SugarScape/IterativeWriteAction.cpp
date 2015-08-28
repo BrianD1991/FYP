@@ -9,6 +9,12 @@
 #include "IterativeWriteAction.h"
 
 
+IterativeWriteAction::IterativeWriteAction(World *sim)
+:WriteAction(sim)
+{
+    //our work is done
+}
+
 bool IterativeWriteAction::run(int startX, int startY, int size)
 {
         int participants=participantCount(startX, startY, size);
