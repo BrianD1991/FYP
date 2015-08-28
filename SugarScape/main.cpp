@@ -115,7 +115,7 @@ int benchmark(int numRepeats, int stepCount, int dimStart, int increment, int ru
 int main(int, char const**)
 {
     
-    benchmark(50,200, 10, 10, 10, "/Users/joseph/mating10-100.txt");
+    benchmark(1,200, 200, 100, 4, "/Users/joseph/mating200-500.txt");
     return 0;
 }
 
