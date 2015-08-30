@@ -13,6 +13,14 @@ Growback::Growback(World *sim):IndependentAction(sim){
     
 }
 
+/**
+ * Sugar grows back at a rate set by the World object
+ * @param place :the location we are applying rule to
+ * @param group - not required for this action. Is a nullptr
+ * @see Growback Rule
+ * @return true
+ * @exception none
+ */
 bool Growback::executeAction(Location * place,group*){
     
     place->setSugar(place->getSugar()+sim->getSugarGrowth());

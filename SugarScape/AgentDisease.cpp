@@ -11,6 +11,7 @@
 AgentDisease::AgentDisease(World *s):ReadAction(s){
     //EMPTY
 }
+
 /**
  * If agent X resides at this location find its neighbours and collect diseases from them
  * then update agent X's immunity tags for these diseases

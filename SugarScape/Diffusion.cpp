@@ -13,6 +13,15 @@ Diffusion::Diffusion(World *s):ReadAction(s){
     //EMPTY
 }
 
+/**
+ * If the correct number of steps have elapsed calculate diffusion.
+ * New pollution is average of four von Neumann neighbours pollution level
+ * @param loc :the location we are executing rule on
+ * @param group - not used
+ * @see Pollution Diffusion Rule
+ * @return true if pollution was diffused
+ * @exception none
+ */
 bool Diffusion::executeAction(Location *loc, group *){
     int size=sim->getSize();
     if (sim->getStep() % sim->getPollutionRate()==0) {

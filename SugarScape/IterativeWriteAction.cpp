@@ -45,7 +45,7 @@ bool IterativeWriteAction::concurrentRun(void)
                         WriteAction::run((xTile+i)*sectionSize,(yTile+k)*sectionSize,sectionSize);
                         participants=participantCount((xTile+i)*sectionSize,(yTile+k)*sectionSize,sectionSize);
                     }
-                    
+#pragma omp barrier
                 }
             }
         }

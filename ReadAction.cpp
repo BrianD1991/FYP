@@ -53,17 +53,6 @@ bool ReadAction::run(int startX, int startY, int size){
  */
 bool ReadAction::concurrentRun(void){
     int size=sim->getSize();
-    Location* Lattice=sim->getLattice();
-    //Perform action
-#pragma omp for
-    for (int i=0; i<size; ++i) {
-        for (int k=0; k<size; ++k) {
-            executeAction(&Lattice[i*size+k],nullptr);
-        }
-    }
-    //Update everyone
-    sim->sync();
-    return true;
-    
+    return run(0,0,size);
 }
 

@@ -14,6 +14,17 @@ WriteAction::WriteAction(World* theWorld):Action(theWorld){
 WriteAction::~WriteAction(void){
     
 }
+
+
+/**
+ * run - Applies action to every location in lattice within parameter limits
+ * @param startX :Starting X position of tile we are executing
+ * @param startY :starting Y position of tile
+ * @param size :dimensions of our tile (we assume square tiles)
+ * @see Write-Dependent Algorithm
+ * @return true
+ * @exception none
+ */
 bool WriteAction::run(int startX, int startY, int size){
     Location* Lattice=sim->getLattice();
     int remaining=0;
@@ -72,6 +83,13 @@ bool WriteAction::run(int startX, int startY, int size){
     return true;
 }
 
+
+/**
+ * Concurrent version of run
+ * @see Concurrent Write-Dependent Algorithm
+ * @return true
+ * @exception none
+ */
 bool WriteAction::concurrentRun(void){
     int sectionSize=sim->getMaxVision();
     /*!< construct tile set - tile contains 9 sections - 3 each side*/
@@ -85,12 +103,15 @@ bool WriteAction::concurrentRun(void){
             for (int i=0; i<3; ++i) {
                 for (int k=0; k<3; ++k) {
                     run((xTile+i)*sectionSize,(yTile+k)*sectionSize,sectionSize);
+#pragma omp barrier
                 }
             }
         }
     }    
     return true;
 }
+
+
 /**
  Calculate the number of active participants in this action on the grid
  Default is number of agents - assume they are all active
@@ -117,7 +138,8 @@ int WriteAction::participantCount(int startX, int startY, int dimSize)
 /**
  pick index from list of available locations
  
- Picks randomly
+ Picks randomly, May be required to help form group reimplement if you want
+ a more intelligent picking behaviour e.g. pick best/nearest/weakest neighbour
  
  @param possibleDestinations :vector of locations we can move to
  @returns index of chosen location in vector

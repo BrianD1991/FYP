@@ -80,7 +80,7 @@ group* AgentReplacement::formGroup(Location *loc)
                 grp->push_back(loc);
             } else { /*!< spawn at new random empty location */
                 int index=sim->getRnd(0, (int)freeSlots.size()-1);
-                if (freeSlots[index]->isDone()) {//slot taken spawn in place
+                if (freeSlots[index]->isDone()) {//slot not free
                     grp->push_back(loc);
                 } else{
                     grp->push_back(freeSlots[index]);

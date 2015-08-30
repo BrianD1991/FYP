@@ -19,6 +19,7 @@
 #include <chrono>
 #include <iostream>
 #include <fstream>
+
 // Here is a small helper for you ! Have a look.
 #include "ResourcePath.hpp"
 
@@ -146,14 +147,6 @@ int main(int, char const**)
         return EXIT_FAILURE;
     }
     window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
-
-//    // Load a sprite to display
-//    sf::Texture texture;
-//    if (!texture.loadFromFile(resourcePath() + "cute_image.jpg")) {
-//        return EXIT_FAILURE;
-//    }
-//    sf::Sprite sprite(texture);
-//
     // Create a graphical text to display
     sf::Font font;
     if (!font.loadFromFile(resourcePath() + "sansation.ttf")) {
@@ -171,7 +164,11 @@ int main(int, char const**)
 
     // Play the music
     music.play();
-
+    //!
+    /*!
+     set number of threads here - for testing only. Not needed normally
+     */
+    //omp_set_num_threads(1);
     // Start the game loop
     while (window.isOpen())
     {

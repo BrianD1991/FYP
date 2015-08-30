@@ -12,7 +12,12 @@
 #include <iostream>
 #include "IndependentAction.h"
 
-
+/*!  \class  AgentMetabolism
+ \brief handles metabolism of agents
+ 
+ Not a seperate rule in book but required as a seperate rule
+ i.e. should have been a rule in book!
+ */
 class AgentMetabolism:public IndependentAction{
 public:
     AgentMetabolism(World *s);

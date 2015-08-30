@@ -19,7 +19,7 @@ AgentDeath::AgentDeath(World *s)
  * Deletes any references to dead agents in any other classes
  * @param loc :Location we a re checking
  * @param group - not used by this method
- * @see Death Rule
+ * @see Death Rule (not in book!)
  * @return True if an agent was present
  * @exception none
  */

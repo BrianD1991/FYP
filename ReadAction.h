@@ -12,6 +12,12 @@
 #include <iostream>
 #include "Action.h"
 
+/*!  \class  ReadAction
+ \brief Actions that read the neighbours state but only update their own
+ 
+ Read-Dependent Rules all inherit from this. They need to implement formGroup and executeAction.
+ They can just inherit the rest!
+ */
 class ReadAction:public Action{
 public:
     ReadAction(World*);

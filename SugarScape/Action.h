@@ -17,7 +17,8 @@
 /*!  \class  Action
  \brief Abstract base class for Actions
  
- Derived actions need to define formGroup and executeAction functions as they are pure virtual. run and concurrentRun perform actions on lattice.
+ Derived actions need to define formGroup and executeAction functions as they are pure virtual. 
+ run and concurrentRun perform actions on lattice.
  */
 
 class Action{
@@ -28,7 +29,7 @@ public:
     virtual ~Action();
     virtual bool run(int,int,int);
     virtual bool concurrentRun(void);
-    virtual bool executeAction(Location *, group*)=0;
+    virtual bool executeAction(Location *, group* grp=nullptr)=0;
     virtual group* formGroup(Location *)=0;
 };
 #endif /* defined(__SugarScape__Action__) */

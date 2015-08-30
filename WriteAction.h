@@ -12,6 +12,11 @@
 #include <iostream>
 #include "Action.h"
 
+/*!  \class  WriteAction All Write-Dependent Actions inherit from this
+ \brief Contains algorithm for executing Write-Dependent actions
+ 
+ Inherit from this and implement executeAction and formGroup
+ */
 class WriteAction:public Action{
 public:
     WriteAction(World*);
