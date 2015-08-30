@@ -10,7 +10,7 @@
 
 
 AgentMating::AgentMating(World *sim)
-:WriteAction(sim)
+:IterativeWriteAction(sim)
 {
     //our work is done
 }
