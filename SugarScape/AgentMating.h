@@ -12,7 +12,7 @@
 #include <iostream>
 #include "IterativeWriteAction.h"
 
-class AgentMating:public WriteAction{
+class AgentMating:public IterativeWriteAction{
 protected:
     bool suitable(Location*);
 public:

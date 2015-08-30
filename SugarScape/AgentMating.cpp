@@ -15,16 +15,6 @@ AgentMating::AgentMating(World *sim)
     //our work is done
 }
 
-//bool AgentMating::run(int startX, int startY, int size)
-//{
-//    int participants=participantCount(startX, startY, size);
-//    while (participants>0) {
-//        WriteAction::run(startX, startY, size);
-//        participants=participantCount(startX, startY, size);
-//    }
-//    sim->resetNeighbours();
-//    return true;
-//}
 
 
 bool AgentMating::executeAction(Location *loc, group *grp)
