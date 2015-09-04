@@ -15,7 +15,12 @@ bool combatCompare(Location *a, Location *b)
     return a->getReward()>b->getReward();
 }
 
-
+/**
+ * Constructor - passes World pointer to parent constructor
+ * @param s :Pointer to World
+ * @return none
+ * @exception none
+ */
 AgentCombat::AgentCombat(World *s)
 :AgentMove(s)
 {
@@ -23,7 +28,15 @@ AgentCombat::AgentCombat(World *s)
 }
 
 
-
+/**
+ * Agent removes agent in location in group from world and takes resources
+ * It also removes links to agents killed by combat (lenders, borrowers, etc.)
+ * @param loc :Pointer to Location of the winning agent
+ * @param grp : Pointer to Group containing location of losing agent (or possibly an empty location)
+ * @see Combat Rule
+ * @return true if agent exists at loc else false
+ * @exception none
+ */
 bool AgentCombat::executeAction(Location *loc, group *grp)
 {
     if (loc->hasAgent()) {
@@ -73,6 +86,14 @@ bool AgentCombat::executeAction(Location *loc, group *grp)
 }
 
 
+/**
+ * Picks the agent we want to attack if any, or otherwise an empty location to move to
+ * @param possibles : list containing al possible destinations
+ * @param me : the Agent making the move
+ * @see Combat Rule
+ * @return index of destination from list (std::vector)
+ * @exception none
+ */
 int AgentCombat::pickIndex(std::vector<Location*> possibles,Agent *me)
 {//find a winner
     //Find out if there is going to be retaliation
@@ -100,6 +121,13 @@ int AgentCombat::pickIndex(std::vector<Location*> possibles,Agent *me)
 }
 
 
+/**
+ * Creates the group containing the vistim we are attacking or empty location we are moving to
+ * @param loc :pointer to our location
+ * @see Combat Rule
+ * @return pointer to group object
+ * @exception none
+ */
 group* AgentCombat::formGroup(Location *loc)
 {
     if (loc->hasAgent() && loc->isDone()==false) {/*!< Agent at this location */

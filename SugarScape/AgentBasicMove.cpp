@@ -8,6 +8,12 @@
 
 #include "AgentBasicMove.h"
 
+/**
+ * Constructor - passes world pointer to base class constructor
+ * @param s :Pointer to World Object
+ * @return none
+ * @exception none
+ */
 AgentBasicMove::AgentBasicMove(World *s)
     :WriteAction(s)
 {
@@ -16,7 +22,16 @@ AgentBasicMove::AgentBasicMove(World *s)
 
 
 
-
+/**
+ * Moves an agent to the location in the group object
+ * Consumes sugar at new location
+ * If location is empty then do nothing (this should not  occur!)
+ * @param loc : Pointer to location we are acting on
+ * @param grp : Pointer to group object containing destination
+ * @see Move Rule
+ * @return true if all ok
+ * @exception none
+ */
 bool AgentBasicMove::executeAction(Location *loc, group * grp)
 {
     if (loc->hasAgent()) {

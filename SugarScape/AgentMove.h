@@ -14,6 +14,17 @@
 
 bool myCompare(Location *a, Location *b);
 
+
+/*!  \class  AgentMove
+ \brief Basic Move Defined in Sugarscape
+ 
+Movement - M
+
+ - Look out as far as vision permits in each of the four lattice directions, north, south, east and west;
+ - Considering only unoccupied lattice positions, find the nearest position producing maximum welfare;
+ - Move to the new position
+ - Collect all resources at that location
+ */
 class AgentMove :public AgentBasicMove{
 public:
     AgentMove(World *s);

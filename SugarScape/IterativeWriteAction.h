@@ -12,6 +12,11 @@
 #include <iostream>
 #include "WriteAction.h"
 
+/*!  \class  IterativeWriteAction
+ \brief Write-Dependent Actions that are iterative
+ 
+ Base Class for all iterative Write-Dependent Actions If an action is applied to every (or more than one) neighbour each in turn during a single step then it inherits from this
+ */
 class IterativeWriteAction:public WriteAction{
 
 public:

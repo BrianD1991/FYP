@@ -60,9 +60,9 @@ bool AgentReplacement::executeAction(Location *loc, group *grp)
 /**
  formGroup forms a group of two - the primeMover and the location of its replacement
  
- If the agent is not being replaced we from a group of one. This is to ensure every agent runs execute action
- Only try find frree slot twice. On second block just spawn in place. Would be better if we kept trying but
- This would require updating the free slots list to remove all slots marked done.
+ - If the agent is not being replaced we from a group of one. This is to ensure every agent runs execute action
+ - Only try find free slot twice. On second block just spawn in place. Would be better if we kept trying but:
+    -# This would require updating the free slots list to remove all slots marked done.
  
  @param loc :location we are examining
  @returns pointer to group object -nullptr if location contains no agent or if agent is not due for replacement

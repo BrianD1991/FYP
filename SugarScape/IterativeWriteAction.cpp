@@ -8,13 +8,27 @@
 
 #include "IterativeWriteAction.h"
 
-
+/**
+ * Construtor - pass World Pointer back to base class constructor
+ * @param sim :Pointer to World Object
+ * @return none
+ * @exception none
+ */
 IterativeWriteAction::IterativeWriteAction(World *sim)
 :WriteAction(sim)
 {
     //our work is done
 }
 
+
+/**
+ * run action iteratively.  Call run until we have performed action on all possible neighbours
+ * @param startX :X-coordinate of top left corner of grid we are running on
+ * @param startY :Y-coordinate of top left corner of grid we are working on
+ * @param size :Dimensions of grid
+ * @return true
+ * @exception none
+ */
 bool IterativeWriteAction::run(int startX, int startY, int size)
 {
         int participants=participantCount(startX, startY, size);
@@ -27,6 +41,11 @@ bool IterativeWriteAction::run(int startX, int startY, int size)
 }
 
 
+/**
+ * Concurrent version of run. Tiled algorithm from base class but call run iteratively on each subtile
+ * @return true
+ * @exception none
+ */
 bool IterativeWriteAction::concurrentRun(void)
 {
     int sectionSize=sim->getMaxVision();

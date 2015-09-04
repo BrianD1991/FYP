@@ -67,6 +67,8 @@ bool WriteAction::run(int startX, int startY, int size){
                     loc->markDone();
                 }
                 remaining=remaining-grp->getActiveParticipants();//reduce number of entities left to place
+            }else{//group is not exclusive delete it!
+                //delete grp;
             }
         }
     }//While

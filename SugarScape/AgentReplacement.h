@@ -12,6 +12,12 @@
 #include <iostream>
 #include "WriteAction.h"
 
+/*!  \class  AgentReplacement
+ \brief Replacement Rule
+ 
+ Replacement - R_[a,b]
+ When an agent dies it is replaced by an agent of age 0 having random genetic attributes, random position on the Sugarscape, random initial endowment, and a maximum age selected from the range [a,b].
+ */
 class AgentReplacement :public WriteAction{
     std::vector<Location* > freeSlots;
     unsigned long  populateFreeSlots(void);
