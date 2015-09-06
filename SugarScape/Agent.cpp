@@ -10,6 +10,16 @@
 #include "Agent.h"
 
 //Constructors
+
+/**
+ * Constructor, lots to set up
+ * @param s :Pointer to World Object
+ * @param dad :Male parent of Agent
+ * @param mum :Female parent of Agent
+ * @param pos :Position of Agent in Lattice
+ * @return none
+ * @exception none
+ */
 Agent::Agent(World *s,Agent *dad, Agent *mum, std::pair<int,int> pos):amountEaten(0), done(false),
     father(dad),mother(mum),killed(false),newPosition(pos),currentPosition(pos),
     theWorld(s),currentAge(0),newAge(1),vision(2),
@@ -73,91 +83,258 @@ Agent::Agent(World *s,Agent *dad, Agent *mum, std::pair<int,int> pos):amountEate
 
 //getters
 
+/**
+ * Returns true if there is ana vailable agent in the given direction
+ * @param direction :Int from 0 to 3 indicating direction
+ * @see iterativeWriteAction
+ * @return true if agent in that direction is available
+ * @exception none *NEED TO ADD EXCEPTION HERE*
+ */
 bool Agent::getAvail(int direction){
-    return availableNeighbours[direction];
+    if (direction>=0 && direction<=3) {
+        return availableNeighbours[direction];
+    }
+    return false;
 }
+
+/**
+ * Returns amount eaten - used by pollution formation rule
+ * @see PollutionFormation
+ * @return amount eaten by agent during step
+ * @exception none
+ */
 int Agent::getAmountEaten(void){
     return amountEaten;
 }
 
+/**
+ * Tells if agent has completed action, or is booked, for this step
+ * @see Action run method
+ * @return true if done else false
+ * @exception none
+ */
 bool Agent::isDone(void){
     return done;
 }
+
+/**
+ * gets current position
+
+ * @return std::pair with position in lattice of agent
+ * @exception none
+ */
 std::pair<int, int> Agent::getPosition(void){
     return currentPosition;
 }
+
+/**
+ * returns sex of Agent
+ * @return sex
+ * @exception none
+ */
 Sex Agent::getSex(void){
     return sex;
 }
+
+/**
+ * Returns length of vision of agent
+ * @return int - value of vision
+ * @exception none
+ */
 int Agent::getVision(void){
     return vision;
 }
+
+/**
+ * Returns Age of agent
+ * @return int - value of age
+ * @exception none
+ */
 int Agent::getAge(void){
     return currentAge;
 }
+
+/**
+ * Returns Maximum allowable age of agent
+ * @return int - value of max age
+ * @exception none
+ */
 int Agent::getMaxAge(void){
     return maxAge;
 }
+
+/**
+ * Returns Sugar Metabolism of agent
+ * @return int - value of sugar metabolism
+ * @exception none
+ */
 int Agent::getMetabolism(void){
     return currentMetabolism;
 }
+
+/**
+ * Returns Spice Metabolism of agent
+ * @return int - value of spice metabolism
+ * @exception none
+ */
 int Agent::getSpiceMetabolism(void){
     return currentSpiceMetabolism;
 }
+
+/**
+ * Returns Amount of Sugar held by agent
+ * @return int - value of Sugar reserves
+ * @exception none
+ */
 int Agent::getSugar(void){
     return currentSugar;
 }
+
+/**
+ * Returns Amount of Spice held by agent
+ * @return int - value of Spice reserves
+ * @exception none
+ */
 int Agent::getSpice(void){
     return currentSpice;
 }
+
+/**
+ * Returns Combined amount of Sugar and Spice held by agent
+ * @return int - value of Sugar+spice reserves
+ * @exception none
+ */
 int Agent::getWealth(void){
     return currentSugar+currentSpice;
 }
+
+/**
+ * Returns Reward for killing agent
+ * @return int - Maximum of agent wealth and COmbat limit
+ * @exception none
+ */
 int Agent::getReward(void){
     return std::min(this->getWealth(),theWorld->getCombatLimit());
 }
+
+/**
+ * Returns Number of culture tags held by agent
+ * @return int - length of culture vector
+ * @exception none
+ */
 int Agent::getCultureLength(void){
     return cultureLength;
 }
+
+/**
+ * Returns Number of Immunity tags held by agent
+ * @return int - length of immunity vector
+ * @exception none
+ */
 int Agent::getImmunityLength(void){
     return immunityLength;
 }
+
+
+/**
+ * Returns Number of children of agent
+ * @return int - size of currentChildren vector
+ * @exception none
+ */
 unsigned long Agent::getChildrenCount()
 {
     return currentChildren.size();
 }
+
+/**
+ * Returns pointer to father of agent
+ * @return Agent* --nullptr if no father else pointer to father
+ * @exception none
+ */
 Agent* Agent::getFather()
 {
     return father;
 }
+
+/**
+ * Returns pointer to mother of agent
+ * @return Agent* --nullptr if no mother else pointer to mother
+ * @exception none
+ */
 Agent* Agent::getMother()
 {
     return mother;
 }
 
 
+/**
+ * Returns culture of agent
+ * @return vector containing culture tags
+ * @exception none
+ */
 std::vector<bool> Agent::getCulture(void){
     return currentCulture;
 }
+
+/**
+ * Returns immunity of agent
+ * @return vector containing immunity tags
+ * @exception none
+ */
 std::vector<bool> Agent::getImmunity(void){
     return currentImmunity;
 }
+
+/**
+ * Returns children of agent
+ * @return vector containing children
+ * @exception none
+ */
 std::vector<Agent*> Agent::getChildren(void){
     return currentChildren;
 }
+
+/**
+ * Returns loans owed *by* agent
+ * @return vector containing loans owed
+ * @exception none
+ */
 std::vector<std::pair<Agent*,std::pair<int, int>>> Agent::getLoansOwed(void){
     return currentLoansOwed;
 }
+
+/**
+ * Returns loans owed *to* agent
+ * @return vector containing loans owing to us
+ * @exception none
+ */
 std::vector<std::pair<Agent*,std::pair<int, int>>> Agent::getLoansOwing(void){
     return currentLoansOwing;
 }
+
+
+/**
+ * Returns diseases caught by agent
+ * @return vector containing diseases
+ * @exception none
+ */
 std::vector<std::vector<bool>> Agent::getDiseases(void){
     return currentDiseases;
 }
+
+/**
+ * Returns location of agent
+ * @return pointer to location object
+ * @exception none
+ */
 Location* Agent::getLocation(void){
     return theWorld->getLocation(currentPosition);
 }
-//setters
+
+
+
+
+//***********************************setters***********************************
 
 bool Agent::markNeighbour(int direction)
 {
