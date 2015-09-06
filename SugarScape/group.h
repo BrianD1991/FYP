@@ -12,6 +12,18 @@
 #include <iostream>
 #include "Location.h"
 
+
+/*!  \class  group
+ \brief Group used in writeDependent actions to record groups of agents who wish to
+ interact exclusively for an action (e.g. combat)
+ 
+ Holds:
+ - list of agents in the group;
+ - The prime mover in the group (e.g. in Combat this is the attacking agent);
+ - Size of group
+ - Ranking of group , used to sort groups in order
+ - Number of active participants (can differ from  size of group - e.g. mating has a group size of 3 but only two active participants
+ */
 class group{
     std::vector<Location*> members; /*!< Locations of Agents in this group */
     Location *primeMover;/*!< Location of Agent who formed the group */

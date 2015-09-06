@@ -334,107 +334,292 @@ Location* Agent::getLocation(void){
 
 
 
-//***********************************setters***********************************
+//***********************************SETTERS***********************************
 
+
+/**
+ * marks neighbour in given direction as done
+ * @param direction :int (0 to 3) indicating direction
+ * @see iterativeWriteAction
+ * @return true if direction is ok
+ * @exception none *ADD EXCEPTION HERE*
+ */
 bool Agent::markNeighbour(int direction)
 {
-    return availableNeighbours[direction]=false;
+    if (0<=direction && 4>direction) {
+        availableNeighbours[direction]=false;
+        return true;
+    }else{
+        return false;
+    }
+    
 }
 
-
+/**
+ * sets agent to new position - handles wraparound properly
+ * @param destination std::pair containing new position
+ * @return new position
+ * @exception none
+ */
 std::pair<int, int> Agent::setPosition(std::pair<int, int> destination){
     newPosition.first=theWorld->wrap(destination.first);
     newPosition.second=theWorld->wrap(destination.second);
     return newPosition;
 }
+
+/**
+ * sets sex of agent, only works if sex is not already set
+ * @param sex
+ * @return new sex
+ * @exception none
+ */
 Sex Agent::setSex(Sex newSex){
     if (sex==Sex::unknown) sex=newSex;
     return sex;
 }
+
+/**
+ * sets vision of agent, only works if vision is not already set
+ * @param newvision
+ * @return new vision value
+ * @exception none
+ */
 int Agent::setVision(int newVision){
     if (vision==-1) {
         vision=newVision;
     }
     return newVision;
 }
+
+/**
+ * increments agent age
+ * @return new age
+ * @exception none
+ */
 int Agent::incAge(void){
     return ++currentAge;
 }
+
+/**
+ * increments agent age by any amount
+ * @return new age
+ * @exception none *NEED TO ADD EXCEPTION*
+ */
 int Agent::setAge(int newAmount){
-    currentAge=newAmount;
+    if (newAmount>=0) {
+        currentAge=newAmount;
+    }
     return currentAge;
 }
+
+/**
+ * sets maximum age of agent, only works if maximum age is not already set
+ * @param newMax
+ * @return maxAge value
+ * @exception none
+ */
 int Agent::setMaxAge(int newMax){
     if (maxAge==-1) {
         maxAge=newMax;
     }
     return maxAge;
 }
+
+/**
+ * sets sugar metabolism of agent
+ * @param newAmount
+ * @return newMetabolism value
+ * @exception none
+ */
 int Agent::setMetabolism(int newAmount){
-    newMetabolism=newAmount;
+    if (newAmount>=0) {
+        newMetabolism=newAmount;
+    }
     return newMetabolism;
 }
+
+
+/**
+ * sets spice metabolism of agent
+ * @param newAmount
+ * @return newMetabolism value
+ * @exception none
+ */
 int Agent::setSpiceMetabolism(int newAmount){
-    newSpiceMetabolism=newAmount;
+    if (newAmount>=0) {
+        newSpiceMetabolism=newAmount;
+    }
     return newSpiceMetabolism;
 }
+
+/**
+ * Adds Sugar to reserves held by agent
+ * @param extraSugar
+ * @return new Sugar reserves
+ * @exception none
+ */
 int Agent::incSugar(int extraSugar){
     newSugar+=extraSugar;
     return newSugar;
 }
+
+/**
+ * Adds Spice to reserves held by agent
+ * @param extraSpice
+ * @return new Spice reserves
+ * @exception none
+ */
 int Agent::incSpice(int extraSpice){
     newSpice+=extraSpice;
     return newSpice;
 }
+
+/**
+ * Sets Sugar reserves held by agent to a new amount
+ * @param newAmount
+ * @return new Sugar reserves
+ * @exception none
+ */
 int Agent::setSugar(int newAmount){
     newSugar=newAmount;
     return newSugar;
 }
+
+/**
+ * Sets Spice reserves held by agent to a new amount
+ * @param newAmount
+ * @return new Spice reserves
+ * @exception none
+ */
 int Agent::setSpice(int newAmount){
     newSpice=newAmount;
     return newSpice;
 }
+
+/**
+ * Sets culture length to a new amount
+ * @param newAmount
+ * @return new culture length
+ * @exception none
+ */
 int Agent::setCultureLength(int newAmount){
-    cultureLength=newAmount;
+    if (newAmount>=0) {
+        cultureLength=newAmount;
+    }
     return cultureLength;
 }
+
+/**
+ * Sets immunity length to a new amount
+ * @param newAmount
+ * @return new immunity length
+ * @exception none
+ */
 int Agent::setImmunityLength(int newAmount){
-    immunityLength=newAmount;
+    if (newAmount>=0) {
+        immunityLength=newAmount;
+    }
     return immunityLength;
 }
+
+/**
+ * Set a specific tag to new value
+ * @param newValue
+ * @param index
+ * @see Disease Rule
+ * @return index of new tag if ok else -1
+ * @exception none *ADD EXCEPTION HERE*
+ */
 int Agent::setImmunityTag(bool newValue,int index){
-    newImmunity[index]=newValue;
-    return newImmunity[index];
+    if (index>=0 && index<newImmunity.size()) {
+        newImmunity[index]=newValue;
+        return index;
+    }
+    return -1;
 }
+
+/**
+ * Replaces culture of agent with new culture. Not used but you never know!
+ * @param replacementCulture
+ * @return new culture vector
+ * @exception none
+ */
 std::vector<bool> Agent::setCulture(std::vector<bool> replacementCulture){
     newCulture=replacementCulture;
     return newCulture;
 }
+
+/**
+ * Replaces immunity of agent with new immunity. Not used but you never know!
+ * @param replacementImmunity
+ * @return new immunity vector
+ * @exception none
+ */
 std::vector<bool> Agent::setImmunity(std::vector<bool> replacementImmunity){
     newImmunity=replacementImmunity;
     return newImmunity;
 }
+
+/**
+ * Replaces children of agent with new children. Not used but you never know!
+ * @param replacementChildren
+ * @return new children vector
+ * @exception none
+ */
 std::vector<Agent*> Agent::setChildren(std::vector<Agent*>replacementChildren){
     newChildren=replacementChildren;
     return newChildren;
 }
 
+/**
+ * Replaces loans owed *TO* agent with new loans owed. Not used but you never know!
+ * @param replacementLoansOwed
+ * @return new loans owed vector
+ * @exception none
+ */
 std::vector<std::pair<Agent*,std::pair<int, int>>> Agent::setLoansOwed(std::vector<std::pair<Agent*,std::pair<int, int>>> replacementLoansOwed){
     newLoansOwed=replacementLoansOwed;
     return newLoansOwed;
 }
+
+
+/**
+ * Replaces loans owed *BY* agent with new loans owed *BY* agent. Not used but you never know!
+ * @param replacementLoansOwing
+ * @return new loans owing vector
+ * @exception none
+ */
 std::vector<std::pair<Agent*,std::pair<int, int>>> Agent::setLoansOwing(std::vector<std::pair<Agent*,std::pair<int, int>>> replacementLoansOwing){
     newLoansOwing=replacementLoansOwing;
     return newLoansOwing;
 }
+
+
+/**
+ * Replaces diseases caught by agent with diseases. Not used but you never know!
+ * @param replacementDiseases
+ * @return new diseases vector
+ * @exception none
+ */
 std::vector<std::vector<bool>> Agent::setDiseases(std::vector<std::vector<bool>> replacementDiseases){
     newDiseases=replacementDiseases;
     return newDiseases;
 }
 
+
+
+
 //*********************** HELPERS ***********************************************
 
-
+/**
+ * Initialise some values in existing agent: Not used as yet
+ * @param sim :pointer to world
+ * @param dad :pointer to male parent
+ * @param mum :pointer to female parent
+ * @return pointer to agent
+ * @see reincarnate method
+ * @exception none
+ */
 Agent* Agent::initialise(World *sim,Agent *dad, Agent *mum)
 {
     theWorld=sim;
@@ -448,6 +633,15 @@ Agent* Agent::initialise(World *sim,Agent *dad, Agent *mum)
     return this;
 }
 
+
+
+/**
+ * reincarnates agent for replacement rule, saves deleting one agent and then creating a new replacement
+ * @param pos :new position of agent
+ * @see Replacement rule
+ * @return pointer to agent
+ * @exception none
+ */
 Agent* Agent::reincarnate(std::pair<int,int> pos){
     mother=father=nullptr;
     killed=false;
@@ -497,15 +691,32 @@ Agent* Agent::reincarnate(std::pair<int,int> pos){
     return this;
 }
 
-
+/**
+ * mark this agent as done (completed action or part of group going to complete action
+ * @return true
+ * @exception none
+ */
 bool Agent::markDone(void){
     return done=true;
 }
 
+
+/**
+ * mrk agent as killed
+ * @see Combat rule
+ * @return true
+ * @exception none
+ */
 bool Agent::markKilled(){
     return killed=true;
 }
 
+/**
+ * REturns tribe of agent (red or blue)
+ * @see Culture Rule
+ * @return affiliation (red or blue)
+ * @exception none
+ */
 affiliation Agent::getTribe(void){
     int reds=0;
     for (int i=0; i<cultureLength; ++i) {
@@ -520,6 +731,15 @@ affiliation Agent::getTribe(void){
         return affiliation::blue;
     }
 }
+
+
+/**
+ * tells us if agent is immune to a disease
+ * @param disease
+ * @see AgentDisease Rule
+ * @return true if immune else false
+ * @exception none
+ */
 bool Agent::isImmune(std::vector<bool> disease){
     int j=0;
     int length= (int)disease.size();
@@ -535,22 +755,51 @@ bool Agent::isImmune(std::vector<bool> disease){
     }
     return false;
 }
+
+/**
+ * Is this agent our child?
+ * @param agent
+ * @see Inheritance Rule
+ * @return true if agent is our child
+ * @exception none
+ */
 bool Agent::isChild(Agent* agent){
     for (const Agent* child: currentChildren){
         if (agent==child) return true;
     }
     return false;
 }
+
+/**
+ * Adds agent to our list of children
+ * @param newChild
+ * @return number of children we have
+ * @exception none
+ */
 unsigned long Agent::addChild(Agent* newChild){
     newChildren.push_back(newChild);
     return newChildren.size();
 }
+
+/**
+ * delete agent from our child list (we only store living children)
+ * @param goneChild
+ * @return number of children we have
+ * @exception none
+ */
 unsigned long Agent::removeChild(Agent* goneChild){
     auto it = std::find(newChildren.begin(), newChildren.end(), goneChild);
     if(it != newChildren.end())
         newChildren.erase(it);
     return newChildren.size();
 }
+
+/**
+ * Returns amount owed *BY* agent *IN TOTAL*
+ * @see Credit Rule
+ * @return amount we owe IN TOTAL
+ * @exception none
+ */
 int Agent::totalOwed(void){
     int total=0;
     for(const std::pair<Agent*,std::pair<int, int>> account:currentLoansOwed){
@@ -558,6 +807,13 @@ int Agent::totalOwed(void){
     }//for
     return total;
 }
+
+/**
+ * Returns amount owed *TO* agent *IN TOTAL*
+ * @see Credit Rule
+ * @return amount we are owed IN TOTAL
+ * @exception none
+ */
 int Agent::totalOwing(void){
     int total=0;
     for(const std::pair<Agent*,std::pair<int, int>> account:currentLoansOwing){
@@ -565,6 +821,14 @@ int Agent::totalOwing(void){
     }//for
     return total;
 }
+
+
+/**
+ * Returns amount owed *BY* agent TODAY
+ * @see Credit Rule
+ * @return amount we owe
+ * @exception none
+ */
 int Agent::OwedToday(void){
     int total=0;
     for(const std::pair<Agent*,std::pair<int, int>> account:currentLoansOwed){
@@ -575,7 +839,12 @@ int Agent::OwedToday(void){
     return total;
 }
 
-
+/**
+ * Returns amount owed *TO* agent TODAY
+ * @see Credit Rule
+ * @return amount we are owed
+ * @exception none
+ */
 int Agent::OwingToday(void){
     int total=0;
     for(const std::pair<Agent*,std::pair<int, int>> account:currentLoansOwing){
@@ -585,6 +854,8 @@ int Agent::OwingToday(void){
     }//for
     return total;
 }
+
+
 /**
  * Checks to see if an agent has a particular disease
  * @param infection :disease we are checking for
@@ -612,7 +883,11 @@ unsigned long Agent::addDisease(std::vector<bool> infection){
 }
 
 
-
+/**
+ * Returns number of diseases an agent has
+ * @return length of currentDiseases vector
+ * @exception none
+ */
 unsigned long Agent::diseaseCount(void){
     return currentDiseases.size();
 }
@@ -703,8 +978,9 @@ bool Agent::removeDeadMother(void)
         return false;
     }
 }
+
 /**
- * Removed link to father if father is dead
+ * Removes link to father if father is dead
  * @return true if father was dead else false
  * @exception none
  */
@@ -792,6 +1068,12 @@ bool Agent::removeKilledFather(void)
 }
 
 
+/**
+ * Tells us if all neighbours are done
+ * @see IterativeWriteAction
+ * @return true if all done
+ * @exception none
+ */
 bool Agent::allDone(void){
     for (int i=0; i<4; ++i) {
         if (availableNeighbours[i]==true) {
@@ -801,6 +1083,12 @@ bool Agent::allDone(void){
     return true;
 }
 
+/**
+ * Sets all neighbours to not done
+ * @see IterativeWriteAction
+ * @return true
+ * @exception none
+ */
 bool Agent::resetNeighbours(void){
     for (int i=0; i<4; ++i) {
         availableNeighbours[i]=true;
@@ -808,6 +1096,13 @@ bool Agent::resetNeighbours(void){
     return true;
 }
 
+
+/**
+ * Sets all neighbours to done
+ * @see IterativeWriteAction
+ * @return true
+ * @exception none
+ */
 bool Agent::makeUnavailable(void){
     for (int i=0; i<4; ++i) {
         availableNeighbours[i]=false;
