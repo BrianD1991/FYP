@@ -129,32 +129,73 @@ int Location::setPollution(int newAmount){
     newPollution=newAmount;
     return newPollution;
 }
+
 Agent* Location::setAgent(Agent* newAgent){
     newResident=newAgent;
     return newResident;
 }
+
+/**
+ * Change pointer to world -Why would we ever do this??
+ * @param theWorld
+ * @return pointer to old world object
+ * @exception none
+ */
 World* Location::setWorld(World* theWorld){
     World* old=sim;
     sim=theWorld;
     return old;
 }
-//helpers
+
+
+
+//******************HELPERS***********************
+
+/**
+ * Mark us done
+ * @return true
+ * @exception none
+ */
 bool Location::markDone(void){
     return done=true;
 }
+
+/**
+ * do we have an agent here?
+ * @return true if we have an agent here else false
+ * @exception none
+ */
 bool Location::hasAgent(void){
     return currentResident!=nullptr;
 }
+
+/**
+ * Kill agent at this location
+ * @return pointer to killed agent (nullptr if none)
+ * @exception none
+ */
 Agent* Location::killAgent(void)
 {
     newResident=nullptr;
     return deadAgent=currentResident;
 }
+
+/**
+ * returns true if we have a dead agent waiting to be deleted
+ * @return true if there is a dead agent
+ * @exception none
+ */
 bool Location::hasDeadAgent()
 {
     return deadAgent!=nullptr;
 }
 
+/**
+ * Returns location N,S,E or W.
+ * @param direction :integer 0..3 for cardinal directions
+ * @return Location in direction we wanted
+ * @exception none *ADD EXCEPTION HERE*
+ */
 Location* Location::getCardinal(int direction){
     switch (direction) {
         case 0:
@@ -176,6 +217,11 @@ Location* Location::getCardinal(int direction){
     return nullptr;
 }
 
+/**
+ * deletes dead agents - Not required. Done in sync
+ * @return true if dead agent was removed else if no dead agent then false
+ * @exception none
+ */
 bool Location::putOutGarbage(void)
 {
     if (deadAgent!=nullptr) {
@@ -200,7 +246,11 @@ bool Location::initAgent(Agent * InitialAgent){
     return true;
 }
 
-
+/**
+ * Synchronises all updates. deletes agents that are dead
+ * @return true
+ * @exception none
+ */
 bool Location::sync(void){
     done=false;
     currentPollution=newPollution;

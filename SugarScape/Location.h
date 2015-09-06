@@ -15,6 +15,11 @@
 
 const std::pair<int, int> nullPosition(-1,-1);
 
+/*!  \class  Location
+ \brief Locatgions of the lattice, representing the world
+ 
+ Each location can hold one agent and has Sugar and spice resources.  It can also contain some pollution.
+ */
 class Location{
         //immutable -- once initialised these stay constant
         std::pair<int,int> position;

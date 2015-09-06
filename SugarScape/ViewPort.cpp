@@ -32,12 +32,24 @@ ViewPort::ViewPort(sf::RenderWindow * theWindow, World * aWorld, std::pair<int,i
             //AgentRepresentations[i].setOrigin(maxRadius, -maxRadius);
     }
 }
+
+/**
+ * destructor - delete array of shape pointers
+ */
 ViewPort::~ViewPort(){
     delete [] AgentRepresentations;
 }
 
 
 /*!< Setters */
+
+
+/**
+ * Sets new start position (top left corner) for drawable area of lattice
+ * @param newStart
+ * @return new starting position
+ * @exception none
+ */
 std::pair<int,int> ViewPort::setStartPositions(std::pair<int,int> newStart)
 {
     std::pair<int,int> old=startPosition;
@@ -45,7 +57,12 @@ std::pair<int,int> ViewPort::setStartPositions(std::pair<int,int> newStart)
     return old;
 }
 
-
+/**
+ * Sets size of drawable area
+ * @param newDim
+ * @return old dimension size
+ * @exception none
+ */
 int ViewPort::setSize(int newDim){
     int old=portDimension;
     portDimension=newDim;
@@ -54,6 +71,12 @@ int ViewPort::setSize(int newDim){
 }
 
 
+/**
+ * Sets num of pixels in screen drawing area
+ * @param newPixels
+ * @return old pixel count
+ * @exception none
+ */
 std::pair<int,int> ViewPort::setPixels(std::pair<int,int> newPixels)
 {
     std::pair<int,int> old=pixelCount;
@@ -62,30 +85,50 @@ std::pair<int,int> ViewPort::setPixels(std::pair<int,int> newPixels)
 }
 
 /*!< Getters */
+
+/**
+ * returns start position of lattice we are drawing (top-left corner)
+ * @return startPosition
+ * @exception none
+ */
 std::pair<int,int>  ViewPort::getStartPosition()
 {
     return startPosition;
 }
 
+/**
+ * Pixelcount of drawing area
+ * @return PixelCount
+ * @exception none
+ */
 std::pair<int,int>  ViewPort::getPixelCount()
 {
     return pixelCount;
 }
 
+/**
+ * retruns number of Lattice locations we are drawing
+ * @return portDimension
+ * @exception none
+ */
 int                 ViewPort::getSize()
 {
     return portDimension;
 }
 
 /*!< Draw Method */
+/**
+ * Draws lattice grid on screen
+ * @return true
+ * @exception none
+ */
 bool ViewPort::draw(){
-
     int agentCount=0;
     // Display grid
         std::pair<int,int> pos;
         Agent *theAgent=nullptr;
-        for (int i=0; i<portDimension; ++i) {
-            for (int k=0; k<portDimension; ++k) {
+        for (int i=startPosition.first; i<portDimension; ++i) {
+            for (int k=startPosition.second; k<portDimension; ++k) {
                 pos={i,k};
                 int radius=-1;
                 Location *currLocation=theWorld->getLocation(pos);
