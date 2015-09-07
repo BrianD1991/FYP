@@ -589,6 +589,11 @@ int World::addRule(Action* rule){
     return (int)activeRules.size();
 }
 
+/**
+ * apply each active rule in turn
+ * @return number of rules applied
+ * @exception none
+ */
 int World::applyRules(){
     int ruleCount=0;
     for(auto rule:activeRules){
