@@ -21,8 +21,25 @@ typedef std::mt19937 MyRNG;  // the Mersenne Twister with a popular choice of pa
 class Action;
 
 
+/*!  \class  World
+ \brief World - singleton that holds everything belonging to sim.
+ 
+ This class holds:
+ - The Lattice of locations;
+ - All agents
+ - All simulation parameters
+ - All Rules to be used in simulation
+ - Random number generator (*need to have one per thread really*)
+ 
+ Each step is called from here.
+ */
 class World{
     
+    //!
+    /*!
+     All parameters of simulation world are set here.
+     Change to suit your simulation
+     */
     static const int DIM=40;
     static const int AGENTCOUNT=400;
     static const int CultureCount=20;

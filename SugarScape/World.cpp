@@ -578,7 +578,12 @@ Agent* World::killAgent(std::pair<int,int> pos)
 }
 //Rule Application
 
-
+/**
+ * Add a rule to the list of active rules
+ * @param rule
+ * @return number of rules  that are active
+ * @exception none
+ */
 int World::addRule(Action* rule){
     activeRules.push_back(rule);
     return (int)activeRules.size();

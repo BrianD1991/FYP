@@ -34,8 +34,7 @@ class Location{
         Agent *deadAgent;
 public:
     //constructors
-    Location(World* sim=nullptr);
-    Location(int,int);
+    Location(World* sim=nullptr, std::pair<int,int> pos=nullPosition);
     //destructor
     ~Location();
     
