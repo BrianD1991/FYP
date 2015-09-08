@@ -39,7 +39,7 @@ bool IndependentAction::run(int startX, int startY, int size){
             executeAction(&Lattice[i*size+k],nullptr);
         }
     }
-    sim->sync();
+    //sim->sync();
     return true;
 
 }

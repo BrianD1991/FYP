@@ -77,7 +77,7 @@ bool WriteAction::run(int startX, int startY, int size){
         executeAction(grp->getPrimeMover(),grp);
     }
     //update states
-    sim->sync();
+    //sim->sync();
     //delete groups
     for(auto grp:ExclusiveGroups){
          delete grp;
@@ -97,19 +97,46 @@ bool WriteAction::concurrentRun(void){
     /*!< construct tile set - tile contains 9 sections - 3 each side*/
     int tileDim=3*sectionSize;
     int tileNum=sim->getSize()/tileDim;/*!< Assume size%tileDim==0 */
+    if (sim->getSize()%tileDim!=0) {
+        std::cout << "TILE SIZE ERROR"<<std::endl;
+    }
+    int totalTiles=tileNum*tileNum;
 #pragma omp for
-    for (int xTile=0; xTile<tileNum; ++xTile) {
+    for (int i=0; i<totalTiles; ++i) {
+        run((i/tileNum)*tileDim,(i%tileNum)*tileDim,sectionSize);
+    }
 #pragma omp for
-        for (int yTile=0; yTile<tileNum; ++yTile) {
-            //sequentally run through each tile
-            for (int i=0; i<3; ++i) {
-                for (int k=0; k<3; ++k) {
-                    run((xTile+i)*sectionSize,(yTile+k)*sectionSize,sectionSize);
-#pragma omp barrier
-                }
-            }
-        }
-    }    
+    for (int i=0; i<totalTiles; ++i) {
+        run((i/tileNum)*tileDim,(i%tileNum)*tileDim+sectionSize,sectionSize);
+    }
+#pragma omp for
+    for (int i=0; i<totalTiles; ++i) {
+        run((i/tileNum)*tileDim,(i%tileNum)*tileDim+2*sectionSize,sectionSize);
+    }
+#pragma omp for
+    for (int i=0; i<totalTiles; ++i) {
+        run((i/tileNum)*tileDim+sectionSize,(i%tileNum)*tileDim,sectionSize);
+    }
+#pragma omp for
+    for (int i=0; i<totalTiles; ++i) {
+        run((i/tileNum)*tileDim+sectionSize,(i%tileNum)*tileDim+sectionSize,sectionSize);
+    }
+#pragma omp for
+    for (int i=0; i<totalTiles; ++i) {
+        run((i/tileNum)*tileDim+sectionSize,(i%tileNum)*tileDim+2*sectionSize,sectionSize);
+    }
+#pragma omp for
+    for (int i=0; i<totalTiles; ++i) {
+        run((i/tileNum)*tileDim+sectionSize*2,(i%tileNum)*tileDim,sectionSize);
+    }
+#pragma omp for
+    for (int i=0; i<totalTiles; ++i) {
+        run((i/tileNum)*tileDim+sectionSize*2,(i%tileNum)*tileDim+sectionSize,sectionSize);
+    }
+#pragma omp for
+    for (int i=0; i<totalTiles; ++i) {
+        run((i/tileNum)*tileDim+sectionSize*2,(i%tileNum)*tileDim+2*sectionSize,sectionSize);
+    }
     return true;
 }
 

@@ -40,7 +40,7 @@ bool ReadAction::run(int startX, int startY, int size){
         }
     }
     //Update everyone
-    sim->sync();
+    //sim->sync();
     return true;
     
 }
