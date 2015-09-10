@@ -95,7 +95,7 @@ class World{
     int initialPopulation;
     
     Location *Lattice; /*!< 2D (size by size) Matrix of locations in world  */
-    std::vector<Agent*> population; /*!< Agents in simulation */
+    //std::vector<Agent*> population; /*!< Agents in simulation NOT USED */
     std::vector<Action*> activeRules; /*!< Rules we run each time step */
     
     //random Numbers

@@ -12,7 +12,12 @@
 
 
 
-//Constructor
+
+/**
+ * Constructor Population is 1/4 lattice size
+ * @param dimensionSize :length of lattice side Lattice[dimensionSize,dimensionSize]
+ * @exception none
+ */
 World::World(int dimensionSize)
     :size(DIM),step(0),cultureCount(CultureCount),
     maxAge(MaxAge),maxVision(MaxVision),maxMetabolism(MaxMetabolism),
@@ -31,13 +36,24 @@ World::World(int dimensionSize)
     rng.seed();
     }
 
-//Destructor
+/**
+ * Destructor - delete lattice array
+ * @exception none
+ */
 World::~World(){
     delete [] Lattice;
     
 }
 
-//helpers
+//********************************HELPERS***************************************
+
+
+
+/**
+ * initialises World fully
+ * @return true
+ * @exception none
+ */
 bool World::init(void)
 {
     //Create Locations in Lattice
@@ -51,7 +67,7 @@ bool World::init(void)
     
     //create agents and put in lattice
     std::pair<int,int> pos;
-    for (int i=0; i<initialPopulation; ++i) {//quatar fill lattice
+    for (int i=0; i<initialPopulation; ++i) {//quater fill lattice
         Agent *anAgent= nullptr;
         do {
             pos.first=getRnd(0, size-1);
@@ -59,11 +75,16 @@ bool World::init(void)
         } while (Lattice[pos.first*size+pos.second].hasAgent());
         anAgent=new Agent(this,nullptr,nullptr,pos);
         Lattice[pos.first*size+pos.second].initAgent(anAgent);
-        population.push_back(anAgent);
+        //population.push_back(anAgent); NOT USED
     }
     return true;
 }
 
+/**
+ * Syncs dual state
+ * @return zero
+ * @exception none
+ */
 int World::sync(void){
 #pragma omp parallel for
     for (int i=0; i<size*size; ++i) {
@@ -73,6 +94,11 @@ int World::sync(void){
     return 0;
 }
 
+/**
+ * sanity check used during development
+ * @return void
+ * @exception none
+ */
 void World::sanityCeck(void){
     for (int i=0; i<size; ++i) {
         for (int k=0; k<size; ++k) {
@@ -93,6 +119,13 @@ void World::sanityCeck(void){
     std::cout <<std::endl;
 }
 
+/**
+ * Handles wraparound on lattice. "%" does not work properly in C++ !
+ * @param x :index in lattice
+ * @see Lattice Definition
+ * @return x after wraparound
+ * @exception none
+ */
 int World::wrap(int x){
     if (x<0) {
          return size+x;
@@ -104,19 +137,29 @@ int World::wrap(int x){
     }
 }
 
+
+/**
+ * counts agents in lattice
+ * @return number of agents
+ * @exception none
+ */
 int World::getAgentCount(void){
     int count=0;
-    for (int i=0; i<size; ++i) {
-        for (int k=0; k<size; ++k) {
-            if (Lattice[i*size+k].hasAgent()){
+#pragma omp parallel for reduction(+:count)
+    for (int i=0; i<size*size; ++i) {
+            if (Lattice[i].hasAgent()){
                 ++count;
             }
-        }
-        
     }
     return count;
 }
 
+/**
+ * set neighbours to not done, used in iterative write actions
+ * @see InterativeAction
+ * @return true
+ * @exception none
+ */
 bool World::resetNeighbours(void){
 #pragma omp parallel for
     for (int i=0; i<size*size; ++i) {
@@ -126,9 +169,16 @@ bool World::resetNeighbours(void){
 }
 
 
-//*************************Getters*************************
+//********************************GETTERS**************************************
 
 
+/**
+ * Gets a randon number in range (inclusive)
+ * @param start :integer start value of number range
+ * @param end :integer end value in range
+ * @return number in range
+ * @exception none
+ */
 int World::getRnd(int start,int end){
     std::uniform_int_distribution<uint32_t> uint_dist(start,end);
     return uint_dist(rng);
@@ -310,29 +360,86 @@ int World::getSeasonLength(void){
 int World::getProduction(void){
     return production;
 }
+
+/**
+ * Gets consumptionvalue
+ * @see Pollution
+ * @return consumption value
+ * @exception none
+ */
 int World::getConsumption(void){
     return consumption;
 }
+
+/**
+ * Gets CombatLimit
+ * @see AgentCombat
+ * @return Combat Limit value
+ * @exception none
+ */
 int World::getCombatLimit(void){
     return combatLimit;
 }
+
+/**
+ * Gets length of immunity string
+ * @see AgentDisease
+ * @return immunity length
+ * @exception none
+ */
 int World::getImmunityLength(void){
     return immunityLength;
 }
+
+/**
+ * gets initial population size
+ * @return Initial population size
+ * @exception none
+ */
 int World::getInitialPopulationSize(void){
     return initialPopulationSize;
 }
+
+/**
+ * Gets Pollution Rate
+ * @see Pollution
+ * @return Pollution Rate
+ * @exception none
+ */
 int World::getPollutionRate(void){
     return pollutionRate;
 }
+
+
+/**
+ * Gets Child Amount
+ * @see AgentMating
+ * @return Child Amount
+ * @exception none
+ */
 int World::getChildAmount(void){
     return childAmount;
 }
+
+/**
+ * Returns agent at position if any (or nullptr)
+ * @param pos std::pair of location indices
+ * @return pointer to agent at that position (or nullptr)
+ * @exception none
+ */
 Agent* World::getAgent(std::pair<int,int> pos){
     return Lattice[wrap(pos.first)*size+wrap(pos.second)].getAgent();
 }
 
 
+
+/**
+ * return all locations in neighbourhood
+ * @param pos std::pair of position
+ * @param range :size of neighbourhood (usually 1)
+ * @return std::vector of all locations in neighbourhood
+ * @exception none
+ */
 std::vector<Location*> World::getNeighbourhood(std::pair<int,int> pos,int range)
 {
     std::vector<Location*> neighbourhood;
@@ -405,7 +512,6 @@ std::vector<Location*> World::getCombatNeighbourhood(std::pair<int,int> pos,int 
             
         }//if
     }//for
-    
     for (int i=pos.second-range; i<=pos.second+range; ++i) {/*!< loop up to and including (<=) or else we lose last location */
         //pick location only if it !=identity (us) and is empty and is not marked done
         if (i!=pos.second && false==Lattice[pos.first*size+wrap(i)].isDone())
@@ -451,10 +557,22 @@ std::vector<Agent*> World::getNeighbours(std::pair<int,int> pos,int range)
     }//for
     return neighbourList;
 }
+
+/**
+ * Return lattice array
+ * @return lattice array (ptr)
+ * @exception none
+ */
 Location* World::getLattice(void)
 {
     return Lattice;
 }
+/**
+ * get location at position
+ * @param pos :std::pair position indices
+ * @return pointer to location
+ * @exception none
+ */
 Location* World::getLocation(std::pair<int, int> pos)
 {
     return &Lattice[wrap(pos.first)*size+wrap(pos.second)];
@@ -462,110 +580,328 @@ Location* World::getLocation(std::pair<int, int> pos)
 
 
 
-//Setters
+//**************************SETTERS********************************
+
+
+/**
+ * change size of lattice dimensions
+ * @param newSize
+ * @return old Size
+ * @exception none
+ */
 int World::setSize(int newSize){
+    int oldSize=size;
     size=newSize;
-    return size;
+    return oldSize;
 }
+
+
+/**
+ * Change culture size
+ * @param newCultureCount
+ * @return old Culture size
+ * @exception none
+ */
 int World::setCultureCount(int newCultureCount){
+    int oldCount=cultureCount;
     cultureCount=newCultureCount;
-    return cultureCount;
+    return oldCount;
 }
+
+/**
+ * Change disease length
+ * @param newDiseaseLength
+ * @return old disease length
+ * @exception none
+ */
 int World::setDiseaseLength(int newDiseaseLength){
+    int oldLength=DiseaseLength;
     diseaseLength=newDiseaseLength;
-    return diseaseLength;
+    return oldLength;
 }
+
+
+/**
+ * Change maximum vision length
+ * @param newMaxVision
+ * @return old maximum vision length
+ * @exception none
+ */
 int World::setMaxVision(int newMaxVision){
+    int oldMax=MaxVision;
     maxVision=newMaxVision;
-    return maxVision;
+    return oldMax;
 }
+
+
+/** Change minimum metabolism
+ * @param newMinMetabolism
+ * @return old minimum metabolism
+ * @exception none
+ */
 int World::setMinMetabolism(int newMinMetabolism){
+    int oldMin=MinMetabolism;
     minMetabolism=newMinMetabolism;
-    return minMetabolism;
+    return oldMin;
 }
+
+
+/** Change maximum metabolism
+ * @param newMaxMetabolism
+ * @return old maximum metabolism
+ * @exception none
+ */
 int World::setMaxMetabolism(int newMaxMetabolism){
+    int oldMax=MaxMetabolism;
     maxMetabolism=newMaxMetabolism;
-    return maxMetabolism;
+    return oldMax;
 }
+
+/** Change sugar growth
+ * @param newSugarGrowth
+ * @return old sugar growth
+ * @exception none
+ */
 int World::setSugarGrowth(int newSugarGrowth){
+    int oldSugar=SugarGrowth;
     sugarGrowth=newSugarGrowth;
-    return sugarGrowth;
+    return oldSugar;
 }
+
+/** Change spice growth
+ * @param newSpiceGrowth
+ * @return old spice growth
+ * @exception none
+ */
 int World::setSpiceGrowth(int newSpiceGrowth){
+    int oldSpice=SpiceGrowth;
     spiceGrowth=newSpiceGrowth;
-    return spiceGrowth;
+    return oldSpice;
 }
+
+/** Change minimum age
+ * @param newMinAge
+ * @return old minimum age
+ * @exception none
+ */
 int World::setMinAge(int newMinAge){
+    int oldMin=MinAge;
     minAge=newMinAge;
-    return minAge;
+    return oldMin;
 }
+
+/** Change maximum age
+ * @param newMaxAge
+ * @return old maximum age
+ * @exception none
+ */
 int World::setMaxAge(int newMaxAge){
+    int oldMax=MaxAge;
     maxAge=newMaxAge;
-    return maxAge;
+    return oldMax;
 }
+
+
+/**
+ * change duration
+ * @param newDuration
+ * @return old duration
+ * @exception none
+ */
 int World::setDuration(int newDuration){
+    int oldDuration=duration;
     duration=newDuration;
-    return duration;
+    return oldDuration;
 }
+
+/**
+ * change rate
+ * @param newRate
+ * @return old rate
+ * @exception none
+ */
 int World::setRate(int newRate){
+    int oldRate=rate;
     rate=newRate;
-    return rate;
+    return oldRate;
 }
+
+/**
+ * change Initial Sugar minimum
+ * @param newInitialSugarMin
+ * @return old Initial Sugar minimum
+ * @exception none
+ */
 int World::setInitialSugarMin(int newInitialSugarMin){
+    int oldMin=initialSugarMin;
     initialSugarMin=newInitialSugarMin;
-    return initialSugarMin;
+    return oldMin;
 }
+
+
+/**
+ * change Initial Sugar maximum
+ * @param newInitialSugarMax
+ * @return old Initial Sugar maximum
+ * @exception none
+ */
 int World::setInitialSugarMax(int newInitialSugarMax){
+    int oldMax=initialSugarMax;
     initialSugarMax=newInitialSugarMax;
-    return initialSugarMax;
+    return oldMax;
 }
+
+
+/**
+ * change Initial Spice minimum
+ * @param newInitialSpiceMin
+ * @return old Initial Spice minimum
+ * @exception none
+ */
 int World::setInitialSpiceMin(int newInitialSpiceMin){
+    int oldMin=initialSpiceMin;
     initialSpiceMin=newInitialSpiceMin;
-    return initialSpiceMin;
+    return oldMin;
 }
+
+/**
+ * change Initial Spice maximum
+ * @param newInitialSpiceMax
+ * @return old Initial Spice maximum
+ * @exception none
+ */
 int World::setInitialSpiceMax(int newInitialSpiceMax){
+    int oldMax=initialSpiceMax;
     initialSpiceMax=newInitialSpiceMax;
-    return initialSpiceMax;
+    return oldMax;
 }
+
+
+/**
+ * change winter rate
+ * @param newWinterRate
+ * @return old Winter Rate
+ * @exception none
+ */
 int World::setWinterRate(int newWinterRate){
+    int oldRate=winterRate;
     winterRate=newWinterRate;
-    return winterRate;
+    return oldRate;
 }
+
+
+/**
+ * change season length
+ * @param newSeasonLength
+ * @return old season length
+ * @exception none
+ */
 int World::setSeasonLength(int newSeasonLength){
+    int oldLength=seasonLength;
     seasonLength=newSeasonLength;
-    return seasonLength;
+    return oldLength;
 }
+
+/**
+ * change Production rate
+ * @param newProduction
+ * @return old Production rate
+ * @exception none
+ */
 int World::setProduction(int newProduction){
+    int oldRate=production;
     production=newProduction;
-    return production;
+    return oldRate;
 }
+
+/**
+ * change Concumption Rate
+ * @param newConsumption
+ * @return old consumption rate
+ * @exception none
+ */
 int World::setConsumption(int newConsumption){
+    int oldRate=consumption;
     consumption=newConsumption;
-    return consumption;
+    return oldRate;
 }
+
+/**
+ * change Combat Limit
+ * @param newCombatLimit
+ * @return old Combat Limit
+ * @exception none
+ */
 int World::setCombatLimit(int newCombatLimit){
+    int oldLimit=combatLimit;
     combatLimit=newCombatLimit;
-    return combatLimit;
+    return oldLimit;
 }
+
+/**
+ * change immunity Length
+ * @param newImmunityLength
+ * @return old immunity length
+ * @exception none
+ */
 int World::setImmunityLength(int newImmunityLength){
+    int oldLength=immunityLength;
     immunityLength=newImmunityLength;
-    return immunityLength;
+    return oldLength;
 }
+
+/**
+ * change Initial Population Size
+ * @param newInitialPopulationSize
+ * @return old initial population size
+ * @exception none
+ */
 int World::setInitialPopulationSize(int newInitialPopulationSize){
+    int oldSize=initialPopulationSize;
     initialPopulationSize=newInitialPopulationSize;
-    return initialPopulationSize;
+    return oldSize;
 }
+
+/**
+ * change winter rate
+ * @param newWinterRate
+ * @return old Winter Rate
+ * @exception none
+ */
 int World::setPollutionRate(int newPollutionRate){
     pollutionRate=newPollutionRate;
     return pollutionRate;
 }
+
+/**
+ * change child amount
+ * @param newChildAmount
+ * @return old child amount
+ * @exception none
+ */
 int World::setChildAmount(int newChildAmount){
+    int oldAmt=childAmount;
     childAmount=newChildAmount;
-    return childAmount;
+    return oldAmt;
 }
+
+/**
+ * put agent at location *Does NOT delete pointer to old agent!*
+ * @param pos :std::pair indices of location 
+ * @param newAgent pointer to new agent
+ * @return pointer to agent we are replacing (if any)
+ * @exception none
+ */
 Agent* World::setAgent(std::pair<int,int> pos, Agent *newAgent){
     return Lattice[wrap(pos.first)*size+wrap(pos.second)].setAgent(newAgent);
 }
+
+/**
+ * Kill an agent at location
+ * @param pos :std::pair indices of location of agent
+ * @return pointer to dead agent (sync will delete pointer)
+ * @exception none
+ */
 Agent* World::killAgent(std::pair<int,int> pos)
 {
     if (Lattice[wrap(pos.first)*size+wrap(pos.second)].hasAgent()) {
@@ -576,7 +912,10 @@ Agent* World::killAgent(std::pair<int,int> pos)
         return nullptr;
     }
 }
-//Rule Application
+
+
+
+//****************RULE APPLICATION**************************
 
 /**
  * Add a rule to the list of active rules
