@@ -72,6 +72,7 @@ bool IterativeWriteAction::concurrentRun(void)
 int IterativeWriteAction::participantCount(int startX, int startY, int dimSize)
 {
     int pcount=0;
+#pragma omp parallel for
     for (int i=startX; i<startX+dimSize; ++i) {
         for (int k=startY; k<startY+dimSize; ++k) {
             if (sim->getAgent(std::pair<int,int>(i, k)) != nullptr && sim->getAgent(std::pair<int,int>(i, k))->allDone()==false) {
