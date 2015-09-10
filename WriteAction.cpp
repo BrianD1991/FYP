@@ -28,7 +28,7 @@ WriteAction::~WriteAction(void){
 bool WriteAction::run(int startX, int startY, int size){
     Location* Lattice=sim->getLattice();
     int remaining=0;
-    std::vector<group*>  ExclusiveGroups;
+    std::vector<group*>  ExclusiveGroups,FailedGroups;
     //calculate number of entities that need to take part in this actions
     remaining=participantCount(startX, startY, size);
     while (remaining>0) {//loop until all active participants are in groups
@@ -67,8 +67,8 @@ bool WriteAction::run(int startX, int startY, int size){
                     loc->markDone();
                 }
                 remaining=remaining-grp->getActiveParticipants();//reduce number of entities left to place
-            }else{//group is not exclusive delete it!
-                //delete grp;
+            }else{//group is not exclusive store it for deletion!
+                FailedGroups.push_back(grp);
             }
         }
     }//While
@@ -81,6 +81,9 @@ bool WriteAction::run(int startX, int startY, int size){
     //delete groups
     for(auto grp:ExclusiveGroups){
          delete grp;
+    }
+    for(auto grp:FailedGroups){
+        delete grp;
     }
     return true;
 }
