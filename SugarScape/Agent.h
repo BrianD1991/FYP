@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <vector>
-
+#include <algorithm>
 
 class World;
 class Location;

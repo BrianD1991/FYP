@@ -10,6 +10,7 @@
 #define __SugarScape__Location__
 
 #include <iostream>
+#include <algorithm>
 #include "Agent.h"
 #include "World.h"
 

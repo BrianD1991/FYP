@@ -10,6 +10,7 @@
 #define __SugarScape__ViewPort__
 
 #include <iostream>
+#include <algorithm>
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 

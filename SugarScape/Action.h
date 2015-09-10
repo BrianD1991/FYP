@@ -10,6 +10,8 @@
 #define __SugarScape__Action__
 
 #include <iostream>
+#include <algorithm>
+//#include <omp.h>
 #include "Location.h"
 #include "group.h"
 #include "World.h"

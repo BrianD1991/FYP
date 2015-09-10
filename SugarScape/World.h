@@ -10,7 +10,9 @@
 #define __SugarScape__World__
 
 #include <iostream>
+#include <algorithm>
 #include <random>
+//#include <omp.h>
 #include "Location.h"
 
 

@@ -10,6 +10,7 @@
 #define __SugarScape__group__
 
 #include <iostream>
+#include <algorithm>
 #include "Location.h"
 
 
