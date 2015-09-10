@@ -754,7 +754,7 @@ int World::setInitialSugarMax(int newInitialSugarMax){
 
 /**
  * change Initial Spice minimum
- * @param newInitialSpiceMin
+ * @param newInitialSpiceMin 
  * @return old Initial Spice minimum
  * @exception none
  */
@@ -936,9 +936,10 @@ int World::addRule(Action* rule){
 int World::applyRules(){
     int ruleCount=0;
     for(auto rule:activeRules){
-        ruleCount+=rule->run(0,0,size);
-        //ruleCount+=rule->concurrentRun();//run(0,0,size);
+        //ruleCount+=rule->run(0,0,size);
+        ruleCount+=rule->concurrentRun();//run(0,0,size);
         sync();
+        resetNeighbours();
     }
     return ruleCount;
 }

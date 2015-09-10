@@ -36,7 +36,7 @@ bool IterativeWriteAction::run(int startX, int startY, int size)
             sim->sync();/*!< *MUST* sync before iterating */
             participants=participantCount(startX, startY, size);
         }
-        sim->resetNeighbours();
+        //sim->resetNeighbours();
         return true;
 }
 
@@ -54,7 +54,7 @@ bool IterativeWriteAction::concurrentRun(void)
         sim->sync();/*!< *MUST* sync before iterating */
         participants=participantCount(0, 0, sim->getSize());
     }
-    sim->resetNeighbours();
+    //sim->resetNeighbours();
     return true;
 
 }
