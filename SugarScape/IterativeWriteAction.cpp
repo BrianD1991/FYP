@@ -58,3 +58,27 @@ bool IterativeWriteAction::concurrentRun(void)
     return true;
 
 }
+
+
+/**
+ Calculate the number of active participants in this action on the grid
+ Iterative actions not done until all neighbours are done!
+ @param startX :start Index for row
+ @param startY :start index for column
+ @param dimSize :Dimensions of grid size
+ @returns number of agents in this grid
+ @exception none
+ */
+int IterativeWriteAction::participantCount(int startX, int startY, int dimSize)
+{
+    int pcount=0;
+    for (int i=startX; i<startX+dimSize; ++i) {
+        for (int k=startY; k<startY+dimSize; ++k) {
+            if (sim->getAgent(std::pair<int,int>(i, k)) != nullptr && sim->getAgent(std::pair<int,int>(i, k))->allDone()==false) {
+                ++pcount;
+            }
+        }
+    }
+    return pcount;
+}
+

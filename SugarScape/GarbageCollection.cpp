@@ -25,3 +25,4 @@ bool GarbageCollection::executeAction(Location * loc, group *)
 {
     return loc->putOutGarbage();
 }
+

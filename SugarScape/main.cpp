@@ -34,7 +34,7 @@ int benchmark(int numRepeats, int stepCount, int dimStart, int increment, int ru
     std::ofstream outputFile(fileName,std::ios::out | std::ios::app);
     for (int i=0; i<runs; ++i) {
         std::chrono::duration <double, std::milli> min;
-        std::chrono::duration <double, std::milli> max;
+        std::chrono::duration <double, std::milli> max;   
         for (int k=0;k<numRepeats; ++k) {
             // create everything
             std::cout << "SIZE" << dimStart+i*increment << ": ";
@@ -112,7 +112,7 @@ int benchmark(int numRepeats, int stepCount, int dimStart, int increment, int ru
 int main(int, char const**)
 {
     
-    benchmark(1,50, 50, 50, 2, "/Users/joseph/test200.txt");
+    benchmark(1,50, 18, 18, 6, "/Users/joseph/test18-108.txt");
     return 0;
 }
 

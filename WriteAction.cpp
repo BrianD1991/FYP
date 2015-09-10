@@ -36,8 +36,8 @@ bool WriteAction::run(int startX, int startY, int size){
         //Part One: Form group proposals
         for (int i=startX; i<startX+size; ++i ) {
             for (int k=startY; k<startY+size; ++k) {
-                if (Lattice[i*size+k].isDone()==false){
-                    group *grp = formGroup(&Lattice[i*size+k]);
+                if (Lattice[i*sim->getSize()+k].isDone()==false){
+                    group *grp = formGroup(&Lattice[i*sim->getSize()+k]);
                     if (grp!=nullptr) {/*!< do not add nullptrs as they will interfere with sorting */
                         proposedGroups.push_back(grp);
                     }
@@ -104,39 +104,39 @@ bool WriteAction::concurrentRun(void){
         std::cout << "TILE SIZE ERROR"<<std::endl;
     }
     int totalTiles=tileNum*tileNum;
-#pragma omp for
+#pragma omp parallel for
     for (int i=0; i<totalTiles; ++i) {
         run((i/tileNum)*tileDim,(i%tileNum)*tileDim,sectionSize);
     }
-#pragma omp for
+#pragma omp parallel for
     for (int i=0; i<totalTiles; ++i) {
         run((i/tileNum)*tileDim,(i%tileNum)*tileDim+sectionSize,sectionSize);
     }
-#pragma omp for
+#pragma omp parallel for
     for (int i=0; i<totalTiles; ++i) {
         run((i/tileNum)*tileDim,(i%tileNum)*tileDim+2*sectionSize,sectionSize);
     }
-#pragma omp for
+#pragma omp parallel for
     for (int i=0; i<totalTiles; ++i) {
         run((i/tileNum)*tileDim+sectionSize,(i%tileNum)*tileDim,sectionSize);
     }
-#pragma omp for
+#pragma omp parallel for
     for (int i=0; i<totalTiles; ++i) {
         run((i/tileNum)*tileDim+sectionSize,(i%tileNum)*tileDim+sectionSize,sectionSize);
     }
-#pragma omp for
+#pragma omp parallel for
     for (int i=0; i<totalTiles; ++i) {
         run((i/tileNum)*tileDim+sectionSize,(i%tileNum)*tileDim+2*sectionSize,sectionSize);
     }
-#pragma omp for
+#pragma omp parallel for
     for (int i=0; i<totalTiles; ++i) {
         run((i/tileNum)*tileDim+sectionSize*2,(i%tileNum)*tileDim,sectionSize);
     }
-#pragma omp for
+#pragma omp parallel for
     for (int i=0; i<totalTiles; ++i) {
         run((i/tileNum)*tileDim+sectionSize*2,(i%tileNum)*tileDim+sectionSize,sectionSize);
     }
-#pragma omp for
+#pragma omp parallel for
     for (int i=0; i<totalTiles; ++i) {
         run((i/tileNum)*tileDim+sectionSize*2,(i%tileNum)*tileDim+2*sectionSize,sectionSize);
     }
@@ -158,7 +158,7 @@ int WriteAction::participantCount(int startX, int startY, int dimSize)
     int pcount=0;
     for (int i=startX; i<startX+dimSize; ++i) {
         for (int k=startY; k<startY+dimSize; ++k) {
-            if (sim->getAgent(std::pair<int,int>(i, k)) != nullptr) {
+            if (sim->getAgent(std::pair<int,int>(i, k)) != nullptr && sim->getAgent(std::pair<int,int>(i, k))->isDone()==false) {
                 ++pcount;
             }
         }

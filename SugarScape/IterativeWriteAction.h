@@ -23,6 +23,7 @@ public:
     IterativeWriteAction(World*);
     virtual bool run(int startX, int startY, int size);
     virtual bool concurrentRun(void);
+    virtual int  participantCount(int, int, int);
 };
 
 #endif /* defined(__SugarScape__IterativeWriteAction__) */

@@ -138,3 +138,4 @@ unsigned long AgentReplacement::populateFreeSlots()
     }
     return freeSlots.size();
 }
+

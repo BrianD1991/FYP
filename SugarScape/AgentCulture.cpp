@@ -20,7 +20,7 @@ AgentCulture::AgentCulture(World *s):ReadAction(s){
  * @return true if location contained agent else false
  * @exception none
  */
-bool AgentCulture::executeAction(Location *loc, group* grp){
+bool AgentCulture::executeAction(Location *loc, group* ){
     if (loc->hasAgent()) {
         std::vector<Agent*> neighbours=sim->getNeighbours(loc->getPosition(), 1);
         for(auto a:neighbours){
