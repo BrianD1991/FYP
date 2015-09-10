@@ -35,7 +35,6 @@ int benchmark(int numRepeats, int stepCount, int dimStart, int increment, int ru
     for (int i=0; i<runs; ++i) {
         std::chrono::duration <double, std::milli> min;
         std::chrono::duration <double, std::milli> max;
-        std::chrono::duration <double, std::milli> avg;
         for (int k=0;k<numRepeats; ++k) {
             // create everything
             std::cout << "SIZE" << dimStart+i*increment << ": ";
@@ -89,11 +88,10 @@ int benchmark(int numRepeats, int stepCount, int dimStart, int increment, int ru
             auto end = std::chrono::steady_clock::now();
             auto diff = end - start;
             if (k==0) {
-                min=max=avg=diff;
+                min=max=diff;
             }else{
                 if (diff<min) min=diff;
-                if (diff>max) max=diff;
-                avg +=diff;
+                else if (diff>max) max=diff;
             }
             std::cout << std::chrono::duration <double, std::milli> (diff).count() << " ms ";
             std::cout  << std::chrono::duration <double, std::nano> (diff).count() << " ns " ;
@@ -102,10 +100,9 @@ int benchmark(int numRepeats, int stepCount, int dimStart, int increment, int ru
             outputFile  << std::chrono::duration <double, std::nano> (diff).count() << ","
                         << theWorld.getAgentCount() <<std::endl;
         }
-        avg=avg/stepCount;
         std::cout << "MIN:" << std::chrono::duration <double, std::milli> (min).count()
                 <<" MAX:" << std::chrono::duration <double, std::milli> (max).count()
-        <<" AVG:" << std::chrono::duration <double, std::milli> (avg).count() << std::endl;
+            << std::endl;
         
     }
     outputFile.close();
