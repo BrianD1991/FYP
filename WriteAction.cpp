@@ -34,12 +34,16 @@ bool WriteAction::run(int startX, int startY, int size){
     while (remaining>0) {//loop until all active participants are in groups
         std::vector<group*> proposedGroups;
         //Part One: Form group proposals
+#pragma omp parallel for
         for (int i=startX; i<startX+size; ++i ) {
             for (int k=startY; k<startY+size; ++k) {
                 if (Lattice[i*sim->getSize()+k].isDone()==false){
                     group *grp = formGroup(&Lattice[i*sim->getSize()+k]);
                     if (grp!=nullptr) {/*!< do not add nullptrs as they will interfere with sorting */
+                        #pragma omp critical
+                        {
                         proposedGroups.push_back(grp);
+                        }
                     }
                 }
             }
@@ -73,18 +77,28 @@ bool WriteAction::run(int startX, int startY, int size){
         }
     }//While
     //Exclusive Groups all formed here. Apply actions
-    for(auto grp:ExclusiveGroups){
-        executeAction(grp->getPrimeMover(),grp);
+#pragma omp parallel for
+    for(int i=0;i<ExclusiveGroups.size();++i){
+        executeAction(ExclusiveGroups[i]->getPrimeMover(),ExclusiveGroups[i]);
     }
-    //update states
-    //sim->sync();
+//    for(auto grp:ExclusiveGroups){
+//        executeAction(grp->getPrimeMover(),grp);
+//    }
     //delete groups
-    for(auto grp:ExclusiveGroups){
-         delete grp;
+#pragma omp parallel for
+    for(int i=0;i<ExclusiveGroups.size();++i){
+        delete ExclusiveGroups[i];
     }
-    for(auto grp:FailedGroups){
-        delete grp;
+#pragma omp parallel for
+    for(int i=0;i<FailedGroups.size();++i){
+        delete FailedGroups[i];
     }
+//    for(auto grp:ExclusiveGroups){
+//         delete grp;
+//    }
+//    for(auto grp:FailedGroups){
+//        delete grp;
+//    }
     return true;
 }
 
