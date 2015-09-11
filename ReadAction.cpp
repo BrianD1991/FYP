@@ -35,13 +35,15 @@ bool ReadAction::run(int startX, int startY, int size){
     int dim=sim->getSize();
     //Perform action
 #pragma omp parallel for
-    for (int i=startX; i<startX+size; ++i) {
-        for (int k=startY; k<startY+size; ++k) {
-            executeAction(&Lattice[i*dim+k],nullptr);
-        }
+    for (int i=0; i<size*size; ++i) {
+        executeAction(&Lattice[(startX+i/size)*dim+startY+i%size],nullptr);
     }
+//    for (int i=startX; i<startX+size; ++i) {
+//        for (int k=startY; k<startY+size; ++k) {
+//            executeAction(&Lattice[i*dim+k],nullptr);
+//        }
+//    }
     return true;
-    
 }
 
 /**
