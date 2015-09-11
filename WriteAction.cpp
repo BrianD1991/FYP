@@ -40,7 +40,7 @@ bool WriteAction::run(int startX, int startY, int size){
                 if (Lattice[i*sim->getSize()+k].isDone()==false){
                     group *grp = formGroup(&Lattice[i*sim->getSize()+k]);
                     if (grp!=nullptr) {/*!< do not add nullptrs as they will interfere with sorting */
-                        #pragma omp critical
+#pragma omp critical(pushBack)
                         {
                         proposedGroups.push_back(grp);
                         }
