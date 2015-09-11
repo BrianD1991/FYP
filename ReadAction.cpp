@@ -32,15 +32,14 @@ group* ReadAction::formGroup(Location* loc){
  */
 bool ReadAction::run(int startX, int startY, int size){
     Location* Lattice=sim->getLattice();
+    int dim=sim->getSize();
     //Perform action
 #pragma omp parallel for
     for (int i=startX; i<startX+size; ++i) {
         for (int k=startY; k<startY+size; ++k) {
-            executeAction(&Lattice[i*size+k],nullptr);
+            executeAction(&Lattice[i*dim+k],nullptr);
         }
     }
-    //Update everyone
-    //sim->sync();
     return true;
     
 }
