@@ -154,6 +154,8 @@ public:
     bool removeKilledFather(void);
     bool canLoan(void);
     bool wantsLoan(void);
+    int loanOffered(void);
+    int loanRequired(void);
     bool allDone(void);
     bool resetNeighbours(void);
     bool makeUnavailable(void);

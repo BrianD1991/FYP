@@ -1124,7 +1124,32 @@ bool Agent::wantsLoan(void)
     return false;
 }
 
+/**
+ * Maximum amount offered for loan
+ * @return  sugar reserves minus amount required for children if fertile else half of reserve
+ * @exception none
+ */
+int Agent::loanOffered(void){
+    if (canLoan() && isFertile()) {
+        return currentSugar-theWorld->getChildAmount();
+    }
+    else if (canLoan()){
+        return currentSugar/2;
+    }
+    return 0;
+}
 
+/**
+ * Maximum amount we need to borrow
+ * @return  enough sugar to allow us to have child
+ * @exception none
+ */
+int Agent::loanRequired(void){
+    if (wantsLoan()) {
+        return theWorld->getChildAmount()-currentSugar-currentMetabolism;
+    }
+    return 0;
+}
 
 
 /**

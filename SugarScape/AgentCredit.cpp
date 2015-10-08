@@ -15,7 +15,34 @@ AgentCredit::AgentCredit(World* sim):IterativeWriteAction(sim){
 
 
 bool AgentCredit::executeAction(Location *loc, group *grp){
-    return false;
+    if (loc->hasAgent()) {
+        Agent* theLender=loc->getAgent();
+        if (grp->getMembers().size()==1) {
+            Agent *theBorrower=grp->getMembers()[0]->getAgent();/*!< fGet Borrow from Group*/
+            if (loc->getCardinal(0)->getAgent()==theBorrower) {
+                theLender->markNeighbour(0);
+            } else if(loc->getCardinal(1)->getAgent()==theBorrower){
+                theLender->markNeighbour(1);
+            } else if (loc->getCardinal(2)->getAgent()==theBorrower){
+                theLender->markNeighbour(2);
+            }else if (loc->getCardinal(3)->getAgent()==theBorrower){
+                theLender->markNeighbour(3);
+            }else{
+                std::cerr <<"CREDIT RULE CANNOT FIND BORROWER"<<std::endl;
+            }
+            
+            //HERE WE GIVE OUT LOAN USING RULES!
+            int SugarLoanAmount=std::min(theLender->loanOffered(),theBorrower->loanRequired());
+            theLender->incSugar(-SugarLoanAmount);
+            theBorrower->incSugar(SugarLoanAmount);
+            return true;
+        }else{
+            return false;/*!< group has no borrower */
+        }
+    }else{
+        std::cerr << "exectued mating on location with no agent! " << std::endl;
+        return false;/*!< no agent present so do nothing */
+    }
 }
 
 /**
@@ -40,7 +67,6 @@ group* AgentCredit::formGroup(Location *loc){
             grp->setActiveParticipants(1);
             grp->setPrimeMover(loc);
             for (int i=0; i<4 && borrower==nullptr; ++i) {/*!< find a borrower first */
-                
                 if (me->getAvail(i) && suitable(loc->getCardinal(i))==true) {
                     borrower=loc->getCardinal(i)->getAgent();
                 }
