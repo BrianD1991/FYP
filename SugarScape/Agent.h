@@ -145,12 +145,14 @@ public:
     bool setTag(int,bool);
     bool isDead(void);
     bool isKilled(void);
+    bool isFertile(void);
     int removeDeadLoans(void);
     bool removeDeadMother(void);
     bool removeDeadFather(void);
     int removeKilledLoans(void);
     bool removeKilledMother(void);
     bool removeKilledFather(void);
+    bool canLoan(void);
     bool allDone(void);
     bool resetNeighbours(void);
     bool makeUnavailable(void);

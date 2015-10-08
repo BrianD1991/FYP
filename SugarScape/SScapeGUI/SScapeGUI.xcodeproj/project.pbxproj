@@ -38,6 +38,7 @@
 		0867A2AC1B7B35BE00A8D02F /* ReadAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0867A2AA1B7B35BE00A8D02F /* ReadAction.cpp */; };
 		0867A2AF1B7B35CE00A8D02F /* WriteAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0867A2AD1B7B35CE00A8D02F /* WriteAction.cpp */; };
 		08AD16F81B8E64BE009FBF06 /* AgentMetabolism.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08AD16F61B8E64BE009FBF06 /* AgentMetabolism.cpp */; };
+		08CAF4431BC6FAB1007F8C7E /* AgentCredit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08CAF4411BC6FAB1007F8C7E /* AgentCredit.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -100,6 +101,8 @@
 		0867A2AE1B7B35CE00A8D02F /* WriteAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WriteAction.h; path = ../../../WriteAction.h; sourceTree = "<group>"; };
 		08AD16F61B8E64BE009FBF06 /* AgentMetabolism.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AgentMetabolism.cpp; path = ../../AgentMetabolism.cpp; sourceTree = "<group>"; };
 		08AD16F71B8E64BE009FBF06 /* AgentMetabolism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AgentMetabolism.h; path = ../../AgentMetabolism.h; sourceTree = "<group>"; };
+		08CAF4411BC6FAB1007F8C7E /* AgentCredit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AgentCredit.cpp; path = ../AgentCredit.cpp; sourceTree = "<group>"; };
+		08CAF4421BC6FAB1007F8C7E /* AgentCredit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AgentCredit.h; path = ../AgentCredit.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,8 +119,10 @@
 		0867A2411B7B33E600A8D02F = {
 			isa = PBXGroup;
 			children = (
-				0867A24D1B7B33E600A8D02F /* SScapeGUI */,
 				0867A24C1B7B33E600A8D02F /* Products */,
+				0867A24D1B7B33E600A8D02F /* SScapeGUI */,
+				08CAF4411BC6FAB1007F8C7E /* AgentCredit.cpp */,
+				08CAF4421BC6FAB1007F8C7E /* AgentCredit.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -306,6 +311,7 @@
 				083D03F21B91081E0023F988 /* IterativeWriteAction.cpp in Sources */,
 				0867A2951B7B358200A8D02F /* AgentMating.cpp in Sources */,
 				0867A29A1B7B358200A8D02F /* group.cpp in Sources */,
+				08CAF4431BC6FAB1007F8C7E /* AgentCredit.cpp in Sources */,
 				0867A2911B7B358200A8D02F /* AgentCombat.cpp in Sources */,
 				0867A28F1B7B358200A8D02F /* Agent.cpp in Sources */,
 				0867A2AC1B7B35BE00A8D02F /* ReadAction.cpp in Sources */,

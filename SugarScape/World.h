@@ -42,8 +42,8 @@ class World{
      All parameters of simulation world are set here.
      Change to suit your simulation
      */
-    static const int DIM=40;
-    static const int AGENTCOUNT=400;
+    static const int DIM=40; /*!< Size of lattice dimensions */
+    static const int AGENTCOUNT=400; /*!< Initial number of agents */
     static const int CultureCount=20;
     static const int MaxAge=60;
     static const int MaxVision=6;
@@ -55,9 +55,9 @@ class World{
     static const int Duration=10;
     static const int Rate=3;
     static const int InitialPopulationSize=50;
-    static const int InitialSugarMax=5;
-    static const int InitialSugarMin=2;
-    static const int InitialSpiceMax=10;
+    static const int InitialSugarMax=25;
+    static const int InitialSugarMin=5;
+    static const int InitialSpiceMax=25;
     static const int InitialSpiceMin=5;
     static const int WinterRate=3;
     static const int SeasonLength=15;
@@ -68,6 +68,13 @@ class World{
     static const int PollutionRate=2;
     static const int ChildAmount=4;
     static const int DiseaseLength=5;
+    static const int MinFemaleFertilityStart=12;
+    static const int MaxFemaleFertilityStart=15;
+    static const int MinMaleFertilityStart=12;
+    static const int MaxMaleFertilityStart=15;
+    static const int MinFemaleFertilityEnd=40;
+    static const int MaxFemaleFertilityEnd=50;
+
     
     int step; /*!< Number of steps the simulation has run for */
     int size; /*!< Dimensions of lattice  a size*size matrix of locations*/
@@ -90,9 +97,11 @@ class World{
     int combatLimit; /*!< Maximum reward attainable through killing an agent */
     int immunityLength;
     int initialPopulationSize; /*!< Starting population size */
-    int pollutionRate; /*!< Number of timeperiods that pass between each diffusion of pollution */
+    int pollutionRate; /*!< Number of time periods that pass between each diffusion of pollution */
     int childAmount;
     int initialPopulation;
+    int femaleFertilityStart,femaleFertilityEnd;/*!<age range that female agent is fertile for*/
+    int maleFertilityStart,maleFertilityEnd;/*!<age range that male agent is fertile for*/
     
     Location *Lattice; /*!< 2D (size by size) Matrix of locations in world  */
     //std::vector<Agent*> population; /*!< Agents in simulation NOT USED */
@@ -138,6 +147,11 @@ public:
     int getInitialPopulationSize(void);
     int getPollutionRate(void);
     int getChildAmount(void);
+    int getFemaleMinFertilityAge(void);
+    int getFemaleMaxFertilityAge(void);
+    int getMaleMinFertilityAge(void);
+    int getMaleMaxFertilityAge(void);
+    
     Agent* getAgent(std::pair<int,int>);
     std::vector<Location*> getNeighbourhood(std::pair<int,int>,int);
     std::vector<Location*> getEmptyNeighbourhood(std::pair<int,int>,int);

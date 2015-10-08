@@ -38,6 +38,7 @@
 #include "AgentReplacement.h"
 #include "AgentMating.h"
 #include "AgentMetabolism.h"
+#include "AgentCredit.h"
 
 int benchmark(int stepCount, int dimStart, int increment, int runs, std::string fileName){
     std::ofstream outputFile(fileName);
@@ -59,6 +60,7 @@ int benchmark(int stepCount, int dimStart, int increment, int runs, std::string 
         AgentCombat agentCombat(&theWorld);
         AgentReplacement agentReplacement(&theWorld);
         AgentMetabolism agentMetabolism(&theWorld);
+        AgentCredit agentCredit(&theWorld);
         
         //!
         /*!
@@ -162,7 +164,7 @@ int main(int, char const**)
         return EXIT_FAILURE;
     }
 
-    // Play the music
+    // Play the music -it never hurts!
     music.play();
     //!
     /*!

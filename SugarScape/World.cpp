@@ -34,7 +34,11 @@ World::World(int dimensionSize)
         initialPopulation=size*size/4;
     }
     rng.seed();
-    }
+    femaleFertilityStart=getRnd(MinFemaleFertilityStart, MaxFemaleFertilityStart+1);//range is inclusive!
+    maleFertilityStart=getRnd(MinMaleFertilityStart, MaxMaleFertilityStart+1);//range is inclusive!
+    femaleFertilityEnd=getRnd(MinFemaleFertilityEnd, MaxFemaleFertilityEnd+1);//range is inclusive!
+    maleFertilityEnd=femaleFertilityEnd+10;//as per specification
+}
 
 /**
  * Destructor - delete lattice array
@@ -419,6 +423,46 @@ int World::getPollutionRate(void){
  */
 int World::getChildAmount(void){
     return childAmount;
+}
+
+/**
+ * Gets minimum age for female fertility
+ * @see AgentMating,AgentCredit
+ * @return minimum fertility age
+ * @exception none
+ */
+int World::getFemaleMinFertilityAge(void){
+    return femaleFertilityStart;
+}
+
+/**
+ * Gets maximum age for female fertility
+ * @see AgentMating,AgentCredit
+ * @return maximum fertility age
+ * @exception none
+ */
+int World::getFemaleMaxFertilityAge(void){
+    return femaleFertilityEnd;
+}
+
+/**
+ * Gets minimum age for male fertility
+ * @see AgentMating,AgentCredit
+ * @return minimum fertility age
+ * @exception none
+ */
+int World::getMaleMinFertilityAge(void){
+    return maleFertilityStart;
+}
+
+/**
+ * Gets maximum age for female fertility
+ * @see AgentMating,AgentCredit
+ * @return maximum fertility age
+ * @exception none
+ */
+int World::getMaleMaxFertilityAge(void){
+    return maleFertilityEnd;
 }
 
 /**
@@ -936,8 +980,8 @@ int World::addRule(Action* rule){
 int World::applyRules(){
     int ruleCount=0;
     for(auto rule:activeRules){
-        //ruleCount+=rule->run(0,0,size);
-        ruleCount+=rule->concurrentRun();//run(0,0,size);
+        ruleCount+=rule->run(0,0,size);
+        //ruleCount+=rule->concurrentRun();//run(0,0,size);
         sync();
         resetNeighbours();
     }

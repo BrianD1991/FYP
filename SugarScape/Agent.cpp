@@ -927,6 +927,29 @@ bool Agent::isKilled(void)
     return killed;
 }
 
+
+/**
+ * Tells us if an agent is fertile
+ * @return true if age is within limits
+ * @exception none
+ */
+bool Agent::isFertile(void)
+{
+    if (sex==female) {
+        if ((currentAge>=theWorld->getFemaleMinFertilityAge())
+             &&(currentAge<=theWorld->getFemaleMaxFertilityAge()) ) {
+            return true;
+        }
+    }else{
+        if ((currentAge>=theWorld->getMaleMinFertilityAge())
+            &&(currentAge<=theWorld->getMaleMaxFertilityAge()) ) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
 /**
  * Removes all loans with dead agents
  * @return number of loan agreements nullified
@@ -1067,6 +1090,26 @@ bool Agent::removeKilledFather(void)
     }
 }
 
+
+/**
+ * lets us know if we can give a loan
+ * @return true if we can give a loan
+ * @exception none
+ */
+bool Agent::canLoan(void)
+{
+    if (sex==female ) {
+        if ((theWorld->getFemaleMaxFertilityAge()<currentAge) ||
+            (currentSugar>theWorld->getChildAmount() && (isFertile()==true)))
+        return true;
+    }
+    else if (sex==male){
+        if ((theWorld->getFemaleMaxFertilityAge()<currentAge) ||
+            (currentSugar>theWorld->getChildAmount() && (isFertile()==true)))
+            return true;
+    }
+    return false;
+}
 
 /**
  * Tells us if all neighbours are done
