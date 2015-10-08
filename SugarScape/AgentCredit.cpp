@@ -31,7 +31,29 @@ bool AgentCredit::executeAction(Location *loc, group *grp){
  @exception none
  */
 group* AgentCredit::formGroup(Location *loc){
-    return nullptr;
+    if (loc->hasAgent()) {
+        if (loc->getAgent()->canLoan()) {
+            Agent *me=loc->getAgent();
+            Agent *borrower=nullptr;
+            group *grp= new group();/*!< create group */
+            grp->setRank(1);
+            grp->setActiveParticipants(1);
+            grp->setPrimeMover(loc);
+            for (int i=0; i<4 && borrower==nullptr; ++i) {/*!< find a borrower first */
+                
+                if (me->getAvail(i) && suitable(loc->getCardinal(i))==true) {
+                    borrower=loc->getCardinal(i)->getAgent();
+                }
+                me->markNeighbour(i);
+            }
+            if (borrower==nullptr) {/*!< no borrower available return empty group */
+                return grp;
+            }
+            grp->push_back(borrower->getLocation());/*!< if I get here then all is fine create group */
+            return grp;
+        }
+    }
+    return nullptr;//no male agent here so do nothing
 }
 
 /**
@@ -60,4 +82,11 @@ int AgentCredit::participantCount(int startX, int startY, int dimSize)
         }
     }
     return pcount;
+}
+
+bool AgentCredit::suitable(Location *loc){
+    if (loc->hasAgent() && loc->getAgent()->wantsLoan()) {
+        return true;
+    }
+    return false;
 }

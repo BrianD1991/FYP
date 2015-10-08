@@ -153,6 +153,7 @@ public:
     bool removeKilledMother(void);
     bool removeKilledFather(void);
     bool canLoan(void);
+    bool wantsLoan(void);
     bool allDone(void);
     bool resetNeighbours(void);
     bool makeUnavailable(void);

@@ -27,6 +27,8 @@
 
  */
 class AgentCredit:public IterativeWriteAction{
+protected:
+    bool suitable(Location*);
 public:
     AgentCredit(World*);
     virtual bool executeAction(Location *, group *);

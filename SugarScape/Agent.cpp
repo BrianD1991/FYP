@@ -1112,6 +1112,22 @@ bool Agent::canLoan(void)
 }
 
 /**
+ * lets us know if we want a loan
+ * @return true if we want a loan
+ * @exception none
+ */
+bool Agent::wantsLoan(void)
+{
+    if (isFertile() && currentSugar<theWorld->getChildAmount()){
+        return true;
+    }
+    return false;
+}
+
+
+
+
+/**
  * Tells us if all neighbours are done
  * @see IterativeWriteAction
  * @return true if all done
