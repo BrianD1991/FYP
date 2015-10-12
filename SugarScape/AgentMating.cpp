@@ -127,7 +127,7 @@ int AgentMating::participantCount(int startX, int startY, int dimSize)
 {
     int pcount=0;
     Agent *theAgent=nullptr;
-#pragma omp parallel for privare(theAgent)
+#pragma omp parallel for private(theAgent)
     for (int i=startX; i<startX+dimSize; ++i) {
         for (int k=startY; k<startY+dimSize; ++k) {
             theAgent=sim->getAgent(std::pair<int,int>(i, k));
