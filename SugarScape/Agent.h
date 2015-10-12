@@ -147,6 +147,7 @@ public:
     bool isKilled(void);
     bool isFertile(void);
     int removeDeadLoans(void);
+    int removePaidLoans(void);
     bool removeDeadMother(void);
     bool removeDeadFather(void);
     int removeKilledLoans(void);
@@ -156,6 +157,8 @@ public:
     bool wantsLoan(void);
     int loanOffered(void);
     int loanRequired(void);
+    int addLoanOwed(Agent*,int);
+    int addLoanOwing(Agent*,int);
     bool allDone(void);
     bool resetNeighbours(void);
     bool makeUnavailable(void);

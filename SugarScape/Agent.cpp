@@ -984,6 +984,44 @@ int Agent::removeDeadLoans(void)
 }
 
 /**
+ * Removes all due loans after payment is made
+ * @return number of loan agreements nullified
+ * @exception none
+ */
+int Agent::removePaidLoans(void)
+{
+    int repititions=0;
+    auto it=newLoansOwed.begin();
+    while(it!=newLoansOwed.end())
+    {
+        if (it->second.second==theWorld->getStep()) {
+            it=newLoansOwed.erase(it);
+            ++repititions;
+        }
+        else{
+            ++it;
+        }
+    }
+    //Remove loans going to be paid to us this turn as well
+    it=newLoansOwing.begin();
+    while(it!=newLoansOwing.end())
+    {
+        if (it->second.second==theWorld->getStep()) {
+            it=newLoansOwing.erase(it);
+            ++repititions;
+        }
+        else{
+            ++it;
+        }
+    }
+
+    return repititions;
+}
+
+
+
+
+/**
  * Removed link to mother if father is dead
  * @return true if mother was dead else false
  * @exception none
@@ -1151,6 +1189,31 @@ int Agent::loanRequired(void){
     return 0;
 }
 
+/**
+ * Adds new lender to our loanbook
+ * @return  final amount due *BY* us from loan on repayment
+ * @exception none
+ */
+int Agent::addLoanOwed(Agent* theLender,int theAmount)
+{
+    std::pair<int,int> amounts=std::make_pair(theAmount,theWorld->getStep()+theWorld->getDuration());
+    std::pair<Agent*,std::pair<int,int>> newEntry=std::make_pair(theLender,amounts);
+    newLoansOwed.push_back(newEntry);
+    return amounts.first+amounts.second*theWorld->getRate()*theWorld->getDuration();
+}
+
+/**
+ * Adds new borrower to our loanbook
+ * @return  final amount due *TO* us from loan on repayment
+ * @exception none
+ */
+int Agent::addLoanOwing(Agent* theBorrower,int theAmount)
+{
+    std::pair<int,int> amounts=std::make_pair(theAmount,theWorld->getStep()+theWorld->getDuration());
+    std::pair<Agent*,std::pair<int,int>> newEntry=std::make_pair(theBorrower,amounts);
+    newLoansOwing.push_back(newEntry);
+    return amounts.first+amounts.second*theWorld->getRate()*theWorld->getDuration();
+}
 
 /**
  * Tells us if all neighbours are done

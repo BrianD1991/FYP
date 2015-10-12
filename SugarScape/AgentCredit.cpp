@@ -31,10 +31,12 @@ bool AgentCredit::executeAction(Location *loc, group *grp){
                 std::cerr <<"CREDIT RULE CANNOT FIND BORROWER"<<std::endl;
             }
             
-            //HERE WE GIVE OUT LOAN USING RULES!
+            /*!<HERE WE GIVE OUT LOAN USING RULES! */
             int SugarLoanAmount=std::min(theLender->loanOffered(),theBorrower->loanRequired());
             theLender->incSugar(-SugarLoanAmount);
             theBorrower->incSugar(SugarLoanAmount);
+            theLender->addLoanOwing(theBorrower, SugarLoanAmount); /*!< record loans */
+            theBorrower->addLoanOwed(theLender, SugarLoanAmount);
             return true;
         }else{
             return false;/*!< group has no borrower */
