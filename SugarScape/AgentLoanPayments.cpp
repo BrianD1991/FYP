@@ -30,9 +30,9 @@ bool AgentLoanPayments::executeAction(Location * loc, group * grp)
         int amtAvail=theAgent->getSugar();
         /*!< find all loans due to be paid back --if any */
         for(const std::pair<Agent*,std::pair<int, int>> account:theLoanBook){
-            if (account.second.second==theWorld->getStep()) {
+            if (account.second.second==sim->getStep()) {
                 Agent* theLender=account.first;
-                int amtDue=account.second.first+account.second.first*theWorld->getRate()*theWorld->getDuration();
+                int amtDue=account.second.first+account.second.first*sim->getRate()*sim->getDuration();
                 if (amtDue<amtAvail){
                     amtAvail=amtAvail-amtDue;
                     theLender->incSugar(amtDue);
@@ -53,7 +53,7 @@ bool AgentLoanPayments::executeAction(Location * loc, group * grp)
 
 
 
-group* AgentLoanPayments::formGroup(Location *)
+group* AgentLoanPayments::formGroup(Location *loc)
 {
     group *ourChoice = nullptr;
     if (loc->hasAgent()) {/*!< Agent at this location */
@@ -65,8 +65,8 @@ group* AgentLoanPayments::formGroup(Location *)
         auto theLoanBook=theAgent->getLoansOwed();
         /*!< find all loans due to be paid back */
         for(const std::pair<Agent*,std::pair<int, int>> account:theLoanBook){
-            if (account.second.second==theWorld->getStep()) {
-                ourChoice->push_back(account.first);
+            if (account.second.second==sim->getStep()) {
+                ourChoice->push_back(account.first->getLocation());
             }//if
         }
     }

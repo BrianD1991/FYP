@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		083D03F21B91081E0023F988 /* IterativeWriteAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 083D03F11B91081E0023F988 /* IterativeWriteAction.cpp */; };
+		0845DA791BCC537400BD51D4 /* AgentLoanPayments.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0845DA781BCC537400BD51D4 /* AgentLoanPayments.cpp */; };
 		0867A2511B7B33E600A8D02F /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0867A2501B7B33E600A8D02F /* ResourcePath.mm */; };
 		0867A2541B7B33E600A8D02F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0867A2531B7B33E600A8D02F /* main.cpp */; };
 		0867A2571B7B33E600A8D02F /* cute_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0867A2561B7B33E600A8D02F /* cute_image.jpg */; };
@@ -44,6 +45,8 @@
 /* Begin PBXFileReference section */
 		083D03F01B91080E0023F988 /* IterativeWriteAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IterativeWriteAction.h; path = ../../IterativeWriteAction.h; sourceTree = "<group>"; };
 		083D03F11B91081E0023F988 /* IterativeWriteAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IterativeWriteAction.cpp; path = ../../IterativeWriteAction.cpp; sourceTree = "<group>"; };
+		0845DA771BCC536200BD51D4 /* AgentLoanPayments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AgentLoanPayments.h; path = ../../AgentLoanPayments.h; sourceTree = "<group>"; };
+		0845DA781BCC537400BD51D4 /* AgentLoanPayments.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AgentLoanPayments.cpp; path = ../../AgentLoanPayments.cpp; sourceTree = "<group>"; };
 		0867A24B1B7B33E600A8D02F /* SScapeGUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SScapeGUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0867A24F1B7B33E600A8D02F /* SScapeGUI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SScapeGUI-Info.plist"; sourceTree = "<group>"; };
 		0867A2501B7B33E600A8D02F /* ResourcePath.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
@@ -137,6 +140,8 @@
 		0867A24D1B7B33E600A8D02F /* SScapeGUI */ = {
 			isa = PBXGroup;
 			children = (
+				0845DA781BCC537400BD51D4 /* AgentLoanPayments.cpp */,
+				0845DA771BCC536200BD51D4 /* AgentLoanPayments.h */,
 				0867A2AD1B7B35CE00A8D02F /* WriteAction.cpp */,
 				0867A2AE1B7B35CE00A8D02F /* WriteAction.h */,
 				0867A2AA1B7B35BE00A8D02F /* ReadAction.cpp */,
@@ -309,6 +314,7 @@
 				0867A29C1B7B358200A8D02F /* Inheritance.cpp in Sources */,
 				0867A2A51B7B359800A8D02F /* ViewPort.cpp in Sources */,
 				083D03F21B91081E0023F988 /* IterativeWriteAction.cpp in Sources */,
+				0845DA791BCC537400BD51D4 /* AgentLoanPayments.cpp in Sources */,
 				0867A2951B7B358200A8D02F /* AgentMating.cpp in Sources */,
 				0867A29A1B7B358200A8D02F /* group.cpp in Sources */,
 				08CAF4431BC6FAB1007F8C7E /* AgentCredit.cpp in Sources */,

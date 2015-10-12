@@ -39,69 +39,13 @@
 #include "AgentMating.h"
 #include "AgentMetabolism.h"
 #include "AgentCredit.h"
+#include "AgentLoanPayments.h"
 
-int benchmark(int stepCount, int dimStart, int increment, int runs, std::string fileName){
-    std::ofstream outputFile(fileName);
-    for (int i=0; i<runs; ++i) {
-        // create everything
-        World theWorld(dimStart+i*increment);
-        theWorld.init();
-        theWorld.sync();
-        theWorld.sanityCeck();
-        Growback growback(&theWorld);
-        SeasonalGrowback seasonalGrowback(&theWorld);
-        AgentMove move(&theWorld);
-        PollutionFormation pollForm(&theWorld);
-        GarbageCollection gc(&theWorld);
-        AgentCulture agentCulture(&theWorld);
-        AgentDeath agentDeath(&theWorld);
-        AgentDisease agentDisease(&theWorld);
-        Diffusion diffusion(&theWorld);
-        AgentCombat agentCombat(&theWorld);
-        AgentReplacement agentReplacement(&theWorld);
-        AgentMetabolism agentMetabolism(&theWorld);
-        AgentCredit agentCredit(&theWorld);
-        
-        //!
-        /*!
-         Add the rules we are using here.
-         */
-        //theWorld.addRule(&growback);
-        //theWorld.addRule(&seasonalGrowback);
-        //theWorld.addRule(&pollForm);
-        //theWorld.addRule(&diffusion);
-        
-        theWorld.addRule(&move);
-        //theWorld.addRule(&agentCombat);
-        
-        //theWorld.addRule(&agentCulture);
-        //theWorld.addRule(&agentDisease);
-        //theWorld.addRule(&agentReplacement);
-        theWorld.addRule(&agentDeath);
-        theWorld.addRule(&agentMetabolism);
 
-        int dimSize=dimStart+i*increment;
-        auto start = std::chrono::steady_clock::now();
-        for (int k=0; k<stepCount; ++k) {
-            //step
-            theWorld.applyRules();
-        }
-        auto end = std::chrono::steady_clock::now();
-        auto diff = end - start;
-        std::cout << std::chrono::duration <double, std::milli> (diff).count() << " ms ";
-        std::cout  << std::chrono::duration <double, std::nano> (diff).count() << " ns" << std::endl;
-        outputFile  << std::chrono::duration <double, std::milli> (diff).count() << " ms ";
-        outputFile  << std::chrono::duration <double, std::nano> (diff).count() << " ns" << std::endl;
-    }
-    return 0;
-}
-
-int main(int, char const**)
+int Gui(void)
 {
-    
     // Create the main window
     sf::RenderWindow window(sf::VideoMode(1024, 768), "SFML window");
-    
     // create everything
     World theWorld(30);
     theWorld.init();
@@ -121,6 +65,8 @@ int main(int, char const**)
     AgentReplacement agentReplacement(&theWorld);
     AgentMating agentMating(&theWorld);
     AgentMetabolism agentMetabolism(&theWorld);
+    AgentCredit agentCredit(&theWorld);
+    AgentLoanPayments agentLoanPayments(&theWorld);
     
     //!
     /*!
@@ -142,7 +88,7 @@ int main(int, char const**)
     //theWorld.addRule(&gc);
     int stepCount=0;
     std::string counter;
-
+    
     // Set the Icon
     sf::Image icon;
     if (!icon.loadFromFile(resourcePath() + "icon.png")) {
@@ -157,13 +103,13 @@ int main(int, char const**)
     counter = std::to_string(stepCount);
     sf::Text text(counter, font, 50);
     text.setColor(sf::Color::White);
-
+    
     // Load a music to play
     sf::Music music;
     if (!music.openFromFile(resourcePath() + "nice_music.ogg")) {
         return EXIT_FAILURE;
     }
-
+    
     // Play the music -it never hurts!
     music.play();
     //!
@@ -182,13 +128,13 @@ int main(int, char const**)
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
-
+            
             // Escape pressed: exit
             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
                 window.close();
             }
         }
-
+        
         // Clear screen
         window.clear();
         
@@ -196,10 +142,10 @@ int main(int, char const**)
         theGUI.draw();
         // Draw the sprite
         //window.draw(sprite);
-
+        
         // Draw the string
         window.draw(text);
-
+        
         // Update the window
         window.display();
         counter = std::to_string(++stepCount);
@@ -208,11 +154,18 @@ int main(int, char const**)
         sf::sleep(t1);
         theWorld.sanityCeck();
     }
-
+    
     //tidy up at end
     delete seasonalGrowback;
     delete growback;
     delete move;
+    
+    return stepCount;
+}
 
+int main(int, char const**)
+{
+    
+    Gui();
     return EXIT_SUCCESS;
 }

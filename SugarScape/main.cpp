@@ -26,6 +26,8 @@
 #include "AgentReplacement.h"
 #include "AgentMetabolism.h"
 #include "AgentMating.h"
+#include "AgentLoanPayments.h"
+#include "AgentCredit.h"
 
 
 int benchmark(int,int,int,int,int,std::string);
@@ -56,6 +58,8 @@ int benchmark(int numRepeats, int stepCount, int dimStart, int increment, int ru
             AgentReplacement agentReplacement(&theWorld);
             AgentMetabolism agentMetabolism(&theWorld);
             AgentMating agentMating(&theWorld);
+            AgentCredit agentCredit(&theWorld);
+            AgentLoanPayments agentLoanPayments(&theWorld);
             
             
             //!

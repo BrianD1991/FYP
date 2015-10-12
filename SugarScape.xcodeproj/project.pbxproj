@@ -10,6 +10,7 @@
 		080765E51B4BCB3800795BF6 /* AgentReplacement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 080765E31B4BCB3800795BF6 /* AgentReplacement.cpp */; };
 		083D03EF1B9107740023F988 /* IterativeWriteAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 083D03ED1B9107740023F988 /* IterativeWriteAction.cpp */; };
 		0845DA751BCC462600BD51D4 /* AgentLoanPayments.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0845DA731BCC462600BD51D4 /* AgentLoanPayments.cpp */; };
+		0845DA7C1BCC54DE00BD51D4 /* AgentCredit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0845DA7B1BCC54DE00BD51D4 /* AgentCredit.cpp */; };
 		0871784C1B0E2C9F00ED6854 /* AgentDisease.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0871784A1B0E2C9F00ED6854 /* AgentDisease.cpp */; };
 		089A0C551B30447500C17F80 /* AgentDeath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 089A0C531B30447500C17F80 /* AgentDeath.cpp */; };
 		089A0C581B30ABF000C17F80 /* GarbageCollection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 089A0C561B30ABF000C17F80 /* GarbageCollection.cpp */; };
@@ -66,6 +67,8 @@
 		083D03EE1B9107740023F988 /* IterativeWriteAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IterativeWriteAction.h; sourceTree = "<group>"; };
 		0845DA731BCC462600BD51D4 /* AgentLoanPayments.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AgentLoanPayments.cpp; sourceTree = "<group>"; };
 		0845DA741BCC462600BD51D4 /* AgentLoanPayments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentLoanPayments.h; sourceTree = "<group>"; };
+		0845DA7A1BCC54CF00BD51D4 /* AgentCredit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AgentCredit.h; path = SugarScape/AgentCredit.h; sourceTree = "<group>"; };
+		0845DA7B1BCC54DE00BD51D4 /* AgentCredit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AgentCredit.cpp; path = SugarScape/AgentCredit.cpp; sourceTree = "<group>"; };
 		0867A2631B7B33E600A8D02F /* SScapeGUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SScapeGUI.xcodeproj; path = SScapeGUI/SScapeGUI.xcodeproj; sourceTree = "<group>"; };
 		0871784A1B0E2C9F00ED6854 /* AgentDisease.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AgentDisease.cpp; sourceTree = "<group>"; };
 		0871784B1B0E2C9F00ED6854 /* AgentDisease.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentDisease.h; sourceTree = "<group>"; };
@@ -138,6 +141,8 @@
 		D897269D1AEBD28B005664BF = {
 			isa = PBXGroup;
 			children = (
+				0845DA7B1BCC54DE00BD51D4 /* AgentCredit.cpp */,
+				0845DA7A1BCC54CF00BD51D4 /* AgentCredit.h */,
 				7CEC12AA1B8F1634005A1822 /* AgentMetabolism.cpp */,
 				7CEC12AB1B8F1634005A1822 /* AgentMetabolism.h */,
 				D89726A81AEBD28B005664BF /* SugarScape */,
@@ -294,6 +299,7 @@
 				D89726B41AEBD591005664BF /* Location.cpp in Sources */,
 				D8F15FF41B57CF7F007E4E7D /* AgentMove.cpp in Sources */,
 				7C7987901B0242D1003A4AE5 /* AgentCulture.cpp in Sources */,
+				0845DA7C1BCC54DE00BD51D4 /* AgentCredit.cpp in Sources */,
 				080765E51B4BCB3800795BF6 /* AgentReplacement.cpp in Sources */,
 				D8D994411AEF874500F248C7 /* World.cpp in Sources */,
 				D8F15FFA1B5D4B92007E4E7D /* AgentMating.cpp in Sources */,
