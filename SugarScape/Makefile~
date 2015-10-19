@@ -1,0 +1,6 @@
+
+ALL: *.o
+	g++ *.o -o Sugarscape -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
+
+%.o : %.cpp %.h
+	g++ -std=c++11 -c *.cpp -lsfml-graphics -lsfml-window -lsfml-system
