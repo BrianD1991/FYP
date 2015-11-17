@@ -15,11 +15,4 @@ DEBUG: *.o
 CLEAN:
 	rm *.o
 
-%.o : %.cpp %.h
-	g++ -std=gnu++11 -c *.cpp -lsfml-graphics -lsfml-window -lsfml-system
-
-
-ALL: *.o
-	g++ -std=gnu++11 *.o -o Sugarscape -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
-
 
